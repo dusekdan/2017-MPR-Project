@@ -20,7 +20,7 @@ class RouterFactory
     {
         $router = new RouteList;
         $admin = new RouteList('Admin'); //vytvoření modulu (tváří se tak i v debugbaru)
-        $admin[] = new Route('//%host%/[<locale=cs cs|en>/]administrace/<presenter>/<action>[/<id>]', [
+        $admin[] = new Route('[//%host%/][<locale=cs cs|en>/]administrace/<presenter>/<action>[/<id>]', [
             'presenter' => [
                 Route::VALUE => 'Homepage', // default value
                 Route::FILTER_TABLE => [
@@ -41,7 +41,7 @@ class RouterFactory
         $router[] = $admin;
 
         $base = new RouteList('Base');
-        $base[] = new Route('//%host%/[<locale=cs cs|en>/]<presenter>/<action>[/<id>]', [
+        $base[] = new Route('[//%host%/][<locale=cs cs|en>/]<presenter>/<action>[/<id>]', [
             'presenter' => [
                 Route::VALUE => 'Homepage',
                 Route::FILTER_TABLE => [
