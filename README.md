@@ -1,9 +1,17 @@
 # Postup instalace
+- Naklonovat si tento projekt
 - Pomocí composeru si stáhněte potřebné balíčky 
     ```sh 
     $ composer update
     ``` 
-- Pak už si jen nastavit databázi
+- Nastavit databázi v `app/config/config.local.neon`
+- Nastavit migrace v `phinx.yml`
+- Spustit příkaz
+	 ```sh
+	$ vendor/bin/phinx migrate
+	```
+
+- Rozšiřující info
     - Databáze (tabulky/entity)
         - Přihlašovací údaje k localhostu `app/config/config.local.neon`
         - `app/model/entities/*` - zde jsou tabulky jako objekty. Je použita               - Doctrina [dokumentace](http://docs.doctrine-project.org/projects/doctrine-orm/en/latest/reference/working-with-objects.html)
