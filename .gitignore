@@ -15,3 +15,6 @@ www/videos/
 # examply
 www/example/
 /www/images/user/
+
+app/config/config.local.neon
+phinx.yml
