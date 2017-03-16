@@ -1,0 +1,29 @@
+{block head}
+
+{/block}
+
+{block content}
+	{block modalTitle}
+		Úprava uživatele
+	{/block}
+
+	{block modal}
+		{snippet snippetUpdate}
+			{import './../components/bootstrap-form.latte'} {* bootstrap formuláře *}
+			{include bootstrap-form, form => updateForm, labelSize => 4, inputSize => 7}
+		{/snippet}
+	{/block}
+{/block}
+{block scripts}
+	<script type="text/javascript">
+		$(function () {
+			$('#datepicker').datetimepicker({
+				locale: 'cs',
+				viewMode: 'days',
+				format: 'DD.MM.YYYY'
+			});
+		});
+	</script>
+{/block}
+
+

@@ -1,19 +1,21 @@
-# Software support for managing the risks of the projects
-
-"This is a project repository. So called projectory." - Dan Dušek
-
-## Manual for the project
-
-All the informations from the assistant.
-
-https://www.fit.vutbr.cz/~trchalik/mpr-pokyny.pro.studenty.2017.pdf
-
-Posible dates for the meetings with the assistant.
-
-http://www.fit.vutbr.cz/~trchalik/meetings/index.html
-
-## Online notes from meetings
-
-https://docs.google.com/document/d/1010aCcsqDDXmCkk5NRlXlkv2T-8FGgRCFWHHiw51wg4/edit?usp=sharing
-
-## Feel free to add anything important and valid for the project here bellow: 
+# Postup instalace
+- Pomocí composeru si stáhněte potřebné balíčky 
+    ```sh 
+    $ composer update
+    ``` 
+- Pak už si jen nastavit databázi
+    - Databáze (tabulky/entity)
+        - Přihlašovací údaje k localhostu `app/config/config.local.neon`
+        - `app/model/entities/*` - zde jsou tabulky jako objekty. Je použita               - Doctrina dokumentace
+    - Migrace dokumentace (sql scripty, práce s databází)
+        - `phinx.yml` - pro nastavení databáze pro migrace
+        - `migrations/*` - zde jsou vygenerované migrace
+            ```sh
+            $ vendor/bin/phinx migrate
+            $ vendor/bin/phinx rollback
+            $ vendor/bin/phinx create NazevSouboru
+            ```
+        - vygeneruje soubor -> `YYYYMMDDHHMMSS_nazev_souboru.php`
+    - ACL vrstva
+        - `app/components/Acl.php` - nastavení rolí a oprávnění
+        - `app/model/entities/User.php` - uživatel

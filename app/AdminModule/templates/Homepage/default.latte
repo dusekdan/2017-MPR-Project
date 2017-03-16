@@ -1,0 +1,30 @@
+{block content}
+	<div>
+		<table>
+			<tr>
+				<th>Uživatel</th>
+				<th></th>
+			</tr>
+			<tr>
+				<td>Id:</td>
+				<td>{$user->getId()}</td>
+			</tr>
+			<tr>
+				<td>Role:</td>
+				<td>{foreach $user->getRoles() as $role} {$role} {/foreach}</td>
+			</tr>
+			{foreach $user->getIdentity()->getData() as $key => $data}
+				<tr>
+					<td>{$key}</td>
+					<td>{$data}</td>
+				</tr>
+			{/foreach}
+		</table>
+	</div>
+{/block}
+
+{block scripts}
+{/block}
+
+{block head}
+{/block}

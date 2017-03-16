@@ -1,0 +1,10 @@
+base:
+	header:
+		name: Project name
+	menu:
+		home: Home
+		signIn: Sign in
+		signUp: Sing up
+		signOut: Sign out
+		administration: Administration
+		updateProfile: Update profile

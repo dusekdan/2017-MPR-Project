@@ -1,0 +1,37 @@
+{* Latte template *}
+
+{block content}
+{translator ui.base.menu}
+	<nav id="menu">
+		<div id="language">
+			<ul>
+				<li n:class="$presenter->isLinkCurrent('*', ['locale'=>'cs']) ? menu-item-active">
+					<a n:href="this, locale=>'cs'" >cs</a>
+				</li>
+				<li n:class="$presenter->isLinkCurrent('*', ['locale'=>'en']) ? menu-item-active">
+					<a n:href="this, locale=>'en'" >en</a>
+				</li>
+			</ul>
+		</div>
+		<ul>
+			<li n:class="$presenter->isLinkCurrent('Homepage:*') ? menu-item-active">
+				<a n:href="Homepage:">{_home}</a>
+			</li>
+			<li n:if="$user->isAllowed('AdminModule','view')">
+				<a n:href=":Admin:Homepage:default">{_administration}</a>
+			</li>
+			<li n:class="$presenter->isLinkCurrent('User:Update') ? menu-item-active" n:if="$user->isLoggedIn()">
+				<a n:href="User:Update">{_updateProfile}</a>
+			</li>
+			<li n:class="$presenter->isLinkCurrent('User:SignUp') ? menu-item-active">
+				<a n:href="User:SignUp">{_signUp}</a>
+			</li>
+			<li n:class="$presenter->isLinkCurrent('User:SignIn') ? menu-item-active" n:if="!$user->isLoggedIn()">
+				<a class="ajax" n:href="User:SignIn" data-toggle="modal" data-target="#myModal">{_signIn}</a>
+			</li>
+			<li n:if="$user->isLoggedIn()">
+				<a n:href="User:SignOut">{_signOut}</a>
+			</li>
+		</ul>
+	</nav>
+{/translator}

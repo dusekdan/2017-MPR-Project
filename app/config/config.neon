@@ -1,0 +1,52 @@
+#
+# WARNING: it is CRITICAL that this file & directory are NOT accessible directly via a web browser!
+# https://nette.org/security-warning
+#
+parameters:
+	acl:
+		roles:
+			guest:
+			admin:
+			superAdmin: [admin] # superAdmin dědí od admina
+	file:
+		image:
+			maxHeight: 200
+	form:
+		user:
+			password:
+				minLength: 6
+			roles: %acl.roles%
+			image: %file.image%
+
+application:
+	errorPresenter: Base:Error
+	mapping:
+		*: App\*Module\Presenters\*Presenter
+
+
+session:
+	expiration: 14 days
+
+
+services: #property name se uvádí u služeb který nahrazují stejně jmenovanou službu
+	router: App\RouterFactory::createRouter
+	acl: App\Components\Acl::create #říkáme, že třídu Permission vytvoříme metodou create třídy AuthorizatorFactory
+	- App\Model\Authentication
+	- App\Components\FileStorage(%wwwDir%) #práce se soubory ve složce www @TODO otestovat zda nemusí být proper name
+	- App\Components\Utilities
+	- App\Model\Facades\UserFacade
+
+extensions:
+	# https://github.com/Kdyby/Doctrine
+	doctrine: Kdyby\Doctrine\DI\OrmExtension
+	console: Kdyby\Console\DI\ConsoleExtension
+	events: Kdyby\Events\DI\EventsExtension
+	annotations: Kdyby\Annotations\DI\AnnotationsExtension
+	translation: Kdyby\Translation\DI\TranslationExtension
+
+
+
+# Vložení konfiguračních souborů z jednotlivých modulů.
+includes:
+    - AdminModule/config.neon
+    - BaseModule/config.neon

@@ -1,0 +1,17 @@
+# budu ignorovat
+
+# složky netbeans a phpstorm
+nbproject/
+.idea/
+
+# složku log a temp a vendor (tyto složky se nemění)
+log/
+temp/
+vendor/
+
+# videa - moc velké
+www/videos/
+
+# examply
+www/example/
+/www/images/user/

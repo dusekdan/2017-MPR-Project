@@ -1,0 +1,15 @@
+parameters:
+	dbname: Nette
+
+database:
+	dsn: 'mysql:host=127.0.0.1;dbname=%dbname%'
+	user: root
+	password: 
+	options:
+		lazy: yes
+
+
+doctrine:
+    user: 
+    password:
+    dbname:

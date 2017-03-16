@@ -1,0 +1,12 @@
+{* Latte template *}
+
+{block content}
+<header id="header">
+	<div class="menu-hamburger" onclick="scrollToggleMenu(this, '#menu');">
+		<span></span>
+		<span></span>
+		<span></span>
+	</div>
+	<h1>{_ui.base.header.name}</h1>
+	{include 'menu.latte'}
+</header>

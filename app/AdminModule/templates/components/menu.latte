@@ -1,0 +1,22 @@
+{* Latte template *}
+
+{block content}
+<nav id="menu">
+	<ul>
+		<li>
+			<a n:href=":Base:Homepage:">Základní modul</a>
+		</li>
+		<li>
+			<a n:href=":Admin:Homepage:default">Hlavní stránka</a>
+		</li>
+		<li>
+			<a n:href=":Base:User:update">Úprava údajů</a>
+		</li>
+        <li n:if="$user->isAllowed('AdminModule', 'updateUsers')" >
+            <a n:href="User:users">Úprava údajů všech</a>
+        </li>
+		<li>
+			<a n:href=":Base:User:signOut">Odhlášení</a>
+		</li>
+	</ul>
+</nav>

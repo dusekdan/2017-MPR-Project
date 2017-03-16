@@ -1,0 +1,38 @@
+{block head}
+	<link rel="stylesheet" href="{$basePath}/libs/datetimepicker/css/bootstrap-datetimepicker.css">
+	<script src="{$basePath}/libs/moment/moment-with-locales.min.js"></script>
+	<script src="{$basePath}/libs/datetimepicker/js/bootstrap-datetimepicker.min.js"></script>
+{/block}
+
+{block content}
+	<table n:snippet="snippetUsers"> {*TODO snippet neni dodelan*}
+		<tr>
+			<td>ID</td>
+			<td>Login</td>
+			<td>Příjmení</td>
+			<td>Jméno</td>
+			<td>Narozeniny</td>
+			<td>Role</td>
+			<td>Datum založení</td>
+			<td>Datum posledního přihlášení</td>
+		</tr>
+		{foreach $users as $one}
+			<tr>{*promene z doctrine jde vypisovat pomoci geteru ale v latte i zkracene  one->getId() / one->id*}
+				<td>{$one->id}</td>
+				<td>{$one->getUsername()}</td>
+				<td>{$one->getLastName()}</td>
+				<td>{$one->getFirstName()}</td>
+				<td>{$one->getBirthday()|date:'j.n.Y'}</td>
+				<td>{$one->getRole()}</td>
+				<td>{$one->getCreated()|date:'G:i j.n.Y'}</td>
+				<td>{$one->getLastSign()|date:'G.i j.n.Y'}</td>
+
+				<td><a class="ajax" n:href="User:update, 'userId' => $one->id">Upravit</a></td>
+				<td><a n:href="delete!, 'userId' => $one->id">Smazat</a></td>
+			</tr>
+		{/foreach}
+	</table>
+{/block}
+
+{block scripts}
+{/block}

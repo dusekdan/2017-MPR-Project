@@ -1,0 +1,135 @@
+{block content}
+	<div id="banner">
+		<h1 n:block=title>Nový projekt!</h1>
+	</div>
+
+	<div>
+		<div>
+			<ul>
+				<li class="rolled-up">Postup instalace
+					<ul class="sublist">
+						<li>Příkazem <code>composer update</code> si stáhnout potřebné balíčky</li>
+						<li>Pak už si jen nastavit databázi</li>
+						<li class="rolled-up">Databáze (tabulky/entity)
+							<ul class="sublist">
+								<li><code>app/config/config.local.neon</code></li>
+								<li>Přihlašovací údaje k localhostu</li>
+								<li><code>app/model/entities/*</code> - zde jsou tabulky jako objekty. Je použita Doctrina <a href="http://docs.doctrine-project.org/projects/doctrine-orm/en/latest/reference/working-with-objects.html">dokumentace</a></li>
+							</ul>
+						</li>
+						<li class="rolled-up">Migrace <a href="http://docs.phinx.org/en/latest/migrations.html">dokumentace</a> (sql scripty, práce s databází)
+							<ul class="sublist">
+								<li><code>phinx.yml</code> - pro nastavení databáze pro migrace</li>
+								<li><code>migrations/*</code></li>
+								<li>vendor/bin/phinx migrate</li>
+								<li>vendor/bin/phinx rollback</li>
+								<li>vendor/bin/phinx create NazevSouboru
+									<ul>
+										<li>vygeneruje soubor -> YYYYMMDDHHMMSS_nazev_souboru.php</li>
+									</ul>
+								</li>
+							</ul>
+						</li>
+						<li class="rolled-up">ACL vrstva
+							<ul class="sublist">
+								<li><code>app/components/Acl.php</code> - nastavení rolí a oprávnění</li>
+								<li><code>app/model/entities/User.php</code> - uživatel</li>
+							</ul>
+						</li>
+					</ul>
+				</li>
+			</ul>
+		</div>
+
+		<div class="options">
+			<h2>Vlastnosti</h2>
+			<ul>
+				<li>Nette-2.4-20161221</li>
+				<li class="rolled-up">
+					Doctrine
+					<ul class="sublist">
+						<li>php ./www/index.php orm:validate-schema (validace)</li>
+						<li>php www/index.php orm:schema-tool:update --dump-sql (nabídka sql v doctrine)</li>
+					</ul>
+				</li>
+				<li class="rolled-up">
+					Migrace
+					<ul class="sublist">
+						<li>vendor/bin/phinx migrate</li>
+						<li>vendor/bin/phinx rollback</li>
+						<li>vendor/bin/phinx create NazevSouboru (YYYYMMDDHHMMSS_nazev_souboru.php</li>
+					</ul>
+				</li>
+				<li>Překlady - možná časem jinak pro moduly, teď je to vše najednou</li>
+				<li class="rolled-up">
+					Připraveno pro moduly
+					<ul class="sublist">
+						<li class="rolled-up">
+							AdminModule
+							<ul class="sublist">
+								<li class="rolled-up">
+									ACL-vrstvu
+									<ul class="sublist">
+										<li>Admin nastavuje opravnění</li>
+									</ul>
+								</li>
+								<li>Mazání uživatelů</li>
+							</ul>
+						</li>
+						<li class="rolled-up">
+							BaseModule
+							<ul class="sublist">
+								<li>Přihlášení</li>
+								<li>Registrace</li>
+								<li>Editace</li>
+							</ul>
+						</li>
+						<li>Zízkávání parametrů z configů (klasicky přes parametr)</li>
+					</ul>
+				</li>
+				<li>Přihlášení vrací na pozici odkud byl přesměrován z administrace <a href="https://pla.nette.org/cs/jak-po-odeslani-formulare-zobrazit-stejnou-stranku">link</a></li>
+				<li class="rolled-up">
+					Bootstrap 3.3.7
+					<ul class="sublist">
+						<li>Modal pro přihlašování (zjišťuje se pomoci příznaku v payloudu)</li>
+					</ul>
+				</li>
+				<li>Přejít na https (zatím umožněno obojí)</li>
+				<li>datetimepicker.js [moment.js (potřebné pro datetimepicker)]</li>
+				<li>jquery-3.1.1.js</li>
+				<li>netteForm.js 14.3.2017 staženo</li>
+				<li>nette.ajax.js verze 2.3.0</li>
+				<li>Ve www/libs a www/css jsou hodící se soubory  nebo knihovny označeny _nazev</li>
+				<li>Gulp - předpřipraven - minimalizace js a css - <a href="https://uspesny-web.cz/clanky/blog/gulp-automatizace-ukolu-pri-vyvoji-webu"> gulp1</a> <a href="http://blog.webdream.cz/ostatni/gulp-js-nastroj-pro-automatizaci-ukolu">gulp2</a></li>
+				<li>Pro zrychlení webu je dobré zapnout [opcache] v php.ini (časem lze pro doctrine nastavic [APCu])</li>
+				<li>Fotka u uživatele</li>
+				<li>Bootstrap input file bootstrap vzhled</li>
+			</ul>
+		</div>
+
+		<div class="upcoming-statement">
+			<h2>Příjde dodělat</h2>
+			<ul>
+				<li>Lepší nastylování vzorového projektu</li>
+				<li>Nastylování administrace <a href="https://www.templatemonster.com/demo/58393.html">pěkný vzor menu</a></li>
+			</ul>
+		</div>
+
+		<div style="clear: both;">
+			<h2>Návody</h2>
+			<ul>
+				<li><a href="https://doc.nette.org/quickstart">Quick Start</a></li>
+				<li><a href="https://doc.nette.org">documentation</a></li>
+				<li><a href="https://pla.nette.org">tutorials</a></li>
+				<li><a href="https://forum.nette.org">forum</a></li>
+			</ul>
+		</div>
+	</div>
+{/block}
+
+{block scripts}
+{/block}
+
+
+{block head}
+{/block}

@@ -1,0 +1,16 @@
+{* User signIn.latte *}
+<a n:href="User:signIn" n:block=title >Přihlášení</a>
+
+{* vloží obsah který obsahuje modální blok, a ten pokud jede ajax s epřenese do modálního okna*}
+{block content}
+	{block modal}
+		{snippet snippetSignIn}
+			{import './../components/bootstrap-form.latte'} {* bootstrap formuláře *}
+			{include bootstrap-form, form => signInForm, labelSize => 4, inputSize => 7}
+		{/snippet}
+	{/block}
+{/block}
+
+{block titleModal}
+	Přihlášení
+{/block}
