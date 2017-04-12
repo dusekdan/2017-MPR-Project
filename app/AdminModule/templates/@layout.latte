@@ -10,8 +10,29 @@
 	<title>{ifset title}{include title|stripHtml} | {/ifset}Moduly</title>
 
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<link rel="stylesheet" href="{$basePath}/libs/bootstrap/css/bootstrap.css" >
+	
 	<link rel="stylesheet" href="{$basePath}/css/style.css">
+
+	<!--Morris Chart CSS -->
+	<link rel="stylesheet" href="{$basePath}/plugins/morris/morris.css">
+
+    <!-- App css -->
+    <link href="{$basePath}/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link href="{$basePath}/css/core.css" rel="stylesheet" type="text/css" />
+    <link href="{$basePath}/css/components.css" rel="stylesheet" type="text/css" />
+    <link href="{$basePath}/css/icons.css" rel="stylesheet" type="text/css" />
+    <link href="{$basePath}/css/pages.css" rel="stylesheet" type="text/css" />
+    <link href="{$basePath}/css/menu.css" rel="stylesheet" type="text/css" />
+    <link href="{$basePath}/css/responsive.css" rel="stylesheet" type="text/css" />
+
+    <!-- HTML5 Shiv and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="{$basePath}/js/modernizr.min.js"></script>
 
 	<script src="{$basePath}/js/include/jquery-3.1.1.js"></script>
 	<script src="{$basePath}/libs/bootstrap/js/bootstrap.js"></script>
@@ -24,12 +45,15 @@
 	{include head}
 </head>
 
-<body>
-	<div n:foreach="$flashes as $flash" n:class="flash, $flash->type">{$flash->message}</div>
-	<div id="banner">
-		<h1 n:block=title>Modul administrace</h1>
+<body class="fixed-left">
+	<div class="wrapper">
+		{include './components/topMenu.latte'}
+		{include './components/leftSideMenu.latte'}
+		
+
+
+		{include './components/rightSideMenu.latte'}
 	</div>
-	{include './components/menu.latte'}
 	{include content}
 
 	{snippet snippetModal}
@@ -66,6 +90,38 @@
 			$.nette.init();
 		});
 	</script>
+	<script>
+		var resizefunc = [];
+    </script>
+
+    <!-- jQuery  -->
+    <script src="{$basePath}/js/jquery.min.js"></script>
+    <script src="{$basePath}/js/bootstrap.min.js"></script>
+    <script src="{$basePath}/js/detect.js"></script>
+    <script src="{$basePath}/js/fastclick.js"></script>
+    <script src="{$basePath}/js/jquery.slimscroll.js"></script>
+    <script src="{$basePath}/js/jquery.blockUI.js"></script>
+    <script src="{$basePath}/js/waves.js"></script>
+    <script src="{$basePath}/js/jquery.nicescroll.js"></script>
+    <script src="{$basePath}/js/jquery.slimscroll.js"></script>
+    <script src="{$basePath}/js/jquery.scrollTo.min.js"></script>
+
+    <!-- KNOB JS -->
+    <!--[if IE]>
+    <script type="text/javascript" src="assets/plugins/jquery-knob/excanvas.js"></script>
+    <![endif]-->
+    <script src="{$basePath}/plugins/jquery-knob/jquery.knob.js"></script>
+
+    <!--Morris Chart-->
+	<script src="{$basePath}/plugins/morris/morris.min.js"></script>
+	<script src="{$basePath}/plugins/raphael/raphael-min.js"></script>
+
+    <!-- Dashboard init -->
+    <script src="{$basePath}/pages/jquery.dashboard.js"></script>
+
+    <!-- App js -->
+    <script src="{$basePath}/js/jquery.core.js"></script>
+    <script src="{$basePath}/js/jquery.app.js"></script>
 	{snippet snippetScripts}
 		{block scripts}
 		{/block}
