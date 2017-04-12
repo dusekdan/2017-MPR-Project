@@ -19,9 +19,12 @@ class Acl extends Control {
 		$acl = new Permission();
 
 		/* seznam uživatelských rolí */
-		$acl->addRole('guest');              //host
-		$acl->addRole('admin');              //admin
-		$acl->addRole('superAdmin', 'admin');//dědí od admina
+        $acl->addRole('administrator');
+        $acl->addRole('owner');
+        $acl->addRole('projectManager', 'owner');
+        $acl->addRole('user', 'projectManager');
+
+
 
 		/* seznam zdrojů */
 		$acl->addResource('AdminModule'); // přístup do Osobní údaje, Plán, Kalendář, Deník, Zprávy, Soubory
@@ -29,15 +32,20 @@ class Acl extends Control {
 
 		/* seznam pravidel oprávnění (role, zdroj, operace)*/
 		/* stránky */
-		$acl->allow('guest','BaseModule', ['edit','view','remove','add']);
-		$acl->allow('admin','AdminModule', ['edit','view','remove','add']); //povoleno pro admina -> nemusím povolovat pro superAdmina
+		$acl->allow('user','BaseModule', ['edit','view','remove','add']);
+		$acl->allow('administrator','AdminModule', ['edit','view','remove','add']); //povoleno pro admina -> nemusím povolovat pro superAdmina
+        $acl->allow('projectManager','AdminModule', ['edit','view','remove','add']); //povoleno pro admina -> nemusím povolovat pro superAdmina
+        $acl->allow('owner','AdminModule', ['edit','view','remove','add']); //povoleno pro admina -> nemusím povolovat pro superAdmina
 
-		$acl->deny('guest','BaseModule', ['edit', 'remove']);
-		$acl->deny('guest','AdminModule', ['edit','view','remove','add']);
-		$acl->deny('admin', 'AdminModule', 'updateUsers');
+
+		$acl->deny('user','BaseModule', ['edit', 'remove']);
+		$acl->deny('user','AdminModule', ['edit','view','remove','add']);
+		$acl->deny('administrator', 'AdminModule', 'updateUsers');
+        $acl->deny('projectManager', 'AdminModule', 'updateUsers');
+        $acl->deny('owner', 'AdminModule', 'updateUsers');
 
 		/* superAdmin má práva na všechno */
-		$acl->allow('superAdmin', ['BaseModule', 'AdminModule'], ['edit', 'view', 'remove', 'add', 'updateUsers']);
+		$acl->allow('owner', ['BaseModule', 'AdminModule'], ['edit', 'view', 'remove', 'add', 'updateUsers']);
 
 		return $acl;
 	}

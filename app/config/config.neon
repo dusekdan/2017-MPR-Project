@@ -5,9 +5,11 @@
 parameters:
 	acl:
 		roles:
-			guest:
-			admin:
-			superAdmin: [admin] # superAdmin dědí od admina
+			user:
+			administrator:
+			owner:
+			projectManager:
+
 	file:
 		image:
 			maxHeight: 200

@@ -112,9 +112,10 @@ class User
 	 * @var array roleList
 	 */
 	static private $roleList = [
-		'superAdmin' => 'super administrátor',
-		'admin' => 'administrátor',
-		'guest' => 'host'];
+		'user' => 'User',
+		'administrator' => 'administrátor',
+		'projectManager' => 'Projektový manažér',
+        'owner' => 'Majiteľ spoločnosti'];
 
 
 	public function __construct($username, $password, $email, $firstName, $lastName, $birthday, $phone, $role)
@@ -142,7 +143,7 @@ class User
 		$this->birthday = (!empty($birthday)) ? new \DateTime($birthday) : NULL;
 	}
 
-	public function setRole($role = 'guest') {
+	public function setRole($role = 'user') {
 			$this->role = $role;
 	}
 

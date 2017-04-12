@@ -1,16 +1,16 @@
 parameters:
-	dbname: nazev_databaze
+	dbname: project
 
 database:
-	dsn: 'mysql:host=127.0.0.1;dbname=%dbname%'
+	dsn: 'mysql:host=localhost;dbname=%dbname%'
 	user: root
-	password:
+	password: root
 	options:
 		lazy: yes
 
 doctrine:
 	user: root
-	password:
+	password: root
 	dbname: %dbname%
 	metadata:
-		App: %appDir%\Model\Entities
+		App: %appDir%/Model/Entities

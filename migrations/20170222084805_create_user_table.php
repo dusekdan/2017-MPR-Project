@@ -40,38 +40,49 @@ class CreateUserTable extends AbstractMigration
 			//heslo je 123456
 		$rows = [
 			[
-				'email'    => "superAdmin@admin.cz",
+				'email'    => "user@mpr.cz",
 				'password'  => '$2y$10$.kckarxUiumF2QkqHWx6DuTu6JHU/ChWMd3AsiRFiRtEUBjZiKA12',
-				'username' => "superAdmin",
+				'username' => "user",
 				'first_name' => "Jméno",
 				'last_name' => "Příjmení",
 				'birthday' => "2000-01-01",
 				'phone' => "+420123456789",
-				'role' => "superAdmin",
+				'role' => "user",
 				'created' => date("Y-m-d H:i:s"),
 			],
 			[
-				'email'    => "admin@admin.cz",
+				'email'    => "administrator@mpr.cz",
 				'password'  => '$2y$10$.kckarxUiumF2QkqHWx6DuTu6JHU/ChWMd3AsiRFiRtEUBjZiKA12',
-				'username' => "admin",
+				'username' => "administrator",
 				'first_name' => "Jméno",
 				'last_name' => "Příjmení",
 				'birthday' => "2000-01-01",
 				'phone' => "+420123456789",
-				'role' => "admin",
+				'role' => "administrator",
 				'created' => date("Y-m-d H:i:s"),
 			],
-			[
-				'email'    => "guest@guest.cz",
-				'password'  => '$2y$10$.kckarxUiumF2QkqHWx6DuTu6JHU/ChWMd3AsiRFiRtEUBjZiKA12',
-				'username' => "guest",
-				'first_name' => "Jméno",
-				'last_name' => "Příjmení",
-				'birthday' => "2000-01-01",
-				'phone' => "+420123456789",
-				'role' => "guest",
-				'created' => date("Y-m-d H:i:s"),
-			]
+            [
+                'email'    => "projectmanager@mpr.cz",
+                'password'  => '$2y$10$.kckarxUiumF2QkqHWx6DuTu6JHU/ChWMd3AsiRFiRtEUBjZiKA12',
+                'username' => "projectManager",
+                'first_name' => "Jméno",
+                'last_name' => "Příjmení",
+                'birthday' => "2000-01-01",
+                'phone' => "+420123456789",
+                'role' => "projectManager",
+                'created' => date("Y-m-d H:i:s"),
+            ],
+            [
+                'email'    => "owner@mpr.cz",
+                'password'  => '$2y$10$.kckarxUiumF2QkqHWx6DuTu6JHU/ChWMd3AsiRFiRtEUBjZiKA12',
+                'username' => "owner",
+                'first_name' => "Jméno",
+                'last_name' => "Příjmení",
+                'birthday' => "2000-01-01",
+                'phone' => "+420123456789",
+                'role' => "owner",
+                'created' => date("Y-m-d H:i:s"),
+            ]
 		];
 		$this->insert($this->tableName, $rows);
 	}
