@@ -32,11 +32,24 @@ class User
 	 */
 	protected $id;
 
-	/**
+
+    /**
+     * ID Company, pre ktoru pracuje
+     * @ORM\Column(name="id_company", type="integer")
+     * @var integer
+     */
+
+    protected $idCompany;
+
+
+
+    /**
 	 * Přezdívka - login
 	 * @ORM\Column(type="string", length=30, unique=true)
 	 * @var string
 	 */
+
+
 	protected $username;
 
 	/**
@@ -108,18 +121,28 @@ class User
 	 */
 	protected $hasPhoto;
 
+    /**
+     * Enabled, moznost pracovat so zaznamom
+     * @ORM\Column(type="boolean", options={"default"=true})
+     * @var boolean
+     */
+    protected  $enabled;
+
 	/**
 	 * @var array roleList
 	 */
+
 	static private $roleList = [
+
 		'user' => 'User',
-		'administrator' => 'administrátor',
+		'admin' => 'Administrátor',
 		'projectManager' => 'Projektový manažér',
         'owner' => 'Majiteľ spoločnosti'];
 
 
-	public function __construct($username, $password, $email, $firstName, $lastName, $birthday, $phone, $role)
+	public function __construct($id_company, $username, $password, $email, $firstName, $lastName, $birthday, $phone, $role)
 	{
+	    $this->setIdCompamy($id_company);
 		$this->setUsername($username);
 		$this->setPassword($password);
 		$this->setEmail($email);
@@ -129,6 +152,7 @@ class User
 		$this->setPhone($phone);
 		$role ? $this->setRole($role) : $this->setRole();
 		$this->setCreated(new \DateTime('now'));
+        $this->setUpdated(new \DateTime('now'));
 	}
 
 	/**

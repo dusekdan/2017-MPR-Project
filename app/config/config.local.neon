@@ -1,16 +1,16 @@
 parameters:
-	dbname: project
+	dbname: mpr_octopus
 
 database:
-	dsn: 'mysql:host=localhost;dbname=%dbname%'
+	dsn: 'mysql:host=127.0.0.1;dbname=%dbname%'
 	user: root
-	password: root
+	password:
 	options:
 		lazy: yes
 
 doctrine:
 	user: root
-	password: root
+	password:
 	dbname: %dbname%
 	metadata:
-		App: %appDir%/Model/Entities
+		App: %appDir%\Model\Entities
