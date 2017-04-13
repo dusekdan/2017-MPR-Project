@@ -3961,7 +3961,7 @@ $(function(){
 * 
 * 
 * Author: Vitaliy Potapov
-* Project page: http://github.com/vitalets/combodate
+* Projects page: http://github.com/vitalets/combodate
 * Copyright (c) 2012 Vitaliy Potapov. Released under MIT License.
 **/
 (function ($) {

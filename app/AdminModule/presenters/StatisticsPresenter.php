@@ -8,10 +8,10 @@ use Nette;
 use App\Model;
 
 
-class ProjectsPresenter extends Nette\Application\UI\Presenter
+class StatisticsPresenter extends Nette\Application\UI\Presenter
 {
 
-    public function renderProjects()
+    public function renderStatistics()
     {
         $this->template->anyVariable = 'any value';
     }

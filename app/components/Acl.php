@@ -19,6 +19,8 @@ class Acl extends Control {
 		$acl = new Permission();
 
 		/* seznam uživatelských rolí */
+
+        $acl->addRole('guest');
         $acl->addRole('administrator');
         $acl->addRole('owner');
         $acl->addRole('projectManager', 'owner');
@@ -45,7 +47,7 @@ class Acl extends Control {
         $acl->deny('owner', 'AdminModule', 'updateUsers');
 
 		/* superAdmin má práva na všechno */
-		$acl->allow('owner', ['BaseModule', 'AdminModule'], ['edit', 'view', 'remove', 'add', 'updateUsers']);
+		$acl->allow('administrator', ['BaseModule', 'AdminModule'], ['edit', 'view', 'remove', 'add', 'updateUsers']);
 
 		return $acl;
 	}

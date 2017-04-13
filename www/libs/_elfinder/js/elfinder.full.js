@@ -6835,7 +6835,7 @@ if (elFinder && elFinder.prototype && typeof(elFinder.prototype.i18) == 'object'
 			'webfm'           : 'Web file manager',
 			'ver'             : 'Version',
 			'protocolver'     : 'protocol version',
-			'homepage'        : 'Project home',
+			'homepage'        : 'Projects home',
 			'docs'            : 'Documentation',
 			'github'          : 'Fork us on Github',
 			'twitter'         : 'Follow us on twitter',

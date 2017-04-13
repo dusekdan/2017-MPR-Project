@@ -2,7 +2,7 @@
 
 module.exports = function(grunt) {
 
-	// Project configuration.
+	// Projects configuration.
 	grunt.initConfig({
 		// Metadata.
 		pkg: grunt.file.readJSON('package.json'),

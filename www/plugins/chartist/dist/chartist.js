@@ -442,7 +442,7 @@ var Chartist = {
   };
 
   /**
-   * Project a data length into screen coordinates (pixels)
+   * Projects a data length into screen coordinates (pixels)
    *
    * @memberof Chartist.Core
    * @param {Object} axisLength The svg element for the chart
