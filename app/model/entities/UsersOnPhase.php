@@ -51,14 +51,14 @@ class UsersOnPhase
 
     /**
      * Datum vytvorenia zaznamu
-     * @ORM\Column(name"created_", type="datetime")
+     * @ORM\Column(name"created_at", type="datetime")
      * @var \DateTime
      */
     protected $created;
 
     /**
      * Datum posledneho update zaznamu
-     * @ORM\Column(name"updatedt", type="datetime")
+     * @ORM\Column(name"updated_at", type="datetime")
      * @var \DateTime
      */
     protected $updated;

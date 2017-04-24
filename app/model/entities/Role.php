@@ -33,11 +33,11 @@ class Role
 
 
     /**
-     * ID Company, pre ktoru user pracuje
+     * ID Clienta, pre ktoru user pracuje
      * @ORM\Column(name="id_company", type="integer")
      * @var integer
      */
-    protected $idCompany;
+    protected $idClient;
 
 
 

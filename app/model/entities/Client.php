@@ -36,13 +36,7 @@ class Client
      * @ORM\Column(name="id_company", type="integer")
      * @var integer
      */
-    protected $idCompany;
 
-    /**
-	 * Nazev klienta
-	 * @ORM\Column(type="string", length=100)
-	 * @var string
-	 */
 	protected $name;
 
 	/**

@@ -57,7 +57,7 @@ class Risk
 
 	/**
 	 * Popis rizika
-	 * @ORM\Column(type="string")
+	 * @ORM\Column(type="text")
 	 * @var string
 	 */
 	protected $description;
@@ -65,14 +65,14 @@ class Risk
 
     /**
      * Datum vytvorenia zaznamu o riziku
-     * @ORM\Column(name"created_", type="datetime")
+     * @ORM\Column(name"created_at", type="datetime")
      * @var \DateTime
      */
     protected $created;
 
     /**
      * Datum posledneho update zaznamu o riziku
-     * @ORM\Column(name"updatedt", type="datetime")
+     * @ORM\Column(name"updated_at", type="datetime")
      * @var \DateTime
      */
     protected $updated;
@@ -94,14 +94,14 @@ class Risk
 
     /**
      * Id usera zodpovedneho za riziko
-     * @ORM\Column(type="integer")
+     * @ORM\Column(name="id_resposible_user", type="integer")
      * @var integer
      */
     protected $idCreator;
 
     /**
      * Pravdepodobnost rizika
-     * @ORM\Column(type="float")
+     * @ORM\Column(name="id_creator",type="float")
      * @var float
      */
     protected $probability;
@@ -122,12 +122,39 @@ class Risk
 
     /**
      * Vysledok rizika
-     * @ORM\Column(type="string")
+     * @ORM\Column(type="string", length=100)
      * @var string
      */
     protected $result;
 
-	public function __construct($idPhase, $idRiskType, $name ,$description, $probability,$money,$time,$result)
+    /**
+     * Zavaznost rizika
+     * @ORM\Column(type="integer")
+     * @var string
+     */
+    protected $severity;
+    /**
+     * Prvotna pricina rizika
+     * @ORM\Column(name="primary_cause",type="string",length=100)
+     * @var string
+     */
+    protected $primaryCause;
+    /**
+     * Spustac rizika
+     * @ORM\Column(type="string"length=100)
+     * @var string
+     */
+    protected $trigger;
+    /**
+     * Reakcia/Opatrenie rizika
+     * @ORM\Column(type="string",length=100)
+     * @var string
+     */
+    protected $reaction;
+
+
+
+    public function __construct($idPhase, $idRiskType, $name ,$description, $probability,$money,$time,$result,$severity,$primaryCause,$trigger,$reaction)
 	{
 		$this->setIdPhase($idPhase);
 		$this->setIdRiskType($idRiskType);
@@ -139,6 +166,10 @@ class Risk
 	    $this->setMoney($money);
         $this->setTime($time);
         $this->setResult($result);
+        $this->setSeverity($severity);
+        $this->setPrimaCause($primaryCause);
+        $this->setTrigger($trigger);
+        $this->setReaction($reaction);
     }
 
 }

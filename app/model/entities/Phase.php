@@ -71,14 +71,14 @@ class Phase
 
     /**
      * Datum vytvorenia zaznamu o projekte
-     * @ORM\Column(name"created_", type="datetime")
+     * @ORM\Column(name"created_at", type="datetime")
      * @var \DateTime
      */
     protected $created;
 
     /**
      * Datum posledneho update zaznamu o projekte
-     * @ORM\Column(name"updatedt", type="datetime")
+     * @ORM\Column(name"updated_at", type="datetime")
      * @var \DateTime
      */
     protected $updated;
