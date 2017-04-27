@@ -21,7 +21,6 @@ class CreateUserTable extends AbstractMigration
         $users
             ->addColumn('username', 'string', array('limit' => 30))
             ->addColumn('password', 'string')
-            ->addColumn('id_company', 'integer')
             ->addColumn('email', 'string', array('limit' => 100))
             ->addColumn('first_name', 'string', array('limit' => 30))
             ->addColumn('last_name', 'string', array('limit' => 30))
@@ -41,49 +40,7 @@ class CreateUserTable extends AbstractMigration
             ->addIndex(array('username'), array('unique' => true, 'name' => 'UNIQ_C3176774F85E0677'))
             ->save();
 
-        //heslo je 123456
-        $rows = [
-            [
-                'email'    => "superAdmin@admin.cz",
-                'password'  => '$2y$10$.kckarxUiumF2QkqHWx6DuTu6JHU/ChWMd3AsiRFiRtEUBjZiKA12',
-                'id_company' => 1,
-                'username' => "superAdmin",
-                'first_name' => "Jméno",
-                'last_name' => "Příjmení",
-                'birthday' => "2000-01-01",
-                'phone' => "+420123456789",
-                'role' => "administrator",
-                'created' => date("Y-m-d H:i:s"),
-                'updated' => date("Y-m-d H:i:s"),
-            ],
-            [
-                'email'    => "admin@admin.cz",
-                'password'  => '$2y$10$.kckarxUiumF2QkqHWx6DuTu6JHU/ChWMd3AsiRFiRtEUBjZiKA12',
-                'id_company' => 1,
-                'username' => "admin",
-                'first_name' => "Jméno",
-                'last_name' => "Příjmení",
-                'birthday' => "2000-01-01",
-                'phone' => "+420123456789",
-                'role' => "projectManager",
-                'created' => date("Y-m-d H:i:s"),
-                'updated' => date("Y-m-d H:i:s"),
-            ],
-            [
-                'email'    => "guest@guest.cz",
-                'password'  => '$2y$10$.kckarxUiumF2QkqHWx6DuTu6JHU/ChWMd3AsiRFiRtEUBjZiKA12',
-                'id_company' => 1,
-                'username' => "guest",
-                'first_name' => "Jméno",
-                'last_name' => "Příjmení",
-                'birthday' => "2000-01-01",
-                'phone' => "+420123456789",
-                'role' => "user",
-                'created' => date("Y-m-d H:i:s"),
-                'updated' => date("Y-m-d H:i:s"),
-            ]
-        ];
-        $this->insert($this->tableName, $rows);
+
     }
 
     /**

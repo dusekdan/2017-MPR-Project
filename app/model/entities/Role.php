@@ -45,17 +45,17 @@ class Role
      * ID Usera, ktoreho sa zaznam tyka
      * @ORM\Column(name="id_user", type="integer")
      * @var integer
+     * @Id @ManyToOne(targetEntity="User")
      */
     protected $idUser;
 
 
     /**
 	 * Nazev role
-	 * @ORM\Column(type="string", length=100)
+	 * @ORM\Column(type="string", length=100) //just for now, should be done by enum list
 	 * @var string
 	 */
 	protected $roleName;
-
 	/**
 	 * Popis pozicie daneho zamestnanca vo firme
 	 * @ORM\Column(type="string", nullable=true)

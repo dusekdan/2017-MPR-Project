@@ -23,21 +23,15 @@ class CreatePhaseTable extends AbstractMigration
 
             ->addColumn('name', 'string', array('limit' => 100))
             ->addColumn('description', 'text')
+            ->addColumn('start_date', 'datetime',array('null' => true))
+            ->addColumn('end_dDate', 'datetime',array('null' => true))
+            ->addColumn('id_project', 'integer')
+            //->addForeignKey('id_project', 'projects', 'id', array('delete'=> 'SET_NULL', 'update'=> 'CASCADE'))
             ->addColumn('created', 'datetime')
             ->addColumn('updated', 'datetime')
-            ->addColumn('start_date', 'datetime')
-            ->addColumn('end_dDate', 'datetime',array('null' => true))
             ->addColumn('enabled', 'boolean', array('default' => true))
-            ->addColumn('id_project', 'integer')
-            ->addForeignKey('id_project', 'projects', 'id', array('delete'=> 'SET_NULL', 'update'=> 'CASCADE'))
-            /* Pokud to chci řešit na straně databáze
-            ->addColumn('created_at', 'timestamp', array('default' => '0000-00-00 00:00:00', 'update' => ''))
-            ->addColumn('updated_at', 'timestamp', array('default' => 'CURRENT_TIMESTAMP', 'update' => 'CURRENT_TIMESTAMP'))
-            */
-//            ->addIndex(array('email'), array('unique' => true, 'name' => 'UNIQ_C3176774E7927C74'))
-//            ->addIndex(array('username'), array('unique' => true, 'name' => 'UNIQ_C3176774F85E0677'))
-
             ->save();
+
     }
 
 	/**

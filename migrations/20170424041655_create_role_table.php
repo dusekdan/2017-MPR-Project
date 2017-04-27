@@ -9,21 +9,25 @@
 use Phinx\Migration\AbstractMigration;
 use Phinx\Db\Adapter\MysqlAdapter;
 
-class CreateUsersOnProjectTable extends AbstractMigration
+class CreateRoleTable extends AbstractMigration
 {
     /**
      * Migrate Up.
      */
 
-    private $tableName = "users_on_projects";
+    private $tableName = "roles";
     public function up()
     {
-        $users_on_projects = $this->table($this->tableName); // id je automaticky generován
-        $users_on_projects
+        $roles = $this->table($this->tableName); // id je automaticky generován
+        $roles
+
+            ->addColumn('name', 'string', array('limit' => 100))
+            ->addColumn('description', 'text',array('null' => true))
+
             ->addColumn('id_user', 'integer')
             //->addForeignKey('id_user', 'users', 'id', array('delete'=> 'SET_NULL', 'update'=> 'CASCADE'))
-            ->addColumn('id_project', 'integer')
-            //->addForeignKey('id_project', 'projects', 'id', array('delete'=> 'SET_NULL', 'update'=> 'CASCADE'))
+            ->addColumn('id_client', 'integer')
+            //->addForeignKey('id_client', 'clients', 'id', array('delete'=> 'SET_NULL', 'update'=> 'CASCADE'))
             ->addColumn('created', 'datetime')
             ->addColumn('updated', 'datetime')
             ->addColumn('enabled', 'boolean', array('default' => true))

@@ -26,14 +26,8 @@ class CreateRiskTypeTable extends AbstractMigration
             ->addColumn('created', 'datetime')
             ->addColumn('updated', 'datetime')
             ->addColumn('enabled', 'boolean', array('default' => true))
-            /* Pokud to chci řešit na straně databáze
-          ->addColumn('created_at', 'timestamp', array('default' => '0000-00-00 00:00:00', 'update' => ''))
-          ->addColumn('updated_at', 'timestamp', array('default' => 'CURRENT_TIMESTAMP', 'update' => 'CURRENT_TIMESTAMP'))
-          */
-//            ->addIndex(array('email'), array('unique' => true, 'name' => 'UNIQ_C3176774E7927C74'))
-//            ->addIndex(array('username'), array('unique' => true, 'name' => 'UNIQ_C3176774F85E0677'))
-
             ->save();
+
     }
 
     /**

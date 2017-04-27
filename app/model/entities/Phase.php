@@ -36,6 +36,7 @@ class Phase
      * ID Projektu, komu faze patri
      * @ORM\Column(name="id_project", type="integer")
      * @var integer
+     * @Id @ManyToOne(targetEntity="Project")
      */
     protected $idProject;
 

@@ -33,13 +33,6 @@ class RiskType
 
 
     /**
-     * ID Company, ktora tento typ rizika vytvorila
-     * @ORM\Column(name="id_company", type="integer")
-     * @var integer
-     */
-    protected $idCompany;
-
-    /**
 	 * Nazev typu rizika
 	 * @ORM\Column(type="string", length=100)
 	 * @var string

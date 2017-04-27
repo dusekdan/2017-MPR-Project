@@ -36,6 +36,7 @@ class Risk
      * ID Faze, ktorej riziko patri
      * @ORM\Column(name="id_phase", type="integer")
      * @var integer
+     * @Id @ManyToOne(targetEntity="Phase")
      */
     protected $idPhase;
 
@@ -43,6 +44,7 @@ class Risk
      * ID Typu rizika, ktoremu riziko patri
      * @ORM\Column(name="id_risk_type", type="integer")
      * @var integer
+     * @Id @ManyToOne(targetEntity="Risk")
      */
     protected $idRiskType;
 
@@ -89,6 +91,7 @@ class Risk
      * Id usera zodpovedneho za riziko
      * @ORM\Column(type="integer")
      * @var integer
+     * @Id @ManyToOne(targetEntity="User")
      */
     protected $idResponsibleUser;
 
@@ -96,6 +99,7 @@ class Risk
      * Id usera zodpovedneho za riziko
      * @ORM\Column(name="id_resposible_user", type="integer")
      * @var integer
+     * @Id @ManyToOne(targetEntity="User")
      */
     protected $idCreator;
 

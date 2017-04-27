@@ -33,15 +33,6 @@ class User
 	protected $id;
 
 
-    /**
-     * ID Company, pre ktoru pracuje
-     * @ORM\Column(name="id_company", type="integer")
-     * @var integer
-     */
-
-    protected $idCompany;
-
-
 
     /**
 	 * Přezdívka - login

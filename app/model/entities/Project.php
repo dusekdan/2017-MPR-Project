@@ -36,6 +36,7 @@ class Project
      * ID Clienta, komu Projekt patri
      * @ORM\Column(name="id_client", type="integer")
      * @var integer
+     * @Id @ManyToOne(targetEntity="Client")
      */
     protected $idClient;
 
@@ -96,6 +97,7 @@ class Project
     /**
      * Id usera ako manazera projektu
      * @ORM\Column(type="integer")
+     * @Id @ManyToOne(targetEntity="User")
      */
     protected $idProjectManager;
 
