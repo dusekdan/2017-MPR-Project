@@ -20,13 +20,10 @@ class CreatePhaseTable extends AbstractMigration
     {
         $phases = $this->table($this->tableName); // id je automaticky generován
         $phases
-
             ->addColumn('name', 'string', array('limit' => 100))
             ->addColumn('description', 'text')
             ->addColumn('start_date', 'datetime',array('null' => true))
-            ->addColumn('end_dDate', 'datetime',array('null' => true))
-            ->addColumn('id_project', 'integer')
-            //->addForeignKey('id_project', 'projects', 'id', array('delete'=> 'SET_NULL', 'update'=> 'CASCADE'))
+            ->addColumn('end_date', 'datetime',array('null' => true))
             ->addColumn('created', 'datetime')
             ->addColumn('updated', 'datetime')
             ->addColumn('enabled', 'boolean', array('default' => true))

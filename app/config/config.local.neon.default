@@ -1,5 +1,5 @@
 parameters:
-	dbname: vut_mpr_spravarizik
+	dbname: nazev_databaze
 
 database:
 	dsn: 'mysql:host=127.0.0.1;dbname=%dbname%'

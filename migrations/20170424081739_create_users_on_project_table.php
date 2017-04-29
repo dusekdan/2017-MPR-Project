@@ -21,9 +21,7 @@ class CreateUsersOnProjectTable extends AbstractMigration
         $users_on_projects = $this->table($this->tableName); // id je automaticky generován
         $users_on_projects
             ->addColumn('id_user', 'integer')
-            //->addForeignKey('id_user', 'users', 'id', array('delete'=> 'SET_NULL', 'update'=> 'CASCADE'))
             ->addColumn('id_project', 'integer')
-            //->addForeignKey('id_project', 'projects', 'id', array('delete'=> 'SET_NULL', 'update'=> 'CASCADE'))
             ->addColumn('created', 'datetime')
             ->addColumn('updated', 'datetime')
             ->addColumn('enabled', 'boolean', array('default' => true))

@@ -9,7 +9,7 @@
 use Phinx\Migration\AbstractMigration;
 use Phinx\Db\Adapter\MysqlAdapter;
 
-class InputData extends AbstractMigration
+class AddTestData extends AbstractMigration
 {
     private $tableNameU = "users";
     private $tableNameRi = "risks";

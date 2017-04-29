@@ -20,7 +20,6 @@ class CreateRiskTypeTable extends AbstractMigration
     {
         $risk_types = $this->table($this->tableName); // id je automaticky generován
         $risk_types
-
             ->addColumn('name', 'string', array('limit' => 100))
             ->addColumn('description', 'text')
             ->addColumn('created', 'datetime')

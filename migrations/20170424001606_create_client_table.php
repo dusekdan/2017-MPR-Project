@@ -21,7 +21,6 @@ class CreateClientTable extends AbstractMigration
     {
         $clients = $this->table($this->tableName); // id je automaticky generován
         $clients
-
             ->addColumn('name', 'string', array('limit' => 100))
             ->addColumn('description', 'text')
             ->addColumn('created', 'datetime')

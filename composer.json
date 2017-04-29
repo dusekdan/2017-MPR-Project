@@ -30,7 +30,7 @@
 		"kdyby/events": "^3.0",
 		"kdyby/annotations": "^2.3",
 	 	"kdyby/translation": "dev-master",
-		"robmorgan/phinx": "^0.7.1"
+		"robmorgan/phinx": "dev-master"
 	},
 	"require-dev": {
 		"nette/tester": "^1.6"

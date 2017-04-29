@@ -21,9 +21,7 @@ class CreateUsersOnPhaseTable extends AbstractMigration
         $users_on_phases = $this->table($this->tableName); // id je automaticky generován
         $users_on_phases
             ->addColumn('id_user', 'integer')
-            //->addForeignKey('id_user', 'users', 'id', array('delete'=> 'SET_NULL', 'update'=> 'CASCADE'))
             ->addColumn('id_phase', 'integer')
-            //->addForeignKey('id_phase', 'phases', 'id', array('delete'=> 'SET_NULL', 'update'=> 'CASCADE'))
             ->addColumn('created', 'datetime')
             ->addColumn('updated', 'datetime')
             ->addColumn('enabled', 'boolean', array('default' => true))

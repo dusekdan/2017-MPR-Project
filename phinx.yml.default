@@ -17,7 +17,7 @@ environments:
     development:
         adapter: mysql
         host: localhost
-        name: vut_mpr_spravarizik
+        name: nazev_databaze
         user: root
         pass: ''
         port: 3306
