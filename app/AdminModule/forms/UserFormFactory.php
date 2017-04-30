@@ -34,4 +34,12 @@ class UserFormFactory extends BaseFactory
 		$this->fileStorage = $fileStorage;
 		$this->baseUFF = $userFormFactory;
 	}
+
+	public function update(callable $onSuccess, $user)
+	{
+		$form = $this->baseUFF->update($onSuccess, $user);
+		$form->getElementPrototype()->class('ajax');
+
+		return $form;
+	}
 }

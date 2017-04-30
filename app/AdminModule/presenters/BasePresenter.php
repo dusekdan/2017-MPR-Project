@@ -8,7 +8,7 @@ use Nette;
 use App\Model;
 use App\Model\Facades\ProjectFacade;
 use App\AdminModule\Forms\ProjectFormFactory;
-
+use Tracy\Debugger;
 
 /**
  * Base presenter for all application presenters.
@@ -20,6 +20,9 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter
 
 	/** @var \Kdyby\Translation\Translator @inject */
 	public $translator;
+
+	/** @persistent */
+	public $project;
 
 	/**
 	 * @var ProjectFacade Fasáda pro manipulaci s uživateli.
@@ -51,11 +54,16 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter
 		parent::beforeRender();
 
 		$this->template->projects = $this->projectFacade->getProjects();
+		if (isset($this->project)) {
+			$this->template->project = $this->projectFacade->getProject($this->project);
+		}
 	}
 
 	protected function createComponentChooseOneForm()
 	{
-		return $this->projectFormF->chooseOne(function() {
+		return $this->projectFormF->chooseOne($this->project, function($project) {
+			$this->flashMessage("Změna projektu.", "success");
+			$this->redirect('this', ['project'=>$project]);
 		});
 	}
 }

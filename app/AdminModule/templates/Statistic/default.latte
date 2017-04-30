@@ -1,107 +1,16 @@
-{block head}
-
-    <link rel="stylesheet" href="{$basePath}/plugins/morris/morris.css">
-
+{block title}
+	{if isset($project)}Statistiky projektu {$project->getName()} {else} Projekt nebyl zvolen {/if}
 {/block}
 
-
 {block content}
-
-    <div class="col-lg-6">
-        <div class="card-box">
-            <div class="dropdown pull-right">
-                <a href="#" class="dropdown-toggle card-drop" data-toggle="dropdown" aria-expanded="false">
-                    <i class="zmdi zmdi-more-vert"></i>
-                </a>
-                <ul class="dropdown-menu" role="menu">
-                    <li><a href="#">Action</a></li>
-                    <li><a href="#">Another action</a></li>
-                    <li><a href="#">Something else here</a></li>
-                    <li class="divider"></li>
-                    <li><a href="#">Line Chart</a></li>
-                </ul>
-            </div>
-
-            <h4 class="header-title m-t-0 m-b-30">Line Chart</h4>
-
-            <div class="text-center">
-                <ul class="list-inline chart-detail-list">
-                    <li>
-                        <h5 style="color: #ff8acc;"><i class="fa fa-circle m-r-5"></i>Series A</h5>
-                    </li>
-                    <li>
-                        <h5 style="color: #5b69bc;"><i class="fa fa-circle m-r-5"></i>Series B</h5>
-                    </li>
-                </ul>
-            </div>
-            <div id="morris-line-example" style="height: 300px; position: relative;"><svg height="300" version="1.1" width=100% xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" style="overflow: hidden; position: relative;"><desc>Created with Raphaël 2.1.2</desc><defs></defs><text x="42.53125" y="260.984375" text-anchor="end" font-family="sans-serif" font-size="12px" stroke="none" fill="#98a6ad" font-weight="normal" style="text-anchor: end; font-family: sans-serif; font-size: 12px; font-weight: normal;"><tspan dy="4.1640625">$ 0</tspan></text><path fill="none" stroke="#2f3e47" d="M55.03125,260.984375H620" stroke-width="0.5" style=""></path><text x="42.53125" y="201.98828125" text-anchor="end" font-family="sans-serif" font-size="12px" stroke="none" fill="#98a6ad" font-weight="normal" style="text-anchor: end; font-family: sans-serif; font-size: 12px; font-weight: normal;"><tspan dy="4.16015625">$ 25</tspan></text><path fill="none" stroke="#2f3e47" d="M55.03125,201.98828125H620" stroke-width="0.5" style=""></path><text x="42.53125" y="142.9921875" text-anchor="end" font-family="sans-serif" font-size="12px" stroke="none" fill="#98a6ad" font-weight="normal" style="text-anchor: end; font-family: sans-serif; font-size: 12px; font-weight: normal;"><tspan dy="4.15625">$ 50</tspan></text><path fill="none" stroke="#2f3e47" d="M55.03125,142.9921875H620" stroke-width="0.5" style=""></path><text x="42.53125" y="83.99609375" text-anchor="end" font-family="sans-serif" font-size="12px" stroke="none" fill="#98a6ad" font-weight="normal" style="text-anchor: end; font-family: sans-serif; font-size: 12px; font-weight: normal;"><tspan dy="4.16015625">$ 75</tspan></text><path fill="none" stroke="#2f3e47" d="M55.03125,83.99609375H620" stroke-width="0.5" style=""></path><text x="42.53125" y="25" text-anchor="end" font-family="sans-serif" font-size="12px" stroke="none" fill="#98a6ad" font-weight="normal" style="text-anchor: end; font-family: sans-serif; font-size: 12px; font-weight: normal;"><tspan dy="4.1640625">$ 100</tspan></text><path fill="none" stroke="#2f3e47" d="M55.03125,25H620" stroke-width="0.5" style=""></path><text x="620" y="273.484375" text-anchor="middle" font-family="sans-serif" font-size="12px" stroke="none" fill="#98a6ad" font-weight="normal" transform="matrix(1,0,0,1,0,7.0078)" style="text-anchor: middle; font-family: sans-serif; font-size: 12px; font-weight: normal;"><tspan dy="4.1640625">2015</tspan></text><text x="539.3533070981618" y="273.484375" text-anchor="middle" font-family="sans-serif" font-size="12px" stroke="none" fill="#98a6ad" font-weight="normal" transform="matrix(1,0,0,1,0,7.0078)" style="text-anchor: middle; font-family: sans-serif; font-size: 12px; font-weight: normal;"><tspan dy="4.1640625">2014</tspan></text><text x="458.7066141963238" y="273.484375" text-anchor="middle" font-family="sans-serif" font-size="12px" stroke="none" fill="#98a6ad" font-weight="normal" transform="matrix(1,0,0,1,0,7.0078)" style="text-anchor: middle; font-family: sans-serif; font-size: 12px; font-weight: normal;"><tspan dy="4.1640625">2013</tspan></text><text x="377.838971450919" y="273.484375" text-anchor="middle" font-family="sans-serif" font-size="12px" stroke="none" fill="#98a6ad" font-weight="normal" transform="matrix(1,0,0,1,0,7.0078)" style="text-anchor: middle; font-family: sans-serif; font-size: 12px; font-weight: normal;"><tspan dy="4.1640625">2012</tspan></text><text x="297.1922785490809" y="273.484375" text-anchor="middle" font-family="sans-serif" font-size="12px" stroke="none" fill="#98a6ad" font-weight="normal" transform="matrix(1,0,0,1,0,7.0078)" style="text-anchor: middle; font-family: sans-serif; font-size: 12px; font-weight: normal;"><tspan dy="4.1640625">2011</tspan></text><text x="216.54558564724286" y="273.484375" text-anchor="middle" font-family="sans-serif" font-size="12px" stroke="none" fill="#98a6ad" font-weight="normal" transform="matrix(1,0,0,1,0,7.0078)" style="text-anchor: middle; font-family: sans-serif; font-size: 12px; font-weight: normal;"><tspan dy="4.1640625">2010</tspan></text><text x="135.89889274540477" y="273.484375" text-anchor="middle" font-family="sans-serif" font-size="12px" stroke="none" fill="#98a6ad" font-weight="normal" transform="matrix(1,0,0,1,0,7.0078)" style="text-anchor: middle; font-family: sans-serif; font-size: 12px; font-weight: normal;"><tspan dy="4.1640625">2009</tspan></text><text x="55.03125" y="273.484375" text-anchor="middle" font-family="sans-serif" font-size="12px" stroke="none" fill="#98a6ad" font-weight="normal" transform="matrix(1,0,0,1,0,7.0078)" style="text-anchor: middle; font-family: sans-serif; font-size: 12px; font-weight: normal;"><tspan dy="4.1640625">2008</tspan></text><path fill="none" stroke="#5b69bc" d="M55.03125,260.984375C75.24816068635118,231.486328125,115.68198205905358,166.62290740424078,135.89889274540477,142.9921875C156.06056597086427,119.42603240424077,196.38391242178335,72.196875,216.54558564724286,72.196875C236.70725887270237,72.196875,277.0306053236214,122.3435546875,297.1922785490809,142.9921875C317.35395177454046,163.6408203125,357.6772982254595,234.4401681130301,377.838971450919,237.3859375C398.0558821372702,240.3397774880301,438.4897035099726,178.40598495212038,458.7066141963238,166.590625C478.8682874217833,154.8075474521204,519.1916338727024,151.8416015625,539.3533070981618,142.9921875C559.5149803236213,134.14277343749998,599.8383267745405,107.59453124999999,620,95.7953125" stroke-width="3px" style=""></path><path fill="none" stroke="#ff8acc" d="M55.03125,142.9921875C75.24816068635118,128.2431640625,115.68198205905358,78.0884137739398,135.89889274540477,83.99609375C156.06056597086427,89.88763252393981,196.38391242178335,182.81455078125,216.54558564724286,190.1890625C236.70725887270237,197.56357421875,277.0306053236214,156.26630859375,297.1922785490809,142.9921875C317.35395177454046,129.71806640625,357.6772982254595,83.99609375,377.838971450919,83.99609375C398.0558821372702,83.99609375,438.4897035099726,142.9921875,458.7066141963238,142.9921875C478.8682874217833,142.9921875,519.1916338727024,98.74511718749999,539.3533070981618,83.99609375C559.5149803236213,69.24707031249999,599.8383267745405,39.7490234375,620,25" stroke-width="3px" style=""></path><circle cx="55.03125" cy="260.984375" r="0" fill="#ffffff" stroke="#999999" stroke-width="1" style=""></circle><circle cx="135.89889274540477" cy="142.9921875" r="0" fill="#ffffff" stroke="#999999" stroke-width="1" style=""></circle><circle cx="216.54558564724286" cy="72.196875" r="0" fill="#ffffff" stroke="#999999" stroke-width="1" style=""></circle><circle cx="297.1922785490809" cy="142.9921875" r="0" fill="#ffffff" stroke="#999999" stroke-width="1" style=""></circle><circle cx="377.838971450919" cy="237.3859375" r="0" fill="#ffffff" stroke="#999999" stroke-width="1" style=""></circle><circle cx="458.7066141963238" cy="166.590625" r="0" fill="#ffffff" stroke="#999999" stroke-width="1" style=""></circle><circle cx="539.3533070981618" cy="142.9921875" r="0" fill="#ffffff" stroke="#999999" stroke-width="1" style=""></circle><circle cx="620" cy="95.7953125" r="0" fill="#ffffff" stroke="#999999" stroke-width="1" style=""></circle><circle cx="55.03125" cy="142.9921875" r="0" fill="#ffffff" stroke="#999999" stroke-width="1" style=""></circle><circle cx="135.89889274540477" cy="83.99609375" r="0" fill="#ffffff" stroke="#999999" stroke-width="1" style=""></circle><circle cx="216.54558564724286" cy="190.1890625" r="0" fill="#ffffff" stroke="#999999" stroke-width="1" style=""></circle><circle cx="297.1922785490809" cy="142.9921875" r="0" fill="#ffffff" stroke="#999999" stroke-width="1" style=""></circle><circle cx="377.838971450919" cy="83.99609375" r="0" fill="#ffffff" stroke="#999999" stroke-width="1" style=""></circle><circle cx="458.7066141963238" cy="142.9921875" r="0" fill="#ffffff" stroke="#999999" stroke-width="1" style=""></circle><circle cx="539.3533070981618" cy="83.99609375" r="0" fill="#ffffff" stroke="#999999" stroke-width="1" style=""></circle><circle cx="620" cy="25" r="0" fill="#ffffff" stroke="#999999" stroke-width="1" style=""></circle></svg><div class="morris-hover morris-default-style" style="left: 489.85330709816185px; top: 93px; display: none;"><div class="morris-hover-row-label">2014</div><div class="morris-hover-point" style="color: #ff8acc">
-                        Series A:
-                        $ 75
-                    </div><div class="morris-hover-point" style="color: #5b69bc">
-                        Series B:
-                        $ 50
-                    </div></div></div>
-
-        </div>
-    </div>
-
-    <div class="col-lg-6">
-        <div class="card-box">
-            <div class="dropdown pull-right">
-                <a href="#" class="dropdown-toggle card-drop" data-toggle="dropdown" aria-expanded="false">
-                    <i class="zmdi zmdi-more-vert"></i>
-                </a>
-                <ul class="dropdown-menu" role="menu">
-                    <li><a href="#">Action</a></li>
-                    <li><a href="#">Another action</a></li>
-                    <li><a href="#">Something else here</a></li>
-                    <li class="divider"></li>
-                    <li><a href="#">Separated link</a></li>
-                </ul>
-            </div>
-
-            <h4 class="header-title m-t-0 m-b-30">Area Chart with Point</h4>
-
-            <div class="text-center">
-                <ul class="list-inline chart-detail-list">
-                    <li>
-                        <h5 style="color: #5b69bc;"><i class="fa fa-circle m-r-5"></i>Series A</h5>
-                    </li>
-                    <li>
-                        <h5 style="color: #35b8e0;"><i class="fa fa-circle m-r-5"></i>Series B</h5>
-                    </li>
-                </ul>
-            </div>
-            <div id="morris-area-with-dotted" style="height: 300px; position: relative;"><svg height="300" version="1.1" width="645" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" style="overflow: hidden; position: relative;"><desc>Created with Raphaël 2.1.2</desc><defs></defs><text x="32.53125" y="260.984375" text-anchor="end" font-family="sans-serif" font-size="12px" stroke="none" fill="#98a6ad" font-weight="normal" style="text-anchor: end; font-family: sans-serif; font-size: 12px; font-weight: normal;"><tspan dy="4.1640625">0</tspan></text><path fill="none" stroke="#2f3e47" d="M45.03125,260.984375H620" stroke-width="0.5" style=""></path><text x="32.53125" y="201.98828125" text-anchor="end" font-family="sans-serif" font-size="12px" stroke="none" fill="#98a6ad" font-weight="normal" style="text-anchor: end; font-family: sans-serif; font-size: 12px; font-weight: normal;"><tspan dy="4.16015625">50</tspan></text><path fill="none" stroke="#2f3e47" d="M45.03125,201.98828125H620" stroke-width="0.5" style=""></path><text x="32.53125" y="142.9921875" text-anchor="end" font-family="sans-serif" font-size="12px" stroke="none" fill="#98a6ad" font-weight="normal" style="text-anchor: end; font-family: sans-serif; font-size: 12px; font-weight: normal;"><tspan dy="4.15625">100</tspan></text><path fill="none" stroke="#2f3e47" d="M45.03125,142.9921875H620" stroke-width="0.5" style=""></path><text x="32.53125" y="83.99609375" text-anchor="end" font-family="sans-serif" font-size="12px" stroke="none" fill="#98a6ad" font-weight="normal" style="text-anchor: end; font-family: sans-serif; font-size: 12px; font-weight: normal;"><tspan dy="4.16015625">150</tspan></text><path fill="none" stroke="#2f3e47" d="M45.03125,83.99609375H620" stroke-width="0.5" style=""></path><text x="32.53125" y="25" text-anchor="end" font-family="sans-serif" font-size="12px" stroke="none" fill="#98a6ad" font-weight="normal" style="text-anchor: end; font-family: sans-serif; font-size: 12px; font-weight: normal;"><tspan dy="4.1640625">200</tspan></text><path fill="none" stroke="#2f3e47" d="M45.03125,25H620" stroke-width="0.5" style=""></path><text x="620" y="273.484375" text-anchor="middle" font-family="sans-serif" font-size="12px" stroke="none" fill="#98a6ad" font-weight="normal" transform="matrix(1,0,0,1,0,7.0078)" style="text-anchor: middle; font-family: sans-serif; font-size: 12px; font-weight: normal;"><tspan dy="4.1640625">2015</tspan></text><text x="524.2156121633957" y="273.484375" text-anchor="middle" font-family="sans-serif" font-size="12px" stroke="none" fill="#98a6ad" font-weight="normal" transform="matrix(1,0,0,1,0,7.0078)" style="text-anchor: middle; font-family: sans-serif; font-size: 12px; font-weight: normal;"><tspan dy="4.1640625">2014</tspan></text><text x="428.43122432679144" y="273.484375" text-anchor="middle" font-family="sans-serif" font-size="12px" stroke="none" fill="#98a6ad" font-weight="normal" transform="matrix(1,0,0,1,0,7.0078)" style="text-anchor: middle; font-family: sans-serif; font-size: 12px; font-weight: normal;"><tspan dy="4.1640625">2013</tspan></text><text x="332.3844135098129" y="273.484375" text-anchor="middle" font-family="sans-serif" font-size="12px" stroke="none" fill="#98a6ad" font-weight="normal" transform="matrix(1,0,0,1,0,7.0078)" style="text-anchor: middle; font-family: sans-serif; font-size: 12px; font-weight: normal;"><tspan dy="4.1640625">2012</tspan></text><text x="236.6000256732086" y="273.484375" text-anchor="middle" font-family="sans-serif" font-size="12px" stroke="none" fill="#98a6ad" font-weight="normal" transform="matrix(1,0,0,1,0,7.0078)" style="text-anchor: middle; font-family: sans-serif; font-size: 12px; font-weight: normal;"><tspan dy="4.1640625">2011</tspan></text><text x="140.8156378366043" y="273.484375" text-anchor="middle" font-family="sans-serif" font-size="12px" stroke="none" fill="#98a6ad" font-weight="normal" transform="matrix(1,0,0,1,0,7.0078)" style="text-anchor: middle; font-family: sans-serif; font-size: 12px; font-weight: normal;"><tspan dy="4.1640625">2010</tspan></text><text x="45.03125" y="273.484375" text-anchor="middle" font-family="sans-serif" font-size="12px" stroke="none" fill="#98a6ad" font-weight="normal" transform="matrix(1,0,0,1,0,7.0078)" style="text-anchor: middle; font-family: sans-serif; font-size: 12px; font-weight: normal;"><tspan dy="4.1640625">2009</tspan></text><path fill="#80c5da" stroke="none" d="M45.03125,225.58671875C68.97734695915108,193.13886718749998,116.86954087745323,104.6447265625,140.8156378366043,95.7953125C164.7617347957554,86.94589843749999,212.6539287140575,154.79140625,236.6000256732086,154.79140625C260.54612263235964,154.79140625,308.4383165506618,95.7953125,332.3844135098129,95.7953125C356.39611621405754,95.7953125,404.41952162254677,154.79140625,428.43122432679144,154.79140625C452.3773212859425,154.79140625,500.2695152042446,104.64472656249998,524.2156121633957,95.7953125C548.1617091225468,86.94589843749999,596.0539030408489,86.9458984375,620,83.99609375L620,260.984375L45.03125,260.984375Z" fill-opacity="1" style="fill-opacity: 1;"></path><path fill="none" stroke="#35b8e0" d="M45.03125,225.58671875C68.97734695915108,193.13886718749998,116.86954087745323,104.6447265625,140.8156378366043,95.7953125C164.7617347957554,86.94589843749999,212.6539287140575,154.79140625,236.6000256732086,154.79140625C260.54612263235964,154.79140625,308.4383165506618,95.7953125,332.3844135098129,95.7953125C356.39611621405754,95.7953125,404.41952162254677,154.79140625,428.43122432679144,154.79140625C452.3773212859425,154.79140625,500.2695152042446,104.64472656249998,524.2156121633957,95.7953125C548.1617091225468,86.94589843749999,596.0539030408489,86.9458984375,620,83.99609375" stroke-width="1" style=""></path><circle cx="45.03125" cy="225.58671875" r="3" fill="#ffffff" stroke="#999999" stroke-width="1" style=""></circle><circle cx="140.8156378366043" cy="95.7953125" r="3" fill="#ffffff" stroke="#999999" stroke-width="1" style=""></circle><circle cx="236.6000256732086" cy="154.79140625" r="3" fill="#ffffff" stroke="#999999" stroke-width="1" style=""></circle><circle cx="332.3844135098129" cy="95.7953125" r="3" fill="#ffffff" stroke="#999999" stroke-width="1" style=""></circle><circle cx="428.43122432679144" cy="154.79140625" r="3" fill="#ffffff" stroke="#999999" stroke-width="1" style=""></circle><circle cx="524.2156121633957" cy="95.7953125" r="3" fill="#ffffff" stroke="#999999" stroke-width="1" style=""></circle><circle cx="620" cy="83.99609375" r="3" fill="#ffffff" stroke="#999999" stroke-width="1" style=""></circle><path fill="#949cc7" stroke="none" d="M45.03125,249.18515625C68.97734695915108,230.01142578125,116.86954087745323,178.38984375,140.8156378366043,172.490234375C164.7617347957554,166.590625,212.6539287140575,201.98828125,236.6000256732086,201.98828125C260.54612263235964,201.98828125,308.4383165506618,172.490234375,332.3844135098129,172.490234375C356.39611621405754,172.490234375,404.41952162254677,201.98828125,428.43122432679144,201.98828125C452.3773212859425,201.98828125,500.2695152042446,178.38984375,524.2156121633957,172.490234375C548.1617091225468,166.590625,596.0539030408489,159.21611328125,620,154.79140625L620,260.984375L45.03125,260.984375Z" fill-opacity="1" style="fill-opacity: 1;"></path><path fill="none" stroke="#5b69bc" d="M45.03125,249.18515625C68.97734695915108,230.01142578125,116.86954087745323,178.38984375,140.8156378366043,172.490234375C164.7617347957554,166.590625,212.6539287140575,201.98828125,236.6000256732086,201.98828125C260.54612263235964,201.98828125,308.4383165506618,172.490234375,332.3844135098129,172.490234375C356.39611621405754,172.490234375,404.41952162254677,201.98828125,428.43122432679144,201.98828125C452.3773212859425,201.98828125,500.2695152042446,178.38984375,524.2156121633957,172.490234375C548.1617091225468,166.590625,596.0539030408489,159.21611328125,620,154.79140625" stroke-width="1" style=""></path><circle cx="45.03125" cy="249.18515625" r="3" fill="#ffffff" stroke="#999999" stroke-width="1" style=""></circle><circle cx="140.8156378366043" cy="172.490234375" r="3" fill="#ffffff" stroke="#999999" stroke-width="1" style=""></circle><circle cx="236.6000256732086" cy="201.98828125" r="3" fill="#ffffff" stroke="#999999" stroke-width="1" style=""></circle><circle cx="332.3844135098129" cy="172.490234375" r="3" fill="#ffffff" stroke="#999999" stroke-width="1" style=""></circle><circle cx="428.43122432679144" cy="201.98828125" r="3" fill="#ffffff" stroke="#999999" stroke-width="1" style=""></circle><circle cx="524.2156121633957" cy="172.490234375" r="3" fill="#ffffff" stroke="#999999" stroke-width="1" style=""></circle><circle cx="620" cy="154.79140625" r="3" fill="#ffffff" stroke="#999999" stroke-width="1" style=""></circle></svg><div class="morris-hover morris-default-style" style="left: 192.1000256732086px; top: 112px; display: none;"><div class="morris-hover-row-label">2011</div><div class="morris-hover-point" style="color: #5b69bc">
-                        Series A:
-                        50
-                    </div><div class="morris-hover-point" style="color: #35b8e0">
-                        Series B:
-                        40
-                    </div></div></div>
-
-        </div>
-    </div>
+	{if isset($project)}
+        Statistiky projektu {$project->getName()} a nějaké blbosti, tady mi napište co tady chcete
+	{else}
+        <div>Zvolte si prosím ve výběru vlevo.</div>
+	{/if}
 
 {/block}
 
 {block scripts}
-
-
-    <!-- Flot chart js -->
-    <script src="{$basePath}/plugins/flot-chart/jquery.flot.js"></script>
-    <script src="{$basePath}/plugins/flot-chart/jquery.flot.time.js"></script>
-    <script src="{$basePath}/plugins/flot-chart/jquery.flot.tooltip.min.js"></script>
-    <script src="{$basePath}/plugins/flot-chart/jquery.flot.resize.js"></script>
-    <script src="{$basePath}/plugins/flot-chart/jquery.flot.pie.js"></script>
-    <script src="{$basePath}/plugins/flot-chart/jquery.flot.selection.js"></script>
-    <script src="{$basePath}/plugins/flot-chart/jquery.flot.stack.js"></script>
-    <script src="{$basePath}/plugins/flot-chart/jquery.flot.crosshair.js"></script>
-
-    <!-- flot init -->
-    <script src="{$basePath}/pages/jquery.flot.init.js"></script>
-
-
-
 
 {/block}

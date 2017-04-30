@@ -2,6 +2,13 @@ body {
 	font-family: 'Karla', sans-serif;
 }
 
+.flash {
+	position: sticky;
+	top: 0;
+	width: 100%;
+	z-index: 11;
+}
+
 #header {
 	position: sticky;
 	top: 0;
@@ -73,7 +80,7 @@ body {
 	margin: 10px 0;
 }
 
-#left-menu .project-name a:hover {
+#left-menu a:hover {
 	text-decoration: none;
 }
 

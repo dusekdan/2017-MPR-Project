@@ -23,7 +23,7 @@
 					<div class="radio">{input $input}</div>
 				{elseif $input->getOption(type) === file}
 					<input type="text" class="form-control fileInput" placeholder="Soubor nebyl vybrán" disabled>
-					<label class="fileLabel"  for="{$input->getControl()->attrs['id']}">Vybrat soubor</label>
+					<label class="fileLabel"  for="{$input->getControl()->attrs['id']}">Vybrat</label>
 					<div style="clear: both;"></div>
 					{input $input}
 					<script>

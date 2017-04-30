@@ -30,20 +30,24 @@ class ProjectFormFactory extends BaseFactory
 		$this->projectFacade = $projectFacade;
 	}
 
-	public function chooseOne(callable $onSuccess)
+	public function chooseOne($project, callable $onSuccess)
 	{
 		$projects=[];
-		foreach ($this->projectFacade->getProjects() as $project) {
-			$projects[$project->getId()] = $project->getName();
+		foreach ($this->projectFacade->getProjects() as $proj) {
+			$projects[$proj->getId()] = $proj->getName();
 		}
 		$form = $this->create();
 		$form->getElementPrototype()->class('ajax');
-		$form->addSelect('Projekty', 'Vyberte si projekt', $projects);
+		$form->addSelect('Projekty', 'Vyberte si projekt', $projects)
+			->setPrompt('Vyberte projekt')
+			->addRule(Form::FILLED,"Projekt musí být zvolen.");
+		if (isset ($project)) {
+			$form['Projekty']->setDefaultValue($project);
+		}
 		$form->addSubmit('send', 'Zvolit');
 
 		$form->onSuccess[] = function (Form $form, $values) use ($onSuccess) {
-
-			$onSuccess();
+			$onSuccess($values->Projekty);
 		};
 
 		return $form;

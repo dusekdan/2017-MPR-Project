@@ -12,7 +12,7 @@
 			{foreach $user->getRoles() as $role} {$user->getIdentity()->getData()['allRoles'][$role]} {/foreach}
 		</div>
 		<div>
-			<a n:href=":Base:User:update">
+			<a n:href="User:update">
 				<span class="glyphicon glyphicon-cog"></span>
 			</a>
 			<a n:href=":Base:User:signOut">

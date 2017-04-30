@@ -16,7 +16,6 @@ use Nette\Security\User;
 
 use App\Model\Facades\UserFacade;
 use App\AdminModule\Forms\UserFormFactory;
-use App\BaseModule\Forms\UserFormFactory as BaseUFF;
 use Tracy\Debugger;
 use Nette;
 
@@ -34,20 +33,16 @@ class UserPresenter extends BasePresenter
 	/** @var UserFormFactory */
 	private $formFactory;
 
-	/** @var BaseUFF */
-	private $baseFormFactory;
-
 	/** @var  FileStorage */
 	private $fileStorage;
 
 	/** @persistent */
 	public $showModal = false;
 
-	public function __construct(User $user, UserFormFactory $userFormFactory, BaseUFF $baseUFF, FileStorage $fileStorage)
+	public function __construct(User $user, UserFormFactory $userFormFactory, FileStorage $fileStorage)
 	{
 		$this->user = $user;
 		$this->formFactory = $userFormFactory;
-		$this->baseFormFactory = $baseUFF;
 		$this->fileStorage = $fileStorage;
 	}
 
@@ -71,12 +66,12 @@ class UserPresenter extends BasePresenter
 			$this->payload->isModal = true;
 			//pokud je modal zobrazen překresluju už jen formulář
 			if ($this->showModal == false) {
-				$this->redrawControl("snippetModal");
+				$this->redrawControl("modal");
 				$this->showModal = true;
 			} else {
 				$this->redrawControl("snippetUpdate");
+				$this->redrawControl("snippetUsers");
 			}
-			$this->redrawControl("snippetScripts");
 		}
 	}
 
@@ -87,8 +82,14 @@ class UserPresenter extends BasePresenter
 
 	public function createComponentUpdateForm($name)
 	{
-		$user = $this->userFacade->getUser($this->getParameter('userId'));
-		$form = $this->baseFormFactory->update(function ($user){
+		$userId = $this->getParameter('userId');
+		if (isset($userId)) {
+			$user = $this->userFacade->getUser($userId);
+		} else {
+			$user = $this->userFacade->getUser($this->user->id);
+		}
+
+		$form = $this->formFactory->update(function ($user){
 			$this->flashMessage("Údaje uživatele {$user->username} byly aktualizovány.", "success");
 			$this->showModal = false;
 			$this->redirect('User:users');

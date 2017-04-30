@@ -8,7 +8,7 @@ use Nette;
 use App\Model;
 
 
-class StatisticPresenter extends Nette\Application\UI\Presenter
+class StatisticPresenter extends BasePresenter
 {
 
     public function renderDefault()
