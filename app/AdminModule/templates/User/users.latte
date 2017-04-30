@@ -1,9 +1,6 @@
-{block head}
-	<link rel="stylesheet" href="{$basePath}/libs/datetimepicker/css/bootstrap-datetimepicker.css">
-	<script src="{$basePath}/libs/moment/moment-with-locales.min.js"></script>
-	<script src="{$basePath}/libs/datetimepicker/js/bootstrap-datetimepicker.min.js"></script>
+{block title}
+	Správa uživatelů
 {/block}
-
 {block content}
 	<table n:snippet="snippetUsers"> {*TODO snippet neni dodelan*}
 		<tr>
@@ -35,4 +32,11 @@
 {/block}
 
 {block scripts}
+{/block}
+
+{block head}
+	<link rel="stylesheet" href="{$basePath}/css/adminModule/user/style.css">
+	<link rel="stylesheet" href="{$basePath}/libs/datetimepicker/css/bootstrap-datetimepicker.css">
+	<script src="{$basePath}/libs/moment/moment-with-locales.min.js"></script>
+	<script src="{$basePath}/libs/datetimepicker/js/bootstrap-datetimepicker.min.js"></script>
 {/block}
