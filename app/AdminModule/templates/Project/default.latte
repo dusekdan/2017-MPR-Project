@@ -4,7 +4,299 @@
 
 {block content}
 	{if isset($project)}
-        Přehled projektu {$project->getName()} a nějaké blbosti, tady mi napište co tady chcete
+	    <div class="container">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="card-box">
+                        <h4 class="header-title m-t-0 m-b-30">Info projektu</h4>
+                        <div class="row">
+                            <div class="col-lg-12">
+
+                                <ul class="nav nav-tabs">
+                                    <li role="presentation" class="active">
+                                        <a href="#phases" class="project-item" role="tab" data-toggle="tab" aria-expanded="true">Fázy a riziká</a>
+                                    </li>
+                                    <li role="presentation" class="">
+                                        <a href="#users" class="project-item" role="tab" data-toggle="tab" aria-expanded="false">Užívatelia</a>
+                                    </li>
+                                    <li role="presentation" class="">
+                                        <a href="#description" class="project-item" role="tab" data-toggle="tab" aria-expanded="false">Popis</a>
+                                    </li>
+                                </ul>
+                                <div class="tab-content">
+                                    <div role="tabpanel" class="tab-pane fade active in" id="phases">
+                                        <div class="row">
+                                            <div class="col-lg-12">
+                                                <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+                                                    <div class="panel panel-default bx-shadow-none">
+                                                        <div class="panel-heading" role="tab" id="headingOne">
+                                                            <h4 class="panel-title">
+                                                                <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="false" aria-controls="collapseOne" class="collapsed">
+                                                                    Počiatočná fáza projektu - Návrh DB
+                                                                </a>
+                                                            </h4>
+                                                        </div>
+                                                        <div id="collapseOne" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne" aria-expanded="false" style="height: 0px;">
+                                                            <div class="panel-body">
+                                                                <div class="row">
+                                                                    <h3>Info</h3>
+                                                                    <ul>
+                                                                        <li>Popis fáze bla bla bla</li>
+                                                                        <li>OD: 2017.09.01</li>
+                                                                        <li>DO: 2019.02.02</li>
+                                                                    </ul>
+                                                                    <h3>Riziká</h3>
+                                                                    <table class="table table-striped m-0">
+                                                                        <thead>
+                                                                            <tr>
+                                                                                <th>ID</th>
+                                                                                <th>Jméno</th>
+                                                                                <th>Popis</th>
+                                                                                <th>Začiatok</th>
+                                                                                <th>Koniec</th>
+                                                                                <th>Pravdepodobnosť</th>
+                                                                                <th>Peniaze</th>
+                                                                                <th>Čas</th>
+                                                                                <th>Výsledok</th>
+                                                                                <th>Akce</th>
+                                                                            </tr>
+                                                                        </thead>
+                                                                        <tbody>
+                                                                            <tr>
+                                                                                <th scope="row">1</th>
+                                                                                <td>Zla volba</td>
+                                                                                <td>Popis pre zlú voľbu databáze</td>
+                                                                                <td>3.1.2018</td>
+                                                                                <td>4.2.2019</td>
+                                                                                <td>90%</td>
+                                                                                <td>400€</td>
+                                                                                <td>21h</td>
+                                                                                <td>Vyšlo to</td>
+                                                                                <td class="actions">
+                                                                                    <a href="#" class="on-default edit-row"><i class="fa fa-pencil"></i></a>
+                                                                                    <a href="#" class="on-default remove-row"><i class="fa fa-trash-o"></i></a>
+                                                                                </td>
+                                                                            </tr>
+                                                                            <tr>
+                                                                                <th scope="row">2</th>
+                                                                                <td>Zla volba</td>
+                                                                                <td>Popis pre zlú voľbu databáze</td>
+                                                                                <td>3.1.2018</td>
+                                                                                <td>4.2.2019</td>
+                                                                                <td>90%</td>
+                                                                                <td>400€</td>
+                                                                                <td>21h</td>
+                                                                                <td>Vyšlo to</td>
+                                                                                <td class="actions">
+                                                                                    <a href="#" class="on-default edit-row"><i class="fa fa-pencil"></i></a>
+                                                                                    <a href="#" class="on-default remove-row"><i class="fa fa-trash-o"></i></a>
+                                                                                </td>
+                                                                            </tr>
+                                                                            <tr>
+                                                                                <th scope="row">3</th>
+                                                                                <td>Zla volba</td>
+                                                                                <td>Popis pre zlú voľbu databáze</td>
+                                                                                <td>3.1.2018</td>
+                                                                                <td>4.2.2019</td>
+                                                                                <td>90%</td>
+                                                                                <td>400€</td>
+                                                                                <td>21h</td>
+                                                                                <td>Vyšlo to</td>
+                                                                                <td class="actions">
+                                                                                    <a href="#" class="on-default edit-row"><i class="fa fa-pencil"></i></a>
+                                                                                    <a href="#" class="on-default remove-row"><i class="fa fa-trash-o"></i></a>
+                                                                                </td>
+                                                                            </tr>
+                                                                        </tbody>
+                                                                    </table>
+                                                                    <hr>
+                                                                    <div class="col-md-12 text-center">
+                                                                        <button class="btn btn-success waves-effect waves-light" data-toggle="modal" data-target="#addRiskModal"> <i class="fa fa-plus m-r-5"></i> <span>Přidat riziko</span> </button>
+                                                                    </div>
+
+                                                                    <h3>Užívatelia</h3>
+                                                                    <table class="table table-striped m-0">
+                                                                        <thead>
+                                                                            <tr>
+                                                                                <th>ID</th>
+                                                                                <th>Jméno</th>
+                                                                                <th>Příjmení</th>
+                                                                                <th>Login</th>
+                                                                                <th>Email</th>
+                                                                                <th>Role</th>
+                                                                                <th>Akce</th>
+                                                                            </tr>
+                                                                        </thead>
+                                                                        <tbody>
+                                                                            <tr>
+                                                                                <th scope="row">1</th>
+                                                                                <td>Mark</td>
+                                                                                <td>Otto</td>
+                                                                                <td>Markur</td>
+                                                                                <td>mark@mpr.com</td>
+                                                                                <td>User</td>
+                                                                                <td class="actions">
+                                                                                    <a href="#" class="on-default remove-row"><i class="fa fa-trash-o"></i></a>
+                                                                                </td>
+                                                                            </tr>
+                                                                            <tr>
+                                                                                <th scope="row">2</th>
+                                                                                <td>Jožko</td>
+                                                                                <td>Franco</td>
+                                                                                <td>Joseph</td>
+                                                                                <td>joseh@mpr.com</td>
+                                                                                <td>Administrator</td>
+                                                                                <td class="actions">
+                                                                                    <a href="#" class="on-default remove-row"><i class="fa fa-trash-o"></i></a>
+                                                                                </td>
+                                                                            </tr>
+                                                                            <tr>
+                                                                                <th scope="row">3</th>
+                                                                                <td>Matias</td>
+                                                                                <td>Figuli</td>
+                                                                                <td>Mato</td>
+                                                                                <td>mato@mpr.com</td>
+                                                                                <td>Owner</td>
+                                                                                <td class="actions">
+                                                                                    <a href="#" class="on-default remove-row"><i class="fa fa-trash-o"></i></a>
+                                                                                </td>
+                                                                            </tr>
+                                                                        </tbody>
+                                                                    </table>
+                                                                    <hr>
+                                                                    <div class="col-md-2 col-lg-offset-5 text-center">
+                                                                        <select class="form-control">
+                                                                            <option>vybrat uživatele</option>
+                                                                            <option>Martin Pristaš</option>
+                                                                            <option>Martin Pristaš</option>
+                                                                            <option>Martin Pristaš</option>
+                                                                        </select>
+                                                                        <br />
+                                                                        <button class="btn btn-success waves-effect waves-light"> <i class="fa fa-user m-r-5"></i> <span>Přidat uživatele do fáze</span> </button>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="panel panel-default bx-shadow-none">
+                                                        <div class="panel-heading" role="tab" id="headingTwo">
+                                                            <h4 class="panel-title">
+                                                                <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                                                    Počiatočná fáza - Návrh GUI
+                                                                </a>
+                                                            </h4>
+                                                        </div>
+                                                        <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo" aria-expanded="false" style="height: 0px;">
+                                                            <div class="panel-body">
+                                                                Anim pariatur cliche reprehenderit, enim eiusmod high life
+                                                                accusamus terry richardson ad squid. 3 wolf moon officia
+                                                                aute, non cupidatat skateboard dolor brunch. Food truck
+                                                                quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor,
+                                                                sunt aliqua put a bird on it squid single-origin coffee
+                                                                nulla assumenda shoreditch et. Nihil anim keffiyeh
+                                                                helvetica, craft beer labore wes anderson cred nesciunt
+                                                                sapiente ea proident. Ad vegan excepteur butcher vice lomo.
+                                                                Leggings occaecat craft beer farm-to-table, raw denim
+                                                                aesthetic synth nesciunt you probably haven't heard of them
+                                                                accusamus labore sustainable VHS.
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="panel panel-default bx-shadow-none">
+                                                        <div class="panel-heading" role="tab" id="headingThree">
+                                                            <h4 class="panel-title">
+                                                                <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                                                                    Schválenie návrhov
+                                                                </a>
+                                                            </h4>
+                                                        </div>
+                                                        <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree" aria-expanded="false">
+                                                            <div class="panel-body">
+                                                                Anim pariatur cliche reprehenderit, enim eiusmod high life
+                                                                accusamus terry richardson ad squid. 3 wolf moon officia
+                                                                aute, non cupidatat skateboard dolor brunch. Food truck
+                                                                quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor,
+                                                                sunt aliqua put a bird on it squid single-origin coffee
+                                                                nulla assumenda shoreditch et. Nihil anim keffiyeh
+                                                                helvetica, craft beer labore wes anderson cred nesciunt
+                                                                sapiente ea proident. Ad vegan excepteur butcher vice lomo.
+                                                                Leggings occaecat craft beer farm-to-table, raw denim
+                                                                aesthetic synth nesciunt you probably haven't heard of them
+                                                                accusamus labore sustainable VHS.
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <hr>
+                                            <div class="col-md-2 col-lg-offset-5 text-center">
+                                                <button class="btn btn-success waves-effect waves-light " data-toggle="modal" data-target="#addPhaseModal"> <i class="fa fa-plus m-r-5"></i> <span>Pridať fázu</span> </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div role="tabpanel" class="tab-pane fade" id="users">
+                                        <div class="row">
+                                            <table class="table table-striped m-0">
+                                                <thead>
+                                                    <tr>
+                                                        <th>ID</th>
+                                                        <th>Jméno</th>
+                                                        <th>Příjmení</th>
+                                                        <th>Login</th>
+                                                        <th>Email</th>
+                                                        <th>Role</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <th scope="row">1</th>
+                                                        <td>Mark</td>
+                                                        <td>Otto</td>
+                                                        <td>Markur</td>
+                                                        <td>mark@mpr.com</td>
+                                                        <td>User</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th scope="row">2</th>
+                                                        <td>Jožko</td>
+                                                        <td>Franco</td>
+                                                        <td>Joseph</td>
+                                                        <td>joseh@mpr.com</td>
+                                                        <td>Administrator</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th scope="row">3</th>
+                                                        <td>Matias</td>
+                                                        <td>Figuli</td>
+                                                        <td>Mato</td>
+                                                        <td>mato@mpr.com</td>
+                                                        <td>Owner</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                            <hr>
+                                            <div class="col-md-2 col-lg-offset-5 text-center">
+                                                <select class="form-control">
+                                                    <option>vybrat uživatele</option>
+                                                    <option>Martin Pristaš</option>
+                                                    <option>Martin Pristaš</option>
+                                                    <option>Martin Pristaš</option>
+                                                </select>
+                                                <br />
+                                                <button class="btn btn-success waves-effect waves-light"> <i class="fa fa-user m-r-5"></i> <span>Přidat uživatele</span> </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div role="tabpanel" class="tab-pane fade" id="description">
+                                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque vel magna auctor, aliquet nunc vitae, consequat tellus. Mauris dignissim eros sed leo eleifend, ac condimentum neque semper. Phasellus commodo sem sit amet mollis dapibus. Maecenas consectetur quis dui eget dignissim. Praesent feugiat at dui ornare luctus. Nunc ac ante quis velit convallis tincidunt. Etiam mollis eros ut nisi ornare posuere. Etiam arcu quam, tristique vel justo et, pellentesque consectetur purus. Ut molestie lobortis mi, sit amet pretium ligula pulvinar tincidunt. Morbi sit amet enim tristique, sagittis felis a, gravida dui. Vivamus et nisi volutpat ligula fermentum ultricies sed et erat. Vivamus imperdiet scelerisque facilisis.</p>
+                                    </div>
+                                </div>
+                            </div><!-- end col -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     {else}
         <div>Zvolte si prosím ve výběru vlevo.</div>
     {/if}

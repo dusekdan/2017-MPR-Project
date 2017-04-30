@@ -1,0 +1,64 @@
+.header-title {
+    color: white;
+
+}
+
+.project-item {
+    text-decoration: none;
+    color: #98a6ad;
+}
+
+.active {
+    background-color: #253138;
+}
+
+li{
+    color: #98a6ad;
+}
+
+th, td{
+    color: black;
+}
+
+.panel-collapse {
+    background-color: #2f3e47;
+}
+
+.tab-pane {
+    padding: 1%;
+    background-color: #2f3e47;
+    /*background-color: #98a6ad;*/
+}
+
+.table{
+    background-color: #98a6ad;
+}
+
+.tab-content{
+    padding-top: 5px;
+}
+
+.panel-default > .panel-heading {
+    background-color: #253138;
+    border-color: #EEEEEE;
+    color: #98a6ad;
+}
+
+.panel-title {
+    color: #98a6ad;
+}
+
+.nav-tabs > li.active > a, .nav-tabs > li.active > a:hover, .nav-tabs > li.active > a:focus{
+    background-color: #253138;
+    border-color: #EEEEEE;
+    color: #98a6ad;
+}
+
+.panel-body .row {
+    padding-left: 3%;
+    padding-right: 3%;
+}
+
+.row h3{
+    color: #98a6ad;
+}

@@ -2,32 +2,36 @@
 	Správa uživatelů
 {/block}
 {block content}
-	<table n:snippet="snippetUsers"> {*TODO snippet neni dodelan*}
-		<tr>
-			<td>ID</td>
-			<td>Login</td>
-			<td>Příjmení</td>
-			<td>Jméno</td>
-			<td>Narozeniny</td>
-			<td>Role</td>
-			<td>Datum založení</td>
-			<td>Datum posledního přihlášení</td>
-		</tr>
-		{foreach $users as $one}
-			<tr>{*promene z doctrine jde vypisovat pomoci geteru ale v latte i zkracene  one->getId() / one->id*}
-				<td>{$one->id}</td>
-				<td>{$one->getUsername()}</td>
-				<td>{$one->getLastName()}</td>
-				<td>{$one->getFirstName()}</td>
-				<td>{$one->getBirthday()|date:'j.n.Y'}</td>
-				<td>{$one->getRole()}</td>
-				<td>{$one->getCreated()|date:'G:i j.n.Y'}</td>
-				<td>{$one->getLastSign()|date:'G.i j.n.Y'}</td>
+	<table class="table table-striped m-0" n:snippet="snippetUsers"> {*TODO snippet neni dodelan*}
+        <thead>
+            <tr>
+                <td>ID</td>
+                <td>Login</td>
+                <td>Příjmení</td>
+                <td>Jméno</td>
+                <td>Narozeniny</td>
+                <td>Role</td>
+                <td>Datum založení</td>
+                <td>Datum posledního přihlášení</td>
+            </tr>
+        </thead>
+        <tbody>
+            {foreach $users as $one}
+                <tr>{*promene z doctrine jde vypisovat pomoci geteru ale v latte i zkracene  one->getId() / one->id*}
+                    <td>{$one->id}</td>
+                    <td>{$one->getUsername()}</td>
+                    <td>{$one->getLastName()}</td>
+                    <td>{$one->getFirstName()}</td>
+                    <td>{$one->getBirthday()|date:'j.n.Y'}</td>
+                    <td>{$one->getRole()}</td>
+                    <td>{$one->getCreated()|date:'G:i j.n.Y'}</td>
+                    <td>{$one->getLastSign()|date:'G.i j.n.Y'}</td>
 
-				<td><a class="ajax" n:href="User:update, 'userId' => $one->id">Upravit</a></td>
-				<td><a n:href="delete!, 'userId' => $one->id">Smazat</a></td>
-			</tr>
-		{/foreach}
+                    <td><a class="ajax" n:href="User:update, 'userId' => $one->id">Upravit</a></td>
+                    <td><a n:href="delete!, 'userId' => $one->id">Smazat</a></td>
+                </tr>
+            {/foreach}
+        </tbody>
 	</table>
 {/block}
 
