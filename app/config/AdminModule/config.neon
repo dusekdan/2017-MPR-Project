@@ -8,3 +8,4 @@ application:
 
 services:
 	- App\AdminModule\Forms\UserFormFactory
+	- App\AdminModule\Forms\ProjectFormFactory

@@ -12,7 +12,6 @@ namespace App\Model\Entities;
 use App\Model\Entities\Traits\TimeInfo;
 use Doctrine\ORM\Mapping as ORM;
 use Kdyby\Doctrine\Entities\MagicAccessors;
-//use Nette\Security\Passwords;
 
 /**
  * @ORM\Entity
@@ -36,7 +35,6 @@ class Project
      * ID Clienta, komu Projekt patri
      * @ORM\Column(name="id_client", type="integer")
      * @var integer
-     * @Id @ManyToOne(targetEntity="Client")
      */
     protected $idClient;
 
@@ -60,28 +58,28 @@ class Project
 
 	/**
 	 * Den zacatku projektu
-	 * @ORM\Column(name"start_date", type="datetime")
+	 * @ORM\Column(name="start_date", type="datetime")
      * @var \DateTime
 	 */
 	protected $startDate;
 
     /**
      * Den konce projektu
-     * @ORM\Column(name"end_date", type="datetime")
+     * @ORM\Column(name="end_date", type="datetime")
      * @var \DateTime
      */
     protected $endDate;
 
     /**
      * Datum vytvorenia zaznamu o projekte
-     * @ORM\Column(name"created_", type="datetime")
+     * @ORM\Column(name="created", type="datetime")
      * @var \DateTime
      */
     protected $created;
 
     /**
      * Datum posledneho update zaznamu o projekte
-     * @ORM\Column(name"updatedt", type="datetime")
+     * @ORM\Column(name="updated", type="datetime")
      * @var \DateTime
      */
     protected $updated;
@@ -97,7 +95,6 @@ class Project
     /**
      * Id usera ako manazera projektu
      * @ORM\Column(type="integer")
-     * @Id @ManyToOne(targetEntity="User")
      */
     protected $idProjectManager;
 

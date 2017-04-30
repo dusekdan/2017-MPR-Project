@@ -42,8 +42,7 @@ class Acl extends Control {
 
 		$acl->deny('user','BaseModule', ['edit', 'remove']);
 		$acl->deny('user','AdminModule', ['edit','view','remove','add']);
-		$acl->deny('administrator', 'AdminModule', 'updateUsers');
-        $acl->deny('projectManager', 'AdminModule', 'updateUsers');
+        $acl->allow('projectManager', 'AdminModule', 'updateUsers');
         $acl->deny('owner', 'AdminModule', 'updateUsers');
 
 		/* superAdmin má práva na všechno */

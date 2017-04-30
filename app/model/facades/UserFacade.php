@@ -50,11 +50,13 @@ class UserFacade
 		return $this->repository->findAll();
 	}
 
-	public function getUserByName($username) {
+	public function getUserByName($username)
+	{
 		return $this->repository->findOneBy(['username' => $username]);
 	}
 
-	public function getUserByEmail($email) {
+	public function getUserByEmail($email)
+	{
 		return $this->repository->findOneBy(['email' => $email]);
 	}
 
@@ -63,7 +65,8 @@ class UserFacade
 	 * @param $id
 	 * @return Identity
 	 */
-	public function getIdentity($id) {
+	public function getIdentity($id)
+	{
 		$user = $this->getUser($id);
 
 		return new Nette\Security\Identity($user->getId(), $user->getRole(), $this->getIdentityData($user));
@@ -74,15 +77,17 @@ class UserFacade
 	 * @param $user User nebo id
 	 * @return mixed
 	 */
-	public function getIdentityData($user) {
+	public function getIdentityData($user)
+	{
 		if (!$user instanceof User) {
 			$user = $this->getUser($user);
 		}
 
-		return (object)['username' => $user->getUsername(), 'email' => $user->getEmail(), 'firstName' => $user->getFirstName(), 'lastName' => $user->getLastName(), 'hasPhoto' => $user->getHasPhoto()];
+		return (object)['username' => $user->getUsername(), 'email' => $user->getEmail(), 'firstName' => $user->getFirstName(), 'lastName' => $user->getLastName(), 'hasPhoto' => $user->getHasPhoto(), 'allRoles' => $user->getRoleList()];
 	}
 
-	public function setPassword($user, $oldPassword, $newPassword) {
+	public function setPassword($user, $oldPassword, $newPassword)
+	{
 		if (!Passwords::verify($oldPassword, $user->getPassword())) {
 			throw new Nette\Security\AuthenticationException('Heslo je špatně zapsané.', self::INVALID_CREDENTIAL);
 		}
@@ -96,6 +101,19 @@ class UserFacade
 		}
 		if ($user) {
 			$this->em->remove($user);
+			if ($autoFlush) {
+				$this->em->flush();
+			}
+		}
+	}
+
+	public function setLastSign($user, $autoFlush)
+	{
+		if (!$user instanceof User) {
+			$user = $this->getUser($user);
+		}
+		if ($user) {
+			$user->setLastSign(new \DateTime("now"));
 			if ($autoFlush) {
 				$this->em->flush();
 			}

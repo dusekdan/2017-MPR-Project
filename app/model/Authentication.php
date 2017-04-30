@@ -53,8 +53,9 @@ class Authentication implements Nette\Security\IAuthenticator
 			$user->setPassword(Passwords::hash($password));
 		}
 
-		// uložení kdy byl naposled přihlášen @TODO flush
-		$user->setLastSign(date("Y-m-d H:i:s", time()));
+		// uložení kdy byl naposled přihlášen
+		$this->userFacade->setLastSign($user, TRUE);
+
 
 		return new Identity($user->getId(), $user->getRole(), $this->userFacade->getIdentityData($user));
 	}

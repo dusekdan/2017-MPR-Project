@@ -1,22 +1,20 @@
 {* Latte template *}
+<div class="menu">
+	<div class="title">
+		Menu
+	</div>
+	<nav>
+		<ul>
+			<li>
+				<a n:href=":Admin:Project:default"><span class="glyphicon glyphicon-qrcode"></span> Přehled projektů</a>
+			</li>
+			<li>
+				<a n:href=":Admin:Statistic:default"><span class="glyphicon glyphicon-equalizer"></span>Matice a statistiky</a>
+			</li>
 
-{block content}
-<nav id="menu">
-	<ul>
-		<li>
-			<a n:href=":Base:Homepage:">Základní modul</a>
-		</li>
-		<li>
-			<a n:href=":Admin:Homepage:default">Hlavní stránka</a>
-		</li>
-		<li>
-			<a n:href=":Base:User:update">Úprava údajů</a>
-		</li>
-        <li n:if="$user->isAllowed('AdminModule', 'updateUsers')" >
-            <a n:href="User:users">Úprava údajů všech</a>
-        </li>
-		<li>
-			<a n:href=":Base:User:signOut">Odhlášení</a>
-		</li>
-	</ul>
-</nav>
+			<li n:if="$user->isAllowed('AdminModule', 'updateUsers')" >
+				<a n:href="User:users"><span class="glyphicon glyphicon-user"></span>Správa uživatelů</a>
+			</li>
+		</ul>
+	</nav>
+</div>

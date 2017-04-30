@@ -124,11 +124,11 @@ class User
 	 */
 
 	static private $roleList = [
-
 		'user' => 'User',
 		'admin' => 'Administrátor',
-		'projectManager' => 'Projektový manažér',
-        'owner' => 'Majiteľ spoločnosti'];
+		'projectManager' => 'Projektový manažer',
+        'owner' => 'Majitel spoločnosti'
+	];
 
 
 	public function __construct($id_company, $username, $password, $email, $firstName, $lastName, $birthday, $phone, $role)

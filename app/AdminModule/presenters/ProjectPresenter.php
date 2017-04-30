@@ -6,14 +6,16 @@ namespace  App\AdminModule\Presenters;
 
 use Nette;
 use App\Model;
+use App\Model\Facades\ProjectFacade;
 
 
-class StatisticsPresenter extends Nette\Application\UI\Presenter
+class ProjectPresenter extends BasePresenter
 {
 
-    public function renderStatistics()
+	public function renderDefault()
     {
         $this->template->anyVariable = 'any value';
     }
+
 
 }

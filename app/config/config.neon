@@ -37,6 +37,7 @@ services: #property name se uvádí u služeb který nahrazují stejně jmenovan
 	- App\Components\FileStorage(%wwwDir%) #práce se soubory ve složce www @TODO otestovat zda nemusí být proper name
 	- App\Components\Utilities
 	- App\Model\Facades\UserFacade
+	- App\Model\Facades\ProjectFacade
 
 extensions:
 	# https://github.com/Kdyby/Doctrine

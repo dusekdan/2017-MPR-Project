@@ -1,3 +1,6 @@
+{block title}
+	Homepage
+{/block}
 {block content}
 	<div>
 		<table>
@@ -14,7 +17,7 @@
 				<td>{foreach $user->getRoles() as $role} {$role} {/foreach}</td>
 			</tr>
 			{foreach $user->getIdentity()->getData() as $key => $data}
-				<tr>
+				<tr n:if="!is_array($data)">
 					<td>{$key}</td>
 					<td>{$data}</td>
 				</tr>

@@ -43,7 +43,7 @@ class UserPresenter extends BasePresenter
 	/** @persistent */
 	public $showModal = false;
 
-	public function __construct(User $user, UserFormFactory $userFormFactory, BaseUFF $baseUFF ,FileStorage $fileStorage)
+	public function __construct(User $user, UserFormFactory $userFormFactory, BaseUFF $baseUFF, FileStorage $fileStorage)
 	{
 		$this->user = $user;
 		$this->formFactory = $userFormFactory;
