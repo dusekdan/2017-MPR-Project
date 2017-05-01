@@ -87,6 +87,11 @@ class ProjectFormFactory extends BaseFactory
         $form->addText('result', 'Výsledek')
             ->addRule(Form::FILLED,"Vypltě prosím výsledek rizika");
 
+        $form->addGroup()
+            ->setOption('container', 'fieldset class=formFooter');
+        $form->addSubmit('addRisk', 'Přidat');
+        $form->addSubmit('cancel', 'Zrušit');
+
         return $form;
     }
 
@@ -109,6 +114,11 @@ class ProjectFormFactory extends BaseFactory
 
         $form->addText('toAdRisk', 'Do')
             ->addRule(Form::FILLED,"Vypltě prosím časový interval");
+
+        $form->addGroup()
+            ->setOption('container', 'fieldset class=formFooter');
+        $form->addSubmit('addPhase', 'Přidat');
+        $form->addSubmit('cancel', 'Zrušit');
 
         return $form;
     }
@@ -144,6 +154,11 @@ class ProjectFormFactory extends BaseFactory
 
         $form->addText('state', 'Stav')
             ->addRule(Form::FILLED,"Vypltě prosím stav rizika");
+
+        $form->addGroup()
+            ->setOption('container', 'fieldset class=formFooter');
+        $form->addSubmit('changePhase', 'Upravit');
+        $form->addSubmit('cancel', 'Zrušit');
 
         return $form;
     }

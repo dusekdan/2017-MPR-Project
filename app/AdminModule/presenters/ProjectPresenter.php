@@ -67,6 +67,23 @@ class ProjectPresenter extends BasePresenter
     }
 
 
+    public function actionChangeRisk()
+    {
+        if ($this->isAjax()) {
+            debugger::fireLog("modal");
+            $this->payload->isModal = true;
+            //pokud je modal zobrazen překresluju už jen formulář
+            if ($this->showModal == false) {
+                $this->redrawControl("modal");
+                $this->showModal = true;
+                debugger::fireLog("modal");
+            } else {
+                // snippetem překreslim jen to co je potřeba po odeslání formuláře
+                // formulář (pro zobrazeni chyb), vyslednou tabulku po zmene v DB
+            }
+        }
+    }
+
     public function renderChangeRisk(){}
 
     /**
@@ -86,6 +103,23 @@ class ProjectPresenter extends BasePresenter
         });
     }
 
+
+    public function actionAddPhase()
+    {
+        if ($this->isAjax()) {
+            debugger::fireLog("modal");
+            $this->payload->isModal = true;
+            //pokud je modal zobrazen překresluju už jen formulář
+            if ($this->showModal == false) {
+                $this->redrawControl("modal");
+                $this->showModal = true;
+                debugger::fireLog("modal");
+            } else {
+                // snippetem překreslim jen to co je potřeba po odeslání formuláře
+                // formulář (pro zobrazeni chyb), vyslednou tabulku po zmene v DB
+            }
+        }
+    }
 
     public function renderAddPhase(){}
 
