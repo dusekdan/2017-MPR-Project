@@ -8,27 +8,46 @@ use Nette;
 use App\Model;
 use App\Model\Facades\ProjectFacade;
 use App\AdminModule\Forms\ProjectFormFactory;
+use Tracy\Debugger;
 
 
 class ProjectPresenter extends BasePresenter
 {
-    /** @var projectFormFactory */
-    private $projectFactory;
+	/** @var projectFormFactory */
+	private $projectFactory;
 
-    /** @persistent */
-    public $showModal = true;
-
-    public function __construct(ProjectFormFactory $projectFormFactory)
-    {
-        $this->projectFactory = $projectFormFactory;
-    }
+	public function __construct(ProjectFormFactory $projectFormFactory)
+	{
+		$this->projectFactory = $projectFormFactory;
+	}
 
 	public function renderDefault()
-    {
-        $this->template->anyVariable = 'any value';
-    }
+	{
+		$this->template->anyVariable = 'any value';
+	}
 
-    public function renderAddRisk(){}
+	public function actionAddRisk()
+	{
+
+		if ($this->isAjax()) {
+			debugger::fireLog("modal");
+			$this->payload->isModal = true;
+			//pokud je modal zobrazen překresluju už jen formulář
+			if ($this->showModal == false) {
+				$this->redrawControl("modal");
+				$this->showModal = true;
+				debugger::fireLog("modal");
+			} else {
+				// snippetem překreslim jen to co je potřeba po odeslání formuláře
+				// formulář (pro zobrazeni chyb), vyslednou tabulku po zmene v DB
+			}
+		}
+	}
+
+    public function renderAddRisk()
+    {
+
+    }
 
     /**
      * Create new risk.

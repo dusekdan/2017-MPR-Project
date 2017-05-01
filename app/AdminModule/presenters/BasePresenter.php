@@ -22,6 +22,9 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter
 	public $translator;
 
 	/** @persistent */
+	public $showModal = false;
+
+	/** @persistent */
 	public $project;
 
 	/**

@@ -36,9 +36,6 @@ class UserPresenter extends BasePresenter
 	/** @var  FileStorage */
 	private $fileStorage;
 
-	/** @persistent */
-	public $showModal = false;
-
 	public function __construct(User $user, UserFormFactory $userFormFactory, FileStorage $fileStorage)
 	{
 		$this->user = $user;
