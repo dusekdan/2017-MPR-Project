@@ -4,22 +4,22 @@
 {/block}
 {block content}
 	<div>
-		<table>
+		<table class="table ">
 			<tr>
 				<th>Uživatel</th>
 				<th></th>
 			</tr>
 			<tr>
-				<td>Id:</td>
+				<th>Id:</th>
 				<td>{$user->getId()}</td>
 			</tr>
 			<tr>
-				<td>Role:</td>
+				<th>Role:</th>
 				<td>{foreach $user->getRoles() as $role} {$role} {/foreach}</td>
 			</tr>
 			{foreach $user->getIdentity()->getData() as $key => $data}
 				<tr n:if="!is_array($data)">
-					<td>{$key}</td>
+					<th>{$key}</th>
 					<td>{$data}</td>
 				</tr>
 			{/foreach}

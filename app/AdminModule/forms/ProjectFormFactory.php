@@ -53,4 +53,98 @@ class ProjectFormFactory extends BaseFactory
 		return $form;
 	}
 
+
+    /**
+     * Add new risk form
+     * @return Form
+     */
+    public function addRisk($stuff) {
+        $form = $this->create();
+        $form->getElementPrototype()->class('ajax');
+
+        $form->addText('firstName', 'Jméno')
+            ->addRule(Form::FILLED,"Vypltě prosím jméno");
+
+        $form->addText('subscription', 'Popis')
+            ->addRule(Form::FILLED,"Vypltě prosím popis rizika");
+
+        $form->addText('fromAdRisk', 'Od')
+            ->addRule(Form::FILLED,"Vypltě prosím časový interval");
+
+        $form->addText('toAdRisk', 'Do')
+            ->addRule(Form::FILLED,"Vypltě prosím časový interval");
+
+        $form->addText('probability', 'Pravděpodobnost')
+            ->addRule(Form::FILLED,"Vypltě prosím popis rizika");
+
+        $form->addText('time', 'Čas')
+            ->addRule(Form::FILLED,"Vypltě prosím čas");
+
+        $form->addText('money', 'Peníze')
+            ->addRule(Form::FILLED,"Vypltě prosím peněžní odhad");
+
+        $form->addText('result', 'Výsledek')
+            ->addRule(Form::FILLED,"Vypltě prosím výsledek rizika");
+
+        return $form;
+    }
+
+    /**
+     * Add new phase form
+     * @return Form
+     */
+    public function addPhase($stuff) {
+        $form = $this->create();
+        $form->getElementPrototype()->class('ajax');
+
+        $form->addText('firstName', 'Jméno')
+            ->addRule(Form::FILLED,"Vypltě prosím jméno");
+
+        $form->addText('subscription', 'Popis')
+            ->addRule(Form::FILLED,"Vypltě prosím popis rizika");
+
+        $form->addText('fromAdRisk', 'Od')
+            ->addRule(Form::FILLED,"Vypltě prosím časový interval");
+
+        $form->addText('toAdRisk', 'Do')
+            ->addRule(Form::FILLED,"Vypltě prosím časový interval");
+
+        return $form;
+    }
+
+    /**
+     * Change existing risk form
+     * @return Form
+     */
+    public function changeRisk($stuff) {
+        $form = $this->create();
+        $form->getElementPrototype()->class('ajax');
+
+        $form->addText('firstName', 'Jméno')
+            ->addRule(Form::FILLED,"Vypltě prosím jméno");
+
+        $form->addText('subscription', 'Popis')
+            ->addRule(Form::FILLED,"Vypltě prosím popis rizika");
+
+        $form->addText('fromAdRisk', 'Od')
+            ->addRule(Form::FILLED,"Vypltě prosím časový interval");
+
+        $form->addText('toAdRisk', 'Do')
+            ->addRule(Form::FILLED,"Vypltě prosím časový interval");
+
+        $form->addText('probability', 'Pravděpodobnost')
+            ->addRule(Form::FILLED,"Vypltě pravděpodobnost prosím");
+
+        $form->addText('prize', 'Cena')
+            ->addRule(Form::FILLED,"Vypltě prosím odhad ceny");
+
+        $form->addText('time', 'Čas')
+            ->addRule(Form::FILLED,"Vypltě prosím časový odhad");
+
+        $form->addText('state', 'Stav')
+            ->addRule(Form::FILLED,"Vypltě prosím stav rizika");
+
+        return $form;
+    }
+
 }
