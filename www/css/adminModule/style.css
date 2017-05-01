@@ -2,11 +2,15 @@ body {
 	font-family: 'Karla', sans-serif;
 }
 
-.flash {
+.flash-message {
 	position: sticky;
 	top: 0;
+	padding: 11px;
+	margin-bottom: 0px;
 	width: 100%;
 	z-index: 11;
+	border-radius: 0px;
+	display: none;
 }
 
 #header {

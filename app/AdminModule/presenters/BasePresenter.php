@@ -65,7 +65,7 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter
 	protected function createComponentChooseOneForm()
 	{
 		return $this->projectFormF->chooseOne($this->project, function($project) {
-			$this->flashMessage("Změna projektu.", "success");
+			$this->flashMessage("Změna projektu.", "info");
 			$this->redirect('this', ['project'=>$project]);
 		});
 	}

@@ -18,11 +18,14 @@
 
 	<script src="{$basePath}/js/include/jquery-3.1.1.js"></script>
 	<script src="{$basePath}/libs/bootstrap/js/bootstrap.js"></script>
-	<script src="{$basePath}/js/main.js"></script>
 
 	<script src="{$basePath}/js/include/netteForms.js"></script>
 	<script src="{$basePath}/js/include/nette.ajax.js"></script>
 	<script src="{$basePath}/js/include/extension/nette.ajax.ex.js"></script>
+
+	<script src="{$basePath}/js/main.js"></script>
+	<script src="{$basePath}/js/adminModule/script.js"></script>
+
 	{block head}{/block}
 </head>
 
@@ -31,7 +34,11 @@
 {include './components/leftSidePanel.latte'}
 
 <section id="main">
-	<div n:foreach="$flashes as $flash" n:class="flash, $flash->type">{$flash->message}</div>
+	<div n:foreach="$flashes as $flash" class="flash-message alert alert-{$flash->type}">
+		<span class="type">{$flash->type == 'info' ? 'Info' :( $flash->type == 'success' ? 'Úspěch' :( $flash->type == 'warning' ? 'Varování' :( $flash->type == 'danger' ? 'Nebezpečí' : '' )))}!</span>
+		<span class="message">{$flash->message}</span>
+		<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+	</div>
 	<div id="header">
 		<h3>{ifset title}{include title|stripHtml}{/ifset}</h3>
 	</div>

@@ -40,7 +40,8 @@ class ProjectFormFactory extends BaseFactory
 		$form->getElementPrototype()->class('ajax');
 		$form->addSelect('Projekty', 'Vyberte si projekt', $projects)
 			->setPrompt('Vyberte projekt')
-			->addRule(Form::FILLED,"Projekt musí být zvolen.");
+			->addRule(Form::FILLED,"Projekt musí být zvolen.")
+			->setAttribute("onChange", "sendForm();");
 		if (isset ($project)) {
 			$form['Projekty']->setDefaultValue($project);
 		}

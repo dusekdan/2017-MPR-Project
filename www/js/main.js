@@ -4,6 +4,10 @@
 $(document).ready(function(e)
 {
 	/**
+	 * Aktivace animace flashzpráv
+	 */
+	flashMessageAnimation();
+	/**
 	 * Pro podlisti s danou tridu se daji rozjizdet
 	 */
 	sublist = $('.sublist');
@@ -61,4 +65,31 @@ function setFile(inputHiddenId) {
 			input.val(message);
 		});
 	});
+}
+
+
+/**
+ * Odesílání formuláře při skrytém tlačítku. např na onchange při něčem
+ */
+function sendForm()
+{
+	$("input[type=submit]",this.form).click();
+}
+
+/**
+ * Zobrazování flashzpáv postupně a jejich schovávání
+ * v případě výstrahy, tak ta se neschová
+ */
+function flashMessageAnimation()
+{
+	var length = $('.flash-message').length;
+	for(i=0; i<length ; i++){
+		if($('.flash-message').eq(i).hasClass('alert-danger')){
+			$('.flash-message').eq(i).slideDown();
+		}else{
+			$('.flash-message').eq(i).delay(i*3000).slideDown().delay(2000).slideUp(function() {
+				$(this).remove();
+			});
+		}
+	}
 }
