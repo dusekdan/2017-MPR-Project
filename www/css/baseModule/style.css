@@ -1,3 +1,7 @@
+body {
+	background-image: url('../../images/bg.jpg');
+}
+
 /**
 HLAVIČKA
  */
@@ -59,6 +63,7 @@ Tělo
 section#content {
 	overflow: auto;
 	min-height: calc(100% - 46px - 23px);
+	color: white;
 }
 
 /**

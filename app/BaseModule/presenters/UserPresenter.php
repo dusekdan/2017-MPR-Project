@@ -46,6 +46,7 @@ class UserPresenter extends BasePresenter
 				$this->redrawControl("snippetSignIn");
 			}
 		}
+		$this->showModal = true; // přihlášení chci vždy zobrazit
 	}
 
 	/**
@@ -68,7 +69,7 @@ class UserPresenter extends BasePresenter
 			$identity = $this->user->getIdentity();
 			$this->flashMessage("Byl jste úspěšně přihlášen " . $identity->data['username'] . ".", "success");
 			//$this->restoreRequest($this->backlink); //TODO - zatím to neběhá pod AJAXEM asi kvuli payloudu
-			$this->redirect('Homepage:');
+			$this->redirect(':Admin:Homepage:');
 		} catch (AuthenticationException $e) {
 			$form->addError($e->getMessage());
 		}

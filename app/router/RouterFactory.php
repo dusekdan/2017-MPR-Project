@@ -43,13 +43,13 @@ class RouterFactory
         $base = new RouteList('Base');
         $base[] = new Route('[//%host%/][<locale=cs cs|en>/]<presenter>/<action>[/<id>]', [
             'presenter' => [
-                Route::VALUE => 'Homepage',
+                Route::VALUE => 'User',
                 Route::FILTER_TABLE => [
                     'uzivatel' => 'User'
                 ],
             ],
             'action' => [
-                Route::VALUE => 'default',
+                Route::VALUE => 'signIn',
                 Route::FILTER_TABLE => [
                     'vstup' => 'signIn'
                 ],

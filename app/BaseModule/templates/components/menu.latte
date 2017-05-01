@@ -27,7 +27,7 @@
 				<a n:href="User:SignUp">{_signUp}</a>
 			</li>
 			<li n:class="$presenter->isLinkCurrent('User:SignIn') ? menu-item-active" n:if="!$user->isLoggedIn()">
-				<a class="ajax" n:href="User:SignIn" data-toggle="modal" data-target="#myModal">{_signIn}</a>
+				<a class="ajax" n:href="User:SignIn">{_signIn}</a>
 			</li>
 			<li n:if="$user->isLoggedIn()">
 				<a n:href="User:SignOut">{_signOut}</a>
