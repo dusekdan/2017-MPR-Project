@@ -288,14 +288,15 @@ class AddTestData extends AbstractMigration
 	 */
 	public function down()
 	{
-        $this->execute("DELETE FROM $this->tableNameU");
+
+        $this->execute("DELETE FROM $this->tableNameUoPr");
+        $this->execute("DELETE FROM $this->tableNameUoPh");
+        $this->execute("DELETE FROM $this->tableNameRo");
         $this->execute("DELETE FROM $this->tableNameRi");
-        $this->execute("DELETE FROM $this->tableNameC");
         $this->execute("DELETE FROM $this->tableNamePh");
         $this->execute("DELETE FROM $this->tableNamePr");
+        $this->execute("DELETE FROM $this->tableNameC");
         $this->execute("DELETE FROM $this->tableNameRT");
-        $this->execute("DELETE FROM $this->tableNameRo");
-        $this->execute("DELETE FROM $this->tableNameUoPh");
-        $this->execute("DELETE FROM $this->tableNameUoPr");
+        $this->execute("DELETE FROM $this->tableNameU");
     }
 }
