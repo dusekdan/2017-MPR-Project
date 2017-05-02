@@ -12,10 +12,6 @@
     background-color: #253138;
 }
 
-li{
-    color: #98a6ad;
-}
-
 th, td{
     color: black;
 }
@@ -61,4 +57,13 @@ th, td{
 
 .row h3{
     color: #98a6ad;
+}
+
+
+/**
+Formuláře
+ */
+
+form textarea {
+    resize: vertical;
 }

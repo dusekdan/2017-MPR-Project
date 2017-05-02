@@ -5,16 +5,16 @@
 		<ul class=error n:if="$form->ownErrors">
 			<li n:foreach="$form->ownErrors as $error">{$error}</li>
 		</ul>
-
 		<div n:foreach="$form->controls as $name => $input"
-				n:if="!$input->getOption(rendered) && $input->getOption(type) !== hidden"
-				n:class="form-group, $input->required ? required, $input->error ? has-error, $input->getHtmlName()">
+				n:if="!$input->getOption(rendered) && $input->getOption(type) !== hidden && $input->getOption(type) !== button"
+				n:class="form-group, $input->required ? required, $input->error ? has-error, $input->getHtmlName(), $input->getOption(type) == button ? form-btn">
 
 			<div class="col-sm-{isset($labelSize) ? $labelSize : 2} control-label">{label $input}</div>
 
 			<div class="col-sm-{isset($inputSize) ? $inputSize : 10}">
 				{if $input->getOption(type) in [text, select, textarea]}
-					{input $input class => form-control}
+
+					{input $input class => [form-control, isset($input->getControl()->attrs['class']) ? $input->getControl()->attrs['class']]}
 				{elseif $input->getOption(type) === button}
 					{input $input class => "btn btn-default"}
 				{elseif $input->getOption(type) === checkbox}
@@ -25,7 +25,7 @@
 					<input type="text" class="form-control fileInput" placeholder="Soubor nebyl vybrán" disabled>
 					<label class="fileLabel"  for="{$input->getControl()->attrs['id']}">Vybrat</label>
 					<div style="clear: both;"></div>
-					{input $input}
+				{input $input}
 					<script>
 						setFile("#"+{$input->getControl()->attrs['id']});
 					</script>
@@ -34,6 +34,15 @@
 				{/if}
 
 				<span class=error n:ifcontent>{$input->error}</span>
+			</div>
+		</div>
+		<div class="form-btn">
+			<div n:foreach="$form->controls as $name => $input"
+					n:if="$input->getOption(type) == button"
+					n:class="form-group, $input->required ? required, $input->error ? has-error, $input->getHtmlName()">
+				<div>
+						{input $input class => [form-control, isset($input->getControl()->attrs['class']) ? $input->getControl()->attrs['class']]}
+				</div>
 			</div>
 		</div>
 	</form>

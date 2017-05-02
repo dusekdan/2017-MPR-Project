@@ -7,6 +7,7 @@ namespace App\AdminModule\Forms;
 use Nette;
 use Nette\Application\UI\Form;
 use App\Model\Facades\ProjectFacade;
+use App\Model\Facades\PhaseFacade;
 use Kdyby\Doctrine\EntityManager;
 
 
@@ -23,11 +24,15 @@ class ProjectFormFactory extends BaseFactory
 	/** @var ProjectFacade */
 	private $projectFacade;
 
+	/** @var PhaseFacade */
+	private $phaseFacade;
 
-	public function __construct(EntityManager $em, ProjectFacade $projectFacade)
+
+	public function __construct(EntityManager $em, ProjectFacade $projectFacade, PhaseFacade $phaseFacade)
 	{
 		$this->em = $em;
 		$this->projectFacade = $projectFacade;
+		$this->phaseFacade = $phaseFacade;
 	}
 
 	public function chooseOne($project, callable $onSuccess)
@@ -99,29 +104,46 @@ class ProjectFormFactory extends BaseFactory
      * Add new phase form
      * @return Form
      */
-    public function addPhase($stuff) {
+    public function addPhase($onSuccess, $idProject) {
         $form = $this->create();
         $form->getElementPrototype()->class('ajax');
 
-        $form->addText('firstName', 'Jméno')
+        $form->addText('name', 'Jméno')
             ->addRule(Form::FILLED,"Vypltě prosím jméno");
 
-        $form->addText('subscription', 'Popis')
-            ->addRule(Form::FILLED,"Vypltě prosím popis rizika");
+        $form->addTextArea('subscription', 'Popis')
+            ->addRule(Form::FILLED,"Vypltě prosím popis rizika")
+	        ->addRule(Form::MAX_LENGTH, 'Poznámka je příliš dlouhá', 300);
 
-        $form->addText('fromAdRisk', 'Od')
+        $form->addText('from', 'Od')
+	        ->setAttribute('class', 'datepicker')
             ->addRule(Form::FILLED,"Vypltě prosím časový interval");
 
-        $form->addText('toAdRisk', 'Do')
+        $form->addText('to', 'Do')
+	        ->setAttribute('class', 'datepicker')
             ->addRule(Form::FILLED,"Vypltě prosím časový interval");
 
-        $form->addGroup()
-            ->setOption('container', 'fieldset class=formFooter');
+        $form->addHidden('idProject', $idProject);
+
         $form->addSubmit('addPhase', 'Přidat');
-        $form->addSubmit('cancel', 'Zrušit');
+        $form->addButton('cancel', 'Zrušit')
+            ->setAttribute('data-dismiss','modal');
+
+	    $form->onSuccess[] = [$this, 'addPhaseSubmitted'];
+	    $form->onSuccess[] = $onSuccess;
+
 
         return $form;
     }
+
+	public function addPhaseSubmitted(Form $form, $values)
+	{
+		$from = new Nette\Utils\DateTime($values['from']);
+		$to = new Nette\Utils\DateTime($values['to']);
+		$this->phaseFacade->createPhase($values['name'], $values['subscription'], $from, $to, $values['idProject'], true);
+
+		return;
+	}
 
     /**
      * Change existing risk form

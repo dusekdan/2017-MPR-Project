@@ -125,7 +125,7 @@ class User
 
 	static private $roleList = [
 		'user' => 'User',
-		'admin' => 'Administrátor',
+		'administrator' => 'Administrátor',
 		'projectManager' => 'Projektový manažer',
         'owner' => 'Majitel spoločnosti'
 	];
