@@ -152,3 +152,19 @@ body {
 #left-menu .menu nav a:hover {
 	text-decoration: none;
 }
+
+/**
+Formuláře
+ */
+form {
+	font-family: sans-serif;
+}
+
+form .form-btn {
+	overflow: auto;
+}
+
+form  .form-btn .form-group {
+	float: right;
+	margin-left: 10px;
+}

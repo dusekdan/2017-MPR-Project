@@ -36,9 +36,9 @@ class ProjectFacade
 	}
 
 	/**
-	 * Najde a vrátí uživatele podle jeho ID.
-	 * @param int|NULL $id ID uživatele
-	 * @return User|NULL vrátí entitu uživatele nebo NULL pokud uživatel nebyl nalezen
+	 * Najde a vrátí projekt podle jeho ID.
+	 * @param int|NULL $id ID projektu
+	 * @return User|NULL vrátí entitu projektu nebo NULL pokud projekt nebyl nalezen
 	 */
 	public function getProject($id)
 	{
@@ -49,7 +49,6 @@ class ProjectFacade
 	{
 		return $this->repository->findAll();
 	}
-
 
 	public function removeProject($project, $autoFlush)
 	{
