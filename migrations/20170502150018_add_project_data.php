@@ -196,7 +196,7 @@ class AddProjectData extends AbstractMigration
                 'description' => "Rizika, ktera mohla vzniknout pri organizaci projektu.",
                 'project_id' => 1,
                 'start_date' => "2017-02-03 08:00:00",
-                'end_date' => "2017-05-03 23:59:00",
+                'end_date' => "2017-07-03 23:59:00",
                 'created' => date("Y-m-d H:i:s"),
                 'updated' => date("Y-m-d H:i:s")
             ],
@@ -258,11 +258,12 @@ class AddProjectData extends AbstractMigration
                 'trigger' => "",
                 'reaction' => "Provedeni pruzkumu schopnosti a znalosti jednotlivych clenu tymu a tomu odpovidajici rozdeleni zodpovednosti.",
                 'severity' => 0.8,
+
                 'risk_type_id' => VNITRNI_R,
                 'phase_id' => ORGANIZACE_E,
                 'resposibleFor_id' => 2,
                 'creator_id' => 1,
-                'start_date' => "2017-03-01 08:00:00",
+                'start_date' => "2017-03-15 08:00:00",
                 'end_date' => "2017-05-05 23:59:00",
                 'created' => date("Y-m-d H:i:s"),
                 'updated' => date("Y-m-d H:i:s")
@@ -282,13 +283,13 @@ class AddProjectData extends AbstractMigration
                 'phase_id' => ORGANIZACE_E,
                 'resposibleFor_id' => 2,
                 'creator_id' => 1,
-                'start_date' => "2017-03-01 08:00:00",
+                'start_date' => "2017-02-15 08:00:00",
                 'end_date' => "2017-05-05 23:59:00",
                 'created' => date("Y-m-d H:i:s"),
                 'updated' => date("Y-m-d H:i:s")
             ],
             [
-                'name'    => "¨Momentalni indispozice nektereho clena tymu.",
+                'name'    => "Momentalni indispozice nektereho clena tymu.",
                 'description'  => "Nemoc, uraz.",
                 'probability' => 0.2,
                 'money' => 40000,
@@ -302,7 +303,7 @@ class AddProjectData extends AbstractMigration
                 'phase_id' => ORGANIZACE_E,
                 'resposibleFor_id' => 2,
                 'creator_id' => 1,
-                'start_date' => "2017-03-01 08:00:00",
+                'start_date' => "2017-02-03 08:00:00",
                 'end_date' => "2017-05-05 23:59:00",
                 'created' => date("Y-m-d H:i:s"),
                 'updated' => date("Y-m-d H:i:s")
@@ -322,7 +323,7 @@ class AddProjectData extends AbstractMigration
                 'phase_id' => ORGANIZACE_E,
                 'resposibleFor_id' => 2,
                 'creator_id' => 1,
-                'start_date' => "2017-03-01 08:00:00",
+                'start_date' => "2017-02-03 08:00:00",
                 'end_date' => "2017-05-05 23:59:00",
                 'created' => date("Y-m-d H:i:s"),
                 'updated' => date("Y-m-d H:i:s")
@@ -342,7 +343,7 @@ class AddProjectData extends AbstractMigration
                 'phase_id' => ORGANIZACE_E,
                 'resposibleFor_id' => 2,
                 'creator_id' => 1,
-                'start_date' => "2017-03-01 08:00:00",
+                'start_date' => "2017-02-03 08:00:00",
                 'end_date' => "2017-05-05 23:59:00",
                 'created' => date("Y-m-d H:i:s"),
                 'updated' => date("Y-m-d H:i:s")
@@ -362,7 +363,7 @@ class AddProjectData extends AbstractMigration
                 'phase_id' => ORGANIZACE_E,
                 'resposibleFor_id' => 2,
                 'creator_id' => 1,
-                'start_date' => "2017-03-01 08:00:00",
+                'start_date' => "2017-02-05 08:00:00",
                 'end_date' => "2017-05-05 23:59:00",
                 'created' => date("Y-m-d H:i:s"),
                 'updated' => date("Y-m-d H:i:s")
@@ -385,7 +386,7 @@ class AddProjectData extends AbstractMigration
                 'phase_id' => SPECIFIKACE_E,
                 'resposibleFor_id' => 2,
                 'creator_id' => 1,
-                'start_date' => "2017-03-01 08:00:00",
+                'start_date' => "2017-02-15 08:00:00",
                 'end_date' => "2017-05-05 23:59:00",
                 'created' => date("Y-m-d H:i:s"),
                 'updated' => date("Y-m-d H:i:s")
@@ -405,7 +406,7 @@ class AddProjectData extends AbstractMigration
                 'phase_id' => SPECIFIKACE_E,
                 'resposibleFor_id' => 5,
                 'creator_id' => 1,
-                'start_date' => "2017-03-01 08:00:00",
+                'start_date' => "2017-02-15 08:00:00",
                 'end_date' => "2017-05-05 23:59:00",
                 'created' => date("Y-m-d H:i:s"),
                 'updated' => date("Y-m-d H:i:s")
@@ -425,7 +426,7 @@ class AddProjectData extends AbstractMigration
                 'phase_id' => SPECIFIKACE_E,
                 'resposibleFor_id' => 5,
                 'creator_id' => 1,
-                'start_date' => "2017-03-01 08:00:00",
+                'start_date' => "2017-02-15 08:00:00",
                 'end_date' => "2017-05-05 23:59:00",
                 'created' => date("Y-m-d H:i:s"),
                 'updated' => date("Y-m-d H:i:s")
@@ -465,7 +466,7 @@ class AddProjectData extends AbstractMigration
                 'phase_id' => NAVRH_E,
                 'resposibleFor_id' => 2,
                 'creator_id' => 1,
-                'start_date' => "2017-03-01 08:00:00",
+                'start_date' => "2017-02-03 08:00:00",
                 'end_date' => "2017-05-05 23:59:00",
                 'created' => date("Y-m-d H:i:s"),
                 'updated' => date("Y-m-d H:i:s")
@@ -485,7 +486,7 @@ class AddProjectData extends AbstractMigration
                 'phase_id' => SPECIFIKACE_E,
                 'resposibleFor_id' => 5,
                 'creator_id' => 1,
-                'start_date' => "2017-03-01 08:00:00",
+                'start_date' => "2017-02-15 08:00:00",
                 'end_date' => "2017-05-05 23:59:00",
                 'created' => date("Y-m-d H:i:s"),
                 'updated' => date("Y-m-d H:i:s")
@@ -587,7 +588,7 @@ class AddProjectData extends AbstractMigration
                 'phase_id' => PLANOVANI_E,
                 'resposibleFor_id' => 2,
                 'creator_id' => 1,
-                'start_date' => "2017-03-01 08:00:00",
+                'start_date' => "2017-02-05 08:00:00",
                 'end_date' => "2017-05-05 23:59:00",
                 'created' => date("Y-m-d H:i:s"),
                 'updated' => date("Y-m-d H:i:s")
@@ -607,7 +608,7 @@ class AddProjectData extends AbstractMigration
                 'phase_id' => PLANOVANI_E,
                 'resposibleFor_id' => 2,
                 'creator_id' => 1,
-                'start_date' => "2017-03-01 08:00:00",
+                'start_date' => "2017-02-15 08:00:00",
                 'end_date' => "2017-05-05 23:59:00",
                 'created' => date("Y-m-d H:i:s"),
                 'updated' => date("Y-m-d H:i:s")
@@ -649,7 +650,7 @@ class AddProjectData extends AbstractMigration
                 'phase_id' => REALIZACE_E,
                 'resposibleFor_id' => 1,
                 'creator_id' => 1,
-                'start_date' => "2017-03-01 08:00:00",
+                'start_date' => "2017-02-03 08:00:00",
                 'end_date' => "2017-05-05 23:59:00",
                 'created' => date("Y-m-d H:i:s"),
                 'updated' => date("Y-m-d H:i:s")
@@ -670,6 +671,7 @@ class AddProjectData extends AbstractMigration
                 'resposibleFor_id' => 4,
                 'creator_id' => 1,
                 'start_date' => "2017-03-01 08:00:00",
+                'start_date' => "2017-03-15 08:00:00",
                 'end_date' => "2017-05-05 23:59:00",
                 'created' => date("Y-m-d H:i:s"),
                 'updated' => date("Y-m-d H:i:s")
@@ -690,6 +692,7 @@ class AddProjectData extends AbstractMigration
                 'resposibleFor_id' => 4,
                 'creator_id' => 1,
                 'start_date' => "2017-03-01 08:00:00",
+                'start_date' => "2017-03-15 08:00:00",
                 'end_date' => "2017-05-05 23:59:00",
                 'created' => date("Y-m-d H:i:s"),
                 'updated' => date("Y-m-d H:i:s")
@@ -709,7 +712,7 @@ class AddProjectData extends AbstractMigration
                 'phase_id' => REALIZACE_E,
                 'resposibleFor_id' => 4,
                 'creator_id' => 1,
-                'start_date' => "2017-03-01 08:00:00",
+                'start_date' => "2017-03-15 08:00:00",
                 'end_date' => "2017-05-05 23:59:00",
                 'created' => date("Y-m-d H:i:s"),
                 'updated' => date("Y-m-d H:i:s")
@@ -731,7 +734,7 @@ class AddProjectData extends AbstractMigration
                 'phase_id' => REALIZACE_E,
                 'resposibleFor_id' => 2,
                 'creator_id' => 1,
-                'start_date' => "2017-03-01 08:00:00",
+                'start_date' => "2017-02-03 08:00:00",
                 'end_date' => "2017-05-05 23:59:00",
                 'created' => date("Y-m-d H:i:s"),
                 'updated' => date("Y-m-d H:i:s")
@@ -751,7 +754,7 @@ class AddProjectData extends AbstractMigration
                 'phase_id' => REALIZACE_E,
                 'resposibleFor_id' => 3,
                 'creator_id' => 1,
-                'start_date' => "2017-03-01 08:00:00",
+                'start_date' => "2017-02-03 08:00:00",
                 'end_date' => "2017-05-05 23:59:00",
                 'created' => date("Y-m-d H:i:s"),
                 'updated' => date("Y-m-d H:i:s")
@@ -771,7 +774,7 @@ class AddProjectData extends AbstractMigration
                 'phase_id' => REALIZACE_E,
                 'resposibleFor_id' => 3,
                 'creator_id' => 1,
-                'start_date' => "2017-03-01 08:00:00",
+                'start_date' => "2017-03-15 08:00:00",
                 'end_date' => "2017-05-05 23:59:00",
                 'created' => date("Y-m-d H:i:s"),
                 'updated' => date("Y-m-d H:i:s")
