@@ -64,7 +64,19 @@ class Risk
 	 */
 	protected $description;
 
+    /**
+     * Den zacatku risku
+     * @ORM\Column(name="start_date", type="datetime")
+     * @var \DateTime
+     */
+    protected $startDate;
 
+    /**
+     * Den konce risku
+     * @ORM\Column(name="end_date", type="datetime")
+     * @var \DateTime
+     */
+    protected $endDate;
     /**
      * Datum vytvorenia zaznamu o riziku
      * @ORM\Column(name"created_at", type="datetime")
