@@ -34,7 +34,7 @@ class Role
 
     /**
      * ID Clienta, pre ktoru user pracuje
-     * @ORM\Column(name="id_company", type="integer")
+     * @ORM\Column(name="company_id", type="integer")
      * @var integer
      */
     protected $idClient;
@@ -43,7 +43,7 @@ class Role
 
     /**
      * ID Usera, ktoreho sa zaznam tyka
-     * @ORM\Column(name="id_user", type="integer")
+     * @ORM\Column(name="user_id", type="integer")
      * @var integer
      * @Id @ManyToOne(targetEntity="User")
      */

@@ -34,19 +34,17 @@ class Risk
 
     /**
      * ID Faze, ktorej riziko patri
-     * @ORM\Column(name="id_phase", type="integer")
-     * @var integer
-     * @Id @ManyToOne(targetEntity="Phase")
+     * @ORM\ManyToOne(targetEntity="Phase")
+     * @ORM\JoinColumn(name="phase_id", referencedColumnName="id")
      */
-    protected $idPhase;
+    protected $phase;
 
     /**
      * ID Typu rizika, ktoremu riziko patri
-     * @ORM\Column(name="id_risk_type", type="integer")
-     * @var integer
-     * @Id @ManyToOne(targetEntity="Risk")
+     * @ORM\ManyToOne(targetEntity="Risk")
+     * @ORM\JoinColumn(name="risk_type_id", referencedColumnName="id")
      */
-    protected $idRiskType;
+    protected $riskType;
 
 
 
@@ -79,14 +77,14 @@ class Risk
     protected $endDate;
     /**
      * Datum vytvorenia zaznamu o riziku
-     * @ORM\Column(name"created_at", type="datetime")
+     * @ORM\Column(name="created", type="datetime")
      * @var \DateTime
      */
     protected $created;
 
     /**
      * Datum posledneho update zaznamu o riziku
-     * @ORM\Column(name"updated_at", type="datetime")
+     * @ORM\Column(name="updated", type="datetime")
      * @var \DateTime
      */
     protected $updated;
@@ -94,44 +92,42 @@ class Risk
 
     /**
      * Enabled, moznost pracovat so zaznamom
-     * @ORM\Column(type="boolean", options={"default"=true})
+     * @ORM\Column(type="boolean")
      * @var boolean
      */
     protected  $enabled;
 
     /**
      * Id usera zodpovedneho za riziko
-     * @ORM\Column(type="integer")
-     * @var integer
-     * @Id @ManyToOne(targetEntity="User")
+     * @ORM\ManyToOne(targetEntity="User")
+     * @ORM\JoinColumn(name="resposibleFor_id", referencedColumnName="id")
      */
-    protected $idResponsibleUser;
+    protected $responsibleUser;
 
     /**
      * Id usera zodpovedneho za riziko
-     * @ORM\Column(name="id_resposible_user", type="integer")
-     * @var integer
-     * @Id @ManyToOne(targetEntity="User")
+     * @ORM\ManyToOne(targetEntity="User")
+     * @ORM\JoinColumn(name="creator_id", referencedColumnName="id")
      */
-    protected $idCreator;
+    protected $creator;
 
     /**
      * Pravdepodobnost rizika
-     * @ORM\Column(name="id_creator",type="float")
+     * @ORM\Column(name="probability", type="float")
      * @var float
      */
     protected $probability;
 
     /**
      * Mnozstvo financi ovplyvnenych rizikom
-     * @ORM\Column(type="integer")
+     * @ORM\Column(name="money", type="integer")
      * @var integer
      */
     protected $money;
 
     /**
      * Cas v hodinach(dnoch/tyzdnoch?), o ktory bude projekt opozdeny, kvoli riziku
-     * @ORM\Column(type="integer")
+     * @ORM\Column(name="time", type="integer")
      * @var integer
      */
     protected $time;
@@ -149,31 +145,33 @@ class Risk
      * @var string
      */
     protected $severity;
+
     /**
      * Prvotna pricina rizika
-     * @ORM\Column(name="primary_cause",type="string",length=100)
+     * @ORM\Column(name="primary_cause", type="string", length=100)
      * @var string
      */
     protected $primaryCause;
+
     /**
      * Spustac rizika
-     * @ORM\Column(type="string"length=100)
+     * @ORM\Column(type="string", length=100)
      * @var string
      */
     protected $trigger;
+
     /**
      * Reakcia/Opatrenie rizika
-     * @ORM\Column(type="string",length=100)
+     * @ORM\Column(type="string", length=100)
      * @var string
      */
     protected $reaction;
 
 
 
-    public function __construct($idPhase, $idRiskType, $name ,$description, $probability,$money,$time,$result,$severity,$primaryCause,$trigger,$reaction)
+    public function __construct($riskType, $name , $description, $probability, $money, $time, $result, $severity, $primaryCause, $trigger, $reaction)
 	{
-		$this->setIdPhase($idPhase);
-		$this->setIdRiskType($idRiskType);
+		$this->setIdRiskType($riskType);
 		$this->setName($name);
 		$this->setDescription($description);
 		$this->setProbability($probability);

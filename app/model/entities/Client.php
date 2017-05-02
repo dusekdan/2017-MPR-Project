@@ -33,7 +33,7 @@ class Client
 
     /**
      * Id Company do ktorej Client patri
-     * @ORM\Column(name="id_company", type="integer")
+     * @ORM\Column(name="company_id", type="integer")
      * @var integer
      */
 

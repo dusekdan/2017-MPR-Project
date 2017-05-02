@@ -34,7 +34,7 @@ class UsersOnPhase
 
     /**
      * Id faze na ktorom user pracuje
-     * @ORM\Column(name="id_project", type="integer")
+     * @ORM\Column(name="project_id", type="integer")
      * @var integer
      * @Id @ManyToOne(targetEntity="Project")
      */
@@ -44,7 +44,7 @@ class UsersOnPhase
 
     /**
      * ID Usera, ktoreho sa zaznam tyka
-     * @ORM\Column(name="id_user", type="integer")
+     * @ORM\Column(name="user_id", type="integer")
      * @var integer
      * @Id @ManyToOne(targetEntity="User")
      */

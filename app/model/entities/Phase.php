@@ -10,7 +10,10 @@ declare(strict_types=1);
 namespace App\Model\Entities;
 
 use App\Model\Entities\Traits\TimeInfo;
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
+use App\Model\Entities\Project;
+use App\Model\Entities\Risk;
 use Kdyby\Doctrine\Entities\MagicAccessors;
 
 /**
@@ -29,17 +32,6 @@ class Phase
 	 * @var integer
 	 */
 	protected $id;
-
-
-    /**
-     * ID Projektu, komu faze patri
-     * @ORM\Column(name="id_project", type="integer")
-     * @var integer
-     * @ORM\ManyToOne(targetEntity="Entities\Project")
-     * @ORM\JoinColumn(name="id_project", referencedColumnName="id")
-     */
-    protected $project;
-
 
 
     /**
@@ -92,10 +84,31 @@ class Phase
      */
     protected $enabled;
 
+	/**
+	 * Rizika k dané fazi
+	 * @ORM\OneToMany(targetEntity="Risk", mappedBy="phase")
+	 * @var Risk[]|Collection
+	 */
+	protected $risks;
 
+	/**
+	 * Uživatelé k dané fazi
+	 * @ORM\ManyToMany(targetEntity="User", inversedBy="phases")
+	 * @ORM\JoinTable(name="users_on_phases")
+	 * @var User[]|Collection
+	 */
+	protected $users;
+
+	/**
+	 * Projekt, komu faze patri
+	 * @ORM\ManyToOne(targetEntity="Project", inversedBy="phases")
+	 * @ORM\JoinColumn(name="project_id", referencedColumnName="id")
+	 */
+	protected $project;
 
 	public function __construct($name, $description, $startDate, $endDate, $idProject)
 	{
+
 		$this->setName($name);
 		$this->setDescription($description);
 		$this->setStartDate($startDate);
@@ -104,6 +117,8 @@ class Phase
 		$this->setUpdated(new \DateTime('now'));
 		$this->setCreated(new \DateTime('now'));
 		$this->setEnabled(true);
-	}
 
+		$this->risks = new ArrayCollection();
+		$this->users = new ArrayCollection();
+	}
 }

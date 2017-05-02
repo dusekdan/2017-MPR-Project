@@ -10,6 +10,7 @@ declare(strict_types=1);
 namespace App\Model\Entities;
 
 use App\Model\Entities\Traits\TimeInfo;
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Kdyby\Doctrine\Entities\MagicAccessors;
 
@@ -33,10 +34,10 @@ class Project
 
     /**
      * ID Clienta, komu Projekt patri
-     * @ORM\Column(name="id_client", type="integer")
+     * @ORM\Column(name="client_id", type="integer")
      * @var integer
      */
-    protected $idClient;
+    protected $client;
 
 
 
@@ -94,21 +95,38 @@ class Project
 
     /**
      * Id usera ako manazera projektu
-     * @ORM\Column(type="integer")
+     * @ORM\Column(name="project_manager_id", type="integer")
      */
-    protected $idProjectManager;
+    protected $projectManager;
+
+	/**
+	 * Fáze
+	 * @ORM\OneToMany(targetEntity="Phase", mappedBy="project")
+	 */
+    protected $phases;
+
+	/**
+	 * Uživatelé k danému projektu
+	 * @ORM\ManyToMany(targetEntity="User", inversedBy="projects")
+	 * @ORM\JoinTable(name="users_on_projects")
+	 * @var User[]|Collection
+	 */
+	protected $users;
 
 
 	public function __construct($idClient, $name, $description, $startDate, $endDate, $idProjectManager)
 	{
-		$this->setIdClient($idClient);
+		$this->setClient($idClient);
 		$this->setName($name);
 		$this->setDescription($description);
 		$this->setStartDate($startDate);
 		$this->setEndDate($endDate);
 		$this->setUpdated(new \DateTime('now'));
 		$this->setCreated(new \DateTime('now'));
-	    $this->setIdProjectManager($idProjectManager);
+	    $this->setProjectManager($idProjectManager);
+
+	    $this->phases = new ArrayCollection();
+	    $this->users = new ArrayCollection();
 	}
 
 }

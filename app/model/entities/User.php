@@ -11,6 +11,7 @@ declare(strict_types=1);
 namespace App\Model\Entities;
 
 use App\Model\Entities\Traits\TimeInfo;
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Kdyby\Doctrine\Entities\MagicAccessors;
 use Nette\Security\Passwords;
@@ -120,6 +121,20 @@ class User
     protected  $enabled;
 
 	/**
+	 * Uživatelé k dané fazi
+	 * @ORM\ManyToMany(targetEntity="Phase", mappedBy="users")
+	 * @var Phase[]|Collection
+	 */
+	protected $phases;
+
+	/**
+	 * Uživatelé k dané fazi
+	 * @ORM\ManyToMany(targetEntity="Project", mappedBy="users")
+	 * @var Phase[]|Collection
+	 */
+	protected $projects;
+
+	/**
 	 * @var array roleList
 	 */
 
@@ -131,9 +146,8 @@ class User
 	];
 
 
-	public function __construct($id_company, $username, $password, $email, $firstName, $lastName, $birthday, $phone, $role)
+	public function __construct($username, $password, $email, $firstName, $lastName, $birthday, $phone, $role)
 	{
-	    $this->setIdCompamy($id_company);
 		$this->setUsername($username);
 		$this->setPassword($password);
 		$this->setEmail($email);
@@ -144,6 +158,9 @@ class User
 		$role ? $this->setRole($role) : $this->setRole();
 		$this->setCreated(new \DateTime('now'));
         $this->setUpdated(new \DateTime('now'));
+
+        $this->phases = new ArrayCollection();
+        $this->projects = new ArryCollection();
 	}
 
 	/**
@@ -159,7 +176,7 @@ class User
 	}
 
 	public function setRole($role = 'user') {
-			$this->role = $role;
+		$this->role = $role;
 	}
 
 	public static function getRoleList()

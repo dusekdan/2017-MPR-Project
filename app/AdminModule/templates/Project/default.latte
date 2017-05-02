@@ -12,7 +12,6 @@
                         <h4 class="header-title m-t-0 m-b-30">Info o projektu</h4>
                         <div class="row">
                             <div class="col-lg-12">
-
                                 <ul class="nav nav-tabs">
                                     <li role="presentation" class="active">
                                         <a href="#phases" class="project-item" role="tab" data-toggle="tab" aria-expanded="true">Fáze a rizika</a>
@@ -29,22 +28,22 @@
                                         <div class="row">
                                             <div class="col-lg-12">
                                                 <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
-                                                    <div class="panel panel-default bx-shadow-none">
-                                                        <div class="panel-heading" role="tab" id="headingOne">
+                                                    <div class="panel panel-default bx-shadow-none" n:foreach="$project->phases as $phase">
+                                                        <div class="panel-heading" role="tab" id="heading_{$iterator->counter}">
                                                             <h4 class="panel-title">
-                                                                <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="false" aria-controls="collapseOne" class="collapsed">
-                                                                    Počáteční fáze projektu - Návrh DB
+                                                                <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse_{$iterator->counter}" aria-expanded="false" aria-controls="collapse_{$iterator->counter}" class="collapsed">
+                                                                    {$phase->name}
                                                                 </a>
                                                             </h4>
                                                         </div>
-                                                        <div id="collapseOne" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne" aria-expanded="false" style="height: 0px;">
+                                                        <div id="collapse_{$iterator->counter}" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading_{$iterator->counter}" aria-expanded="false" style="height: 0px;">
                                                             <div class="panel-body">
                                                                 <div class="row">
                                                                     <h3>Info</h3>
                                                                     <ul>
-                                                                        <li>Popis fáze bla bla bla</li>
-                                                                        <li>OD: 2017.09.01</li>
-                                                                        <li>DO: 2019.02.02</li>
+                                                                        <li>{$phase->description}</li>
+                                                                        <li>OD: {$phase->startDate|date:'%d.%m.%Y'}</li>
+                                                                        <li>DO: {$phase->endDate|date:'%d.%m.%Y'}</li>
                                                                     </ul>
                                                                     <h3>Rizika</h3>
                                                                     <table class="table table-striped m-0">
@@ -63,49 +62,19 @@
                                                                             </tr>
                                                                         </thead>
                                                                         <tbody>
-                                                                            <tr>
-                                                                                <th scope="row">1</th>
-                                                                                <td>Zla volba</td>
-                                                                                <td>Popis pre zlú voľbu databáze</td>
-                                                                                <td>3.1.2018</td>
-                                                                                <td>4.2.2019</td>
-                                                                                <td>90%</td>
-                                                                                <td>400€</td>
-                                                                                <td>21h</td>
-                                                                                <td>Vyšlo to</td>
+                                                                            <tr n:foreach="$phase->risks as $risk">
+                                                                                <th scope="row">{$iterator->counter}</th>
+                                                                                <td>{$risk->name}</td>
+                                                                                <td>{$risk->description}</td>
+                                                                                <td>{$risk->startDate|date:'%d.%m.%Y'}</td>
+                                                                                <td>{$risk->endDate|date:'%d.%m.%Y'}</td>
+                                                                                <td>{$risk->probability}</td>
+                                                                                <td>{$risk->money}</td>
+                                                                                <td>{$risk->time}h</td>
+                                                                                <td>{$risk->result}</td>
                                                                                 <td class="actions">
-                                                                                    <a n:href="Project:changeRisk" class="on-default edit-row ajax"><i class="glyphicon glyphicon-pencil"></i></a>
-                                                                                    <a href="#" class="on-default remove-row"><i class="glyphicon glyphicon-trash"></i></a>
-                                                                                </td>
-                                                                            </tr>
-                                                                            <tr>
-                                                                                <th scope="row">2</th>
-                                                                                <td>Zla volba</td>
-                                                                                <td>Popis pre zlú voľbu databáze</td>
-                                                                                <td>3.1.2018</td>
-                                                                                <td>4.2.2019</td>
-                                                                                <td>90%</td>
-                                                                                <td>400€</td>
-                                                                                <td>21h</td>
-                                                                                <td>Vyšlo to</td>
-                                                                                <td class="actions">
-                                                                                    <a n:href="Project:changeRisk" class="on-default edit-row ajax"><i class="glyphicon glyphicon-pencil"></i></a>
-                                                                                    <a href="#" class="on-default remove-row"><i class="glyphicon glyphicon-trash"></i></a>
-                                                                                </td>
-                                                                            </tr>
-                                                                            <tr>
-                                                                                <th scope="row">3</th>
-                                                                                <td>Zla volba</td>
-                                                                                <td>Popis pre zlú voľbu databáze</td>
-                                                                                <td>3.1.2018</td>
-                                                                                <td>4.2.2019</td>
-                                                                                <td>90%</td>
-                                                                                <td>400€</td>
-                                                                                <td>21h</td>
-                                                                                <td>Vyšlo to</td>
-                                                                                <td class="actions">
-                                                                                    <a n:href="Project:changeRisk" class="on-default edit-row ajax"><i class="glyphicon glyphicon-pencil"></i></a>
-                                                                                    <a href="#" class="on-default remove-row"><i class="glyphicon glyphicon-trash"></i></a>
+                                                                                    <a n:href="Project:changeRisk, 'idRisk'=>$risk->id" class="on-default edit-row ajax"><i class="glyphicon glyphicon-pencil"></i></a>
+                                                                                    <a n:href="deleteRisk!, 'idRisk'=>$risk->id" class="on-default remove-row"><i class="glyphicon glyphicon-trash"></i></a>
                                                                                 </td>
                                                                             </tr>
                                                                         </tbody>
@@ -117,7 +86,7 @@
                                                                         </a>
                                                                     </div>
 
-                                                                    <h3>Užívatelé</h3>
+                                                                    <h3>Uživatelé</h3>
                                                                     <table class="table table-striped m-0">
                                                                         <thead>
                                                                             <tr>
@@ -131,35 +100,13 @@
                                                                             </tr>
                                                                         </thead>
                                                                         <tbody>
-                                                                            <tr>
-                                                                                <th scope="row">1</th>
-                                                                                <td>Mark</td>
-                                                                                <td>Otto</td>
-                                                                                <td>Markur</td>
-                                                                                <td>mark@mpr.com</td>
-                                                                                <td>User</td>
-                                                                                <td class="actions">
-                                                                                    <a href="#" class="on-default remove-row"><i class="glyphicon glyphicon-trash"></i></a>
-                                                                                </td>
-                                                                            </tr>
-                                                                            <tr>
-                                                                                <th scope="row">2</th>
-                                                                                <td>Jožko</td>
-                                                                                <td>Franco</td>
-                                                                                <td>Joseph</td>
-                                                                                <td>joseh@mpr.com</td>
-                                                                                <td>Administrator</td>
-                                                                                <td class="actions">
-                                                                                    <a href="#" class="on-default remove-row"><i class="glyphicon glyphicon-trash"></i></a>
-                                                                                </td>
-                                                                            </tr>
-                                                                            <tr>
-                                                                                <th scope="row">3</th>
-                                                                                <td>Matias</td>
-                                                                                <td>Figuli</td>
-                                                                                <td>Mato</td>
-                                                                                <td>mato@mpr.com</td>
-                                                                                <td>Owner</td>
+                                                                            <tr n:foreach="$phase->users as $user_p">
+                                                                                <th scope="row">{$iterator->counter}</th>
+                                                                                <td>{$user_p->firstName}</td>
+                                                                                <td>{$user_p->lastName}</td>
+                                                                                <td>{$user_p->username}</td>
+                                                                                <td>{$user_p->email}</td>
+                                                                                <td>{$user_p->role}</td>
                                                                                 <td class="actions">
                                                                                     <a href="#" class="on-default remove-row"><i class="glyphicon glyphicon-trash"></i></a>
                                                                                 </td>
@@ -167,65 +114,10 @@
                                                                         </tbody>
                                                                     </table>
                                                                     <hr>
-                                                                    <div class="col-md-2 col-lg-offset-5 text-center">
-                                                                        <select class="form-control">
-                                                                            <option>vybrat uživatele</option>
-                                                                            <option>Martin Pristaš</option>
-                                                                            <option>Martin Pristaš</option>
-                                                                            <option>Martin Pristaš</option>
-                                                                        </select>
-                                                                        <br />
-                                                                        <button class="btn btn-success waves-effect waves-light"> <i class="glyphicon glyphicon-user m-r-5"></i> <span>Přidat uživatele do fáze</span> </button>
+                                                                    <div class="col-md-4 col-lg-offset-4 text-center">
+																		{include bootstrap-form, form => addUserPhase, labelSize => 0, inputSize => 12}
                                                                     </div>
                                                                 </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="panel panel-default bx-shadow-none">
-                                                        <div class="panel-heading" role="tab" id="headingTwo">
-                                                            <h4 class="panel-title">
-                                                                <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                                                                    Počáteční fáze projektu - Návrh GUI
-                                                                </a>
-                                                            </h4>
-                                                        </div>
-                                                        <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo" aria-expanded="false" style="height: 0px;">
-                                                            <div class="panel-body">
-                                                                Anim pariatur cliche reprehenderit, enim eiusmod high life
-                                                                accusamus terry richardson ad squid. 3 wolf moon officia
-                                                                aute, non cupidatat skateboard dolor brunch. Food truck
-                                                                quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor,
-                                                                sunt aliqua put a bird on it squid single-origin coffee
-                                                                nulla assumenda shoreditch et. Nihil anim keffiyeh
-                                                                helvetica, craft beer labore wes anderson cred nesciunt
-                                                                sapiente ea proident. Ad vegan excepteur butcher vice lomo.
-                                                                Leggings occaecat craft beer farm-to-table, raw denim
-                                                                aesthetic synth nesciunt you probably haven't heard of them
-                                                                accusamus labore sustainable VHS.
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="panel panel-default bx-shadow-none">
-                                                        <div class="panel-heading" role="tab" id="headingThree">
-                                                            <h4 class="panel-title">
-                                                                <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-                                                                    Schválení návrhů
-                                                                </a>
-                                                            </h4>
-                                                        </div>
-                                                        <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree" aria-expanded="false">
-                                                            <div class="panel-body">
-                                                                Anim pariatur cliche reprehenderit, enim eiusmod high life
-                                                                accusamus terry richardson ad squid. 3 wolf moon officia
-                                                                aute, non cupidatat skateboard dolor brunch. Food truck
-                                                                quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor,
-                                                                sunt aliqua put a bird on it squid single-origin coffee
-                                                                nulla assumenda shoreditch et. Nihil anim keffiyeh
-                                                                helvetica, craft beer labore wes anderson cred nesciunt
-                                                                sapiente ea proident. Ad vegan excepteur butcher vice lomo.
-                                                                Leggings occaecat craft beer farm-to-table, raw denim
-                                                                aesthetic synth nesciunt you probably haven't heard of them
-                                                                accusamus labore sustainable VHS.
                                                             </div>
                                                         </div>
                                                     </div>
@@ -254,47 +146,24 @@
                                                     </tr>
                                                 </thead>
                                                 <tbody>
-                                                    <tr>
-                                                        <th scope="row">1</th>
-                                                        <td>Mark</td>
-                                                        <td>Otto</td>
-                                                        <td>Markur</td>
-                                                        <td>mark@mpr.com</td>
-                                                        <td>User</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th scope="row">2</th>
-                                                        <td>Jožko</td>
-                                                        <td>Franco</td>
-                                                        <td>Joseph</td>
-                                                        <td>joseh@mpr.com</td>
-                                                        <td>Administrator</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th scope="row">3</th>
-                                                        <td>Matias</td>
-                                                        <td>Figuli</td>
-                                                        <td>Mato</td>
-                                                        <td>mato@mpr.com</td>
-                                                        <td>Owner</td>
+                                                    <tr n:foreach="$project->users as $user_p">
+                                                        <th scope="row">{$iterator->counter}</th>
+                                                        <td>{$user_p->firstName}</td>
+                                                        <td>{$user_p->lastName}</td>
+                                                        <td>{$user_p->username}</td>
+                                                        <td>{$user_p->email}</td>
+                                                        <td>{$user_p->role}</td>
                                                     </tr>
                                                 </tbody>
                                             </table>
                                             <hr>
-                                            <div class="col-md-2 col-lg-offset-5 text-center">
-                                                <select class="form-control">
-                                                    <option>vybrat uživatele</option>
-                                                    <option>Martin Pristaš</option>
-                                                    <option>Martin Pristaš</option>
-                                                    <option>Martin Pristaš</option>
-                                                </select>
-                                                <br />
-                                                <button class="btn btn-success waves-effect waves-light"> <i class="glyphicon glyphicon-user m-r-5"></i> <span>Přidat uživatele</span> </button>
+                                            <div class="col-md-4 col-lg-offset-4 text-center">
+												{include bootstrap-form, form => addUserProject, labelSize => 0, inputSize => 12}
                                             </div>
                                         </div>
                                     </div>
                                     <div role="tabpanel" class="tab-pane fade" id="description">
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque vel magna auctor, aliquet nunc vitae, consequat tellus. Mauris dignissim eros sed leo eleifend, ac condimentum neque semper. Phasellus commodo sem sit amet mollis dapibus. Maecenas consectetur quis dui eget dignissim. Praesent feugiat at dui ornare luctus. Nunc ac ante quis velit convallis tincidunt. Etiam mollis eros ut nisi ornare posuere. Etiam arcu quam, tristique vel justo et, pellentesque consectetur purus. Ut molestie lobortis mi, sit amet pretium ligula pulvinar tincidunt. Morbi sit amet enim tristique, sagittis felis a, gravida dui. Vivamus et nisi volutpat ligula fermentum ultricies sed et erat. Vivamus imperdiet scelerisque facilisis.</p>
+                                        <p>{$project->description}</p>
                                     </div>
                                 </div>
                             </div><!-- end col -->

@@ -29,57 +29,57 @@ class AddForeignKey extends AbstractMigration
 	{
 		$projects = $this->table($this->tableProject); // id je automaticky generován
 		$projects
-			->addColumn('id_project_manager', 'integer')
+			->addColumn('project_manager_id', 'integer')
 			//->addForeignKey('id_project_manager', 'users', 'id', array('delete'=> 'SET_NULL', 'update'=> 'CASCADE'))
-			->addColumn('id_client', 'integer')
+			->addColumn('client_id', 'integer')
 			//->addForeignKey('id_client', 'clients', 'id', array('delete'=> 'SET_NULL', 'update'=> 'CASCADE'))
 			->save();
 
-		$this->execute("ALTER TABLE $this->tableProject ADD FOREIGN KEY (id_project_manager) REFERENCES $this->tableUser(id)");
-		$this->execute("ALTER TABLE $this->tableProject ADD FOREIGN KEY (id_client) REFERENCES $this->tableClient(id)");
+		$this->execute("ALTER TABLE $this->tableProject ADD FOREIGN KEY (project_manager_id) REFERENCES $this->tableUser(id)");
+		$this->execute("ALTER TABLE $this->tableProject ADD FOREIGN KEY (client_id) REFERENCES $this->tableClient(id)");
 
 		$projects = $this->table($this->tablePhase); // id je automaticky generován
 		$projects
-			->addColumn('id_project', 'integer')
+			->addColumn('project_id', 'integer')
 			//->addForeignKey('id_project', 'projects', 'id', array('delete'=> 'SET_NULL', 'update'=> 'CASCADE'))
 			->save();
-		$this->execute("ALTER TABLE $this->tablePhase ADD FOREIGN KEY (id_project) REFERENCES $this->tableProject (id)");
+		$this->execute("ALTER TABLE $this->tablePhase ADD FOREIGN KEY (project_id) REFERENCES $this->tableProject (id)");
 
 		$projects = $this->table($this->tableRisk); // id je automaticky generován
 		$projects
-			->addColumn('id_risk_type', 'integer')
+			->addColumn('risk_type_id', 'integer')
 			//->addForeignKey('id_risk_type', 'risk_types', 'id', array('delete'=> 'SET_NULL', 'update'=> 'CASCADE'))
-			->addColumn('id_phase', 'integer')
+			->addColumn('phase_id', 'integer')
 			//->addForeignKey('id_phase', 'phases', 'id', array('delete'=> 'SET_NULL', 'update'=> 'CASCADE'))
-			->addColumn('id_resposibleFor', 'integer')
+			->addColumn('resposibleFor_id', 'integer')
 			//->addForeignKey('id_resposibleFor', 'users', 'id', array('delete'=> 'SET_NULL', 'update'=> 'CASCADE'))
-			->addColumn('id_creator', 'integer')
+			->addColumn('creator_id', 'integer')
 			//->addForeignKey('id_creator', 'users', 'id', array('delete'=> 'SET_NULL', 'update'=> 'CASCADE'))
 			->save();
-		$this->execute("ALTER TABLE $this->tableRisk ADD FOREIGN KEY (id_risk_type) REFERENCES $this->tableRiskT (id)");
-		$this->execute("ALTER TABLE $this->tableRisk ADD FOREIGN KEY (id_phase) REFERENCES $this->tablePhase (id)");
-		$this->execute("ALTER TABLE $this->tableRisk ADD FOREIGN KEY (id_resposibleFor) REFERENCES $this->tableUser (id)");
-		$this->execute("ALTER TABLE $this->tableRisk ADD FOREIGN KEY (id_creator) REFERENCES $this->tableUser (id)");
+		$this->execute("ALTER TABLE $this->tableRisk ADD FOREIGN KEY (risk_type_id) REFERENCES $this->tableRiskT (id)");
+		$this->execute("ALTER TABLE $this->tableRisk ADD FOREIGN KEY (phase_id) REFERENCES $this->tablePhase (id)");
+		$this->execute("ALTER TABLE $this->tableRisk ADD FOREIGN KEY (resposibleFor_id) REFERENCES $this->tableUser (id)");
+		$this->execute("ALTER TABLE $this->tableRisk ADD FOREIGN KEY (creator_id) REFERENCES $this->tableUser (id)");
 
 		$projects = $this->table($this->tableRole); // id je automaticky generován
 		$projects
-		->addColumn('id_user', 'integer')
+		->addColumn('user_id', 'integer')
 		//->addForeignKey('id_user', 'users', 'id', array('delete'=> 'SET_NULL', 'update'=> 'CASCADE'))
-		->addColumn('id_client', 'integer')
+		->addColumn('client_id', 'integer')
 		//->addForeignKey('id_client', 'clients', 'id', array('delete'=> 'SET_NULL', 'update'=> 'CASCADE'))
 		->save();
-		$this->execute("ALTER TABLE $this->tableRole ADD FOREIGN KEY (id_user) REFERENCES $this->tableUser (id)");
-		$this->execute("ALTER TABLE $this->tableRole ADD FOREIGN KEY (id_client) REFERENCES $this->tableClient (id)");
+		$this->execute("ALTER TABLE $this->tableRole ADD FOREIGN KEY (user_id) REFERENCES $this->tableUser (id)");
+		$this->execute("ALTER TABLE $this->tableRole ADD FOREIGN KEY (client_id) REFERENCES $this->tableClient (id)");
 
 		//->addForeignKey('id_user', 'users', 'id', array('delete'=> 'SET_NULL', 'update'=> 'CASCADE'))
 		//->addForeignKey('id_phase', 'phases', 'id', array('delete'=> 'SET_NULL', 'update'=> 'CASCADE'))
-		$this->execute("ALTER TABLE $this->tableUtoPhase ADD FOREIGN KEY (id_user) REFERENCES $this->tableUser (id)");
-		$this->execute("ALTER TABLE $this->tableUtoPhase ADD FOREIGN KEY (id_phase) REFERENCES $this->tablePhase (id)");
+		$this->execute("ALTER TABLE $this->tableUtoPhase ADD FOREIGN KEY (user_id) REFERENCES $this->tableUser (id)");
+		$this->execute("ALTER TABLE $this->tableUtoPhase ADD FOREIGN KEY (phase_id) REFERENCES $this->tablePhase (id)");
 
         //->addForeignKey('id_user', 'users', 'id', array('delete'=> 'SET_NULL', 'update'=> 'CASCADE'))
         //->addForeignKey('id_project', 'projects', 'id', array('delete'=> 'SET_NULL', 'update'=> 'CASCADE'))
-		$this->execute("ALTER TABLE $this->tableUtoProject ADD FOREIGN KEY (id_user) REFERENCES $this->tableUser (id)");
-		$this->execute("ALTER TABLE $this->tableUtoProject ADD FOREIGN KEY (id_project) REFERENCES $this->tableProject (id)");
+		$this->execute("ALTER TABLE $this->tableUtoProject ADD FOREIGN KEY (user_id) REFERENCES $this->tableUser (id)");
+		$this->execute("ALTER TABLE $this->tableUtoProject ADD FOREIGN KEY (project_id) REFERENCES $this->tableProject (id)");
 	}
 
 	/**

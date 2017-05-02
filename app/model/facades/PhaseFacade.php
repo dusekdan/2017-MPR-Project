@@ -49,6 +49,11 @@ class PhaseFacade
 		return $this->repository->findAll();
 	}
 
+	public function getPhasesByProject($project)
+	{
+		return $this->repository->findBy(array('project' => $project));
+	}
+
 	public function removePhase($phase, $autoFlush)
 	{
 		if (!$phase instanceof Phase) {

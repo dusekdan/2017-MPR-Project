@@ -34,9 +34,7 @@ class UsersOnProject
 
     /**
      * Id projektu na ktorom user pracuje
-     * @ORM\Column(name="id_project", type="integer")
-     * @var integer
-     * @Id @ManyToOne(targetEntity="Project")
+     * @ORM\ManyToOne(targetEntity="Project")
      */
     protected $idProject;
 
@@ -44,7 +42,7 @@ class UsersOnProject
 
     /**
      * ID Usera, ktoreho sa zaznam tyka
-     * @ORM\Column(name="id_user", type="integer")
+     * @ORM\Column(name="user_id", type="integer")
      * @var integer
      * @Id @ManyToOne(targetEntity="User")
      */

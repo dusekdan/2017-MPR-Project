@@ -7,23 +7,29 @@ namespace  App\AdminModule\Presenters;
 use Nette;
 use App\Model;
 use App\Model\Facades\ProjectFacade;
+use App\Model\Facades\UserFacade;
+use App\Model\Facades\PhaseFacade;
 use App\AdminModule\Forms\ProjectFormFactory;
 use Tracy\Debugger;
 
 
 class ProjectPresenter extends BasePresenter
 {
-	/** @var projectFormFactory */
+	/** @var ProjectFormFactory */
 	private $projectFactory;
 
-	public function __construct(ProjectFormFactory $projectFormFactory)
+	/** @var UserFacade */
+	private $userFacade;
+
+	public function __construct(ProjectFormFactory $projectFormFactory, UserFacade $userFacade)
 	{
 		$this->projectFactory = $projectFormFactory;
+		$this->userFacade = $userFacade;
 	}
 
 	public function renderDefault()
 	{
-		$this->template->anyVariable = 'any value';
+		$this->template->users = $this->userFacade->getUsers();
 	}
 
 	public function actionAddRisk()
@@ -55,14 +61,10 @@ class ProjectPresenter extends BasePresenter
      */
     public function createComponentAddRiskForm()
     {
-        if ($this->showModal == true) {
-            $this->redrawControl("modal");
-            $this->showModal = true;
-        }
-
         return $this->projectFactory->addRisk(function() {
             $this->flashMessage("Nový risk úspěšně přidán.", "success");
-            $this->redirect('Project:addRisk');
+	        $this->showModal = false; // pokud je to ok, zavřu to
+	        $this->redirect('Project:default');
         });
     }
 
@@ -90,14 +92,10 @@ class ProjectPresenter extends BasePresenter
      */
     public function createComponentChangeRiskForm()
     {
-        if ($this->showModal == true) {
-            $this->redrawControl("modal");
-            $this->showModal = true;
-        }
-
         return $this->projectFactory->changeRisk(function() {
             $this->flashMessage("Risk úspěšně změněn.", "success");
-            $this->redirect('Project:changeRisk');
+	        $this->showModal = false; // pokud je to ok, zavřu to
+	        $this->redirect('Project:default');
         });
     }
 
@@ -136,4 +134,33 @@ class ProjectPresenter extends BasePresenter
         }, $this->project);
     }
 
+    public function createComponentAddUserPhase()
+    {
+    	$form = $this->projectFactory->addUserProject($this->project,
+		    function() {
+			    $this->flashMessage("Uživatel přidán.", "success");
+			    $this->redirect('this');
+		    });
+    	$form['send']->caption = "Přidat uživatele do fáze";
+
+    	return $form;
+    }
+
+	public function createComponentAddUserProject()
+	{
+		$form = $this->projectFactory->addUserProject($this->project,
+			function() {
+				$this->flashMessage("Uživatel přidán.", "success");
+				$this->redirect('this');
+			});
+		$form['send']->caption = "Přidat uživatele do projektu";
+
+		return $form;
+	}
+
+    public function handleDeleteRisk($idRisk)
+    {
+    	//@TODO dodělat mazání
+	    $this->flashMessage("Risk s id:$idRisk byl úspěšně smazán.", "success");
+    }
 }

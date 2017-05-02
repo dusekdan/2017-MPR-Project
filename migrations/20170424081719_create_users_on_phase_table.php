@@ -20,8 +20,8 @@ class CreateUsersOnPhaseTable extends AbstractMigration
     {
         $users_on_phases = $this->table($this->tableName); // id je automaticky generován
         $users_on_phases
-            ->addColumn('id_user', 'integer')
-            ->addColumn('id_phase', 'integer')
+            ->addColumn('user_id', 'integer')
+            ->addColumn('phase_id', 'integer')
             ->addColumn('created', 'datetime')
             ->addColumn('updated', 'datetime')
             ->addColumn('enabled', 'boolean', array('default' => true))
