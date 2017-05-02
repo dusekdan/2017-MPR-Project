@@ -12,7 +12,6 @@ namespace App\Model\Entities;
 use App\Model\Entities\Traits\TimeInfo;
 use Doctrine\ORM\Mapping as ORM;
 use Kdyby\Doctrine\Entities\MagicAccessors;
-//use Nette\Security\Passwords;
 
 /**
  * @ORM\Entity
@@ -36,9 +35,10 @@ class Phase
      * ID Projektu, komu faze patri
      * @ORM\Column(name="id_project", type="integer")
      * @var integer
-     * @Id @ManyToOne(targetEntity="Project")
+     * @ORM\ManyToOne(targetEntity="Entities\Project")
+     * @ORM\JoinColumn(name="id_project", referencedColumnName="id")
      */
-    protected $idProject;
+    protected $project;
 
 
 
@@ -58,28 +58,28 @@ class Phase
 
 	/**
 	 * Den zacatku faze
-	 * @ORM\Column(name"start_date", type="datetime")
+	 * @ORM\Column(name="start_date", type="datetime")
      * @var \DateTime
 	 */
 	protected $startDate;
 
     /**
      * Den konce faze
-     * @ORM\Column(name"end_date", type="datetime")
+     * @ORM\Column(name="end_date", type="datetime")
      * @var \DateTime
      */
     protected $endDate;
 
     /**
      * Datum vytvorenia zaznamu o projekte
-     * @ORM\Column(name"created_at", type="datetime")
+     * @ORM\Column(name="created", type="datetime")
      * @var \DateTime
      */
     protected $created;
 
     /**
      * Datum posledneho update zaznamu o projekte
-     * @ORM\Column(name"updated_at", type="datetime")
+     * @ORM\Column(name="updated", type="datetime")
      * @var \DateTime
      */
     protected $updated;
@@ -87,22 +87,23 @@ class Phase
 
     /**
      * Enabled, moznost pracovat so zaznamom
-     * @ORM\Column(type="boolean", options={"default"=true})
+     * @ORM\Column(type="boolean")
      * @var boolean
      */
-    protected  $enabled;
+    protected $enabled;
 
 
 
-	public function __construct($idPhase, $name, $description, $startDate, $endDate, $idProjectManager)
+	public function __construct($name, $description, $startDate, $endDate, $idProject)
 	{
-		$this->setIdPhase($idPhase);
 		$this->setName($name);
 		$this->setDescription($description);
 		$this->setStartDate($startDate);
 		$this->setEndDate($endDate);
+		$this->setProject($idProject);
 		$this->setUpdated(new \DateTime('now'));
 		$this->setCreated(new \DateTime('now'));
+		$this->setEnabled(true);
 	}
 
 }

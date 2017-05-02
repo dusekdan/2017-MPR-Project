@@ -70,13 +70,11 @@ class ProjectPresenter extends BasePresenter
     public function actionChangeRisk()
     {
         if ($this->isAjax()) {
-            debugger::fireLog("modal");
             $this->payload->isModal = true;
             //pokud je modal zobrazen překresluju už jen formulář
             if ($this->showModal == false) {
                 $this->redrawControl("modal");
                 $this->showModal = true;
-                debugger::fireLog("modal");
             } else {
                 // snippetem překreslim jen to co je potřeba po odeslání formuláře
                 // formulář (pro zobrazeni chyb), vyslednou tabulku po zmene v DB
@@ -107,21 +105,23 @@ class ProjectPresenter extends BasePresenter
     public function actionAddPhase()
     {
         if ($this->isAjax()) {
-            debugger::fireLog("modal");
             $this->payload->isModal = true;
             //pokud je modal zobrazen překresluju už jen formulář
             if ($this->showModal == false) {
                 $this->redrawControl("modal");
                 $this->showModal = true;
-                debugger::fireLog("modal");
             } else {
                 // snippetem překreslim jen to co je potřeba po odeslání formuláře
                 // formulář (pro zobrazeni chyb), vyslednou tabulku po zmene v DB
+	            $this->redrawControl("snippetAddPhase");
             }
         }
     }
 
-    public function renderAddPhase(){}
+    public function renderAddPhase()
+    {
+
+    }
 
     /**
      * Create new risk.
@@ -129,15 +129,11 @@ class ProjectPresenter extends BasePresenter
      */
     public function createComponentAddPhaseForm()
     {
-        if ($this->showModal == true) {
-            $this->redrawControl("modal");
-            $this->showModal = true;
-        }
-
         return $this->projectFactory->addPhase(function() {
             $this->flashMessage("Nová fáze úspěšně přidána.", "success");
-            $this->redirect('Project:addPhase');
-        });
+	        $this->showModal = false; // pokud je to ok, zavřu to
+            $this->redirect('Project:default');
+        }, $this->project);
     }
 
 }
