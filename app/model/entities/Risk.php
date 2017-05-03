@@ -141,7 +141,7 @@ class Risk
 
     /**
      * Zavaznost rizika
-     * @ORM\Column(name="severity", type="integer")
+     * @ORM\Column(name="severity", type="float")
      * @var string
      */
     protected $severity;

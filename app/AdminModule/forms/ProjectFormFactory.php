@@ -449,9 +449,11 @@ class ProjectFormFactory extends BaseFactory
 			->addRule(Form::FILLED, "Vyplňte prosím primární účel rizika");
 		
 		$form->addSelect('riskTypeId','Typ rizika', $types)
+			->setDefaultValue($risk->getRiskType()->getId())
 			->addRule(Form::FILLED, "Vyplňte prosím typ rizika");
 		
 		$form->addSelect('responsibleUserId','Zodpovědný uživatel', $users)
+			->setDefaultValue($risk->getResponsibleUser()->getId())
 			->addRule(Form::FILLED, "Vyplňte prosím zodpovědného uživatele za riziko");
 		
 		
@@ -501,7 +503,7 @@ class ProjectFormFactory extends BaseFactory
 		return;
 	}
 	
-	public function addUserProject($users, callable $onSuccess, $caption)
+	public function addUserProject($users, $id, callable $onSuccess, $caption)
 	{
 		$form = $this->create();
 		$form->getElementPrototype()->class('ajax');
@@ -512,11 +514,13 @@ class ProjectFormFactory extends BaseFactory
 			->getControlPrototype()
 			->setName('button')
 			->setHtml('<span class="glyphicon glyphicon-user"></span>'.$caption);
-		$form->onSuccess[] = function (Form $form, $values) use ($onSuccess) {
-			$onSuccess($values->users);
+		
+		$form->onSuccess[] = function (Form $form, $values) use ($onSuccess, $id) {
+			$onSuccess($values['users'], $id);
 		};
 		
 		return $form;
 	}
+
 	
 }

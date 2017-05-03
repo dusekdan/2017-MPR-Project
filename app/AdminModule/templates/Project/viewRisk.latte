@@ -10,6 +10,7 @@
     {block modal}
         <table class="risk-table">
             <tr><th>Název</th><td colspan="3">{$risk->name}</td></tr>
+            <tr><th>Typ rizika</th><td>{$risk->riskType->name}</td></tr>
             <tr><th>Popis</th><td colspan="3">{$risk->description}</td></tr>
             <tr>
                 <th>Začátek</th><td>{$risk->startDate|date:'%d.%m.%Y'}</td>
