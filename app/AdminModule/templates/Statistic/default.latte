@@ -69,7 +69,7 @@
                                                 <td id="2-1" style="background-color: #f4ffca; color: black">malé</td>
                                                 <td id="2-2" style="background-color: #f4ffca; color: black">malé</td>
                                                 <td id="2-3" style="background-color: #ffbdb5; color: black">střední</td>
-                                                <td id="2-4" style="background-color: #ffbdb5; color: black">střední</td>
+                                                    <td id="2-4" style="background-color: #ffbdb5; color: black">střední</td>
                                             </tr>
                                             <tr>
                                                 <td>kritický</td>
@@ -94,7 +94,8 @@
                                     </div>
                                     <div role="tabpanel" class="tab-pane fade" id="users">
 
-                                    Grafy Pyčo
+                                        <div id="container" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+
 
                                     </div>
 
@@ -106,10 +107,13 @@
             </div>
         </div>
 
-
+        <script src="https://code.highcharts.com/highcharts.js"></script>
+        <script src="https://code.highcharts.com/modules/exporting.js"></script>
         <script>
             var array = JSON.parse({$JSONData});
             var phasesArr = [];
+            var idArray = [];
+            var moneyArray = [];
 
             var getSeverityType = function(severity){
                 var severityType;
@@ -161,6 +165,8 @@
                     var severityType = getSeverityType(risk[4]);
                     var probabilityType = getProbabilityType(risk[2]);
 
+                    idArray.push([risk[1], risk[3]]);
+//                    moneyArray.push(risk[3]);
                     risksArr.push({
                         id: risk[0],
                         name: risk[1],
@@ -222,7 +228,48 @@
                 });
             });
 
-            console.log("phasesArr: ", phasesArr);
+            Highcharts.chart('container', {
+                chart: {
+                    type: 'column'
+                },
+                title: {
+                    text: 'Rizika a jejich cena'
+                },
+                xAxis: {
+                    type: 'category',
+                    labels: {
+                        rotation: -45,
+                        style: {
+                            fontSize: '13px',
+                            fontFamily: 'Verdana, sans-serif'
+                        }
+                    }
+                },
+                yAxis: {
+                    min: 0,
+                    title: {
+                        text: 'Cena rizika (kč)'
+                    }
+                },
+                legend: {
+                    enabled: false
+                },
+                series: [{
+                    name: 'Cena (kč)',
+                    data: idArray,
+                    dataLabels: {
+                        enabled: true,
+                        rotation: -90,
+                        color: '#FFFFFF',
+                        align: 'right',
+                        y: 10,
+                        style: {
+                            fontSize: '13px',
+                            fontFamily: 'Verdana, sans-serif'
+                        }
+                    }
+                }]
+            });
 
         </script>
 
@@ -232,6 +279,16 @@
 
 {/block}
 {block scripts}
+
+    <style>
+        #container {
+            min-width: 310px;
+            max-width: 800px;
+            height: 400px;
+            margin: 0 auto;
+        }
+    </style>
+
 {/block}
 
 {block head}
