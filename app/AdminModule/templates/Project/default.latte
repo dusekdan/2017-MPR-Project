@@ -46,39 +46,39 @@
                                                                         <li>DO: {$phase->endDate|date:'%d.%m.%Y'}</li>
                                                                     </ul>
                                                                     <h3>Rizika</h3>
-                                                                    <table class="table table-striped m-0">
-                                                                        <thead>
-                                                                            <tr>
-                                                                                <th>ID</th>
-                                                                                <th>Jméno</th>
-                                                                                <th>Popis</th>
-                                                                                <th>Začátek</th>
-                                                                                <th>Konec</th>
-                                                                                <th>Pravděpodobnost</th>
-                                                                                <th>Peníze</th>
-                                                                                <th>Čas</th>
-                                                                                <th>Výsledek</th>
-                                                                                <th>Akce</th>
-                                                                            </tr>
-                                                                        </thead>
-                                                                        <tbody>
-                                                                            <tr n:foreach="$phase->risks as $risk">
-                                                                                <th scope="row">{$iterator->counter}</th>
-                                                                                <td>{$risk->name}</td>
-                                                                                <td>{$risk->description}</td>
-                                                                                <td>{$risk->startDate|date:'%d.%m.%Y'}</td>
-                                                                                <td>{$risk->endDate|date:'%d.%m.%Y'}</td>
-                                                                                <td>{$risk->probability}</td>
-                                                                                <td>{$risk->money}</td>
-                                                                                <td>{$risk->time}h</td>
-                                                                                <td>{$risk->result}</td>
-                                                                                <td class="actions">
-                                                                                    <a n:href="Project:changeRisk, 'idRisk'=>$risk->id" class="on-default edit-row ajax"><i class="glyphicon glyphicon-pencil"></i></a>
-                                                                                    <a n:href="deleteRisk!, 'idRisk'=>$risk->id" class="on-default remove-row"><i class="glyphicon glyphicon-trash"></i></a>
-                                                                                </td>
-                                                                            </tr>
-                                                                        </tbody>
-                                                                    </table>
+                                                                    <div class="scroll-table">
+                                                                        <table class="table table-striped m-0">
+                                                                            <thead>
+                                                                                <tr>
+                                                                                    <th>ID</th>
+                                                                                    <th>Jméno</th>
+                                                                                    <th>Začátek</th>
+                                                                                    <th>Konec</th>
+                                                                                    <th>Pravdě.</th>
+                                                                                    <th>Peníze</th>
+                                                                                    <th>Čas</th>
+                                                                                    <th>Výsledek</th>
+                                                                                    <th>Akce</th>
+                                                                                </tr>
+                                                                            </thead>
+                                                                            <tbody>
+                                                                                <tr n:foreach="$phase->risks as $risk">
+                                                                                    <th scope="row">{$iterator->counter}</th>
+                                                                                    <td>{$risk->name}</td>
+                                                                                    <td>{$risk->startDate|date:'%d.%m.%Y'}</td>
+                                                                                    <td>{$risk->endDate|date:'%d.%m.%Y'}</td>
+                                                                                    <td>{$risk->probability}</td>
+                                                                                    <td>{$risk->money}</td>
+                                                                                    <td>{$risk->time}h</td>
+                                                                                    <td>{$risk->result}</td>
+                                                                                    <td class="actions">
+                                                                                        <a n:href="Project:changeRisk, 'idRisk'=>$risk->id" class="on-default edit-row ajax"><i class="glyphicon glyphicon-pencil"></i></a>
+                                                                                        <a n:href="deleteRisk!, 'idRisk'=>$risk->id" class="on-default remove-row"><i class="glyphicon glyphicon-trash"></i></a>
+                                                                                    </td>
+                                                                                </tr>
+                                                                            </tbody>
+                                                                        </table>
+                                                                    </div>
                                                                     <hr>
                                                                     <div class="col-md-12 text-center">
                                                                         <a n:href="Project:addRisk" class="ajax">
@@ -87,32 +87,34 @@
                                                                     </div>
 
                                                                     <h3>Uživatelé</h3>
-                                                                    <table class="table table-striped m-0">
-                                                                        <thead>
-                                                                            <tr>
-                                                                                <th>ID</th>
-                                                                                <th>Jméno</th>
-                                                                                <th>Příjmení</th>
-                                                                                <th>Login</th>
-                                                                                <th>Email</th>
-                                                                                <th>Role</th>
-                                                                                <th>Akce</th>
-                                                                            </tr>
-                                                                        </thead>
-                                                                        <tbody>
-                                                                            <tr n:foreach="$phase->users as $user_p">
-                                                                                <th scope="row">{$iterator->counter}</th>
-                                                                                <td>{$user_p->firstName}</td>
-                                                                                <td>{$user_p->lastName}</td>
-                                                                                <td>{$user_p->username}</td>
-                                                                                <td>{$user_p->email}</td>
-                                                                                <td>{$user_p->role}</td>
-                                                                                <td class="actions">
-                                                                                    <a href="#" class="on-default remove-row"><i class="glyphicon glyphicon-trash"></i></a>
-                                                                                </td>
-                                                                            </tr>
-                                                                        </tbody>
-                                                                    </table>
+                                                                    <div class="scroll-table">
+                                                                        <table class="table table-striped m-0">
+                                                                            <thead>
+                                                                                <tr>
+                                                                                    <th>ID</th>
+                                                                                    <th>Jméno</th>
+                                                                                    <th>Příjmení</th>
+                                                                                    <th>Login</th>
+                                                                                    <th>Email</th>
+                                                                                    <th>Role</th>
+                                                                                    <th>Akce</th>
+                                                                                </tr>
+                                                                            </thead>
+                                                                            <tbody>
+                                                                                <tr n:foreach="$phase->users as $user_p">
+                                                                                    <th scope="row">{$iterator->counter}</th>
+                                                                                    <td>{$user_p->firstName}</td>
+                                                                                    <td>{$user_p->lastName}</td>
+                                                                                    <td>{$user_p->username}</td>
+                                                                                    <td>{$user_p->email}</td>
+                                                                                    <td>{$user_p->role}</td>
+                                                                                    <td class="actions">
+                                                                                        <a href="#" class="on-default remove-row"><i class="glyphicon glyphicon-trash"></i></a>
+                                                                                    </td>
+                                                                                </tr>
+                                                                            </tbody>
+                                                                        </table>
+                                                                    </div>
                                                                     <hr>
                                                                     <div class="col-md-4 col-lg-offset-4 text-center">
 																		{include bootstrap-form, form => addUserPhase, labelSize => 0, inputSize => 12}
@@ -186,4 +188,5 @@
 {block head}
 
     <link rel="stylesheet" href="{$basePath}/css/adminModule/project/style.css">
+    <link rel="stylesheet" href="{$basePath}/css/adminModule/project/default.css">
 {/block}
