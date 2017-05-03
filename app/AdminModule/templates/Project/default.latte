@@ -60,11 +60,14 @@
                                                             <div class="panel-body">
                                                                 <div class="row">
                                                                     <h3>Info</h3>
-                                                                    <ul>
-                                                                        <li>{$phase->description}</li>
-                                                                        <li>OD: {$phase->startDate|date:'%d.%m.%Y'}</li>
-                                                                        <li>DO: {$phase->endDate|date:'%d.%m.%Y'}</li>
-                                                                    </ul>
+                                                                    <p>{$phase->description}</p>
+
+                                                                    <table class="table table-striped m-0">
+                                                                        <tr>
+                                                                            <th>Začátek:</th><td>{$phase->startDate|date:'%d.%m.%Y'}</td>
+                                                                            <th>Konec:</th><td>{$phase->endDate|date:'%d.%m.%Y'}</td>
+                                                                        </tr>
+                                                                    </table>
                                                                     <h3>Rizika</h3>
                                                                     <div class="scroll-table">
                                                                         <table class="table table-striped m-0">
