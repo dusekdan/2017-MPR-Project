@@ -38,7 +38,6 @@ class UserFormFactory extends BaseFactory
 	public function update(callable $onSuccess, $user)
 	{
 		$form = $this->baseUFF->update($onSuccess, $user);
-		$form->getElementPrototype()->class('ajax');
 
 		return $form;
 	}

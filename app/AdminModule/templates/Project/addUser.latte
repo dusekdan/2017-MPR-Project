@@ -1,0 +1,25 @@
+{block title}
+	{$shortTitle}
+{/block}
+
+{block content}
+	{block modalTitle}
+		{$title}
+	{/block}
+
+	{block modal}
+			{import './../components/bootstrap-form.latte'} {* bootstrap formuláře *}
+			{ifset $addToPhase}
+				{include bootstrap-form, form => addUserToPhase, labelSize => 4, inputSize => 8}
+			{/ifset}
+			{ifset $addToProject}
+				{include bootstrap-form, form => addUserToProject, labelSize => 4, inputSize => 8}
+			{/ifset}
+	{/block}
+{/block}
+{block scripts}
+
+{/block}
+
+{block head}
+{/block}
