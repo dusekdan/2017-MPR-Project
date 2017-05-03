@@ -71,9 +71,8 @@ class Client
 
 
 
-	public function __construct($idCompany, $name ,$description)
+	public function __construct($name ,$description)
     {
-        $this->setIdCompany($idCompany);
 		$this->setName($name);
 		$this->setDescription($description);
 		$this->setUpdated(new \DateTime('now'));

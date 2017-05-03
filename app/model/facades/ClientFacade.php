@@ -75,7 +75,7 @@ class ClientFacade
     /**
      * Vytvoří nové riziko se zadanými parametry.
      */
-    public function createRisk($name, $description, $autoFlush)
+    public function createClient($name, $description, $autoFlush)
     {
         $client = new Client($name, $description);
         $this->em->persist($client);
