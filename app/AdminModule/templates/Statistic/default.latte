@@ -5,8 +5,6 @@
 {block content}
 	{if isset($project)}
 
-        Statistiky projektu {$project->getName()}.
-
         {dump $JSONData}
 		{foreach $project->phases as $phase}
             {foreach $phase->risks as $risk}
@@ -22,12 +20,12 @@
 
                         <div class="row">
                             <div class="col-lg-12">
-                                <ul class="nav nav-tabs">
+                                <ul class="nav nav-tabs project-menu">
                                     <li role="presentation" class="active">
-                                        <a href="#phases" class="project-item" role="tab" data-toggle="tab" aria-expanded="true">Matice rizik</a>
+                                        <a href="#phases" class="project-item" role="tab" data-toggle="tab" aria-expanded="true">Matice</a>
                                     </li>
                                     <li role="presentation" class="">
-                                        <a href="#users" class="project-item" role="tab" data-toggle="tab" aria-expanded="false">Statistiky a grafy</a>
+                                        <a href="#users" class="project-item" role="tab" data-toggle="tab" aria-expanded="false">Grafy</a>
                                     </li>
 
                                 </ul>
@@ -37,7 +35,7 @@
                                         <table class="table table-bordered">
                                             <tr>
                                                 <th colspan="2" rowspan="2"></th>
-                                                <th colspan="5">Pravděpodobnost výskytu</th>
+                                                <th style="text-align: center;" colspan="5">Pravděpodobnost výskytu</th>
                                             </tr>
                                             <tr>
                                                 <td><strong>nepatrná</strong></td>
@@ -47,7 +45,9 @@
                                                 <td><strong>mimořádná</strong></td>
                                             </tr>
                                             <tr>
-                                                <td rowspan="5"><div class="rotated">Dopad ztráty</div></td>
+                                                <td rowspan="5"><div style="color:white;" class="rotated">
+                                                        <b>Dopad ztráty</b></div>
+                                                </td>
                                                 <td>nepatrný</td>
                                                 <td id="0-0" style="background-color: #88ffc9; color: black">nepatrné</td>
                                                 <td id="0-1" style="background-color: #88ffc9; color: black">nepatrné</td>
@@ -94,7 +94,7 @@
                                     </div>
                                     <div role="tabpanel" class="tab-pane fade" id="users">
 
-                                        <div id="container" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+                                        <div id="container" style="margin: 0 auto; width: 1100px; height: 400px; margin-top: 20px;"></div>
 
 
                                     </div>
@@ -271,6 +271,8 @@
                 }]
             });
 
+
+
         </script>
 
 	{else}
@@ -279,16 +281,6 @@
 
 {/block}
 {block scripts}
-
-    <style>
-        #container {
-            min-width: 310px;
-            max-width: 800px;
-            height: 400px;
-            margin: 0 auto;
-        }
-    </style>
-
 {/block}
 
 {block head}
