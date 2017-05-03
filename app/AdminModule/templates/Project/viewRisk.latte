@@ -1,0 +1,43 @@
+{block title}
+    Náhled rizika
+{/block}
+
+{block content}
+    {block modalTitle}
+        Náhled rizika
+    {/block}
+
+    {block modal}
+        <table class="risk-table">
+            <tr><th>Název</th><td colspan="3">{$risk->name}</td></tr>
+            <tr><th>Popis</th><td colspan="3">{$risk->description}</td></tr>
+            <tr>
+                <th>Začátek</th><td>{$risk->startDate|date:'%d.%m.%Y'}</td>
+                <th>Konec</th><td>{$risk->endDate|date:'%d.%m.%Y'}</td
+            </tr>
+            <tr>
+                <th>Zodpovědnost</th><td>{$risk->responsibleUser->firstName} {$risk->responsibleUser->lastName}</td>
+                <th>Aktivita</th><td>{($risk->enabled ? "aktivní" : "pasivní")}</td>
+            </tr>
+            <tr><th>Primární účel</th><td>{$risk->primaryCause}</td></tr>
+            <tr><th>Výsledek</th><td colspan="3">{$risk->result}</td></tr>
+            <tr><th>Reakce</th><td colspan="3">{$risk->reaction}</td></tr>
+            <tr>
+                <th>Pravděpodobnost</th><td>{$risk->probability}%</td>
+                <th>Závažnost</th><td>{$risk->severity}%</td>
+                <th></th><td></td>
+            </tr>
+            <tr>
+                <th>Náklady</th><td>{$risk->money} Kč</td>
+                <th>Čas</th><td>{$risk->time} h</td>
+                <th></th><td></td>
+            </tr>
+        </table>
+    {/block}
+{/block}
+{block scripts}
+
+{/block}
+
+{block head}
+{/block}

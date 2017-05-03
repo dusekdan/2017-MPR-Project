@@ -72,6 +72,7 @@
                                                                                     <td>{$risk->time}h</td>
                                                                                     <td>{$risk->result}</td>
                                                                                     <td class="actions">
+                                                                                        <a n:href="Project:viewRisk, 'idRisk'=>$risk->id" class="on-default view-row ajax"><i class="glyphicon glyphicon-eye-open"></i></a>
                                                                                         <a n:href="Project:editRisk, 'idRisk'=>$risk->id" class="on-default edit-row ajax"><i class="glyphicon glyphicon-pencil"></i></a>
                                                                                         <a n:href="Project:removeRisk, 'idRisk'=>$risk->id" class="on-default remove-row ajax"><i class="glyphicon glyphicon-trash"></i></a>
                                                                                     </td>
@@ -190,7 +191,6 @@
 {/block}
 
 {block head}
-
     <link rel="stylesheet" href="{$basePath}/css/adminModule/project/style.css">
     <link rel="stylesheet" href="{$basePath}/css/adminModule/project/default.css">
 {/block}
