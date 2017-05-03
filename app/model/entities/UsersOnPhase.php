@@ -34,33 +34,29 @@ class UsersOnPhase
 
     /**
      * Id faze na ktorom user pracuje
-     * @ORM\Column(name="project_id", type="integer")
-     * @var integer
-     * @Id @ManyToOne(targetEntity="Project")
+     * @ORM\ManyToOne(targetEntity="Project")
      */
-    protected $idProject;
+    protected $phase;
 
 
 
     /**
      * ID Usera, ktoreho sa zaznam tyka
-     * @ORM\Column(name="user_id", type="integer")
-     * @var integer
-     * @Id @ManyToOne(targetEntity="User")
+     * @ORM\ManyToOne(targetEntity="User")
      */
-    protected $idUser;
+    protected $user;
 
 
     /**
      * Datum vytvorenia zaznamu
-     * @ORM\Column(name"created_at", type="datetime")
+     * @ORM\Column(name"created", type="datetime")
      * @var \DateTime
      */
     protected $created;
 
     /**
      * Datum posledneho update zaznamu
-     * @ORM\Column(name"updated_at", type="datetime")
+     * @ORM\Column(name"updated", type="datetime")
      * @var \DateTime
      */
     protected $updated;
@@ -68,17 +64,17 @@ class UsersOnPhase
 
     /**
      * Enabled, moznost pracovat so zaznamom
-     * @ORM\Column(type="boolean", options={"default"=true})
+     * @ORM\Column(type="boolean")
      * @var boolean
      */
     protected  $enabled;
 
 
 
-	public function __construct($idUser,$idProject)
+	public function __construct($user, $phase)
 	{
-        $this->setIdUser($idUser);
-		$this->setIdProject($idProject);
+        $this->setUser($user);
+		$this->setPhase($phase);
 		$this->setUpdated(new \DateTime('now'));
 		$this->setCreated(new \DateTime('now'));
     }
