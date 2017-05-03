@@ -115,16 +115,16 @@ class Project
 	protected $users;
 
 
-	public function __construct($idClient, $name, $description, $startDate, $endDate, $idProjectManager)
+	public function __construct($client, $name, $description, $startDate, $endDate, $projectManager)
 	{
-		$this->setClient($idClient);
+		$this->setClient($client);
 		$this->setName($name);
 		$this->setDescription($description);
 		$this->setStartDate($startDate);
 		$this->setEndDate($endDate);
 		$this->setUpdated(new \DateTime('now'));
 		$this->setCreated(new \DateTime('now'));
-	    $this->setProjectManager($idProjectManager);
+	    $this->setProjectManager($projectManager);
 	    $this->setEnabled(true);
 
 	    $this->phases = new ArrayCollection();

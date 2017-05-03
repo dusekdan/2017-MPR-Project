@@ -320,5 +320,13 @@ class ProjectPresenter extends BasePresenter
             $this->redirect('Homepage:default');
         }, $project);
     }
+
+    public function handleRemoveProject($projectId)
+    {
+        $this->projectFacade->removeProject($projectId, true);
+        $this->flashMessage("Projekt byl smazán.", "success");
+        unset($this->project);
+        $this->redirect('Homepage:default');
+    }
 	
 }

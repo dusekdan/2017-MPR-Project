@@ -140,7 +140,9 @@ class ProjectFormFactory extends BaseFactory
     {
         $from = new Nette\Utils\DateTime($values['from']);
         $to = new Nette\Utils\DateTime($values['to']);
-        $this->projectFacade->createProject($values['name'], $values['subscription'], $from, $to, $values['projectManagerId'], $values['clientId'], true);
+        $client = $this->clientFacade->getClient($values['clientId']);
+        $projectManager = $this->userFacade->getUser($values['projectManagerId']);
+        $this->projectFacade->createProject($values['name'], $values['subscription'], $from, $to, $projectManager, $client, true);
 
         return;
     }
@@ -151,7 +153,6 @@ class ProjectFormFactory extends BaseFactory
      */
     public function editProject($onSuccess, Project $project)
     {
-        dump($project);
 
         $users = [];
         foreach ($this->userFacade->getUsers() as $u) {
@@ -186,12 +187,12 @@ class ProjectFormFactory extends BaseFactory
             ->setDefaultValue($project->getEndDate()->format('d.m.Y'));
 
         $form->addSelect('projectManagerId','Projektový manažer', $users)
-            ->addRule(Form::FILLED, "Vyplňte prosím projektového manažera");
-            //->setDefaultValue($project->getProjectManager()->getUsername());
+            ->addRule(Form::FILLED, "Vyplňte prosím projektového manažera")
+            ->setDefaultValue($project->getProjectManager()->getId());
 
         $form->addSelect('clientId','Klient', $clients)
-            ->addRule(Form::FILLED, "Vyplňte prosím klienta");
-            //->setDefaultValue("");
+            ->addRule(Form::FILLED, "Vyplňte prosím klienta")
+            ->setDefaultValue($project->getClient()->getId());
 
         $form->addSubmit('editProject', 'Uložit');
         $form->addButton('cancel', 'Zrušit')
@@ -200,6 +201,7 @@ class ProjectFormFactory extends BaseFactory
         $form->onSuccess[] = [$this, 'editProjectSubmitted'];
         $form->onSuccess[] = $onSuccess;
 
+        $form->addHidden('idProject',$project->id);
 
         return $form;
     }
@@ -210,9 +212,10 @@ class ProjectFormFactory extends BaseFactory
      */
     public function editProjectSubmitted(Form $form, $values)
     {
-        $from = new Nette\Utils\DateTime($values['from']);
         $to = new Nette\Utils\DateTime($values['to']);
-        $this->projectFacade->editProject($values, true);
+        $client = $this->clientFacade->getClient($values['clientId']);
+        $projectManager = $this->userFacade->getUser($values['projectManagerId']);
+        $this->projectFacade->editProject($values, $client, $projectManager, true);
 
         return;
     }
