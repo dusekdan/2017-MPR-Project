@@ -406,11 +406,11 @@ class ProjectFormFactory extends BaseFactory
 		$form = $this->create();
 		$form->getElementPrototype()->class('ajax');
 		
+		$form->addHidden("idRisk", $risk->id);
+		
 		$form->addSubmit('removeRisk', 'Odstranit');
 		$form->addButton('cancel', 'Zrušit')
 			->setAttribute('data-dismiss', 'modal');
-		
-		$form->addHidden("idRisk", $risk->id);
 		
 		$form->onSuccess[] = [$this, 'removeRiskSubmitted'];
 		$form->onSuccess[] = $onSuccess;

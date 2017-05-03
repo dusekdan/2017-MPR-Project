@@ -85,20 +85,17 @@ class ClientFacade
     }
 
     /**
-     * Upraví riziko zadanými hodnotami.
+     * Upraví klienta zadanými hodnotami.
      */
     public function editClient($values, $autoFlush)
     {
+	    $updated = new Nette\Utils\DateTime('now');
+    	
+    	$client = $this->getClient($values['idClient']);
 
-        $startDate = new Nette\Utils\DateTime($values['startDate']);
-        $endDate = new Nette\Utils\DateTime($values['endDate']);
-
-        $client = $this->getClient($values['idClient']);
-
-        $client->setName($values['idClient']);
+        $client->setName($values['name']);
         $client->setDescription($values['description']);
-        $client->setStartDate($startDate);
-        $client->setEndDate($endDate);
+        $client->setUpdated($updated);
 
         $this->em->persist($client);
         if ($autoFlush) {

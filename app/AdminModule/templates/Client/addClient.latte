@@ -1,0 +1,20 @@
+{block title}
+    Přidat klienta
+{/block}
+
+{block content}
+    {block modalTitle}
+        Přidat klienta
+    {/block}
+
+    {block modal}
+            {import './../components/bootstrap-form.latte'} {* bootstrap formuláře *}
+            {include bootstrap-form, form => addClientForm, labelSize => 4, inputSize => 8}
+    {/block}
+{/block}
+{block scripts}
+
+{/block}
+
+{block head}
+{/block}

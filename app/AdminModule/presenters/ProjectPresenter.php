@@ -69,6 +69,7 @@ class ProjectPresenter extends BasePresenter
 	{
 		
 		if ($this->isAjax()) {
+			$this->payload->isModal = true;
 			//pokud je modal zobrazen překresluju už jen formulář
 			if ($this->showModal == false) {
 				$this->redrawControl("modal");

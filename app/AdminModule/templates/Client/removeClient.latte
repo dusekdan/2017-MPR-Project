@@ -1,0 +1,21 @@
+{block title}
+    Odstranit klienta
+{/block}
+
+{block content}
+    {block modalTitle}
+        Odstranit klienta
+    {/block}
+
+    {block modal}
+        <p>Opravdu chcete odstranit klienta "{$client->getName()}"?</p>
+        {import './../components/bootstrap-form.latte'} {* bootstrap formuláře *}
+        {include bootstrap-form, form => removeClientForm, labelSize => 4, inputSize => 8}
+    {/block}
+{/block}
+{block scripts}
+
+{/block}
+
+{block head}
+{/block}
