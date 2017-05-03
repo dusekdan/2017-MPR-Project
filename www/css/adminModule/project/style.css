@@ -30,6 +30,10 @@ th, td{
     background-color: #98a6ad;
 }
 
+.scroll-table {
+    overflow: auto;
+}
+
 .tab-content{
     padding-top: 5px;
 }
