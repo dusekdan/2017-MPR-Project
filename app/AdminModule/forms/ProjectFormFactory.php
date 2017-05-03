@@ -258,11 +258,19 @@ class ProjectFormFactory extends BaseFactory
 		
 		$form->addText('probability', 'Pravděpodobnost')
 			->setType('number')
-			->setAttribute('step','0.1')
+			->setAttribute('step','0.01')
 			->addRule(Form::FLOAT, "Pravděpodobnost musí být desetinné číslo")
-			->addRule(Form::MAX, "Pravděpodobnost musí být menší než 100%", 100)
+			->addRule(Form::MAX, "Pravděpodobnost musí být menší než 1", 1)
 			->addRule(Form::MIN, "Pravděpodobnost musí být větší než 0",0)
 			->addRule(Form::FILLED, "Vyplňte prosím pravděpodobnost rizika");
+		
+		$form->addText('severity', 'Závažnost')
+			->setType('number')
+			->setAttribute('step','0.01')
+			->addRule(Form::FLOAT, "Závažnost musí být desetinné číslo")
+			->addRule(Form::MAX, "Závažnost musí být menší než 1", 1)
+			->addRule(Form::MIN, "Závažnost musí být větší než 0",0)
+			->addRule(Form::FILLED, "Vyplňte prosím závažnost rizika");
 		
 		$form->addText('time', 'Čas')
 			->setType('number')
@@ -282,9 +290,6 @@ class ProjectFormFactory extends BaseFactory
 		
 		$form->addText('reaction', 'Reakce')
 			->addRule(Form::FILLED, "Vyplňte prosím reakci na riziko");
-		
-		$form->addText('severity', 'Závažnost')
-			->addRule(Form::FILLED, "Vyplňte prosím závažnost rizika");
 		
 		$form->addTextArea('primaryCause', 'Primární účel')
 			->addRule(Form::FILLED, "Vyplňte prosím primární účel rizika");
@@ -410,11 +415,20 @@ class ProjectFormFactory extends BaseFactory
 		$form->addText('probability', 'Pravděpodobnost')
 			->setDefaultValue($risk->getProbability())
 			->setType('number')
-			->setAttribute('step','0.1')
+			->setAttribute('step','0.01')
 			->addRule(Form::FLOAT, "Pravděpodobnost musí být desetinné číslo")
-			->addRule(Form::MAX, "Pravděpodobnost musí být menší než 100%", 100)
+			->addRule(Form::MAX, "Pravděpodobnost musí být menší než 1", 1)
 			->addRule(Form::MIN, "Pravděpodobnost musí být větší než 0",0)
 			->addRule(Form::FILLED, "Vyplňte prosím pravděpodobnost rizika");
+		
+		$form->addText('severity', 'Závažnost')
+			->setDefaultValue($risk->getSeverity())
+			->setType('number')
+			->setAttribute('step','0.01')
+			->addRule(Form::FLOAT, "Závažnost musí být desetinné číslo")
+			->addRule(Form::MAX, "Závažnost musí být menší než 1", 1)
+			->addRule(Form::MIN, "Závažnost musí být větší než 0",0)
+			->addRule(Form::FILLED, "Vyplňte prosím závažnost rizika");
 		
 		$form->addText('time', 'Čas')
 			->setDefaultValue($risk->getTime())
@@ -439,11 +453,7 @@ class ProjectFormFactory extends BaseFactory
 		$form->addText('reaction', 'Reakce')
 			->setDefaultValue($risk->getReaction())
 			->addRule(Form::FILLED, "Vyplňte prosím reakci na riziko");
-		
-		$form->addText('severity', 'Závažnost')
-			->setDefaultValue($risk->getSeverity())
-			->addRule(Form::FILLED, "Vyplňte prosím závažnost rizika");
-		
+			
 		$form->addTextArea('primaryCause', 'Primární účel')
 			->setDefaultValue($risk->getPrimaryCause())
 			->addRule(Form::FILLED, "Vyplňte prosím primární účel rizika");
