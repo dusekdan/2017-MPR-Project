@@ -49,14 +49,14 @@ class RiskType
 
     /**
      * Datum vytvorenia zaznamu o riziku
-     * @ORM\Column(name"created_", type="datetime")
+     * @ORM\Column(name="created", type="datetime")
      * @var \DateTime
      */
     protected $created;
 
     /**
      * Datum posledneho update zaznamu o riziku
-     * @ORM\Column(name"updatedt", type="datetime")
+     * @ORM\Column(name="updated", type="datetime")
      * @var \DateTime
      */
     protected $updated;
@@ -71,13 +71,13 @@ class RiskType
 
 
 
-	public function __construct($idCompany, $name ,$description)
+	public function __construct($name ,$description)
 	{
-		$this->setIdCompany($idCompany);
 		$this->setName($name);
 		$this->setDescription($description);
-		$this->setUpdated(new \DateTime('now'));
 		$this->setCreated(new \DateTime('now'));
+		$this->setUpdated(new \DateTime('now'));
+		$this->setEnabled(true);
     }
 
 }

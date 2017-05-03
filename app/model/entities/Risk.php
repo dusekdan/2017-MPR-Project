@@ -41,7 +41,7 @@ class Risk
 
     /**
      * ID Typu rizika, ktoremu riziko patri
-     * @ORM\ManyToOne(targetEntity="Risk")
+     * @ORM\ManyToOne(targetEntity="RiskType")
      * @ORM\JoinColumn(name="risk_type_id", referencedColumnName="id")
      */
     protected $riskType;
@@ -127,21 +127,21 @@ class Risk
 
     /**
      * Cas v hodinach(dnoch/tyzdnoch?), o ktory bude projekt opozdeny, kvoli riziku
-     * @ORM\Column(name="time", type="integer")
+     * @ORM\Column(name="`time`", type="integer")
      * @var integer
      */
     protected $time;
 
     /**
      * Vysledok rizika
-     * @ORM\Column(type="string", length=100)
+     * @ORM\Column(name="result", type="string", length=100)
      * @var string
      */
     protected $result;
 
     /**
      * Zavaznost rizika
-     * @ORM\Column(type="integer")
+     * @ORM\Column(name="severity", type="integer")
      * @var string
      */
     protected $severity;
@@ -155,35 +155,42 @@ class Risk
 
     /**
      * Spustac rizika
-     * @ORM\Column(type="string", length=100)
+     * @ORM\Column(name="`trigger`", type="string", length=100)
      * @var string
      */
     protected $trigger;
 
     /**
      * Reakcia/Opatrenie rizika
-     * @ORM\Column(type="string", length=100)
+     * @ORM\Column(name="reaction", type="string", length=100)
      * @var string
      */
     protected $reaction;
 
 
 
-    public function __construct($riskType, $name , $description, $probability, $money, $time, $result, $severity, $primaryCause, $trigger, $reaction)
+    public function __construct($name, $description, $probability, $money, $time, $result, $primaryCause, $trigger, $reaction, $severity, $startDate, $endDate, $riskTypeId, $phaseId, $responsibleUserId, $creatorId)
 	{
-		$this->setIdRiskType($riskType);
 		$this->setName($name);
 		$this->setDescription($description);
 		$this->setProbability($probability);
-		$this->setUpdated(new \DateTime('now'));
-		$this->setCreated(new \DateTime('now'));
 	    $this->setMoney($money);
         $this->setTime($time);
         $this->setResult($result);
-        $this->setSeverity($severity);
-        $this->setPrimaCause($primaryCause);
+        $this->setPrimaryCause($primaryCause);
         $this->setTrigger($trigger);
         $this->setReaction($reaction);
+		$this->setSeverity($severity);
+		$this->setStartDate($startDate);
+		$this->setEndDate($endDate);
+		$this->setRiskType($riskTypeId);
+		$this->setPhase($phaseId);
+		$this->setResponsibleUser($responsibleUserId);
+		$this->setCreator($creatorId);
+		
+		$this->setUpdated(new \DateTime('now'));
+		$this->setCreated(new \DateTime('now'));
+		$this->setEnabled(true);
     }
 
 }

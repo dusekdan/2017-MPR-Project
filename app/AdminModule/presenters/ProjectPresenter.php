@@ -20,11 +20,18 @@ class ProjectPresenter extends BasePresenter
 
 	/** @var UserFacade */
 	private $userFacade;
+	
+	/** @var PhaseFacade */
+	private $phaseFacade;
+	
+	/** @persistent */
+	public $actualFase;
 
-	public function __construct(ProjectFormFactory $projectFormFactory, UserFacade $userFacade)
+	public function __construct(ProjectFormFactory $projectFormFactory, UserFacade $userFacade, PhaseFacade $phaseFacade)
 	{
 		$this->projectFactory = $projectFormFactory;
 		$this->userFacade = $userFacade;
+		$this->phaseFacade = $phaseFacade;
 	}
 
 	public function renderDefault()
@@ -50,9 +57,11 @@ class ProjectPresenter extends BasePresenter
 		}
 	}
 
-    public function renderAddRisk()
+    public function renderAddRisk($phase)
     {
-
+    	if (isset($phase)) {
+		    $this->actualFase = $phase;
+	    }
     }
 
     /**
@@ -61,11 +70,13 @@ class ProjectPresenter extends BasePresenter
      */
     public function createComponentAddRiskForm()
     {
-        return $this->projectFactory->addRisk(function() {
+        $phase = $this->phaseFacade->getPhase($this->actualFase);
+        
+    	return $this->projectFactory->addRisk(function() {
             $this->flashMessage("Nový risk úspěšně přidán.", "success");
 	        $this->showModal = false; // pokud je to ok, zavřu to
 	        $this->redirect('Project:default');
-        });
+        }, $phase, $this->user);
     }
 
 

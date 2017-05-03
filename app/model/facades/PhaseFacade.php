@@ -11,6 +11,7 @@ declare(strict_types=1);
 namespace App\Model\Facades;
 
 use App\Model\Entities\Phase;
+use App\Model\Entities\Project;
 use Kdyby\Doctrine\EntityManager;
 use Nette;
 use Tracy\Debugger;
@@ -67,9 +68,9 @@ class PhaseFacade
 		}
 	}
 
-	public function createPhase($name, $description, $startDate, $endDate, $idProject, $autoFlush)
+	public function createPhase($name, $description, $startDate, $endDate, Project $project, $autoFlush)
 	{
-		$phase = new Phase($name, $description, $startDate, $endDate, $idProject);
+		$phase = new Phase($name, $description, $startDate, $endDate, $project);
 		$this->em->persist($phase);
 		if ($autoFlush) {
 			$this->em->flush();
