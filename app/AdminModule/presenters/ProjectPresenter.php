@@ -27,12 +27,6 @@ class ProjectPresenter extends BasePresenter
 	
 	/** @var RiskFacade */
 	private $riskFacade;
-	
-	/** @persistent */
-	public $actualPhase;
-	
-	/** @persistent */
-	public $actualRisk;
 
 	public function __construct(ProjectFormFactory $projectFormFactory, UserFacade $userFacade, PhaseFacade $phaseFacade, RiskFacade $riskFacade)
 	{
@@ -47,7 +41,7 @@ class ProjectPresenter extends BasePresenter
 		$this->template->users = $this->userFacade->getUsers();
 	}
 
-	public function actionAddRisk()
+	public function actionAddRisk($phase)
 	{
 
 		if ($this->isAjax()) {
@@ -67,9 +61,6 @@ class ProjectPresenter extends BasePresenter
 
     public function renderAddRisk($phase)
     {
-    	if (isset($phase)) {
-		    $this->actualPhase = $phase;
-	    }
     }
 
     /**
@@ -78,7 +69,7 @@ class ProjectPresenter extends BasePresenter
      */
     public function createComponentAddRiskForm()
     {
-        $phase = $this->phaseFacade->getPhase($this->actualPhase);
+        $phase = $this->phaseFacade->getPhase($this->getParameter('phase'));
         
     	return $this->projectFactory->addRisk(function() {
             $this->flashMessage("Nové riziko úspěšně přidáno.", "success");
@@ -88,7 +79,7 @@ class ProjectPresenter extends BasePresenter
     }
 
 
-    public function actionEditRisk()
+    public function actionEditRisk($idRisk)
     {
         if ($this->isAjax()) {
             $this->payload->isModal = true;
@@ -103,11 +94,9 @@ class ProjectPresenter extends BasePresenter
         }
     }
 
-    public function renderEditRisk($idRisk){
-    	
-	    if (isset($idRisk)) {
-		    $this->actualRisk = $idRisk;
-	    }
+    public function renderEditRisk($idRisk)
+    {
+
     }
 
     /**
@@ -116,7 +105,7 @@ class ProjectPresenter extends BasePresenter
      */
     public function createComponentEditRiskForm()
     {
-	    $risk = $this->riskFacade->getRisk($this->actualRisk);
+	    $risk = $this->riskFacade->getRisk($this->getParameter('idRisk'));
     	
         return $this->projectFactory->editRisk(function() {
             $this->flashMessage("Riziko bylo úspěšně upraveno.", "success");
@@ -126,7 +115,7 @@ class ProjectPresenter extends BasePresenter
     }
 	
 	
-	public function actionRemoveRisk()
+	public function actionRemoveRisk($idRisk)
 	{
 		if ($this->isAjax()) {
 			$this->payload->isModal = true;
@@ -141,12 +130,9 @@ class ProjectPresenter extends BasePresenter
 		}
 	}
  
-	public function renderRemoveRisk($idRisk){
-		if (isset($idRisk)) {
-			$this->actualRisk = $idRisk;
-		}
-		
-		$this->template->risk = $this->riskFacade->getRisk($this->actualRisk);
+	public function renderRemoveRisk($idRisk)
+	{
+		$this->template->risk = $this->riskFacade->getRisk($this->getParameter('idRisk'));
 	}
 	
 	/**
@@ -155,7 +141,7 @@ class ProjectPresenter extends BasePresenter
 	 */
 	public function createComponentRemoveRiskForm()
 	{
-		$risk = $this->riskFacade->getRisk($this->actualRisk);
+		$risk = $this->riskFacade->getRisk($this->getParameter('idRisk'));
 		
 		return $this->projectFactory->removeRisk(function() {
 			$this->flashMessage("Riziko bylo úspěšně odstraněno.", "success");
@@ -198,27 +184,82 @@ class ProjectPresenter extends BasePresenter
         }, $this->project);
     }
 
-    public function createComponentAddUserPhase()
-    {
-    	$form = $this->projectFactory->addUserProject($this->project,
-		    function() {
-			    $this->flashMessage("Uživatel přidán.", "success");
-			    $this->redirect('this');
-		    });
-    	$form['send']->caption = "Přidat uživatele do fáze";
+	public function actionAddUser($phaseId, $projectId)
+{
+	if ($this->isAjax()) {
+		$this->payload->isModal = true;
+		//pokud je modal zobrazen překresluju už jen formulář
+		if ($this->showModal == false) {
+			$this->redrawControl("modal");
+			$this->showModal = true;
+		} else {
+			// snippetem překreslim jen to co je potřeba po odeslání formuláře
+			// formulář (pro zobrazeni chyb), vyslednou tabulku po zmene v DB
+			$this->redrawControl("snippetAddPhase");
+		}
+	}
+}
 
-    	return $form;
-    }
-
-	public function createComponentAddUserProject()
+	public function renderAddUser($phaseId, $projectId)
 	{
-		$form = $this->projectFactory->addUserProject($this->project,
+		$this->template->title = "Přidat uživatele";
+		debugger::fireLog($this->project);
+		if (isset($phaseId)) {
+			$this->template->shortTitle = "Přidat uživatele do fáze";
+			$this->template->addToPhase = true;
+		}
+
+		if (isset($projectId)) {
+			$this->template->shortTitle = "Přidat uživatele do projektu";
+			$this->template->addToProject = true;
+		}
+	}
+
+	public function createComponentAddUserToPhase()
+	{
+		$caption = 'Přidat uživatele do fáze';
+
+		$phase = $this->phaseFacade->getPhase($this->getParameter('phaseId'));
+
+		$users = [];
+		foreach ($this->userFacade->getUsers() as $oneUser) {
+			if (!$phase->getUsers()->contains($oneUser))
+				$users[$oneUser->getId()] = $oneUser->getUsername();
+		}
+
+		$form = $this->projectFactory->addUserProject($users,
 			function() {
 				$this->flashMessage("Uživatel přidán.", "success");
-				$this->redirect('this');
-			});
-		$form['send']->caption = "Přidat uživatele do projektu";
+				$this->redirect('Project:default');
+			}, $caption);
 
 		return $form;
 	}
+
+	public function createComponentAddUserToProject()
+	{
+		$caption = 'Přidat uživatele do projektu';
+		$project = $this->projectFacade->getProject($this->project);
+		$users = [];
+		foreach ($this->userFacade->getUsers() as $oneUser) {
+			if(!$project->getUsers()->contains($oneUser))
+				$users[$oneUser->getId()] = $oneUser->getUsername();
+		}
+
+		$form = $this->projectFactory->addUserProject($users,
+			function() {
+				$this->flashMessage("Uživatel přidán.", "success");
+				$this->redirect('Project:default');
+			}, $caption);
+
+
+		return $form;
+	}
+
+	public function handleRemoveUser($userId)
+	{
+		$this->userFacade->removeUser($userId, true);
+		$this->flashMessage("Uživatel přidán s id $userId byl smazán.", "success");
+	}
+
 }

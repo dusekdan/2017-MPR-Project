@@ -216,7 +216,8 @@ class ProjectFormFactory extends BaseFactory
 	{
 		$from = new Nette\Utils\DateTime($values['from']);
 		$to = new Nette\Utils\DateTime($values['to']);
-		$this->phaseFacade->createPhase($values['name'], $values['subscription'], $from, $to, $values['project'], true);
+		$project = $this->projectFacade->getProject($values['project']);
+		$this->phaseFacade->createPhase($values['name'], $values['subscription'], $from, $to, $project, true);
 		
 		return;
 	}
@@ -353,19 +354,17 @@ class ProjectFormFactory extends BaseFactory
 		return;
 	}
 	
-	public function addUserProject($project, callable $onSuccess)
+	public function addUserProject($users, callable $onSuccess, $caption)
 	{
-		$users = [];
-		foreach ($this->userFacade->getUsers() as $oneUser) {
-			$users[$oneUser->getId()] = $oneUser->getUsername();
-		}
 		$form = $this->create();
 		$form->getElementPrototype()->class('ajax');
 		$form->addSelect('users', '', $users)
 			->setPrompt('Vyberte uživatele pro přidání');
 		
-		$form->addSubmit('send', 'Zvolit');
-		
+		$form->addSubmit('send')
+			->getControlPrototype()
+			->setName('button')
+			->setHtml('<span class="glyphicon glyphicon-user"></span>'.$caption);
 		$form->onSuccess[] = function (Form $form, $values) use ($onSuccess) {
 			$onSuccess($values->users);
 		};

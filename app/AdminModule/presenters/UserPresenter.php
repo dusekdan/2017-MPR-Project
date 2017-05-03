@@ -66,15 +66,12 @@ class UserPresenter extends BasePresenter
 				$this->redrawControl("modal");
 				$this->showModal = true;
 			} else {
-				$this->redrawControl("snippetUpdate");
-				$this->redrawControl("snippetUsers");
 			}
 		}
 	}
 
-	public function renderUpdate($userId)
+	public function renderUpdate()
 	{
-
 	}
 
 	public function createComponentUpdateForm($name)

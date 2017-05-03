@@ -81,7 +81,7 @@
                                                                     </div>
                                                                     <hr>
                                                                     <div class="col-md-12 text-center">
-                                                                        <a n:href="Project:addRisk, 'phase'=>$phase->id" class="ajax">
+                                                                        <a class="ajax" n:href="Project:addRisk, 'phase' => $phase->id">
                                                                             <button class="btn btn-success waves-effect waves-light"> <i class="glyphicon glyphicon-plus m-r-5"></i> <span>Přidat riziko</span> </button>
                                                                         </a>
                                                                     </div>
@@ -109,15 +109,17 @@
                                                                                     <td>{$user_p->email}</td>
                                                                                     <td>{$user_p->role}</td>
                                                                                     <td class="actions">
-                                                                                        <a href="#" class="on-default remove-row"><i class="glyphicon glyphicon-trash"></i></a>
+                                                                                        <a n:href="removeUser!, 'userId' => $user_p->id" class="on-default remove-row" name="delete" data-confirm="modal" data-confirm-title="Smazání uživatele" data-confirm-ok-class="btn-danger" data-confirm-ok-text="Smazat" data-confirm-cancel-class="btn-success" data-confirm-cancel-text="Zpět" data-confirm-text="Opravdu chcete smazat uživatele {$user_p->firstName} {$user_p->lastName}?" value="Smazat"><i class="glyphicon glyphicon-trash"></i></a>
                                                                                     </td>
                                                                                 </tr>
                                                                             </tbody>
                                                                         </table>
                                                                     </div>
                                                                     <hr>
-                                                                    <div class="col-md-4 col-lg-offset-4 text-center">
-																		{include bootstrap-form, form => addUserPhase, labelSize => 0, inputSize => 12}
+                                                                    <div class="col-md-12 text-center">
+                                                                        <a class="ajax" n:href="Project:addUser, 'phaseId' => $phase->id">
+                                                                            <button class="btn btn-success waves-effect waves-light"> <i class="glyphicon glyphicon-user m-r-5"></i> <span>Přidat uživatele do fáze</span> </button>
+                                                                        </a>
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -159,8 +161,10 @@
                                                 </tbody>
                                             </table>
                                             <hr>
-                                            <div class="col-md-4 col-lg-offset-4 text-center">
-												{include bootstrap-form, form => addUserProject, labelSize => 0, inputSize => 12}
+                                            <div class="col-md-12 text-center">
+                                                <a class="ajax" n:href="Project:addUser, 'projectId' => $project->id">
+                                                    <button class="btn btn-success waves-effect waves-light"> <i class="glyphicon glyphicon-user m-r-5"></i> <span>Přidat uživatele do projektu</span> </button>
+                                                </a>
                                             </div>
                                         </div>
                                     </div>

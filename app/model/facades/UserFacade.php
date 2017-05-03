@@ -11,6 +11,8 @@ declare(strict_types=1);
 namespace App\Model\Facades;
 
 use App\Model\Entities\User;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Criteria;
 use Kdyby\Doctrine\EntityManager;
 use Nette\Security\Passwords;
 use Nette;
@@ -119,4 +121,5 @@ class UserFacade
 			}
 		}
 	}
+
 }

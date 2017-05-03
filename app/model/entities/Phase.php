@@ -11,6 +11,7 @@ namespace App\Model\Entities;
 
 use App\Model\Entities\Traits\TimeInfo;
 use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Criteria;
 use Doctrine\ORM\Mapping as ORM;
 use App\Model\Entities\Project;
 use App\Model\Entities\Risk;
@@ -106,14 +107,14 @@ class Phase
 	 */
 	protected $project;
 
-	public function __construct($name, $description, $startDate, $endDate, $idProject)
+	public function __construct($name, $description, $startDate, $endDate, $project)
 	{
 
 		$this->setName($name);
 		$this->setDescription($description);
 		$this->setStartDate($startDate);
 		$this->setEndDate($endDate);
-		$this->setProject($idProject);
+		$this->setProject($project);
 		$this->setUpdated(new \DateTime('now'));
 		$this->setCreated(new \DateTime('now'));
 		$this->setEnabled(true);
