@@ -1,15 +1,13 @@
 .header-title {
     color: white;
-
 }
 
-.project-item {
-    text-decoration: none;
-    color: #98a6ad;
-}
-
-.active {
-    background-color: #253138;
+.project-menu{
+    background-color: #00aced;
+    border-radius: 5px 5px 0 0;
+    border: none;
+    padding: 5px;
+    padding-bottom: 0;
 }
 
 th, td{
@@ -21,9 +19,7 @@ th, td{
 }
 
 .tab-pane {
-    padding: 1%;
     background-color: #2f3e47;
-    /*background-color: #98a6ad;*/
 }
 
 .table{
@@ -48,15 +44,18 @@ th, td{
     color: #98a6ad;
 }
 
-.nav-tabs > li.active > a, .nav-tabs > li.active > a:hover, .nav-tabs > li.active > a:focus{
-    background-color: #253138;
-    border-color: #EEEEEE;
-    color: #98a6ad;
+.nav-tabs > li > a, .nav-tabs > li > a:hover{
+    background-color: transparent;
+    color: white;
+    border: none;
 }
 
-.panel-body .row {
-    padding-left: 3%;
-    padding-right: 3%;
+.nav-tabs > li.active > a, .nav-tabs > li.active > a:hover, .nav-tabs > li.active > a:focus{
+    border: none;
+    color: #98a6ad;
+    background-color: #253138;
+    border-radius: 5px 5px 0 0;
+    font-weight: bold;
 }
 
 .row h3{
@@ -73,7 +72,7 @@ form textarea {
 }
 
 .risk-table{
-    border-collapse: collapse;
+    collapse: collapse;
     margin: 10px;
 }
 .risk-table th, .risk-table td{

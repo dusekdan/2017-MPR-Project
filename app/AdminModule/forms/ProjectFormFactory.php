@@ -291,7 +291,7 @@ class ProjectFormFactory extends BaseFactory
 		$form->addText('reaction', 'Reakce')
 			->addRule(Form::FILLED, "Vyplňte prosím reakci na riziko");
 		
-		$form->addTextArea('primaryCause', 'Primární účel')
+		$form->addTextArea('primaryCause', 'Primární příčina')
 			->addRule(Form::FILLED, "Vyplňte prosím primární účel rizika");
 		
 		$form->addSelect('riskTypeId','Typ rizika', $types)
@@ -454,7 +454,7 @@ class ProjectFormFactory extends BaseFactory
 			->setDefaultValue($risk->getReaction())
 			->addRule(Form::FILLED, "Vyplňte prosím reakci na riziko");
 			
-		$form->addTextArea('primaryCause', 'Primární účel')
+		$form->addTextArea('primaryCause', 'Primární příčina')
 			->setDefaultValue($risk->getPrimaryCause())
 			->addRule(Form::FILLED, "Vyplňte prosím primární účel rizika");
 		
