@@ -128,9 +128,9 @@ class User
 	protected $phases;
 
 	/**
-	 * Uživatelé k dané fazi
+	 * Uživatelé k daným projektům
 	 * @ORM\ManyToMany(targetEntity="Project", mappedBy="users")
-	 * @var Phase[]|Collection
+	 * @var Project[]|Collection
 	 */
 	protected $projects;
 

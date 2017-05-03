@@ -9,20 +9,20 @@
 use Phinx\Migration\AbstractMigration;
 use Phinx\Db\Adapter\MysqlAdapter;
 
-define("VNITRNI_R", 1);
-define("VNEJSI_R", 2);
-define("TECHNICKA_R", 3);
-define("RIZENI_R", 4);
-define("ORGANIZACNI_R", 5);
-define("EXTERNI_R", 6);
+//define("VNITRNI_R", 1);
+//define("VNEJSI_R", 2);
+//define("TECHNICKA_R", 3);
+//define("RIZENI_R", 4);
+//define("ORGANIZACNI_R", 5);
+//define("EXTERNI_R", 6);
+//
+define("ORGANIZACE_E2", 6);
+define("SPECIFIKACE_E2", 7);
+define("NAVRH_E2", 8);
+define("PLANOVANI_E2", 9);
+define("REALIZACE_E2", 10);
 
-define("ORGANIZACE_E", 1);
-define("SPECIFIKACE_E", 2);
-define("NAVRH_E", 3);
-define("PLANOVANI_E", 4);
-define("REALIZACE_E", 5);
-
-class AddProjectData extends AbstractMigration
+class AddProject2Data extends AbstractMigration
 {
     private $tableNameU = "users";
     private $tableNameRi = "risks";
@@ -40,159 +40,13 @@ class AddProjectData extends AbstractMigration
 
     public function up()
     {
-        //Users heslo je 123456
-
-        $rows = [
-            [
-                'email' => "admin@admin.cz",
-                'password' => '$2y$10$.kckarxUiumF2QkqHWx6DuTu6JHU/ChWMd3AsiRFiRtEUBjZiKA12',
-                'username' => "admin",
-                'first_name' => "John",
-                'last_name' => "Black",
-                'birthday' => "2000-01-01",
-                'phone' => "+420123456789",
-                'role' => "administrator",
-                'created' => date("Y-m-d H:i:s"),
-                'updated' => date("Y-m-d H:i:s")
-            ],
-            [
-                'email' => "projectManager@projectManager.cz",
-                'password' => '$2y$10$.kckarxUiumF2QkqHWx6DuTu6JHU/ChWMd3AsiRFiRtEUBjZiKA12',
-                'username' => "admin2",
-                'first_name' => "Jane",
-                'last_name' => "Bone",
-                'birthday' => "2000-01-01",
-                'phone' => "+420123456789",
-                'role' => "projectManager",
-                'created' => date("Y-m-d H:i:s"),
-                'updated' => date("Y-m-d H:i:s")
-            ],
-            [
-                'email' => "owner@owner.cz",
-                'password' => '$2y$10$.kckarxUiumF2QkqHWx6DuTu6JHU/ChWMd3AsiRFiRtEUBjZiKA12',
-                'username' => "owner",
-                'first_name' => "Fanda",
-                'last_name' => "Kollar",
-                'birthday' => "2000-01-01",
-                'phone' => "+420123456789",
-                'role' => "owner",
-                'created' => date("Y-m-d H:i:s"),
-                'updated' => date("Y-m-d H:i:s")
-            ],
-            [
-                'email' => "programmer@user.cz",
-                'password' => '$2y$10$.kckarxUiumF2QkqHWx6DuTu6JHU/ChWMd3AsiRFiRtEUBjZiKA12',
-                'username' => "programmer",
-                'first_name' => "Gustav",
-                'last_name' => "Kolka",
-                'birthday' => "2000-01-01",
-                'phone' => "+420123456789",
-                'role' => "user",
-                'created' => date("Y-m-d H:i:s"),
-                'updated' => date("Y-m-d H:i:s")
-            ],
-            [
-                'email' => "analytic@user.cz",
-                'password' => '$2y$10$.kckarxUiumF2QkqHWx6DuTu6JHU/ChWMd3AsiRFiRtEUBjZiKA12',
-                'username' => "analytic",
-                'first_name' => "Bill",
-                'last_name' => "Herris",
-                'birthday' => "2000-01-01",
-                'phone' => "+420123456789",
-                'role' => "user",
-                'created' => date("Y-m-d H:i:s"),
-                'updated' => date("Y-m-d H:i:s")
-            ],
-            [
-                'email' => "dbspecialist@user.cz",
-                'password' => '$2y$10$.kckarxUiumF2QkqHWx6DuTu6JHU/ChWMd3AsiRFiRtEUBjZiKA12',
-                'username' => "dbspecialist",
-                'first_name' => "Mia",
-                'last_name' => "Jones",
-                'birthday' => "2000-01-01",
-                'phone' => "+420123456789",
-                'role' => "user",
-                'created' => date("Y-m-d H:i:s"),
-                'updated' => date("Y-m-d H:i:s")
-            ]
-        ];
-
-        $this->insert($this->tableNameU, $rows);
-
-        //Risk type
-
-        $rows = [
-            [
-                'name' => "Vnitřní rizika",
-                'description' => "Rizika, která mohou být ovlivnovanana manažerem projektu nebo projektovým týmem.",
-                'created' => date("Y-m-d H:i:s"),
-                'updated' => date("Y-m-d H:i:s")
-            ],
-            [
-                'name' => "Vnější rizika",
-                'description' => "Rizika, která nejsou nijak ovlivněna osobami zapojených do vývoje.",
-                'created' => date("Y-m-d H:i:s"),
-                'updated' => date("Y-m-d H:i:s")
-            ],
-            [
-                'name' => "Technická rizika",
-                'description' => "Rizika ohrožující kvalitu nebo provedení projektu, která jsou zapříčiněna použitím neověřené nebo nové technologie, co její změny během vývoje.",
-                'created' => date("Y-m-d H:i:s"),
-                'updated' => date("Y-m-d H:i:s")
-            ],
-            [
-                'name' => "Rizika řízení projektu",
-                'description' => "Rizika spojena s časem, nekvalitním plánem projektu či špatným použitím postupu pro vývoj projektu.",
-                'created' => date("Y-m-d H:i:s"),
-                'updated' => date("Y-m-d H:i:s")
-            ],
-            [
-                'name' => "Organizační rizika",
-                'description' => "Rizika pramenící z nekonzistence čase, ceny a věčného rozsahu vývoje projektu.",
-                'created' => date("Y-m-d H:i:s"),
-                'updated' => date("Y-m-d H:i:s")
-            ],
-            [
-                'name' => "Externí rizika",
-                'description' => "Rizika způsobena změnami nebo událostmi mimo samotné dění projektu.",
-                'created' => date("Y-m-d H:i:s"),
-                'updated' => date("Y-m-d H:i:s")
-            ]
-        ];
-
-        $this->insert($this->tableNameRT, $rows);
-
-        //Client
-
-        $rows = [
-            [
-                'name' => "Octopus",
-                'description' => "Zákazník Octopus využívající naše služby Risk Managementu.",
-                'created' => date("Y-m-d H:i:s"),
-                'updated' => date("Y-m-d H:i:s")
-            ],
-            [
-                'name' => "Dell",
-                'description' => "Zákazník Dell využívající naše služby Risk Managementu.",
-                'created' => date("Y-m-d H:i:s"),
-                'updated' => date("Y-m-d H:i:s")
-            ],
-            [
-                'name' => "Samsung",
-                'description' => "Zákazník Samsung využívající naše služby Risk Managementu.",
-                'created' => date("Y-m-d H:i:s"),
-                'updated' => date("Y-m-d H:i:s")
-            ]
-        ];
-
-        $this->insert($this->tableNameC, $rows);
 
         //Project
 
         $rows = [
             [
-                'name' => "Programová podpora řízení rizik v IT projektech.",
-                'description' => "Vývoj webove aplikace pro podporu posuzování rizik v projektech IT.",
+                'name' => "Správa vývoje letiskového kontrolingu.",
+                'description' => "Vývoj webove aplikace pro podporu vývoje letiskového kontrolingu.",
                 'project_manager_id' => 2,
                 'client_id' => 1,
                 'start_date' => "2017-03-02 08:00:00",
@@ -210,7 +64,7 @@ class AddProjectData extends AbstractMigration
             [
                 'name' => "Počáteční organizační záležitosti",
                 'description' => "Rizika, která mohla vzniknout při organizací projektu.",
-                'project_id' => 1,
+                'project_id' => 2,
                 'start_date' => "2017-02-03 08:00:00",
                 'end_date' => "2017-07-03 23:59:00",
                 'created' => date("Y-m-d H:i:s"),
@@ -219,7 +73,7 @@ class AddProjectData extends AbstractMigration
             [
                 'name' => "Analýza a specifikace požadavků, návrh",
                 'description' => "Rizika, která mohla vzniknout při analýze a specifikaci požadavků.",
-                'project_id' => 1,
+                'project_id' => 2,
                 'start_date' => "2017-02-03 08:00:0",
                 'end_date' => "2017-02-15 23:59:00",
                 'created' => date("Y-m-d H:i:s"),
@@ -228,7 +82,7 @@ class AddProjectData extends AbstractMigration
             [
                 'name' => "Návrh",
                 'description' => "Rizika, která mohla vzniknout během návrhu aplikace.",
-                'project_id' => 1,
+                'project_id' => 2,
                 'start_date' => "2017-02-15 08:00:00",
                 'end_date' => "2017-03-01 23:59:00",
                 'created' => date("Y-m-d H:i:s"),
@@ -237,7 +91,7 @@ class AddProjectData extends AbstractMigration
             [
                 'name' => "Plánování projektu",
                 'description' => "Rizika, která mohla vzniknout při plánování projektu.",
-                'project_id' => 1,
+                'project_id' => 2,
                 'start_date' => "2017-03-01 08:00:00",
                 'end_date' => "2017-03-15 23:59:00",
                 'created' => date("Y-m-d H:i:s"),
@@ -246,7 +100,7 @@ class AddProjectData extends AbstractMigration
             [
                 'name' => "Technická realizace",
                 'description' => "Rizika, která mohla vzniknout během technické realizace projektu.",
-                'project_id' => 1,
+                'project_id' => 2,
                 'start_date' => "2017-03-15 08:00:00",
                 'end_date' => "2017-05-05 23:59:00",
                 'created' => date("Y-m-d H:i:s"),
@@ -275,7 +129,7 @@ class AddProjectData extends AbstractMigration
                 'reaction' => "Provedení průzkumu schopnosti a znalosti jednotlivých členů týmu a tomu odpovídající rozdělení zodpovědnosti.",
                 'severity' => 0.8,
                 'risk_type_id' => VNITRNI_R,
-                'phase_id' => ORGANIZACE_E,
+                'phase_id' => ORGANIZACE_E2,
                 'resposibleFor_id' => 2,
                 'creator_id' => 1,
                 'start_date' => "2017-03-15 08:00:00",
@@ -295,7 +149,7 @@ class AddProjectData extends AbstractMigration
                 'reaction' => "Uspořádání teambuildingove akce, vyvařování se nespolečenských a nekomunikativních lidí v týmu.",
                 'severity' => 0.8,
                 'risk_type_id' => VNITRNI_R,
-                'phase_id' => ORGANIZACE_E,
+                'phase_id' => ORGANIZACE_E2,
                 'resposibleFor_id' => 2,
                 'creator_id' => 1,
                 'start_date' => "2017-02-15 08:00:00",
@@ -315,7 +169,7 @@ class AddProjectData extends AbstractMigration
                 'reaction' => "Mít co nejflexibilnější členy v týmu, nebo nějaké lidí mimo tým jako záložní.",
                 'severity' => 0.6,
                 'risk_type_id' => VNITRNI_R,
-                'phase_id' => ORGANIZACE_E,
+                'phase_id' => ORGANIZACE_E2,
                 'resposibleFor_id' => 2,
                 'creator_id' => 1,
                 'start_date' => "2017-02-03 08:00:00",
@@ -335,7 +189,7 @@ class AddProjectData extends AbstractMigration
                 'reaction' => "Mít v záloze lidí, které je možno přijmout do týmu, mít v smlouvě výpovědní dobu.",
                 'severity' => 0.7,
                 'risk_type_id' => VNITRNI_R,
-                'phase_id' => ORGANIZACE_E,
+                'phase_id' => ORGANIZACE_E2,
                 'resposibleFor_id' => 2,
                 'creator_id' => 1,
                 'start_date' => "2017-02-03 08:00:00",
@@ -355,7 +209,7 @@ class AddProjectData extends AbstractMigration
                 'reaction' => "Vytvoření postu zástupce vedoucího pro vhodného jedince.",
                 'severity' => 0.8,
                 'risk_type_id' => VNITRNI_R,
-                'phase_id' => ORGANIZACE_E,
+                'phase_id' => ORGANIZACE_E2,
                 'resposibleFor_id' => 2,
                 'creator_id' => 1,
                 'start_date' => "2017-02-03 08:00:00",
@@ -375,7 +229,7 @@ class AddProjectData extends AbstractMigration
                 'reaction' => "Důsledně promýšlení a časově odhadnutí práce na jednotlivých částech projektu. Důsledný odhad efektivity pracovníků.",
                 'severity' => 0.8,
                 'risk_type_id' => VNEJSI_R,
-                'phase_id' => ORGANIZACE_E,
+                'phase_id' => ORGANIZACE_E2,
                 'resposibleFor_id' => 2,
                 'creator_id' => 1,
                 'start_date' => "2017-02-05 08:00:00",
@@ -398,7 +252,7 @@ class AddProjectData extends AbstractMigration
                 'reaction' => "Neformální schůzka se zákazníkem a rozbor jeho potřeb.",
                 'severity' => 0.95,
                 'risk_type_id' => ORGANIZACNI_R,
-                'phase_id' => SPECIFIKACE_E,
+                'phase_id' => SPECIFIKACE_E2,
                 'resposibleFor_id' => 2,
                 'creator_id' => 1,
                 'start_date' => "2017-02-15 08:00:00",
@@ -418,7 +272,7 @@ class AddProjectData extends AbstractMigration
                 'reaction' => "Důsledná analýza jednotlivých jednání a jejich krajních případů, zaznamenání do specifikace požadavků.",
                 'severity' => 0.7,
                 'risk_type_id' => ORGANIZACNI_R,
-                'phase_id' => SPECIFIKACE_E,
+                'phase_id' => SPECIFIKACE_E2,
                 'resposibleFor_id' => 5,
                 'creator_id' => 1,
                 'start_date' => "2017-02-15 08:00:00",
@@ -438,7 +292,7 @@ class AddProjectData extends AbstractMigration
                 'reaction' => "Předložit zákazníkovi specifikaci ke schválení a vytvořit schvalovací dokument.",
                 'severity' => 0.8,
                 'risk_type_id' => ORGANIZACNI_R,
-                'phase_id' => SPECIFIKACE_E,
+                'phase_id' => SPECIFIKACE_E2,
                 'resposibleFor_id' => 5,
                 'creator_id' => 1,
                 'start_date' => "2017-02-15 08:00:00",
@@ -458,7 +312,7 @@ class AddProjectData extends AbstractMigration
                 'reaction' => "Udělat důkladnou analýzu návrhu databáze vzhledem k funknosti aplikace",
                 'severity' => 0.6,
                 'risk_type_id' => ORGANIZACNI_R,
-                'phase_id' => NAVRH_E,
+                'phase_id' => NAVRH_E2,
                 'resposibleFor_id' => 6,
                 'creator_id' => 1,
                 'start_date' => "2017-03-01 08:00:00",
@@ -478,7 +332,7 @@ class AddProjectData extends AbstractMigration
                 'reaction' => "Změny musí být schválený týmem a musí být dohodnuto případně navýšení rozpočtu a posunutí ukončení projektu.",
                 'severity' => 0.8,
                 'risk_type_id' => VNEJSI_R,
-                'phase_id' => NAVRH_E,
+                'phase_id' => NAVRH_E2,
                 'resposibleFor_id' => 2,
                 'creator_id' => 1,
                 'start_date' => "2017-02-03 08:00:00",
@@ -498,7 +352,7 @@ class AddProjectData extends AbstractMigration
                 'reaction' => "Hlavním vstupem pro specifikaci je zákazník, nepřidávat tam nic navíc.",
                 'severity' => 0.8,
                 'risk_type_id' => ORGANIZACNI_R,
-                'phase_id' => SPECIFIKACE_E,
+                'phase_id' => SPECIFIKACE_E2,
                 'resposibleFor_id' => 5,
                 'creator_id' => 1,
                 'start_date' => "2017-02-15 08:00:00",
@@ -518,7 +372,7 @@ class AddProjectData extends AbstractMigration
                 'reaction' => "Důkladná domluva a sepsání toho, jak mají jednotlivá rozhraní vypadat, dodržování tohoto vzhledu.",
                 'severity' => 0.6,
                 'risk_type_id' => VNITRNI_R,
-                'phase_id' => NAVRH_E,
+                'phase_id' => NAVRH_E2,
                 'resposibleFor_id' => 4,
                 'creator_id' => 1,
                 'start_date' => "2017-03-01 08:00:00",
@@ -538,7 +392,7 @@ class AddProjectData extends AbstractMigration
                 'reaction' => "Změna vzhledu.",
                 'severity' => 0.5,
                 'risk_type_id' => VNITRNI_R,
-                'phase_id' => NAVRH_E,
+                'phase_id' => NAVRH_E2,
                 'resposibleFor_id' => 4,
                 'creator_id' => 1,
                 'start_date' => "2017-03-01 08:00:00",
@@ -558,7 +412,7 @@ class AddProjectData extends AbstractMigration
                 'reaction' => "Odsouhlasení platformy zákazníkem.",
                 'severity' => 0.9,
                 'risk_type_id' => TECHNICKA_R,
-                'phase_id' => SPECIFIKACE_E,
+                'phase_id' => SPECIFIKACE_E2,
                 'resposibleFor_id' => 2,
                 'creator_id' => 1,
                 'start_date' => "2017-03-01 08:00:00",
@@ -581,7 +435,7 @@ class AddProjectData extends AbstractMigration
                 'reaction' => "Tvoření plánu v celém týmu a zahrnutí každého jeho detailů, myslet dopředu.",
                 'severity' => 0.6,
                 'risk_type_id' => RIZENI_R,
-                'phase_id' => PLANOVANI_E,
+                'phase_id' => PLANOVANI_E2,
                 'resposibleFor_id' => 2,
                 'creator_id' => 1,
                 'start_date' => "2017-03-01 08:00:00",
@@ -601,7 +455,7 @@ class AddProjectData extends AbstractMigration
                 'reaction' => "Pravidelná kontrola stavu a případně řešení zpoždění co nejdříve.",
                 'severity' => 0.7,
                 'risk_type_id' => RIZENI_R,
-                'phase_id' => PLANOVANI_E,
+                'phase_id' => PLANOVANI_E2,
                 'resposibleFor_id' => 2,
                 'creator_id' => 1,
                 'start_date' => "2017-02-05 08:00:00",
@@ -621,7 +475,7 @@ class AddProjectData extends AbstractMigration
                 'reaction' => "Konzultace návaznosti jednotlivých části v rámci celého týmu. Správný odhad trvání části.",
                 'severity' => 0.8,
                 'risk_type_id' => RIZENI_R,
-                'phase_id' => PLANOVANI_E,
+                'phase_id' => PLANOVANI_E2,
                 'resposibleFor_id' => 2,
                 'creator_id' => 1,
                 'start_date' => "2017-02-15 08:00:00",
@@ -641,7 +495,7 @@ class AddProjectData extends AbstractMigration
                 'reaction' => "Započítat do odhadů i možná zpoždění, pokud nastane problém, řešit jej včas změnovým řízením.",
                 'severity' => 0.9,
                 'risk_type_id' => RIZENI_R,
-                'phase_id' => PLANOVANI_E,
+                'phase_id' => PLANOVANI_E2,
                 'resposibleFor_id' => 2,
                 'creator_id' => 1,
                 'start_date' => "2017-03-01 08:00:00",
@@ -664,7 +518,7 @@ class AddProjectData extends AbstractMigration
                 'reaction' => "Vyhrazení některého člena týmu, který se bude zabývat problémy s vývojovými prostředky, pravidelně aktualizace.",
                 'severity' => 0.9,
                 'risk_type_id' => TECHNICKA_R,
-                'phase_id' => REALIZACE_E,
+                'phase_id' => REALIZACE_E2,
                 'resposibleFor_id' => 1,
                 'creator_id' => 1,
                 'start_date' => "2017-02-03 08:00:00",
@@ -684,7 +538,7 @@ class AddProjectData extends AbstractMigration
                 'reaction' => "Použití pouze ověřených knihoven.",
                 'severity' => 0.3,
                 'risk_type_id' => TECHNICKA_R,
-                'phase_id' => REALIZACE_E,
+                'phase_id' => REALIZACE_E2,
                 'resposibleFor_id' => 4,
                 'creator_id' => 1,
                 'start_date' => "2017-03-01 08:00:00",
@@ -704,7 +558,7 @@ class AddProjectData extends AbstractMigration
                 'reaction' => "Dopredna domluva na užitých knihovnách",
                 'severity' => 0.2,
                 'risk_type_id' => TECHNICKA_R,
-                'phase_id' => REALIZACE_E,
+                'phase_id' => REALIZACE_E2,
                 'resposibleFor_id' => 4,
                 'creator_id' => 1,
                 'start_date' => "2017-03-01 08:00:00",
@@ -724,7 +578,7 @@ class AddProjectData extends AbstractMigration
                 'reaction' => "Zálohovat co nejčastěji master branch.",
                 'severity' => 0.9,
                 'risk_type_id' => TECHNICKA_R,
-                'phase_id' => REALIZACE_E,
+                'phase_id' => REALIZACE_E2,
                 'resposibleFor_id' => 4,
                 'creator_id' => 1,
                 'start_date' => "2017-03-15 08:00:00",
@@ -747,7 +601,7 @@ class AddProjectData extends AbstractMigration
                 'reaction' => "Zálohovat data a mít pojištěný hmotný majetek firmy.",
                 'severity' => 0.8,
                 'risk_type_id' => EXTERNI_R,
-                'phase_id' => REALIZACE_E,
+                'phase_id' => REALIZACE_E2,
                 'resposibleFor_id' => 2,
                 'creator_id' => 1,
                 'start_date' => "2017-02-03 08:00:00",
@@ -767,7 +621,7 @@ class AddProjectData extends AbstractMigration
                 'reaction' => "Mít ve smlouvě se zákazníkem zahrnuty storno poplatky, které by případně kompenzovaly finanční ztrátu.",
                 'severity' => 0.9,
                 'risk_type_id' => EXTERNI_R,
-                'phase_id' => REALIZACE_E,
+                'phase_id' => REALIZACE_E2,
                 'resposibleFor_id' => 3,
                 'creator_id' => 1,
                 'start_date' => "2017-02-03 08:00:00",
@@ -787,7 +641,7 @@ class AddProjectData extends AbstractMigration
                 'reaction' => "Vypracování kvalitní příručky a provedení zaškolení na úrovni koncových uživatelů.",
                 'severity' => 0.4,
                 'risk_type_id' => EXTERNI_R,
-                'phase_id' => REALIZACE_E,
+                'phase_id' => REALIZACE_E2,
                 'resposibleFor_id' => 3,
                 'creator_id' => 1,
                 'start_date' => "2017-03-15 08:00:00",
@@ -805,7 +659,7 @@ class AddProjectData extends AbstractMigration
                 'name' => "Administrátor",
                 'description' => "Administrátor se stará o správu aplikace.",
                 'user_id' => 1,
-                'client_id' => 1,
+                'client_id' => 2,
                 'created' => date("Y-m-d H:i:s"),
                 'updated' => date("Y-m-d H:i:s")
             ],
@@ -813,7 +667,7 @@ class AddProjectData extends AbstractMigration
                 'name' => "Project manager",
                 'description' => "Project manager řídí jednotlivé etapy projektu, kontroluje výstupy každé z nich a je zodpovědný za dodání celého projektu.",
                 'user_id' => 2,
-                'client_id' => 1,
+                'client_id' => 2,
                 'created' => date("Y-m-d H:i:s"),
                 'updated' => date("Y-m-d H:i:s")
             ],
@@ -821,7 +675,7 @@ class AddProjectData extends AbstractMigration
                 'name' => "Majitel",
                 'description' => "Vlastník aplikace.",
                 'user_id' => 3,
-                'client_id' => 1,
+                'client_id' => 2,
                 'created' => date("Y-m-d H:i:s"),
                 'updated' => date("Y-m-d H:i:s")
             ],
@@ -829,7 +683,7 @@ class AddProjectData extends AbstractMigration
                 'name' => "Běžný uživatel",
                 'description' => "Běžný uživatel aplikace.",
                 'user_id' => 4,
-                'client_id' => 1,
+                'client_id' => 2,
                 'created' => date("Y-m-d H:i:s"),
                 'updated' => date("Y-m-d H:i:s")
             ],
@@ -837,7 +691,7 @@ class AddProjectData extends AbstractMigration
                 'name' => "Běžný uživatel",
                 'description' => "Běžný uživatel aplikace.",
                 'user_id' => 5,
-                'client_id' => 1,
+                'client_id' => 2,
                 'created' => date("Y-m-d H:i:s"),
                 'updated' => date("Y-m-d H:i:s")
             ],
@@ -845,7 +699,7 @@ class AddProjectData extends AbstractMigration
                 'name' => "Běžný uživatel",
                 'description' => "Běžný uživatel aplikace.",
                 'user_id' => 5,
-                'client_id' => 1,
+                'client_id' => 2,
                 'created' => date("Y-m-d H:i:s"),
                 'updated' => date("Y-m-d H:i:s")
             ],
@@ -853,7 +707,7 @@ class AddProjectData extends AbstractMigration
                 'name' => "Běžný uživatel",
                 'description' => "Běžný uživatel aplikace.",
                 'user_id' => 6,
-                'client_id' => 1,
+                'client_id' => 2,
                 'created' => date("Y-m-d H:i:s"),
                 'updated' => date("Y-m-d H:i:s")
             ]
@@ -865,61 +719,61 @@ class AddProjectData extends AbstractMigration
         $rows = [
             [
                 'user_id' => 1,
-                'phase_id' => 1,
+                'phase_id' => 6,
                 'created' => date("Y-m-d H:i:s"),
                 'updated' => date("Y-m-d H:i:s")
             ],
             [
                 'user_id' => 1,
-                'phase_id' => 2,
+                'phase_id' => 7,
                 'created' => date("Y-m-d H:i:s"),
                 'updated' => date("Y-m-d H:i:s")
             ],
             [
                 'user_id' => 1,
-                'phase_id' => 3,
+                'phase_id' => 8,
                 'created' => date("Y-m-d H:i:s"),
                 'updated' => date("Y-m-d H:i:s")
             ],
             [
                 'user_id' => 1,
-                'phase_id' => 4,
+                'phase_id' => 9,
                 'created' => date("Y-m-d H:i:s"),
                 'updated' => date("Y-m-d H:i:s")
             ],
             [
                 'user_id' => 2,
-                'phase_id' => 2,
+                'phase_id' => 10,
                 'created' => date("Y-m-d H:i:s"),
                 'updated' => date("Y-m-d H:i:s")
             ],
             [
                 'user_id' => 3,
-                'phase_id' => 3,
+                'phase_id' => 6,
                 'created' => date("Y-m-d H:i:s"),
                 'updated' => date("Y-m-d H:i:s")
             ],
             [
                 'user_id' => 3,
-                'phase_id' => 3,
+                'phase_id' => 7,
                 'created' => date("Y-m-d H:i:s"),
                 'updated' => date("Y-m-d H:i:s")
             ],
             [
                 'user_id' => 6,
-                'phase_id' => 3,
+                'phase_id' => 8,
                 'created' => date("Y-m-d H:i:s"),
                 'updated' => date("Y-m-d H:i:s")
             ],
             [
                 'user_id' => 5,
-                'phase_id' => 5,
+                'phase_id' => 9,
                 'created' => date("Y-m-d H:i:s"),
                 'updated' => date("Y-m-d H:i:s")
             ],
             [
                 'user_id' => 6,
-                'phase_id' => 5,
+                'phase_id' => 7,
                 'created' => date("Y-m-d H:i:s"),
                 'updated' => date("Y-m-d H:i:s")
             ]
@@ -931,37 +785,37 @@ class AddProjectData extends AbstractMigration
         $rows = [
             [
                 'user_id' => 1,
-                'project_id' => 1,
+                'project_id' => 2,
                 'created' => date("Y-m-d H:i:s"),
                 'updated' => date("Y-m-d H:i:s")
             ],
             [
                 'user_id' => 2,
-                'project_id' => 1,
+                'project_id' => 2,
                 'created' => date("Y-m-d H:i:s"),
                 'updated' => date("Y-m-d H:i:s")
             ],
             [
                 'user_id' => 3,
-                'project_id' => 1,
+                'project_id' => 2,
                 'created' => date("Y-m-d H:i:s"),
                 'updated' => date("Y-m-d H:i:s")
             ],
             [
                 'user_id' => 4,
-                'project_id' => 1,
+                'project_id' => 2,
                 'created' => date("Y-m-d H:i:s"),
                 'updated' => date("Y-m-d H:i:s")
             ],
             [
                 'user_id' => 5,
-                'project_id' => 1,
+                'project_id' => 2,
                 'created' => date("Y-m-d H:i:s"),
                 'updated' => date("Y-m-d H:i:s")
             ],
             [
                 'user_id' => 6,
-                'project_id' => 1,
+                'project_id' => 2,
                 'created' => date("Y-m-d H:i:s"),
                 'updated' => date("Y-m-d H:i:s")
             ]

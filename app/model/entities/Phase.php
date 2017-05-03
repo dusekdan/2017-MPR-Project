@@ -87,15 +87,16 @@ class Phase
 
 	/**
 	 * Rizika k dané fazi
-	 * @ORM\OneToMany(targetEntity="Risk", mappedBy="phase")
+	 * @ORM\OneToMany(targetEntity="Risk", mappedBy="phase", cascade={"remove"})
 	 * @var Risk[]|Collection
 	 */
 	protected $risks;
 
 	/**
 	 * Uživatelé k dané fazi
-	 * @ORM\ManyToMany(targetEntity="User", inversedBy="phases")
+	 * @ORM\ManyToMany(targetEntity="User", inversedBy="phases", cascade={"remove"})
 	 * @ORM\JoinTable(name="users_on_phases")
+	 * @ORM\JoinColumn(onDelete="CASCADE")
 	 * @var User[]|Collection
 	 */
 	protected $users;
@@ -109,7 +110,6 @@ class Phase
 
 	public function __construct($name, $description, $startDate, $endDate, $project)
 	{
-
 		$this->setName($name);
 		$this->setDescription($description);
 		$this->setStartDate($startDate);
