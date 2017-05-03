@@ -17,6 +17,23 @@
                         <h4 class="header-title m-t-0 m-b-30">Info o projektu</h4>
                         <div class="row">
                             <div class="col-lg-12">
+                                <p>{$project->description}</p>
+
+                                <table class="table table-striped m-0">
+                                    <tr>
+                                        <th>Začátek:</th><td>{$project->startDate|date:'%d.%m.%Y'}</td>
+                                        <th>Konec:</th><td>{$project->endDate|date:'%d.%m.%Y'}</td>
+                                        <th>Projektový manažer:</th><td>{$project->projectManager->firstName} {$project->projectManager->lastName}</td>
+                                        <th>Klient:</th><td>{$project->client->name}</td>
+                                    </tr>
+                                </table>
+
+
+
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-12">
                                 <ul class="nav nav-tabs">
                                     <li role="presentation" class="active">
                                         <a href="#phases" class="project-item" role="tab" data-toggle="tab" aria-expanded="true">Fáze a rizika</a>
@@ -24,9 +41,7 @@
                                     <li role="presentation" class="">
                                         <a href="#users" class="project-item" role="tab" data-toggle="tab" aria-expanded="false">Uživatelé</a>
                                     </li>
-                                    <li role="presentation" class="">
-                                        <a href="#description" class="project-item" role="tab" data-toggle="tab" aria-expanded="false">Popis</a>
-                                    </li>
+
                                 </ul>
                                 <div class="tab-content">
                                     <div role="tabpanel" class="tab-pane fade active in" id="phases">
@@ -45,11 +60,14 @@
                                                             <div class="panel-body">
                                                                 <div class="row">
                                                                     <h3>Info</h3>
-                                                                    <ul>
-                                                                        <li>{$phase->description}</li>
-                                                                        <li>OD: {$phase->startDate|date:'%d.%m.%Y'}</li>
-                                                                        <li>DO: {$phase->endDate|date:'%d.%m.%Y'}</li>
-                                                                    </ul>
+                                                                    <p>{$phase->description}</p>
+
+                                                                    <table class="table table-striped m-0">
+                                                                        <tr>
+                                                                            <th>Začátek:</th><td>{$phase->startDate|date:'%d.%m.%Y'}</td>
+                                                                            <th>Konec:</th><td>{$phase->endDate|date:'%d.%m.%Y'}</td>
+                                                                        </tr>
+                                                                    </table>
                                                                     <h3>Rizika</h3>
                                                                     <div class="scroll-table">
                                                                         <table class="table table-striped m-0">
@@ -174,9 +192,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div role="tabpanel" class="tab-pane fade" id="description">
-                                        <p>{$project->description}</p>
-                                    </div>
+
                                 </div>
                             </div><!-- end col -->
                         </div>
