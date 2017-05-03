@@ -3,11 +3,10 @@
 }
 
 .project-menu{
-    background-color: #00aced;
+    background-color: #253138;
+    color: #98a6ad;
     border-radius: 5px 5px 0 0;
     border: none;
-    padding: 5px;
-    padding-bottom: 0;
 }
 
 
@@ -42,22 +41,29 @@
 
 .nav-tabs > li > a, .nav-tabs > li > a:hover{
     background-color: transparent;
-    color: white;
+    color: #98a6ad;
     border: none;
 }
 
 .nav-tabs > li.active > a, .nav-tabs > li.active > a:hover, .nav-tabs > li.active > a:focus{
     border: none;
-    color: #98a6ad;
-    background-color: #253138;
+    color: white;
+    background-color: #00aced;
     border-radius: 5px 5px 0 0;
-    font-weight: bold;
+    margin: 0 5px;
 }
 
 .row h3{
     color: #98a6ad;
 }
 
+.actions{
+    width: 90px;
+}
+.actions > a{
+    color: silver;
+    margin: 2px;
+}
 
 /**
 Formuláře
