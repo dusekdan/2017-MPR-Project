@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\AdminModule\Forms;
 
+use App\Model\Entities\Project;
 use App\Model\Entities\Risk;
 use Nette;
 use Nette\Application\UI\Form;
@@ -139,7 +140,82 @@ class ProjectFormFactory extends BaseFactory
     {
         $from = new Nette\Utils\DateTime($values['from']);
         $to = new Nette\Utils\DateTime($values['to']);
-        $this->projectFacade->createProject($values['name'], $values['subscription'], $from, $to, $values['projectManagerId'], $values['clientId'], true);
+        $client = $this->clientFacade->getClient($values['clientId']);
+        $projectManager = $this->userFacade->getUser($values['projectManagerId']);
+        $this->projectFacade->createProject($values['name'], $values['subscription'], $from, $to, $projectManager, $client, true);
+
+        return;
+    }
+
+    /**
+     * Edit project form
+     * @return Form
+     */
+    public function editProject($onSuccess, Project $project)
+    {
+
+        $users = [];
+        foreach ($this->userFacade->getUsers() as $u) {
+            $users[$u->getId()] = $u->getFirstName()." ".$u->getLastName()." (".$u->getUsername().")";
+        }
+
+        $clients = [];
+        foreach ($this->clientFacade->getClients() as $c) {
+            $clients[$c->getId()] = $c->getName();
+        }
+
+        $form = $this->create();
+        $form->getElementPrototype()->class('ajax');
+
+        $form->addText('name', 'Jméno')
+            ->addRule(Form::FILLED, "Vyplňte prosím jméno")
+            ->setDefaultValue($project->getName());
+
+        $form->addTextArea('subscription', 'Popis')
+            ->addRule(Form::FILLED, "Vyplňte prosím popis projektu")
+            ->addRule(Form::MAX_LENGTH, 'Poznámka je příliš dlouhá', 300)
+            ->setDefaultValue($project->getDescription());
+
+        $form->addText('from', 'Od')
+            ->setAttribute('class', 'datepicker')
+            ->addRule(Form::FILLED, "Vyplňte prosím časový interval")
+            ->setDefaultValue($project->getStartDate()->format('d.m.Y'));
+
+        $form->addText('to', 'Do')
+            ->setAttribute('class', 'datepicker')
+            ->addRule(Form::FILLED, "Vyplňte prosím časový interval")
+            ->setDefaultValue($project->getEndDate()->format('d.m.Y'));
+
+        $form->addSelect('projectManagerId','Projektový manažer', $users)
+            ->addRule(Form::FILLED, "Vyplňte prosím projektového manažera")
+            ->setDefaultValue($project->getProjectManager()->getId());
+
+        $form->addSelect('clientId','Klient', $clients)
+            ->addRule(Form::FILLED, "Vyplňte prosím klienta")
+            ->setDefaultValue($project->getClient()->getId());
+
+        $form->addSubmit('editProject', 'Uložit');
+        $form->addButton('cancel', 'Zrušit')
+            ->setAttribute('data-dismiss', 'modal');
+
+        $form->onSuccess[] = [$this, 'editProjectSubmitted'];
+        $form->onSuccess[] = $onSuccess;
+
+        $form->addHidden('idProject',$project->id);
+
+        return $form;
+    }
+
+    /**
+     * @param Form $form
+     * @param $values
+     */
+    public function editProjectSubmitted(Form $form, $values)
+    {
+        $to = new Nette\Utils\DateTime($values['to']);
+        $client = $this->clientFacade->getClient($values['clientId']);
+        $projectManager = $this->userFacade->getUser($values['projectManagerId']);
+        $this->projectFacade->editProject($values, $client, $projectManager, true);
 
         return;
     }

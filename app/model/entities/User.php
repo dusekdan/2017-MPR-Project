@@ -135,9 +135,14 @@ class User
 	protected $projects;
 
 	/**
+	 * Projekty kterých je manager
+	 * @ORM\OneToMany(targetEntity="Project", mappedBy="projectManager")
+	 */
+	protected $project;
+
+	/**
 	 * @var array roleList
 	 */
-
 	static private $roleList = [
 		'user' => 'User',
 		'administrator' => 'Administrátor',

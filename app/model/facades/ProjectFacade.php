@@ -35,9 +35,9 @@ class ProjectFacade
 		$this->repository = $em->getRepository(Project::class);
 	}
 
-    public function createProject($name, $description, $startDate, $endDate, $projectManagerId, $clientId, $autoFlush)
+    public function createProject($name, $description, $startDate, $endDate, $projectManager, $client, $autoFlush)
     {
-        $project = new Project($clientId, $name, $description, $startDate, $endDate,  $projectManagerId);
+        $project = new Project($client, $name, $description, $startDate, $endDate,  $projectManager);
         $this->em->persist($project);
         if ($autoFlush) {
             $this->em->flush();
@@ -71,4 +71,28 @@ class ProjectFacade
 			}
 		}
 	}
+
+    public function editProject($values, $client, $projectManager, $autoFlush)
+    {
+
+        $startDate = new Nette\Utils\DateTime($values['from']);
+        $endDate = new Nette\Utils\DateTime($values['to']);
+
+
+        $project = $this->getProject($values['idProject']);
+
+        $project->setName($values['name']);
+        $project->setDescription($values['subscription']);
+        $project->setClient($client);
+        $project->setStartDate($startDate);
+        $project->setEndDate($endDate);
+        $project->setUpdated(new \DateTime('now'));
+        $project->setProjectManager($projectManager);
+        $project->setEnabled(true);
+
+        $this->em->persist($project);
+        if ($autoFlush) {
+            $this->em->flush();
+        }
+    }
 }

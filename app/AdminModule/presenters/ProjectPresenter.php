@@ -283,5 +283,51 @@ class ProjectPresenter extends BasePresenter
 		$this->userFacade->removeUser($userId, true);
 		$this->flashMessage("Uživatel přidán s id $userId byl smazán.", "success");
 	}
+
+
+
+    // edit project
+    public function actionEditProject($projectId)
+    {
+
+        if ($this->isAjax()) {
+            $this->payload->isModal = true;
+            //pokud je modal zobrazen překresluju už jen formulář
+            if ($this->showModal == false) {
+                $this->redrawControl("modal");
+                $this->showModal = true;
+            } else {
+                // snippetem překreslim jen to co je potřeba po odeslání formuláře
+                // formulář (pro zobrazeni chyb), vyslednou tabulku po zmene v DB
+            }
+        }
+    }
+
+    public function renderEditProject()
+    {
+    }
+
+    /**
+     * Edit project.
+     * @return Nette\Application\UI\Form
+     */
+    public function createComponentEditProjectForm()
+    {
+        $project = $this->projectFacade->getProject($this->getParameter('projectId'));
+
+        return $this->projectFormF->editProject(function() {
+            $this->flashMessage("Upravení projektu proběhlo úspěšne.", "info");
+            $this->showModal = false;
+            $this->redirect('Homepage:default');
+        }, $project);
+    }
+
+    public function handleRemoveProject($projectId)
+    {
+        $this->projectFacade->removeProject($projectId, true);
+        $this->flashMessage("Projekt byl smazán.", "success");
+        unset($this->project);
+        $this->redirect('Homepage:default');
+    }
 	
 }

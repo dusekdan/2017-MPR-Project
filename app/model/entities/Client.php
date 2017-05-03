@@ -69,6 +69,10 @@ class Client
      */
     protected  $enabled;
 
+	/**
+	 * @ORM\OneToOne(targetEntity="Project", mappedBy="client")
+	 */
+    protected $project;
 
 
 	public function __construct($name ,$description)

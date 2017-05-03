@@ -34,8 +34,8 @@ class Project
 
     /**
      * ID Clienta, komu Projekt patri
-     * @ORM\Column(name="client_id", type="integer")
-     * @var integer
+     * @ORM\OneToOne(targetEntity="Client", inversedBy="project")
+     * @ORM\JoinColumn(name="client_id", referencedColumnName="id")
      */
     protected $client;
 
@@ -95,7 +95,8 @@ class Project
 
     /**
      * Id usera ako manazera projektu
-     * @ORM\Column(name="project_manager_id", type="integer")
+     * @ORM\ManyToOne(targetEntity="User", inversedBy="projects")
+     * @ORM\JoinColumn(name="project_manager_id", referencedColumnName="id")
      */
     protected $projectManager;
 
@@ -114,16 +115,16 @@ class Project
 	protected $users;
 
 
-	public function __construct($idClient, $name, $description, $startDate, $endDate, $idProjectManager)
+	public function __construct($client, $name, $description, $startDate, $endDate, $projectManager)
 	{
-		$this->setClient($idClient);
+		$this->setClient($client);
 		$this->setName($name);
 		$this->setDescription($description);
 		$this->setStartDate($startDate);
 		$this->setEndDate($endDate);
 		$this->setUpdated(new \DateTime('now'));
 		$this->setCreated(new \DateTime('now'));
-	    $this->setProjectManager($idProjectManager);
+	    $this->setProjectManager($projectManager);
 	    $this->setEnabled(true);
 
 	    $this->phases = new ArrayCollection();
