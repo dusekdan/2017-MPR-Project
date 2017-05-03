@@ -71,4 +71,27 @@ class ProjectFacade
 			}
 		}
 	}
+
+    public function editProject($values, $autoFlush)
+    {
+
+        $startDate = new Nette\Utils\DateTime($values['startDate']);
+        $endDate = new Nette\Utils\DateTime($values['endDate']);
+
+        $project = $this->getProject($values['idProject']);
+
+        $project->setName($values['name']);
+        $project->setDescription($values['description']);
+        $project->setClient($idClient);
+        $project->setStartDate($startDate);
+        $project->setEndDate($endDate);
+        $project->setUpdated(new \DateTime('now'));
+        $project->setProjectManager($idProjectManager);
+        $project->setEnabled(true);
+
+        $this->em->persist($project);
+        if ($autoFlush) {
+            $this->em->flush();
+        }
+    }
 }
