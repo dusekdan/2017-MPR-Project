@@ -72,8 +72,8 @@
                                                                                     <td>{$risk->time}h</td>
                                                                                     <td>{$risk->result}</td>
                                                                                     <td class="actions">
-                                                                                        <a n:href="Project:changeRisk, 'idRisk'=>$risk->id" class="on-default edit-row ajax"><i class="glyphicon glyphicon-pencil"></i></a>
-                                                                                        <a n:href="deleteRisk!, 'idRisk'=>$risk->id" class="on-default remove-row"><i class="glyphicon glyphicon-trash"></i></a>
+                                                                                        <a n:href="Project:editRisk, 'idRisk'=>$risk->id" class="on-default edit-row ajax"><i class="glyphicon glyphicon-pencil"></i></a>
+                                                                                        <a n:href="Project:removeRisk, 'idRisk'=>$risk->id" class="on-default remove-row ajax"><i class="glyphicon glyphicon-trash"></i></a>
                                                                                     </td>
                                                                                 </tr>
                                                                             </tbody>

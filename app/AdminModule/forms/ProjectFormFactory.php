@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\AdminModule\Forms;
 
+use App\Model\Entities\Risk;
 use Nette;
 use Nette\Application\UI\Form;
 use App\Model\Facades\ProjectFacade;
@@ -100,11 +101,11 @@ class ProjectFormFactory extends BaseFactory
 		$form->addText('description', 'Popis')
 			->addRule(Form::FILLED, "Vyplňte prosím popis rizika");
 		
-		$form->addText('from', 'Od')
+		$form->addText('startDate', 'Od')
 			->setAttribute('class', 'datepicker')
 			->addRule(Form::FILLED, "Vyplňte prosím časový interval");
 		
-		$form->addText('to', 'Do')
+		$form->addText('endDate', 'Do')
 			->setAttribute('class', 'datepicker')
 			->addRule(Form::FILLED, "Vyplňte prosím časový interval");
 		
@@ -114,7 +115,7 @@ class ProjectFormFactory extends BaseFactory
 			->addRule(Form::FLOAT, "Pravděpodobnost musí být desetinné číslo")
 			->addRule(Form::MAX, "Pravděpodobnost musí být menší než 100%", 100)
 			->addRule(Form::MIN, "Pravděpodobnost musí být větší než 0",0)
-			->addRule(Form::FILLED, "Vyplňte prosím popis rizika");
+			->addRule(Form::FILLED, "Vyplňte prosím pravděpodobnost rizika");
 		
 		$form->addText('time', 'Čas')
 			->setType('number')
@@ -160,20 +161,16 @@ class ProjectFormFactory extends BaseFactory
 		return $form;
 	}
 	
-	/**
-	 * @param Form $form
-	 * @param $values
-	 */
 	public function addRiskSubmitted(Form $form, $values)
 	{
-		$from = new Nette\Utils\DateTime($values['from']);
-		$to = new Nette\Utils\DateTime($values['to']);
+		$startDate = new Nette\Utils\DateTime($values['startDate']);
+		$endDate = new Nette\Utils\DateTime($values['endDate']);
 		$phase = $this->phaseFacade->getPhase($values['phaseId']);
 		$riskType = $this->riskTypeFacade->getRiskType($values['riskTypeId']);
 		$responsibleUser = $this->userFacade->getUser($values['responsibleUserId']);
 		$creator = $this->userFacade->getUser($values['creatorId']);
 		
-		$this->riskFacade->createRisk($values['name'], $values['description'], $values['probability'], $values['money'], $values['time'], $values['result'], $values['primaryCause'], $values['trigger'], $values['reaction'], $values['severity'], $from, $to, $riskType, $phase, $responsibleUser, $creator, true);
+		$this->riskFacade->createRisk($values['name'], $values['description'], $values['probability'], $values['money'], $values['time'], $values['result'], $values['primaryCause'], $values['trigger'], $values['reaction'], $values['severity'], $startDate, $endDate, $riskType, $phase, $responsibleUser, $creator, true);
 		
 		return;
 	}
@@ -225,46 +222,136 @@ class ProjectFormFactory extends BaseFactory
 	}
 	
 	/**
-	 * Change existing risk form
+	 * Edit existing risk form
 	 * @return Form
 	 */
-	public function changeRisk($stuff)
+	public function editRisk($onSuccess, $risk)
 	{
+		$users = [];
+		foreach ($risk->getPhase()->getUsers() as $u) {
+			$users[$u->getId()] = $u->getFirstName()." ".$u->getLastName()." (".$u->getUsername().")";
+		}
+		
+		$riskTypes = $this->riskTypeFacade->getRiskTypes();
+		$types = [];
+		foreach ($riskTypes as $riskType) {
+			$types[$riskType->getId()] = $riskType->getName();
+		}
+		
 		$form = $this->create();
 		$form->getElementPrototype()->class('ajax');
 		
-		$form->addText('firstName', 'Jméno')
+		$form->addText('name', 'Název rizika')
+			->setDefaultValue($risk->getName())
 			->addRule(Form::FILLED, "Vyplňte prosím jméno");
 		
-		$form->addText('subscription', 'Popis')
+		$form->addText('description', 'Popis')
+			->setDefaultValue($risk->getDescription())
 			->addRule(Form::FILLED, "Vyplňte prosím popis rizika");
 		
-		$form->addText('fromAdRisk', 'Od')
+		$form->addText('startDate', 'Od')
+			->setDefaultValue($risk->getStartDate()->format('d.m.Y'))
+			->setAttribute('class', 'datepicker')
 			->addRule(Form::FILLED, "Vyplňte prosím časový interval");
 		
-		$form->addText('toAdRisk', 'Do')
+		$form->addText('endDate', 'Do')
+			->setDefaultValue($risk->getEndDate()->format('d.m.Y'))
+			->setAttribute('class', 'datepicker')
 			->addRule(Form::FILLED, "Vyplňte prosím časový interval");
 		
 		$form->addText('probability', 'Pravděpodobnost')
-			->addRule(Form::FILLED, "Vyplňte pravděpodobnost prosím");
-		
-		$form->addText('prize', 'Cena')
-			->addRule(Form::FILLED, "Vyplňte prosím odhad ceny");
+			->setDefaultValue($risk->getProbability())
+			->setType('number')
+			->setAttribute('step','0.1')
+			->addRule(Form::FLOAT, "Pravděpodobnost musí být desetinné číslo")
+			->addRule(Form::MAX, "Pravděpodobnost musí být menší než 100%", 100)
+			->addRule(Form::MIN, "Pravděpodobnost musí být větší než 0",0)
+			->addRule(Form::FILLED, "Vyplňte prosím pravděpodobnost rizika");
 		
 		$form->addText('time', 'Čas')
-			->addRule(Form::FILLED, "Vyplňte prosím časový odhad");
+			->setDefaultValue($risk->getTime())
+			->setType('number')
+			->setAttribute('placeholder', 'Zadejte počet hodin')
+			->addRule(Form::MIN, "Čas nesmí být záporný", 0)
+			->addRule(Form::FILLED, "Vyplňte prosím čas");
 		
-		$form->addText('state', 'Stav')
-			->addRule(Form::FILLED, "Vyplňte prosím stav rizika");
+		$form->addText('money', 'Peníze')
+			->setDefaultValue($risk->getMoney())
+			->setType('number')
+			->addRule(Form::FILLED, "Vyplňte prosím peněžní odhad");
 		
-		$form->addGroup()
-			->setOption('container', 'fieldset class=formFooter');
-		$form->addSubmit('changePhase', 'Upravit');
-		$form->addSubmit('cancel', 'Zrušit');
+		$form->addText('result', 'Výsledek')
+			->setDefaultValue($risk->getResult())
+			->addRule(Form::FILLED, "Vyplňte prosím výsledek rizika");
+		
+		$form->addText('trigger', 'Spouštěč')
+			->setDefaultValue($risk->getTrigger())
+			->addRule(Form::FILLED, "Vyplňte prosím spouštěč rizika");
+		
+		$form->addText('reaction', 'Reakce')
+			->setDefaultValue($risk->getReaction())
+			->addRule(Form::FILLED, "Vyplňte prosím reakci na riziko");
+		
+		$form->addText('severity', 'Závažnost')
+			->setDefaultValue($risk->getSeverity())
+			->addRule(Form::FILLED, "Vyplňte prosím závažnost rizika");
+		
+		$form->addTextArea('primaryCause', 'Primární účel')
+			->setDefaultValue($risk->getPrimaryCause())
+			->addRule(Form::FILLED, "Vyplňte prosím primární účel rizika");
+		
+		$form->addSelect('riskTypeId','Typ rizika', $types)
+			->addRule(Form::FILLED, "Vyplňte prosím typ rizika");
+		
+		$form->addSelect('responsibleUserId','Zodpovědný uživatel', $users)
+			->addRule(Form::FILLED, "Vyplňte prosím zodpovědného uživatele za riziko");
+		
+		
+		$form->addHidden('idRisk',$risk->id);
+		
+		$form->addSubmit('addRisk', 'Upravit');
+		$form->addButton('cancel', 'Zrušit')
+			->setAttribute('data-dismiss', 'modal');
+		
+		$form->onSuccess[] = [$this, 'editRiskSubmitted'];
+		$form->onSuccess[] = $onSuccess;
 		
 		return $form;
 	}
 	
+	public function editRiskSubmitted(Form $form, $values)
+	{
+		$responsibleUser = $this->userFacade->getUser($values['responsibleUserId']);
+		$riskType = $this->riskTypeFacade->getRiskType($values['riskTypeId']);
+		
+		$this->riskFacade->editRisk($values, $riskType, $responsibleUser, true);
+		
+		return;
+	}
+	
+	public function removeRisk($onSuccess, $risk)
+	{
+		$form = $this->create();
+		$form->getElementPrototype()->class('ajax');
+		
+		$form->addSubmit('removeRisk', 'Odstranit');
+		$form->addButton('cancel', 'Zrušit')
+			->setAttribute('data-dismiss', 'modal');
+		
+		$form->addHidden("idRisk", $risk->id);
+		
+		$form->onSuccess[] = [$this, 'removeRiskSubmitted'];
+		$form->onSuccess[] = $onSuccess;
+		
+		return $form;
+	}
+	
+	public function removeRiskSubmitted(Form $form, $values)
+	{
+		$risk = $this->riskFacade->getRisk($values['idRisk']);
+		$this->riskFacade->removeRisk($risk, true);
+		return;
+	}
 	
 	public function addUserProject($project, callable $onSuccess)
 	{

@@ -9,6 +9,7 @@ use App\Model;
 use App\Model\Facades\ProjectFacade;
 use App\Model\Facades\UserFacade;
 use App\Model\Facades\PhaseFacade;
+use App\Model\Facades\RiskFacade;
 use App\AdminModule\Forms\ProjectFormFactory;
 use Tracy\Debugger;
 
@@ -24,14 +25,21 @@ class ProjectPresenter extends BasePresenter
 	/** @var PhaseFacade */
 	private $phaseFacade;
 	
+	/** @var RiskFacade */
+	private $riskFacade;
+	
 	/** @persistent */
-	public $actualFase;
+	public $actualPhase;
+	
+	/** @persistent */
+	public $actualRisk;
 
-	public function __construct(ProjectFormFactory $projectFormFactory, UserFacade $userFacade, PhaseFacade $phaseFacade)
+	public function __construct(ProjectFormFactory $projectFormFactory, UserFacade $userFacade, PhaseFacade $phaseFacade, RiskFacade $riskFacade)
 	{
 		$this->projectFactory = $projectFormFactory;
 		$this->userFacade = $userFacade;
 		$this->phaseFacade = $phaseFacade;
+		$this->riskFacade = $riskFacade;
 	}
 
 	public function renderDefault()
@@ -60,7 +68,7 @@ class ProjectPresenter extends BasePresenter
     public function renderAddRisk($phase)
     {
     	if (isset($phase)) {
-		    $this->actualFase = $phase;
+		    $this->actualPhase = $phase;
 	    }
     }
 
@@ -70,17 +78,17 @@ class ProjectPresenter extends BasePresenter
      */
     public function createComponentAddRiskForm()
     {
-        $phase = $this->phaseFacade->getPhase($this->actualFase);
+        $phase = $this->phaseFacade->getPhase($this->actualPhase);
         
     	return $this->projectFactory->addRisk(function() {
-            $this->flashMessage("Nový risk úspěšně přidán.", "success");
+            $this->flashMessage("Nové riziko úspěšně přidáno.", "success");
 	        $this->showModal = false; // pokud je to ok, zavřu to
 	        $this->redirect('Project:default');
         }, $phase, $this->user);
     }
 
 
-    public function actionChangeRisk()
+    public function actionEditRisk()
     {
         if ($this->isAjax()) {
             $this->payload->isModal = true;
@@ -95,21 +103,66 @@ class ProjectPresenter extends BasePresenter
         }
     }
 
-    public function renderChangeRisk(){}
-
-    /**
-     * Change existing risk.
-     * @return Nette\Application\UI\Form
-     */
-    public function createComponentChangeRiskForm()
-    {
-        return $this->projectFactory->changeRisk(function() {
-            $this->flashMessage("Risk úspěšně změněn.", "success");
-	        $this->showModal = false; // pokud je to ok, zavřu to
-	        $this->redirect('Project:default');
-        });
+    public function renderEditRisk($idRisk){
+    	
+	    if (isset($idRisk)) {
+		    $this->actualRisk = $idRisk;
+	    }
     }
 
+    /**
+     * Edit existing risk.
+     * @return Nette\Application\UI\Form
+     */
+    public function createComponentEditRiskForm()
+    {
+	    $risk = $this->riskFacade->getRisk($this->actualRisk);
+    	
+        return $this->projectFactory->editRisk(function() {
+            $this->flashMessage("Riziko bylo úspěšně upraveno.", "success");
+	        $this->showModal = false; // pokud je to ok, zavřu to
+	        $this->redirect('Project:default');
+        }, $risk);
+    }
+	
+	
+	public function actionRemoveRisk()
+	{
+		if ($this->isAjax()) {
+			$this->payload->isModal = true;
+			//pokud je modal zobrazen překresluju už jen formulář
+			if ($this->showModal == false) {
+				$this->redrawControl("modal");
+				$this->showModal = true;
+			} else {
+				// snippetem překreslim jen to co je potřeba po odeslání formuláře
+				// formulář (pro zobrazeni chyb), vyslednou tabulku po zmene v DB
+			}
+		}
+	}
+ 
+	public function renderRemoveRisk($idRisk){
+		if (isset($idRisk)) {
+			$this->actualRisk = $idRisk;
+		}
+		
+		$this->template->risk = $this->riskFacade->getRisk($this->actualRisk);
+	}
+	
+	/**
+	 * Remove existing risk.
+	 * @return Nette\Application\UI\Form
+	 */
+	public function createComponentRemoveRiskForm()
+	{
+		$risk = $this->riskFacade->getRisk($this->actualRisk);
+		
+		return $this->projectFactory->removeRisk(function() {
+			$this->flashMessage("Riziko bylo úspěšně odstraněno.", "success");
+			$this->showModal = false; // pokud je to ok, zavřu to
+			$this->redirect('Project:default');
+		}, $risk);
+	}
 
     public function actionAddPhase()
     {
@@ -168,10 +221,4 @@ class ProjectPresenter extends BasePresenter
 
 		return $form;
 	}
-
-    public function handleDeleteRisk($idRisk)
-    {
-    	//@TODO dodělat mazání
-	    $this->flashMessage("Risk s id:$idRisk byl úspěšně smazán.", "success");
-    }
 }

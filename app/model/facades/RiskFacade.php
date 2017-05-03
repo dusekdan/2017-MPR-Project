@@ -83,4 +83,38 @@ class RiskFacade
 			$this->em->flush();
 		}
 	}
+	
+	/**
+	 * Upraví riziko zadanými hodnotami.
+	 */
+	public function editRisk($values, $riskType, $responsibleUser, $autoFlush)
+	{
+		
+		$startDate = new Nette\Utils\DateTime($values['startDate']);
+		$endDate = new Nette\Utils\DateTime($values['endDate']);
+		
+		$risk = $this->getRisk($values['idRisk']);
+		
+		$risk->setName($values['name']);
+		$risk->setDescription($values['description']);
+		$risk->setStartDate($startDate);
+		$risk->setEndDate($endDate);
+		$risk->setProbability($values['probability']);
+		$risk->setTime($values['time']);
+		$risk->setMoney($values['money']);
+		$risk->setResult($values['result']);
+		$risk->setTrigger($values['trigger']);
+		$risk->setReaction($values['reaction']);
+		$risk->setSeverity($values['severity']);
+		$risk->setPrimaryCause($values['primaryCause']);
+		
+		$risk->setRiskType($riskType);
+		$risk->setResponsibleUser($responsibleUser);
+		
+		$this->em->persist($risk);
+		if ($autoFlush) {
+			$this->em->flush();
+		}
+	}
+	
 }
