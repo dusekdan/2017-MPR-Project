@@ -34,8 +34,8 @@ class Project
 
     /**
      * ID Clienta, komu Projekt patri
-     * @ORM\Column(name="client_id", type="integer")
-     * @var integer
+     * @ORM\OneToOne(targetEntity="Client", inversedBy="project")
+     * @ORM\JoinColumn(name="client_id", referencedColumnName="id")
      */
     protected $client;
 
@@ -95,7 +95,8 @@ class Project
 
     /**
      * Id usera ako manazera projektu
-     * @ORM\Column(name="project_manager_id", type="integer")
+     * @ORM\ManyToOne(targetEntity="User", inversedBy="projects")
+     * @ORM\JoinColumn(name="project_manager_id", referencedColumnName="id")
      */
     protected $projectManager;
 
