@@ -21,26 +21,28 @@ class StatisticPresenter extends BasePresenter
 
     public function renderDefault()
     {
-        $this->template->anyVariable = 'any value';
-        $arrJSON = [];
-        $project = $this->projectFacade->getProject($this->project);
-        foreach ($project->phases as $phase){
-            $phaseJSON= [];
-            foreach($phase->risks as $risk){
-                $riskJSON = [];
-                array_push($riskJSON, $risk->id);
-                array_push($riskJSON, $risk->name);
-                array_push($riskJSON, $risk->probability);
-                array_push($riskJSON, $risk->money);
-                array_push($riskJSON, $risk->severity);
-                array_push($riskJSON, $risk->primaryCause);
-                array_push($riskJSON, $risk->result);
-                array_push($phaseJSON, $riskJSON);
+        if(isset($this->project)){
+            $this->template->anyVariable = 'any value';
+            $arrJSON = [];
+            $project = $this->projectFacade->getProject($this->project);
+            foreach ($project->phases as $phase){
+                $phaseJSON= [];
+                foreach($phase->risks as $risk){
+                    $riskJSON = [];
+                    array_push($riskJSON, $risk->id);
+                    array_push($riskJSON, $risk->name);
+                    array_push($riskJSON, $risk->probability);
+                    array_push($riskJSON, $risk->money);
+                    array_push($riskJSON, $risk->severity);
+                    array_push($riskJSON, $risk->primaryCause);
+                    array_push($riskJSON, $risk->result);
+                    array_push($phaseJSON, $riskJSON);
+                }
+                array_push($arrJSON, $phaseJSON);
             }
-            array_push($arrJSON, $phaseJSON);
-        }
 
-        $this->template->JSONData = json_encode($arrJSON,JSON_UNESCAPED_UNICODE);
+            $this->template->JSONData = json_encode($arrJSON,JSON_UNESCAPED_UNICODE);
+        }
     }
 
 }
