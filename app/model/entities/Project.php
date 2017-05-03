@@ -124,6 +124,7 @@ class Project
 		$this->setUpdated(new \DateTime('now'));
 		$this->setCreated(new \DateTime('now'));
 	    $this->setProjectManager($idProjectManager);
+	    $this->setEnabled(true);
 
 	    $this->phases = new ArrayCollection();
 	    $this->users = new ArrayCollection();

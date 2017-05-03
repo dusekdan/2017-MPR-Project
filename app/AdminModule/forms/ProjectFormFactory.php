@@ -93,7 +93,7 @@ class ProjectFormFactory extends BaseFactory
 
         $clients = [];
         foreach ($this->clientFacade->getClients() as $c) {
-            $clients[$c->getId()] = $c->getFirstName()." ".$u->getLastName()." (".$u->getUsername().")";
+            $clients[$c->getId()] = $c->getName();
         }
 
         $form = $this->create();

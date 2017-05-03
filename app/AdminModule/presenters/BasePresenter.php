@@ -101,7 +101,7 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter
         return $this->projectFormF->addProject(function() {
             $this->flashMessage("Přidání projektu proběhlo úspěšne.", "info");
             $this->showModal = false;
-            $this->redirect('this');
+            $this->redirect('Homepage:default');
         });
     }
 

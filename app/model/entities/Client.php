@@ -33,8 +33,8 @@ class Client
 
     /**
      * Id Company do ktorej Client patri
-     * @ORM\Column(name="company_id", type="integer")
-     * @var integer
+     * @ORM\Column(name="name", type="string")
+     * @var string
      */
 
 	protected $name;
@@ -49,14 +49,14 @@ class Client
 
     /**
      * Datum vytvorenia zaznamu o riziku
-     * @ORM\Column(name"created_", type="datetime")
+     * @ORM\Column(name="created", type="datetime")
      * @var \DateTime
      */
     protected $created;
 
     /**
      * Datum posledneho update zaznamu o riziku
-     * @ORM\Column(name"updatedt", type="datetime")
+     * @ORM\Column(name="updated", type="datetime")
      * @var \DateTime
      */
     protected $updated;
@@ -77,6 +77,7 @@ class Client
 		$this->setDescription($description);
 		$this->setUpdated(new \DateTime('now'));
 		$this->setCreated(new \DateTime('now'));
+		$this->setEnabled(true);
     }
 
 }
