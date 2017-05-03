@@ -37,25 +37,27 @@ class AddProjectData extends AbstractMigration
     /**
      * Migrate Up.
      */
+
     public function up()
     {
         //Users heslo je 123456
+
         $rows = [
             [
-                'email'    => "admin@admin.cz",
-                'password'  => '$2y$10$.kckarxUiumF2QkqHWx6DuTu6JHU/ChWMd3AsiRFiRtEUBjZiKA12',
+                'email' => "admin@admin.cz",
+                'password' => '$2y$10$.kckarxUiumF2QkqHWx6DuTu6JHU/ChWMd3AsiRFiRtEUBjZiKA12',
                 'username' => "admin",
                 'first_name' => "John",
                 'last_name' => "Black",
                 'birthday' => "2000-01-01",
                 'phone' => "+420123456789",
-                'role' => "administrator",
+                'role' => "administrátor",
                 'created' => date("Y-m-d H:i:s"),
                 'updated' => date("Y-m-d H:i:s")
             ],
             [
-                'email'    => "projectManager@projectManager.cz",
-                'password'  => '$2y$10$.kckarxUiumF2QkqHWx6DuTu6JHU/ChWMd3AsiRFiRtEUBjZiKA12',
+                'email' => "projectManager@projectManager.cz",
+                'password' => '$2y$10$.kckarxUiumF2QkqHWx6DuTu6JHU/ChWMd3AsiRFiRtEUBjZiKA12',
                 'username' => "admin2",
                 'first_name' => "Jane",
                 'last_name' => "Bone",
@@ -66,8 +68,8 @@ class AddProjectData extends AbstractMigration
                 'updated' => date("Y-m-d H:i:s")
             ],
             [
-                'email'    => "owner@owner.cz",
-                'password'  => '$2y$10$.kckarxUiumF2QkqHWx6DuTu6JHU/ChWMd3AsiRFiRtEUBjZiKA12',
+                'email' => "owner@owner.cz",
+                'password' => '$2y$10$.kckarxUiumF2QkqHWx6DuTu6JHU/ChWMd3AsiRFiRtEUBjZiKA12',
                 'username' => "owner",
                 'first_name' => "Fanda",
                 'last_name' => "Kollar",
@@ -78,8 +80,8 @@ class AddProjectData extends AbstractMigration
                 'updated' => date("Y-m-d H:i:s")
             ],
             [
-                'email'    => "programmer@user.cz",
-                'password'  => '$2y$10$.kckarxUiumF2QkqHWx6DuTu6JHU/ChWMd3AsiRFiRtEUBjZiKA12',
+                'email' => "programmer@user.cz",
+                'password' => '$2y$10$.kckarxUiumF2QkqHWx6DuTu6JHU/ChWMd3AsiRFiRtEUBjZiKA12',
                 'username' => "programmer",
                 'first_name' => "Gustav",
                 'last_name' => "Kolka",
@@ -90,8 +92,8 @@ class AddProjectData extends AbstractMigration
                 'updated' => date("Y-m-d H:i:s")
             ],
             [
-                'email'    => "analytic@user.cz",
-                'password'  => '$2y$10$.kckarxUiumF2QkqHWx6DuTu6JHU/ChWMd3AsiRFiRtEUBjZiKA12',
+                'email' => "analytic@user.cz",
+                'password' => '$2y$10$.kckarxUiumF2QkqHWx6DuTu6JHU/ChWMd3AsiRFiRtEUBjZiKA12',
                 'username' => "analytic",
                 'first_name' => "Bill",
                 'last_name' => "Herris",
@@ -102,8 +104,8 @@ class AddProjectData extends AbstractMigration
                 'updated' => date("Y-m-d H:i:s")
             ],
             [
-                'email'    => "dbspecialist@user.cz",
-                'password'  => '$2y$10$.kckarxUiumF2QkqHWx6DuTu6JHU/ChWMd3AsiRFiRtEUBjZiKA12',
+                'email' => "dbspecialist@user.cz",
+                'password' => '$2y$10$.kckarxUiumF2QkqHWx6DuTu6JHU/ChWMd3AsiRFiRtEUBjZiKA12',
                 'username' => "dbspecialist",
                 'first_name' => "Mia",
                 'last_name' => "Jones",
@@ -114,71 +116,77 @@ class AddProjectData extends AbstractMigration
                 'updated' => date("Y-m-d H:i:s")
             ]
         ];
+
         $this->insert($this->tableNameU, $rows);
 
         //Risk type
+
         $rows = [
             [
-                'name' => "Vnitrni rizika",
-                'description' => "Rizika, ktera mohou byt ovlivnovanana manazerem projektu nebo projektovym tymem.",
+                'name' => "Vnitřní rizika",
+                'description' => "Rizika, která mohou být ovlivnovanana manažerem projektu nebo projektovým týmem.",
                 'created' => date("Y-m-d H:i:s"),
                 'updated' => date("Y-m-d H:i:s")
             ],
             [
-                'name' => "Vnejsi rizika",
-                'description' => "Rizika, ktera nejsou nijak ovlivnena osobami zapojenych do vyvoje.",
+                'name' => "Vnější rizika",
+                'description' => "Rizika, která nejsou nijak ovlivněna osobami zapojených do vývoje.",
                 'created' => date("Y-m-d H:i:s"),
                 'updated' => date("Y-m-d H:i:s")
             ],
             [
-                'name' => "Technicka rizika",
-                'description' => "Rizika ohrozujici kvalitu nebo provedeni projektu, ktera jsou zapricinena pouzitim neoverene nebo nove technologie, co jeji zmeny behem vyvoje.",
+                'name' => "Technická rizika",
+                'description' => "Rizika ohrožující kvalitu nebo provedení projektu, která jsou zapříčiněna použitím neověřené nebo nové technologie, co její změny během vývoje.",
                 'created' => date("Y-m-d H:i:s"),
                 'updated' => date("Y-m-d H:i:s")
             ],
             [
-                'name' => "Rizika rizeni projektu",
-                'description' => "Rizika spojena s casem, nekvalitnim planem projektu ci spatnym pouzitim postupu pro vyvoj projektu.",
+                'name' => "Rizika řízení projektu",
+                'description' => "Rizika spojena s časem, nekvalitním plánem projektu či špatným použitím postupu pro vývoj projektu.",
                 'created' => date("Y-m-d H:i:s"),
                 'updated' => date("Y-m-d H:i:s")
             ],
             [
-                'name' => "Organizacni rizika",
-                'description' => "Rizika pramenici z nekonzistence case, ceny a vecneho rozsahu vyvoje projektu.",
+                'name' => "Organizační rizika",
+                'description' => "Rizika pramenící z nekonzistence čase, ceny a věčného rozsahu vývoje projektu.",
                 'created' => date("Y-m-d H:i:s"),
                 'updated' => date("Y-m-d H:i:s")
             ],
             [
-                'name' => "Externi rizika",
-                'description' => "Rizika zpusobena zmenami nebo udalostmi mimo samotne deni projektu.",
+                'name' => "Externí rizika",
+                'description' => "Rizika způsobena změnami nebo událostmi mimo samotné dění projektu.",
                 'created' => date("Y-m-d H:i:s"),
                 'updated' => date("Y-m-d H:i:s")
             ]
         ];
+
         $this->insert($this->tableNameRT, $rows);
 
         //Client
+
         $rows = [
             [
-                'name'    => "Dell",
-                'description'  => "Zakaznik Dell vyuzivajici nase sluzby.",
+                'name' => "Dell",
+                'description' => "Zákazník Dell využívající naše služby.",
                 'created' => date("Y-m-d H:i:s"),
                 'updated' => date("Y-m-d H:i:s")
             ],
             [
-                'name'    => "Samsung",
-                'description'  => "Zakaznik Samsung vyuzivajici nase sluzby.",
+                'name' => "Samsung",
+                'description' => "Zákazník Samsung využívající naše služby.",
                 'created' => date("Y-m-d H:i:s"),
                 'updated' => date("Y-m-d H:i:s")
             ]
         ];
+
         $this->insert($this->tableNameC, $rows);
 
         //Project
+
         $rows = [
             [
-                'name' => "Programova podpora rizeni rizik v IT projektech.",
-                'description' => "Vyvoj webove aplikace pro podporu posuzovani rizik v projektech IT.",
+                'name' => "Programová podpora řízení rizik v IT projektech.",
+                'description' => "Vývoj webove aplikace pro podporu posuzování rizik v projektech IT.",
                 'project_manager_id' => 2,
                 'client_id' => 1,
                 'start_date' => "2017-03-02 08:00:00",
@@ -187,13 +195,15 @@ class AddProjectData extends AbstractMigration
                 'updated' => date("Y-m-d H:i:s")
             ]
         ];
+
         $this->insert($this->tableNamePr, $rows);
 
         //Phase
+
         $rows = [
             [
-                'name' => "Pocatecni organizacni zalezitosti",
-                'description' => "Rizika, ktera mohla vzniknout pri organizaci projektu.",
+                'name' => "Počáteční organizační záležitosti",
+                'description' => "Rizika, která mohla vzniknout při organizací projektu.",
                 'project_id' => 1,
                 'start_date' => "2017-02-03 08:00:00",
                 'end_date' => "2017-07-03 23:59:00",
@@ -201,8 +211,8 @@ class AddProjectData extends AbstractMigration
                 'updated' => date("Y-m-d H:i:s")
             ],
             [
-                'name' => "Analyza a specifikace pozadavku, navrh",
-                'description' => "Rizika, ktera mohla vzniknout pri analyze a specifikaci pozadavku.",
+                'name' => "Analýza a specifikace požadavků, návrh",
+                'description' => "Rizika, která mohla vzniknout při analýze a specifikaci požadavků.",
                 'project_id' => 1,
                 'start_date' => "2017-02-03 08:00:0",
                 'end_date' => "2017-02-15 23:59:00",
@@ -210,8 +220,8 @@ class AddProjectData extends AbstractMigration
                 'updated' => date("Y-m-d H:i:s")
             ],
             [
-                'name' => "Navrh",
-                'description' => "Rizika, ktera mohla vzniknout behem navrhu aplikace.",
+                'name' => "Návrh",
+                'description' => "Rizika, která mohla vzniknout během návrhu aplikace.",
                 'project_id' => 1,
                 'start_date' => "2017-02-15 08:00:00",
                 'end_date' => "2017-03-01 23:59:00",
@@ -219,8 +229,8 @@ class AddProjectData extends AbstractMigration
                 'updated' => date("Y-m-d H:i:s")
             ],
             [
-                'name' => "Planovani projektu",
-                'description' => "Rizika, ktera mohla vzniknout pri planovani projektu.",
+                'name' => "Plánování projektu",
+                'description' => "Rizika, která mohla vzniknout při plánování projektu.",
                 'project_id' => 1,
                 'start_date' => "2017-03-01 08:00:00",
                 'end_date' => "2017-03-15 23:59:00",
@@ -228,16 +238,16 @@ class AddProjectData extends AbstractMigration
                 'updated' => date("Y-m-d H:i:s")
             ],
             [
-                'name' => "Technicka realizace",
-                'description' => "Rizika, ktera mohla vzniknout behem technicke realizace projektu.",
+                'name' => "Technická realizace",
+                'description' => "Rizika, která mohla vzniknout během technické realizace projektu.",
                 'project_id' => 1,
                 'start_date' => "2017-03-15 08:00:00",
                 'end_date' => "2017-05-05 23:59:00",
                 'created' => date("Y-m-d H:i:s"),
                 'updated' => date("Y-m-d H:i:s")
             ]
-
         ];
+
         $this->insert($this->tableNamePh, $rows);
 
         //Risks
@@ -248,17 +258,16 @@ class AddProjectData extends AbstractMigration
 
             // organizace a komunikace
             [
-                'name'    => "Absence urcitych schopnosti nektereho clena tymu.",
-                'description'  => "Byla predpokladana znalost.",
+                'name' => "Absence určitých schopnosti některého člena týmu.",
+                'description' => "Byla předpokládaná znalost.",
                 'probability' => 0.2,
                 'money' => 20000,
                 'time' => 20,
-                'result' => "Zpomaleni praci ci jejich uplne zastaveni.",
-                'primary_cause' => "Nedostatecne provereni znalosti a schopnosti clenu tymu.",
+                'result' => "Zpomalení práci či jejich úplně zastavení.",
+                'primary_cause' => "Nedostatečné prověření znalosti a schopnosti členů týmu.",
                 'trigger' => "",
-                'reaction' => "Provedeni pruzkumu schopnosti a znalosti jednotlivych clenu tymu a tomu odpovidajici rozdeleni zodpovednosti.",
+                'reaction' => "Provedení průzkumu schopnosti a znalosti jednotlivých členů týmu a tomu odpovídající rozdělení zodpovědnosti.",
                 'severity' => 0.8,
-
                 'risk_type_id' => VNITRNI_R,
                 'phase_id' => ORGANIZACE_E,
                 'resposibleFor_id' => 2,
@@ -269,15 +278,15 @@ class AddProjectData extends AbstractMigration
                 'updated' => date("Y-m-d H:i:s")
             ],
             [
-                'name'    => "Spatna komunikace v tymu",
-                'description'  => "V tymu jsou lide, kteri spolu nedokazou spolupracovat",
+                'name' => "Špatná komunikace v týmu",
+                'description' => "V týmu jsou lidé, kteří spolu nedokážou spolupracovat",
                 'probability' => 0.2,
                 'money' => 60000,
                 'time' => 60,
-                'result' => "Zpomaleni postupu na projektu, chybejici predani informaci.",
-                'primary_cause' => "Clenove tymu se navzajem neznaji, jsou nekomunikativni.",
+                'result' => "Zpomalení postupu na projektu, chybějící předání informací.",
+                'primary_cause' => "Členové týmu se navzájem neznají, jsou nekomunikativní.",
                 'trigger' => "",
-                'reaction' => "Usporadani teambuildingove akce, vyvarovani se nespolecenskych a nekomunikativnich lidi v tymu.",
+                'reaction' => "Uspořádání teambuildingove akce, vyvařování se nespolečenských a nekomunikativních lidí v týmu.",
                 'severity' => 0.8,
                 'risk_type_id' => VNITRNI_R,
                 'phase_id' => ORGANIZACE_E,
@@ -289,15 +298,15 @@ class AddProjectData extends AbstractMigration
                 'updated' => date("Y-m-d H:i:s")
             ],
             [
-                'name'    => "Momentalni indispozice nektereho clena tymu.",
-                'description'  => "Nemoc, uraz.",
+                'name' => "Momentální indispozice některého člena týmu.",
+                'description' => "Nemoc, úraz.",
                 'probability' => 0.2,
                 'money' => 40000,
                 'time' => 40,
-                'result' => "Zpomaleni ci zastaveni nektere casti projektu.",
-                'primary_cause' => "Absence zastupce.",
+                'result' => "Zpomalení či zastavení některé části projektu.",
+                'primary_cause' => "Absence zástupce.",
                 'trigger' => "",
-                'reaction' => "Mit co nejflexibilnejsi cleny v tymu, nebo nejake lidi mimo tym jako zalozni.",
+                'reaction' => "Mít co nejflexibilnější členy v týmu, nebo nějaké lidí mimo tým jako záložní.",
                 'severity' => 0.6,
                 'risk_type_id' => VNITRNI_R,
                 'phase_id' => ORGANIZACE_E,
@@ -309,15 +318,15 @@ class AddProjectData extends AbstractMigration
                 'updated' => date("Y-m-d H:i:s")
             ],
             [
-                'name'    => "Opusteni clena tymu.",
-                'description'  => "Clen odchazi do jineho zamestnani.",
+                'name' => "Opuštění člena týmu.",
+                'description' => "Člen odchází do jiného zaměstnání.",
                 'probability' => 0.2,
                 'money' => 50000,
                 'time' => 50,
-                'result' => "Zpomaleni ci zastaveni nektere casti projektu.",
-                'primary_cause' => "Absence zastupce.",
+                'result' => "Zpomalení či zastavení některé části projektu.",
+                'primary_cause' => "Absence zástupce.",
                 'trigger' => "",
-                'reaction' => "Mit v zaloze lidi, ktere je mozno prijmout do tymu, mit v smlouve vypovedni dobu.",
+                'reaction' => "Mít v záloze lidí, které je možno přijmout do týmu, mít v smlouvě výpovědní dobu.",
                 'severity' => 0.7,
                 'risk_type_id' => VNITRNI_R,
                 'phase_id' => ORGANIZACE_E,
@@ -329,15 +338,15 @@ class AddProjectData extends AbstractMigration
                 'updated' => date("Y-m-d H:i:s")
             ],
             [
-                'name'    => "Docasna indispozice vedouciho.",
-                'description'  => "Nemoc nebo uraz projekt manazera.",
+                'name' => "Dočasná indispozice vedoucího.",
+                'description' => "Nemoc nebo úraz projekt manažera.",
                 'probability' => 0.1,
                 'money' => 50000,
                 'time' => 50,
-                'result' => "Chaoticke rizeni projektu.",
-                'primary_cause' => "Absence zastupce vedouciho projektu.",
+                'result' => "Chaotické řízení projektu.",
+                'primary_cause' => "Absence zástupce vedoucího projektu.",
                 'trigger' => "",
-                'reaction' => "Vytvoreni postu zastupce vedouciho pro vhodneho jedince.",
+                'reaction' => "Vytvoření postu zástupce vedoucího pro vhodného jedince.",
                 'severity' => 0.8,
                 'risk_type_id' => VNITRNI_R,
                 'phase_id' => ORGANIZACE_E,
@@ -349,15 +358,15 @@ class AddProjectData extends AbstractMigration
                 'updated' => date("Y-m-d H:i:s")
             ],
             [
-                'name'    => "Nerovnomerne rozdeleni praci na projektu.",
-                'description'  => "Nekteri clenove tymu nemaji co delat, ostatni nestihaji.",
+                'name' => "Nerovnoměrně rozdělení práci na projektu.",
+                'description' => "Někteří členové týmu nemají co dělat, ostatní nestíhají.",
                 'probability' => 0.2,
                 'money' => 60000,
                 'time' => 60,
-                'result' => "Stagnace urcitych clenu tymu.",
-                'primary_cause' => "Nedusledne rozdeleni prace a plan postupu na projektu.",
+                'result' => "Stagnace určitých členů týmu.",
+                'primary_cause' => "Nedůsledně rozdělení práce a plán postupu na projektu.",
                 'trigger' => "",
-                'reaction' => "Dusledne promysleni a casove odhadnuti prace na jednotlivych castech projektu. Dusledny odhad efektivity pracovniku.",
+                'reaction' => "Důsledně promýšlení a časově odhadnutí práce na jednotlivých částech projektu. Důsledný odhad efektivity pracovníků.",
                 'severity' => 0.8,
                 'risk_type_id' => VNEJSI_R,
                 'phase_id' => ORGANIZACE_E,
@@ -369,18 +378,18 @@ class AddProjectData extends AbstractMigration
                 'updated' => date("Y-m-d H:i:s")
             ],
 
+            // specifikace a návrh
 
-            // specifikace a navrh
             [
-                'name'    => "Nepochopeni potreb zakaznika.",
-                'description'  => "Na shuzce se zakaznikem nebylo probrano vse do detailu, zustaly otevrene otazky na celkove pouziti aplikace.",
+                'name' => "Nepochopení potřeb zákazníka.",
+                'description' => "Na shuzce se zákazníkem nebylo probráno vše do detailů, zůstaly otevřené otázky na celkové použití aplikace.",
                 'probability' => 0.5,
                 'money' => 30000,
                 'time' => 100,
-                'result' => "Nemoznost shodnout se se zakaznikem",
-                'primary_cause' => "Nedostatecny rozbor zakaznikovych potreb.",
+                'result' => "Nemožnost shodnout se se zákazníkem",
+                'primary_cause' => "Nedostatečný rozbor zákazníkových potřeb.",
                 'trigger' => "",
-                'reaction' => "Neformalni schuzka se zakaznikem a rozbor jeho potreb.",
+                'reaction' => "Neformální schůzka se zákazníkem a rozbor jeho potřeb.",
                 'severity' => 0.95,
                 'risk_type_id' => ORGANIZACNI_R,
                 'phase_id' => SPECIFIKACE_E,
@@ -392,15 +401,15 @@ class AddProjectData extends AbstractMigration
                 'updated' => date("Y-m-d H:i:s")
             ],
             [
-                'name'    => "Chybna specifikace.",
-                'description'  => "Typy jednani nejsou specifikovany spravne",
+                'name' => "Chybná specifikace.",
+                'description' => "Typy jednání nejsou specifikovány správné",
                 'probability' => 0.35,
                 'money' => 15000,
                 'time' => 50,
-                'result' => "Rozkol mezi predstavou zakaznika a vyslednou funkcnosti produktu.",
-                'primary_cause' => "Nedostatecne detailne pospsana specifikace pozadavku.",
+                'result' => "Rozkol mezi představou zákazníka a výslednou funkčnosti produktů.",
+                'primary_cause' => "Nedostatečné detailně pospsana specifikace požadavků.",
                 'trigger' => "",
-                'reaction' => "Dusledna analyza jednotlivych jednani a jejich krajnich pripadu, zaznamenani do specifikace pozadavku.",
+                'reaction' => "Důsledná analýza jednotlivých jednání a jejich krajních případů, zaznamenání do specifikace požadavků.",
                 'severity' => 0.7,
                 'risk_type_id' => ORGANIZACNI_R,
                 'phase_id' => SPECIFIKACE_E,
@@ -412,15 +421,15 @@ class AddProjectData extends AbstractMigration
                 'updated' => date("Y-m-d H:i:s")
             ],
             [
-                'name'    => "Neuplna specifikace.",
-                'description'  => "Chybi nejaky typ jednani.",
+                'name' => "Neúplná specifikace.",
+                'description' => "Chybí nějaký typ jednání.",
                 'probability' => 0.6,
                 'money' => 6000,
                 'time' => 20,
-                'result' => "Aplikace postrada nejakou funkcnost.",
-                'primary_cause' => "Nedostatecna kontrola ci konzultace se zakaznikem o specifikaci pozadavku.",
+                'result' => "Aplikace postrádá nějakou funkčnost.",
+                'primary_cause' => "Nedostatečná kontrola či konzultace se zákazníkem o specifikaci požadavků.",
                 'trigger' => "",
-                'reaction' => "Predlozit zakaznikovi specifikaci ke schvaleni a vytvorit schvalovaci dokument.",
+                'reaction' => "Předložit zákazníkovi specifikaci ke schválení a vytvořit schvalovací dokument.",
                 'severity' => 0.8,
                 'risk_type_id' => ORGANIZACNI_R,
                 'phase_id' => SPECIFIKACE_E,
@@ -432,15 +441,15 @@ class AddProjectData extends AbstractMigration
                 'updated' => date("Y-m-d H:i:s")
             ],
             [
-                'name'    => "Nevhodny navrh databaze.",
-                'description'  => "Databaze ma chybne navrzenou strukturu, nelze provadet nektere operace ze specifikace pozadavku.",
+                'name' => "Nevhodný návrh databáze.",
+                'description' => "Databáze má chybné navrženou strukturu, nelze provádět některé operace že specifikace požadavků.",
                 'probability' => 0.5,
                 'money' => 9000,
                 'time' => 30,
-                'result' => "Aplikace neni schopna vykonat nektere ze specifikovanych jednani.",
-                'primary_cause' => "Nedostatecna analyza navrhu database vzhledem k funkcnosti aplikace.",
+                'result' => "Aplikace není schopna vykonat některé že specifikovaných jednání.",
+                'primary_cause' => "Nedostatečná analýza návrhu database vzhledem k funkčnosti aplikace.",
                 'trigger' => "",
-                'reaction' => "Udelat dukladnou analyzu navrhu databaze vzhledem k funknosti aplikace",
+                'reaction' => "Udělat důkladnou analýzu návrhu databáze vzhledem k funknosti aplikace",
                 'severity' => 0.6,
                 'risk_type_id' => ORGANIZACNI_R,
                 'phase_id' => NAVRH_E,
@@ -452,15 +461,15 @@ class AddProjectData extends AbstractMigration
                 'updated' => date("Y-m-d H:i:s")
             ],
             [
-                'name'    => "Zmena zadani zakaznikem.",
-                'description'  => "Zakaznik zapomel nebo chybne predlozil jeho pozadavky.",
+                'name' => "Změna zadání zákazníkem.",
+                'description' => "Zákazník zapomel nebo chybné předložil jeho požadavky.",
                 'probability' => 0.35,
                 'money' => 6000,
                 'time' => 20,
-                'result' => "Kompletni zpomaleni a zdrazeni produktu.",
-                'primary_cause' => "Zakaznik si neujasnil dostatecne svoje pozadavky.",
+                'result' => "Kompletní zpomalení a zdražení produktů.",
+                'primary_cause' => "Zákazník si neujasnil dostatečně svoje požadavky.",
                 'trigger' => "",
-                'reaction' => "Zmeny musi byt schvaleny tymem a musi byt dohodnuto pripadne navyseni rozpoctu a posunuti ukonceni projektu.",
+                'reaction' => "Změny musí být schválený týmem a musí být dohodnuto případně navýšení rozpočtu a posunutí ukončení projektu.",
                 'severity' => 0.8,
                 'risk_type_id' => VNEJSI_R,
                 'phase_id' => NAVRH_E,
@@ -472,15 +481,15 @@ class AddProjectData extends AbstractMigration
                 'updated' => date("Y-m-d H:i:s")
             ],
             [
-                'name'    => "Prilis rozsahla specifikace, presahujici poteby zakaznika.",
-                'description'  => "Specifikace se zabyva dedulezitymi detaily, ktere nemaji vliv na spravne uchopeni potreb zakaznika",
+                'name' => "Příliš rozsáhlá specifikace, přesahující poteby zákazníka.",
+                'description' => "Specifikace se zabývá dedulezitymi detaily, které nemají vliv na správné uchopení potřeb zákazníka",
                 'probability' => 0.35,
                 'money' => 6000,
                 'time' => 20,
-                'result' => "Vyrazne zpozdeni a presahnuti rozpoctu.",
-                'primary_cause' => "Zabyvani se prilis velkymy detaily, ktere nemaji vliv na konecnou spravnou funkci aplikace.",
+                'result' => "Výrazně zpoždění a přesáhnutí rozpočtu.",
+                'primary_cause' => "Zabývání se příliš velkymy detaily, které nemají vliv na konečnou správnou funkci aplikace.",
                 'trigger' => "",
-                'reaction' => "Hlavnim vstupem pro specifikaci je zakaznik, nepridavat tam nic navic.",
+                'reaction' => "Hlavním vstupem pro specifikaci je zákazník, nepřidávat tam nic navíc.",
                 'severity' => 0.8,
                 'risk_type_id' => ORGANIZACNI_R,
                 'phase_id' => SPECIFIKACE_E,
@@ -492,15 +501,15 @@ class AddProjectData extends AbstractMigration
                 'updated' => date("Y-m-d H:i:s")
             ],
             [
-                'name'    => "Spatne navrzene rozhrani jednotlivych casti.",
-                'description'  => "Casti na sebe nelze jednoduse napojit.",
+                'name' => "Špatně navržené rozhraní jednotlivých části.",
+                'description' => "Části na sebe nelze jednoduše napojit.",
                 'probability' => 0.35,
                 'money' => 9000,
                 'time' => 30,
-                'result' => "Casti na sebe nelze napojit - nespravne fungujici system.",
-                'primary_cause' => "Nedostatecne overeni vystupu jednotlivych casti tak, aby odpovidali vstupum do casti jinych.",
+                'result' => "Části na sebe nelze napojit - nesprávné fungující systém.",
+                'primary_cause' => "Nedostatečné ověření výstupu jednotlivých části tak, aby odpovídali vstupům do části jiných.",
                 'trigger' => "",
-                'reaction' => "Dukladna domluva a sepsani toho, jak maji jednotliva rozhrani vypadat, dodrzovani tohoto vzhledu.",
+                'reaction' => "Důkladná domluva a sepsání toho, jak mají jednotlivá rozhraní vypadat, dodržování tohoto vzhledu.",
                 'severity' => 0.6,
                 'risk_type_id' => VNITRNI_R,
                 'phase_id' => NAVRH_E,
@@ -512,15 +521,15 @@ class AddProjectData extends AbstractMigration
                 'updated' => date("Y-m-d H:i:s")
             ],
             [
-                'name'    => "Nevhodny design.",
-                'description'  => "Zakaznik neni spokojen se vzhledem aplikace",
+                'name' => "Nevhodný design.",
+                'description' => "Zákazník není spokojen se vzhledem aplikace",
                 'probability' => 0.2,
                 'money' => 3000,
                 'time' => 10,
-                'result' => "Nespokojenost zakaznika.",
-                'primary_cause' => "Neprobrani vzhledu aplikace pred jeho aplikaci.",
+                'result' => "Nespokojenost zákazníka.",
+                'primary_cause' => "Neprobrani vzhledu aplikace před jeho aplikaci.",
                 'trigger' => "",
-                'reaction' => "Zmena vzhledu.",
+                'reaction' => "Změna vzhledu.",
                 'severity' => 0.5,
                 'risk_type_id' => VNITRNI_R,
                 'phase_id' => NAVRH_E,
@@ -532,15 +541,15 @@ class AddProjectData extends AbstractMigration
                 'updated' => date("Y-m-d H:i:s")
             ],
             [
-                'name'    => "Platforma nevyhovujici zakaznikovi.",
-                'description'  => "",
+                'name' => "Platforma nevyhovující zákazníkovi.",
+                'description' => "",
                 'probability' => 0.2,
                 'money' => 60000,
                 'time' => 60,
-                'result' => "Neprijaty produkt.",
-                'primary_cause' => "Neodstatecna konzultace na tema cilove platformy.",
+                'result' => "Nepřijatý produkt.",
+                'primary_cause' => "Neodstatecna konzultace na téma cílové platformy.",
                 'trigger' => "",
-                'reaction' => "Odsouhlaseni platformy zakaznikem.",
+                'reaction' => "Odsouhlasení platformy zákazníkem.",
                 'severity' => 0.9,
                 'risk_type_id' => TECHNICKA_R,
                 'phase_id' => SPECIFIKACE_E,
@@ -552,17 +561,18 @@ class AddProjectData extends AbstractMigration
                 'updated' => date("Y-m-d H:i:s")
             ],
 
-            // planovani
+            // plánování
+
             [
-                'name'    => "Chybejici cinnost v planu.",
-                'description'  => "Nezohledneni nezbytne cinnosti v casovem a rozpoctovem lanu projektu.",
+                'name' => "Chybějící činnost v plánu.",
+                'description' => "Nezohlednění nezbytné činnosti v časovém a rozpočtovém lánu projektu.",
                 'probability' => 0.1,
                 'money' => 60000,
                 'time' => 60,
-                'result' => "Zpozdeni realizace.",
-                'primary_cause' => "Nedusledna analyza planu projektu." ,
+                'result' => "Zpoždění realizace.",
+                'primary_cause' => "Nedůsledná analýza plánu projektu." ,
                 'trigger' => "",
-                'reaction' => "Tvoreni planu v celem tymu a zahrnuti kazdeho jeho detailu, myslet dopredu.",
+                'reaction' => "Tvoření plánu v celém týmu a zahrnutí každého jeho detailů, myslet dopředu.",
                 'severity' => 0.6,
                 'risk_type_id' => RIZENI_R,
                 'phase_id' => PLANOVANI_E,
@@ -574,15 +584,15 @@ class AddProjectData extends AbstractMigration
                 'updated' => date("Y-m-d H:i:s")
             ],
             [
-                'name'    => "Nedodrzovani terminu",
-                'description'  => "Behem vyvoje aplikace se nestiha dokoncovat v terminech to, co ma.",
+                'name' => "Nedodržování termínu",
+                'description' => "Během vývoje aplikace se nestíhá dokončovat v termínech to, co má.",
                 'probability' => 0.5,
                 'money' => 70000,
                 'time' => 70,
-                'result' => "Retezovy efekt zpomaleni navazujicich ukolu.",
-                'primary_cause' => "Spatne odhadnute doby trvani nekterych ukolu." ,
+                'result' => "Řetězový efekt zpomalení navazujících úkolů.",
+                'primary_cause' => "Špatně odhadnuté doby trvání některých úkolů." ,
                 'trigger' => "",
-                'reaction' => "Pravidelna kontrola stavu a pripadne reseni zpozdeni co nejdrive.",
+                'reaction' => "Pravidelná kontrola stavu a případně řešení zpoždění co nejdříve.",
                 'severity' => 0.7,
                 'risk_type_id' => RIZENI_R,
                 'phase_id' => PLANOVANI_E,
@@ -594,15 +604,15 @@ class AddProjectData extends AbstractMigration
                 'updated' => date("Y-m-d H:i:s")
             ],
             [
-                'name'    => "Spatne naplanovana posloupnost praci.",
-                'description'  => "Neni hotova cinnost, ktera je potreba byt hotova pro zapoceti cinnosti jine.",
+                'name' => "Špatně naplánována posloupnost práci.",
+                'description' => "Není hotová činnost, která je potřeba být hotová pro započetí činnosti jiné.",
                 'probability' => 0.4,
                 'money' => 30000,
                 'time' => 30,
-                'result' => "Casti tymu musi cekat, zpozdeni.",
-                'primary_cause' => "Nepromysleni nezbytnych vstupu pro jednotlive cinnosti.",
+                'result' => "Části týmu musí čekat, zpoždění.",
+                'primary_cause' => "Nepromyšleni nezbytných vstupu pro jednotlivé činnosti.",
                 'trigger' => "",
-                'reaction' => "Konzultace navaznosti jednotlivych casti v ramci celeho tymu. Spravny odhad trvani casti.",
+                'reaction' => "Konzultace návaznosti jednotlivých části v rámci celého týmu. Správný odhad trvání části.",
                 'severity' => 0.8,
                 'risk_type_id' => RIZENI_R,
                 'phase_id' => PLANOVANI_E,
@@ -614,15 +624,15 @@ class AddProjectData extends AbstractMigration
                 'updated' => date("Y-m-d H:i:s")
             ],
             [
-                'name'    => "Nedodrzeni finalniho deadlinu projektu.",
-                'description'  => "Dokonceni projektu ma zpozdeni.",
+                'name' => "Nedodržení finálního deadlinu projektu.",
+                'description' => "Dokončení projektu má zpoždění.",
                 'probability' => 0.35,
                 'money' => 80000,
                 'time' => 80,
-                'result' => "Nedodani produktu vcas = nespokojenost zakaznika.",
-                'primary_cause' => "Chybny odhad delky trvani prace na projektu, neodhaleni moznych zdrzeni." ,
+                'result' => "Nedodání produktů včas = nespokojenost zákazníka.",
+                'primary_cause' => "Chybný odhad délky trvání práce na projektu, neodhaleni možných zdržení." ,
                 'trigger' => "",
-                'reaction' => "Zapocitat do odhadu i mozna zpozdeni, pokud nastane problem, resit jej vcas zmenovym rizenim.",
+                'reaction' => "Započítat do odhadů i možná zpoždění, pokud nastane problém, řešit jej včas změnovým řízením.",
                 'severity' => 0.9,
                 'risk_type_id' => RIZENI_R,
                 'phase_id' => PLANOVANI_E,
@@ -634,17 +644,18 @@ class AddProjectData extends AbstractMigration
                 'updated' => date("Y-m-d H:i:s")
             ],
 
-            // technicka realizace
+            // technická realizace
+
             [
-                'name'    => "Problemy pri instalaci nebo behu vyvojovych prostredi.",
-                'description'  => "Pracovnik neni schopen pracovat na projektu, protoze mu nefunguje vyvojove prostredi.",
+                'name' => "Problémy při instalaci nebo běhu vývojových prostředí.",
+                'description' => "Pracovník není schopen pracovat na projektu, protože mu nefunguje vývojové prostředí.",
                 'probability' => 0.2,
                 'money' => 40000,
                 'time' => 40,
-                'result' => "Nemoznost prace nekterych clenu, zdrzeni.",
-                'primary_cause' => "Nedostatecne provereni implementacnich prostredku, aktualizace atd." ,
+                'result' => "Nemožnost práce některých členů, zdržení.",
+                'primary_cause' => "Nedostatečné prověření implementačních prostředků, aktualizace atd." ,
                 'trigger' => "",
-                'reaction' => "Vyhrazeni nektereho clena tymu, ktery se bude zabyvat problemy s vyvojovymi prostredky, pravidelne aktualizace.",
+                'reaction' => "Vyhrazení některého člena týmu, který se bude zabývat problémy s vývojovými prostředky, pravidelně aktualizace.",
                 'severity' => 0.9,
                 'risk_type_id' => TECHNICKA_R,
                 'phase_id' => REALIZACE_E,
@@ -656,57 +667,55 @@ class AddProjectData extends AbstractMigration
                 'updated' => date("Y-m-d H:i:s")
             ],
             [
-                'name'    => "Pouziti neoverenych knihoven",
-                'description'  => "",
+                'name' => "Použití neověřených knihoven",
+                'description' => "",
                 'probability' => 0.1,
                 'money' => 60000,
                 'time' => 60,
-                'result' => "Neni zarucen spravny vysledek prace.",
-                'primary_cause' => "Nenalezeni jinych vhodnych, overenych knihoven." ,
+                'result' => "Není zaručen správný výsledek práce.",
+                'primary_cause' => "Nenalezení jiných vhodných, ověřených knihoven." ,
                 'trigger' => "",
-                'reaction' => "Pouziti pouze overenych knihoven.",
+                'reaction' => "Použití pouze ověřených knihoven.",
                 'severity' => 0.3,
                 'risk_type_id' => TECHNICKA_R,
                 'phase_id' => REALIZACE_E,
                 'resposibleFor_id' => 4,
                 'creator_id' => 1,
                 'start_date' => "2017-03-01 08:00:00",
-                'start_date' => "2017-03-15 08:00:00",
                 'end_date' => "2017-05-05 23:59:00",
                 'created' => date("Y-m-d H:i:s"),
                 'updated' => date("Y-m-d H:i:s")
             ],
             [
-                'name'    => "Nekomplatibilnost knihoven jednotlivych clenu.",
-                'description'  => "",
+                'name' => "Nekomplatibilnost knihoven jednotlivých členů.",
+                'description' => "",
                 'probability' => 0.4,
                 'money' => 20000,
                 'time' => 20,
-                'result' => "Casti produktu nelze pospojovat.",
-                'primary_cause' => "Spatna komunikace ohledne pouzivanych knihoven." ,
+                'result' => "Části produktů nelze pospojovat.",
+                'primary_cause' => "Špatná komunikace ohledně používaných knihoven." ,
                 'trigger' => "",
-                'reaction' => "Dopredna domluva na uzitych knihovnach",
+                'reaction' => "Dopredna domluva na užitých knihovnách",
                 'severity' => 0.2,
                 'risk_type_id' => TECHNICKA_R,
                 'phase_id' => REALIZACE_E,
                 'resposibleFor_id' => 4,
                 'creator_id' => 1,
                 'start_date' => "2017-03-01 08:00:00",
-                'start_date' => "2017-03-15 08:00:00",
                 'end_date' => "2017-05-05 23:59:00",
                 'created' => date("Y-m-d H:i:s"),
                 'updated' => date("Y-m-d H:i:s")
             ],
             [
-                'name'    => "Premazani master branche na verzovacim systemu.",
-                'description'  => "Programator resil konflikty pri aktualizaci jeho kodu a neudelal to peclive.",
+                'name' => "Přemazáni master branche na verzovacim systému.",
+                'description' => "Programátor řešil konflikty při aktualizaci jeho kódu a neudělal to pečlivě.",
                 'probability' => 0.1,
                 'money' => 90000,
                 'time' => 90,
-                'result' => "Ztrata funkcnich kodu.",
-                'primary_cause' => "Nepozornost pracovnika, chybejici zaloha." ,
+                'result' => "Ztráta funkčních kódu.",
+                'primary_cause' => "Nepozornost pracovníka, chybějící záloha." ,
                 'trigger' => "",
-                'reaction' => "Zalohovat co nejcasteji master branch.",
+                'reaction' => "Zálohovat co nejčastěji master branch.",
                 'severity' => 0.9,
                 'risk_type_id' => TECHNICKA_R,
                 'phase_id' => REALIZACE_E,
@@ -718,17 +727,18 @@ class AddProjectData extends AbstractMigration
                 'updated' => date("Y-m-d H:i:s")
             ],
 
-            // externi udalosti
+            // externí události
+
             [
-                'name'    => "Poskozeni pracovnich stroju prirodnim zivlem.",
-                'description'  => "",
+                'name' => "Poškození pracovních strojů přírodním živlem.",
+                'description' => "",
                 'probability' => 0.05,
                 'money' => 100000,
                 'time' => 10,
-                'result' => "Hmotna skoda a mozna ztrata dat.",
-                'primary_cause' => "Nepojisteny majetek, nezalohovana data." ,
+                'result' => "Hmotná škoda a možná ztráta dát.",
+                'primary_cause' => "Nepojištěny majetek, nezálohovana data." ,
                 'trigger' => "",
-                'reaction' => "Zalohovat data a mit pojisteny hmotny majetek firmy.",
+                'reaction' => "Zálohovat data a mít pojištěný hmotný majetek firmy.",
                 'severity' => 0.8,
                 'risk_type_id' => EXTERNI_R,
                 'phase_id' => REALIZACE_E,
@@ -740,15 +750,15 @@ class AddProjectData extends AbstractMigration
                 'updated' => date("Y-m-d H:i:s")
             ],
             [
-                'name'    => "Zakaznik prerusi smlouvu",
-                'description'  => "Zakaznik odstupuje od dohodnute smlouvy.",
+                'name' => "Zákazník přeruší smlouvu",
+                'description' => "Zákazník odstupuje od dohodnuté smlouvy.",
                 'probability' => 0.2,
                 'money' => 60000,
                 'time' => 60,
-                'result' => "Financni ztrata.",
-                'primary_cause' => "Prilis optimisticka a nedusledna smlouva se zakaznikem." ,
+                'result' => "Finanční ztráta.",
+                'primary_cause' => "Příliš optimistická a nedůsledná smlouva se zákazníkem." ,
                 'trigger' => "",
-                'reaction' => "Mit ve smlouve se zakaznikem zahrnuty storno poplatky, ktere by pripadne kompenzovaly financni ztratu.",
+                'reaction' => "Mít ve smlouvě se zákazníkem zahrnuty storno poplatky, které by případně kompenzovaly finanční ztrátu.",
                 'severity' => 0.9,
                 'risk_type_id' => EXTERNI_R,
                 'phase_id' => REALIZACE_E,
@@ -760,15 +770,15 @@ class AddProjectData extends AbstractMigration
                 'updated' => date("Y-m-d H:i:s")
             ],
             [
-                'name'    => "Nezkuseni uzivatele koncoveho systemu.",
-                'description'  => "Uzivatele neumi pracovat s produktem, pretrvavaji opakujici se dotazy na jeho spravne pouzivani.",
+                'name' => "Nezkušení uživatele koncového systému.",
+                'description' => "Uživatele neumí pracovat s produktem, přetrvávají opakující se dotazy na jeho správné používání.",
                 'probability' => 0.3,
                 'money' => 40000,
                 'time' => 50,
-                'result' => "Prodluzujici se podpora nasazeni produktu do provozu.",
-                'primary_cause' => "Chybejici domluva na zaskoleni." ,
+                'result' => "Prodlužující se podpora nasazení produktů do provozu.",
+                'primary_cause' => "Chybějící domluva na zaškolení." ,
                 'trigger' => "",
-                'reaction' => "Vypracovani kvalitni prirucky a provedeni zaskoleni na urovni koncovych uzivatelu.",
+                'reaction' => "Vypracování kvalitní příručky a provedení zaškolení na úrovni koncových uživatelů.",
                 'severity' => 0.4,
                 'risk_type_id' => EXTERNI_R,
                 'phase_id' => REALIZACE_E,
@@ -778,18 +788,16 @@ class AddProjectData extends AbstractMigration
                 'end_date' => "2017-05-05 23:59:00",
                 'created' => date("Y-m-d H:i:s"),
                 'updated' => date("Y-m-d H:i:s")
-            ],
-
-
+            ]
         ];
-        $this->insert($this->tableNameRi, $rows);
 
+        $this->insert($this->tableNameRi, $rows);
 
         //Role
         $rows = [
             [
-                'name' => "Administrator",
-                'description' => "Administrator se stara o spravu aplikace.",
+                'name' => "Administrátor",
+                'description' => "Administrátor se stará o správu aplikace.",
                 'user_id' => 1,
                 'client_id' => 1,
                 'created' => date("Y-m-d H:i:s"),
@@ -797,7 +805,7 @@ class AddProjectData extends AbstractMigration
             ],
             [
                 'name' => "Project manager",
-                'description' => "Project manager ridi jednotlive etapy projektu, kontroluje vystupy kazde z nich a je zodpovedny za dodani celeho projektu.",
+                'description' => "Project manager řídí jednotlivé etapy projektu, kontroluje výstupy každé z nich a je zodpovědný za dodání celého projektu.",
                 'user_id' => 2,
                 'client_id' => 1,
                 'created' => date("Y-m-d H:i:s"),
@@ -805,46 +813,46 @@ class AddProjectData extends AbstractMigration
             ],
             [
                 'name' => "Majitel",
-                'description' => "Vlastnik aplikace.",
+                'description' => "Vlastník aplikace.",
                 'user_id' => 3,
                 'client_id' => 1,
                 'created' => date("Y-m-d H:i:s"),
                 'updated' => date("Y-m-d H:i:s")
             ],
             [
-                'name' => "Bezny uzivate",
-                'description' => "Bezny uzivatel aplikace.",
+                'name' => "Běžný uživatel",
+                'description' => "Běžný uživatel aplikace.",
                 'user_id' => 4,
                 'client_id' => 1,
                 'created' => date("Y-m-d H:i:s"),
                 'updated' => date("Y-m-d H:i:s")
             ],
             [
-                'name' => "Bezny uzivate",
-                'description' => "Bezny uzivatel aplikace.",
+                'name' => "Běžný uživatel",
+                'description' => "Běžný uživatel aplikace.",
                 'user_id' => 5,
                 'client_id' => 1,
                 'created' => date("Y-m-d H:i:s"),
                 'updated' => date("Y-m-d H:i:s")
             ],
             [
-                'name' => "Bezny uzivate",
-                'description' => "Bezny uzivatel aplikace.",
+                'name' => "Běžný uživatel",
+                'description' => "Běžný uživatel aplikace.",
                 'user_id' => 5,
                 'client_id' => 1,
                 'created' => date("Y-m-d H:i:s"),
                 'updated' => date("Y-m-d H:i:s")
             ],
             [
-                'name' => "Bezny uzivate",
-                'description' => "Bezny uzivatel aplikace.",
+                'name' => "Běžný uživatel",
+                'description' => "Běžný uživatel aplikace.",
                 'user_id' => 6,
                 'client_id' => 1,
                 'created' => date("Y-m-d H:i:s"),
                 'updated' => date("Y-m-d H:i:s")
             ]
-
         ];
+
         $this->insert($this->tableNameRo, $rows);
 
         //Users on phase
@@ -854,73 +862,63 @@ class AddProjectData extends AbstractMigration
                 'phase_id' => 1,
                 'created' => date("Y-m-d H:i:s"),
                 'updated' => date("Y-m-d H:i:s")
-
             ],
             [
                 'user_id' => 1,
                 'phase_id' => 2,
                 'created' => date("Y-m-d H:i:s"),
                 'updated' => date("Y-m-d H:i:s")
-
             ],
             [
                 'user_id' => 1,
                 'phase_id' => 3,
                 'created' => date("Y-m-d H:i:s"),
                 'updated' => date("Y-m-d H:i:s")
-
             ],
             [
                 'user_id' => 1,
                 'phase_id' => 4,
                 'created' => date("Y-m-d H:i:s"),
                 'updated' => date("Y-m-d H:i:s")
-
             ],
             [
                 'user_id' => 2,
                 'phase_id' => 2,
                 'created' => date("Y-m-d H:i:s"),
                 'updated' => date("Y-m-d H:i:s")
-
             ],
             [
                 'user_id' => 3,
                 'phase_id' => 3,
                 'created' => date("Y-m-d H:i:s"),
                 'updated' => date("Y-m-d H:i:s")
-
             ],
             [
                 'user_id' => 3,
                 'phase_id' => 3,
                 'created' => date("Y-m-d H:i:s"),
                 'updated' => date("Y-m-d H:i:s")
-
             ],
             [
                 'user_id' => 6,
                 'phase_id' => 3,
                 'created' => date("Y-m-d H:i:s"),
                 'updated' => date("Y-m-d H:i:s")
-
             ],
             [
                 'user_id' => 5,
                 'phase_id' => 5,
                 'created' => date("Y-m-d H:i:s"),
                 'updated' => date("Y-m-d H:i:s")
-
             ],
             [
                 'user_id' => 6,
                 'phase_id' => 5,
                 'created' => date("Y-m-d H:i:s"),
                 'updated' => date("Y-m-d H:i:s")
-
-            ],
-            // TODO: doplnit lidi k tem castem projektu
+            ]
         ];
+
         $this->insert($this->tableNameUoPh, $rows);
 
         //Users on Project
@@ -962,7 +960,9 @@ class AddProjectData extends AbstractMigration
                 'updated' => date("Y-m-d H:i:s")
             ]
         ];
+
         $this->insert($this->tableNameUoPr, $rows);
+
     }
 
     /**
@@ -979,5 +979,7 @@ class AddProjectData extends AbstractMigration
         $this->execute("DELETE FROM $this->tableNameC");
         $this->execute("DELETE FROM $this->tableNameRT");
         $this->execute("DELETE FROM $this->tableNameU");
+
     }
+
 }
