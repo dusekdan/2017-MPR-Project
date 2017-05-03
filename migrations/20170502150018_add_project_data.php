@@ -51,7 +51,7 @@ class AddProjectData extends AbstractMigration
                 'last_name' => "Black",
                 'birthday' => "2000-01-01",
                 'phone' => "+420123456789",
-                'role' => "administrátor",
+                'role' => "administrator",
                 'created' => date("Y-m-d H:i:s"),
                 'updated' => date("Y-m-d H:i:s")
             ],
