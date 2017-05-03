@@ -40,6 +40,7 @@ class ProjectPresenter extends BasePresenter
 	{
 		$this->template->users = $this->userFacade->getUsers();
 	}
+
 	
 	public function actionViewRisk($idRisk)
 	{
@@ -62,6 +63,7 @@ class ProjectPresenter extends BasePresenter
 		$this->template->risk = $this->riskFacade->getRisk($idRisk);
 	}
 	
+
 	public function actionAddRisk($phase)
 	{
 		

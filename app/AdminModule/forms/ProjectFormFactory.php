@@ -12,6 +12,8 @@ use App\Model\Facades\PhaseFacade;
 use App\Model\Facades\RiskFacade;
 use App\Model\Facades\RiskTypeFacade;
 use App\Model\Facades\UserFacade;
+use App\Model\Facades\ClientFacade;
+
 use Kdyby\Doctrine\EntityManager;
 
 
@@ -38,8 +40,11 @@ class ProjectFormFactory extends BaseFactory
 	
 	/** @var UserFacade */
 	private $userFacade;
+
+    /** @var ClientFacade */
+	private $clientFacade;
 	
-	public function __construct(EntityManager $em, ProjectFacade $projectFacade, PhaseFacade $phaseFacade, UserFacade $userFacade, RiskFacade $riskFacade, RiskTypeFacade $riskTypeFacade)
+	public function __construct(EntityManager $em, ProjectFacade $projectFacade, PhaseFacade $phaseFacade, UserFacade $userFacade, RiskFacade $riskFacade, RiskTypeFacade $riskTypeFacade, ClientFacade $clientFacade)
 	{
 		$this->em = $em;
 		$this->projectFacade = $projectFacade;
@@ -47,31 +52,97 @@ class ProjectFormFactory extends BaseFactory
 		$this->userFacade = $userFacade;
 		$this->riskFacade = $riskFacade;
 		$this->riskTypeFacade = $riskTypeFacade;
+        $this->clientFacade = $clientFacade;
 	}
 	
 	public function chooseOne($project, callable $onSuccess)
-	{
-		$projects = [];
-		foreach ($this->projectFacade->getProjects() as $proj) {
-			$projects[$proj->getId()] = $proj->getName();
-		}
-		$form = $this->create();
-		$form->getElementPrototype()->class('ajax');
-		$form->addSelect('projects', 'Vyberte si projekt', $projects)
-			->setPrompt('Vyberte projekt')
-			->addRule(Form::FILLED, "Projekt musí být zvolen.")
-			->setAttribute("onChange", "sendForm();");
-		if (isset ($project)) {
-			$form['projects']->setDefaultValue($project);
-		}
-		$form->addSubmit('send', 'Zvolit');
-		
-		$form->onSuccess[] = function (Form $form, $values) use ($onSuccess) {
-			$onSuccess($values->projects);
-		};
-		
-		return $form;
-	}
+    {
+        $projects = [];
+        foreach ($this->projectFacade->getProjects() as $proj) {
+            $projects[$proj->getId()] = $proj->getName();
+        }
+        $form = $this->create();
+        $form->getElementPrototype()->class('ajax');
+        $form->addSelect('projects', 'Vyberte si projekt', $projects)
+            ->setPrompt('Vyberte projekt')
+            ->addRule(Form::FILLED, "Projekt musí být zvolen.")
+            ->setAttribute("onChange", "sendForm();");
+        if (isset ($project)) {
+            $form['projects']->setDefaultValue($project);
+        }
+        $form->addSubmit('send', 'Zvolit');
+
+        $form->onSuccess[] = function (Form $form, $values) use ($onSuccess) {
+            $onSuccess($values->projects);
+        };
+
+        return $form;
+
+    }
+
+    /**
+     * Add new project form
+     * @return Form
+     */
+    public function addProject($onSuccess)
+    {
+        $users = [];
+        foreach ($this->userFacade->getUsers() as $u) {
+            $users[$u->getId()] = $u->getFirstName()." ".$u->getLastName()." (".$u->getUsername().")";
+        }
+
+        $clients = [];
+        foreach ($this->clientFacade->getClients() as $c) {
+            $clients[$c->getId()] = $c->getFirstName()." ".$u->getLastName()." (".$u->getUsername().")";
+        }
+
+        $form = $this->create();
+        $form->getElementPrototype()->class('ajax');
+
+        $form->addText('name', 'Jméno')
+            ->addRule(Form::FILLED, "Vyplňte prosím jméno");
+
+        $form->addTextArea('subscription', 'Popis')
+            ->addRule(Form::FILLED, "Vyplňte prosím popis projektu")
+            ->addRule(Form::MAX_LENGTH, 'Poznámka je příliš dlouhá', 300);
+
+        $form->addText('from', 'Od')
+            ->setAttribute('class', 'datepicker')
+            ->addRule(Form::FILLED, "Vyplňte prosím časový interval");
+
+        $form->addText('to', 'Do')
+            ->setAttribute('class', 'datepicker')
+            ->addRule(Form::FILLED, "Vyplňte prosím časový interval");
+
+        $form->addSelect('projectManagerId','Projektový manažer', $users)
+            ->addRule(Form::FILLED, "Vyplňte prosím projektového manažera");
+
+        $form->addSelect('clientId','Klient', $clients)
+            ->addRule(Form::FILLED, "Vyplňte prosím klienta");
+
+        $form->addSubmit('addProject', 'Přidat');
+        $form->addButton('cancel', 'Zrušit')
+            ->setAttribute('data-dismiss', 'modal');
+
+        $form->onSuccess[] = [$this, 'addProjectSubmitted'];
+        $form->onSuccess[] = $onSuccess;
+
+
+        return $form;
+    }
+
+    /**
+     * @param Form $form
+     * @param $values
+     */
+    public function addProjectSubmitted(Form $form, $values)
+    {
+        $from = new Nette\Utils\DateTime($values['from']);
+        $to = new Nette\Utils\DateTime($values['to']);
+        $this->projectFacade->createProject($values['name'], $values['subscription'], $from, $to, $values['projectManagerId'], $values['clientId'], true);
+
+        return;
+    }
 	
 	
 	/**

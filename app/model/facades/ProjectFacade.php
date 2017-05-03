@@ -35,6 +35,15 @@ class ProjectFacade
 		$this->repository = $em->getRepository(Project::class);
 	}
 
+    public function createProject($name, $description, $startDate, $endDate, $projectManagerId, $clientId, $autoFlush)
+    {
+        $project = new Project($clientId, $name, $description, $startDate, $endDate,  $projectManagerId);
+        $this->em->persist($project);
+        if ($autoFlush) {
+            $this->em->flush();
+        }
+    }
+
 	/**
 	 * Najde a vrátí projekt podle jeho ID.
 	 * @param int|NULL $id ID projektu
