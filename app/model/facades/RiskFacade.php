@@ -116,5 +116,17 @@ class RiskFacade
 			$this->em->flush();
 		}
 	}
+
+	public function setEnabled($riskId, $value, $autoFlush)
+	{
+
+		$risk = $this->getRisk($riskId);
+		$risk->setEnabled($value);
+
+		$this->em->persist($risk);
+		if ($autoFlush) {
+			$this->em->flush();
+		}
+	}
 	
 }

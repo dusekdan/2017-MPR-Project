@@ -42,6 +42,11 @@ class StatisticPresenter extends BasePresenter
             }
 
             $this->template->JSONData = json_encode($arrJSON,JSON_UNESCAPED_UNICODE);
+        } else {
+	        $projects = $this->projectFacade->getProjects();
+
+	        //@TODO projet všechny projekty a pro všechny udělat to co máš vejš a hodit to do jedné tabulky
+	        $this->template->JSONData = json_encode([],JSON_UNESCAPED_UNICODE);
         }
     }
 

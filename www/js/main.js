@@ -71,9 +71,10 @@ function setFile(inputHiddenId) {
 /**
  * Odesílání formuláře při skrytém tlačítku. např na onchange při něčem
  */
-function sendForm()
+function sendForm(element)
 {
-	$("input[type=submit]",this.form).click();
+	console.log(element.form);
+	element.form.submit();
 }
 
 /**
