@@ -1,0 +1,45 @@
+.datagrid {
+	padding: 0;
+	color: black;
+}
+
+.datagrid thead {
+	background: #2f3e47;
+}
+
+.datagrid thead a {
+	font-weight: bold;
+	color: white;
+}
+
+.datagrid tbody tr:nth-child(even) {
+	background-color: #2f3e47;
+	color: white;
+}
+
+.datagrid tbody tr:nth-child(even):hover {
+	background-color: white;
+	color: black;
+}
+
+.datagrid tbody tr:nth-child(odd) {
+	background-color: #6A7B85;
+	color: white;
+}
+
+.datagrid tbody tr:nth-child(odd):hover {
+	background-color: white;
+	color: black;
+}
+
+.datagrid .row-grid-bottom {
+	background-color: #2f3e47;
+}
+
+.datagrid .row-grid-bottom .text-muted {
+	color: white;
+}
+
+.datagrid th.text-right {
+	width: 90px;
+}

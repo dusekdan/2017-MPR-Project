@@ -94,7 +94,7 @@
                                     </div>
                                     <div role="tabpanel" class="tab-pane fade" id="users">
 
-                                        <div id="container" style="margin: 0 auto; width: 1100px; height: 400px; margin-top: 20px;"></div>
+                                        <div id="container" style="margin: 0 auto; margin-top: 20px;"></div>
 
 
                                     </div>
@@ -228,9 +228,12 @@
                 });
             });
 
-            Highcharts.chart('container', {
+			var chart = Highcharts.chart('container', {
                 chart: {
-                    type: 'column'
+                    type: 'column',
+                    width: $(".container").width(),
+					height: '70%',
+					marginLeft: 210
                 },
                 title: {
                     text: 'Rizika a jejich cena'
@@ -271,7 +274,15 @@
                 }]
             });
 
+			$(window).resize(function() {
+			    chartResize();
+			});
 
+			function chartResize() {
+				height = chart.height;
+				width = $(".container").width();
+				chart.setSize(width, height, doAnimation = true);
+			}
 
         </script>
 

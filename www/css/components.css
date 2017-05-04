@@ -1086,10 +1086,10 @@ File: Components
   margin-bottom: 10px;
 }
 tbody {
-  color: #98a6ad;
+
 }
 th {
-  color: #eeeeee;
+
   font-weight: 600;
 }
 .table > thead > tr > th {
@@ -1110,7 +1110,7 @@ th {
 .table > thead > tr.active > th,
 .table > tbody > tr.active > th,
 .table > tfoot > tr.active > th {
-  background-color: rgba(255, 255, 255, 0.1) !important;
+  background-color: rgba(255, 255, 255, 0.1);
 }
 .table > thead > tr > th,
 .table > tbody > tr > th,
