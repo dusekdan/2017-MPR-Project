@@ -151,6 +151,12 @@
                 return risksArr;
             };
 
+            var Comparator = function(a, b) {
+                if (a[1] < b[1]) return 1;
+                if (a[1] > b[1]) return -1;
+                return 0;
+            };
+
             array.forEach(function(phases){
                 var risksArr = [];
                 phases.forEach(function(risk) {
@@ -158,7 +164,6 @@
                     var probabilityType = getProbabilityType(risk[2]);
 
                     idArray.push([risk[1], risk[3]]);
-//                    moneyArray.push(risk[3]);
                     risksArr.push({
                         id: risk[0],
                         name: risk[1],
@@ -174,6 +179,8 @@
                     risks: risksArr
                 });
             });
+
+            idArray = idArray.sort(Comparator);
 
             [0, 1, 2, 3, 4].forEach(function(first){
                 [0, 1, 2, 3, 4].forEach(function(second){
