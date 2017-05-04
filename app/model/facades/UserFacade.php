@@ -108,6 +108,17 @@ class UserFacade
 			}
 		}
 	}
+	
+	public function changeEnabled($user, $autoFlush)
+	{
+		
+		$user->setEnabled(!$user->getEnabled());
+		
+		$this->em->persist($user);
+		if ($autoFlush) {
+			$this->em->flush();
+		}
+	}
 
 	public function setLastSign($user, $autoFlush)
 	{

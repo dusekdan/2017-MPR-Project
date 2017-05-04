@@ -9,7 +9,7 @@
             <th>Název</th>
             <th>Popis</th>
             <th>Aktivita</th>
-            <th></th>
+            <th>Akce</th>
         </tr>
         </thead>
         <tbody>
@@ -18,9 +18,9 @@
                 <td>{$one->id}</td>
                 <td>{$one->name}</td>
                 <td>{$one->description}</td>
-                <td>{($one->enabled ? "aktivní" : "pasivni")}</td>
+                <td><a n:href="changeEnabled!, 'clientId' => $one->id"><button class='btn btn-enabled {$one->enabled ? "btn-success" : "btn-danger"}'>{$one->enabled ? "aktivní" : "neaktivní"}</button></a></td>
 
-                <td>
+                <td class="actions">
                     <a class="ajax" n:href="Client:editClient, 'clientId' => $one->id" data-toggle="tooltip" title="Upravit"><span class="glyphicon glyphicon-pencil"></span></a>
                     <a class="ajax" n:href="Client:removeClient, 'clientId' => $one->id" data-toggle="tooltip" title="Odstranit"><span class="glyphicon glyphicon-trash"></span></a>
                 </td>
@@ -42,7 +42,7 @@
 {/block}
 
 {block head}
-    <link rel="stylesheet" href="{$basePath}/css/adminModule/user/style.css">
+    <link rel="stylesheet" href="{$basePath}/css/adminModule/User/style.css">
     <link rel="stylesheet" href="{$basePath}/libs/datetimepicker/css/bootstrap-datetimepicker.css">
     <script src="{$basePath}/libs/moment/moment-with-locales.min.js"></script>
     <script src="{$basePath}/libs/datetimepicker/js/bootstrap-datetimepicker.min.js"></script>

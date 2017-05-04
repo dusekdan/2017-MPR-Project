@@ -152,6 +152,14 @@ body {
 	text-decoration: none;
 }
 
+.actions{
+	width: 90px;
+}
+.actions > a{
+	color: silver;
+	margin: 2px;
+}
+
 /**
 Formuláře
  */

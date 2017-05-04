@@ -94,7 +94,7 @@
                                                                                 </tr>
                                                                             </thead>
                                                                             <tbody>
-                                                                                <tr n:foreach="$phase->users as $user_p">
+                                                                                <tr n:foreach="$phase->users as $user_p" n:if="$user_p->enabled">
                                                                                     <th scope="row">{$iterator->counter}</th>
                                                                                     <td>{$user_p->firstName}</td>
                                                                                     <td>{$user_p->lastName}</td>

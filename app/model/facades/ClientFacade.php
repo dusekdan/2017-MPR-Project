@@ -102,5 +102,15 @@ class ClientFacade
             $this->em->flush();
         }
     }
-
+	
+	public function changeEnabled($client, $autoFlush)
+	{
+		
+		$client->setEnabled(!$client->getEnabled());
+		
+		$this->em->persist($client);
+		if ($autoFlush) {
+			$this->em->flush();
+		}
+	}
 }

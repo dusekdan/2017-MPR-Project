@@ -12,7 +12,9 @@
                 <th>Narozeniny</th>
                 <th>Role</th>
                 <th>Datum založení</th>
-                <th>Datum posledního přihlášení</th>
+                <th>Poslední přihlášení</th>
+                <th>Aktivita</th>
+                <th>Akce</th>
             </tr>
         </thead>
         <tbody>
@@ -26,21 +28,37 @@
                     <td>{$one->getRole()}</td>
                     <td>{$one->getCreated()|date:'G:i j.n.Y'}</td>
                     <td>{$one->getLastSign()|date:'G.i j.n.Y'}</td>
-
-                    <td><a class="ajax" n:href="User:update, 'userId' => $one->id">Upravit</a></td>
-                    <td><a n:href="delete!, 'userId' => $one->id">Smazat</a></td>
+                    <td><a n:href="changeEnabled!, 'userId' => $one->id"><button class='btn btn-enabled {$one->enabled ? "btn-success" : "btn-danger"}'>{$one->enabled ? "aktivní" : "neaktivní"}</button></a></td>
+                    <td class="actions">
+                        <a class="ajax" n:href="User:update, 'userId' => $one->id" data-toggle="tooltip" title="Upravit"><span class="glyphicon glyphicon-pencil"></span></a>
+                        <a n:href="delete!, 'userId' => $one->id" data-toggle="tooltip" title="Odstranit"><span class="glyphicon glyphicon-trash"></span></a>
+                    </td>
                 </tr>
             {/foreach}
         </tbody>
 	</table>
+    <div class="col-md-12 text-center">
+        <a class="ajax" n:href="User:addUser">
+            <button class="btn btn-success waves-effect waves-light">
+                <span class="glyphicon glyphicon-plus m-r-5"></span>
+                Přidat uživatele
+            </button>
+        </a>
+    </div>
 {/block}
 
 {block scripts}
 {/block}
 
 {block head}
-	<link rel="stylesheet" href="{$basePath}/css/adminModule/user/style.css">
+
+	<link rel="stylesheet" href="{$basePath}/css/adminModule/User/style.css">
 	<link rel="stylesheet" href="{$basePath}/libs/datetimepicker/css/bootstrap-datetimepicker.css">
 	<script src="{$basePath}/libs/moment/moment-with-locales.min.js"></script>
 	<script src="{$basePath}/libs/datetimepicker/js/bootstrap-datetimepicker.min.js"></script>
+    <script>
+		$(document).ready(function(){
+			$('[data-toggle="tooltip"]').tooltip();
+		});
+    </script>
 {/block}

@@ -133,4 +133,15 @@ class ClientPresenter extends BasePresenter
 			$this->redirect('Client:default');
 		}, $client);
 	}
+	
+	public function handleChangeEnabled($clientId)
+	{
+		try {
+			$client = $this->clientFacade->getClient($clientId);
+			$this->clientFacade->changeEnabled($client, true);
+			$this->flashMessage("Klientovi s id:{$clientId} byla úspěšně změněna aktivita.", "success");
+		} catch (\Exception $e) {
+			$this->flashMessage("Klientovi s id:{$clientId} se nepodařilo změnit aktivitu", "danger");
+		}
+	}
 }

@@ -91,7 +91,18 @@ class UserPresenter extends BasePresenter
 
 		return $form;
 	}
-
+	
+	public function handleChangeEnabled($userId)
+	{
+		try {
+			$user = $this->userFacade->getUser($userId);
+			$this->userFacade->changeEnabled($user, true);
+			$this->flashMessage("Uživateli s id:{$userId} byla úspěšně změněna aktivita.", "success");
+		} catch (\Exception $e) {
+			$this->flashMessage("Uživateli s id:{$userId} se nepodařilo změnit aktivitu", "danger");
+		}
+	}
+	
 	public function handleDelete($userId)
 	{
 		try {
