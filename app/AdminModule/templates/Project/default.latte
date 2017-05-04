@@ -67,38 +67,7 @@
                                                                     </ul>
                                                                     <h3>Rizika</h3>
                                                                     <div class="scroll-table">
-                                                                        <table class="table table-striped m-0">
-                                                                            <thead>
-                                                                                <tr>
-                                                                                    <th>ID</th>
-                                                                                    <th>Jméno</th>
-                                                                                    <th>Začátek</th>
-                                                                                    <th>Konec</th>
-                                                                                    <th>Pravdě.</th>
-                                                                                    <th>Peníze</th>
-                                                                                    <th>Čas</th>
-                                                                                    <th>Výsledek</th>
-                                                                                    <th>Akce</th>
-                                                                                </tr>
-                                                                            </thead>
-                                                                            <tbody>
-                                                                                <tr n:foreach="$phase->risks as $risk">
-                                                                                    <th scope="row">{$iterator->counter}</th>
-                                                                                    <td>{$risk->name}</td>
-                                                                                    <td>{$risk->startDate|date:'%d.%m.%Y'}</td>
-                                                                                    <td>{$risk->endDate|date:'%d.%m.%Y'}</td>
-                                                                                    <td>{$risk->probability}</td>
-                                                                                    <td>{$risk->money}</td>
-                                                                                    <td>{$risk->time}h</td>
-                                                                                    <td>{$risk->result}</td>
-                                                                                    <td class="actions">
-                                                                                        <a n:href="Project:viewRisk, 'idRisk'=>$risk->id" class="on-default view-row ajax"><i class="glyphicon glyphicon-eye-open"></i></a>
-                                                                                        <a n:href="Project:editRisk, 'idRisk'=>$risk->id" class="on-default edit-row ajax"><i class="glyphicon glyphicon-pencil"></i></a>
-                                                                                        <a n:href="Project:removeRisk, 'idRisk'=>$risk->id" class="on-default remove-row ajax"><i class="glyphicon glyphicon-trash"></i></a>
-                                                                                    </td>
-                                                                                </tr>
-                                                                            </tbody>
-                                                                        </table>
+																		{control phaseGrid-$phase->id}
                                                                     </div>
                                                                     <hr>
                                                                     <div class="col-md-12 text-center">
@@ -205,10 +174,28 @@
 {/block}
 
 {block scripts}
+    <script src="{$basePath}/libs/ublaboo/datagrid.js"></script>
+
+    <!-- It is recommended to include this JS file with just a few bits. It refreshes URL on non ajax request -->
+    <script src="{$basePath}/libs/ublaboo/datagrid-instant-url-refresh.js"></script>
+
+    <!-- Use this little extension for ajax spinners -->
+    <script src="{$basePath}/libs/ublaboo/datagrid-spinners.js"></script>
 
 {/block}
 
 {block head}
+
     <link rel="stylesheet" href="{$basePath}/css/adminModule/project/style.css">
     <link rel="stylesheet" href="{$basePath}/css/adminModule/project/default.css">
+
+
+    <link rel="stylesheet" type="text/css" href="{$basePath}/libs/ublaboo/datagrid.css">
+    <link rel="stylesheet" type="text/css" href="{$basePath}/libs/ublaboo/datagrid-spinners.css">
+    <style>
+        .datagrid {
+            padding: 0;
+        }
+    </style>
+
 {/block}

@@ -10,6 +10,7 @@ declare(strict_types=1);
 namespace App\Model\Entities;
 
 use App\Model\Entities\Traits\TimeInfo;
+use DateTime;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Kdyby\Doctrine\Entities\MagicAccessors;
@@ -60,28 +61,28 @@ class Project
 	/**
 	 * Den zacatku projektu
 	 * @ORM\Column(name="start_date", type="datetime")
-     * @var \DateTime
+     * @var DateTime
 	 */
 	protected $startDate;
 
     /**
      * Den konce projektu
      * @ORM\Column(name="end_date", type="datetime")
-     * @var \DateTime
+     * @var DateTime
      */
     protected $endDate;
 
     /**
      * Datum vytvorenia zaznamu o projekte
      * @ORM\Column(name="created", type="datetime")
-     * @var \DateTime
+     * @var DateTime
      */
     protected $created;
 
     /**
      * Datum posledneho update zaznamu o projekte
      * @ORM\Column(name="updated", type="datetime")
-     * @var \DateTime
+     * @var DateTime
      */
     protected $updated;
 
@@ -122,8 +123,8 @@ class Project
 		$this->setDescription($description);
 		$this->setStartDate($startDate);
 		$this->setEndDate($endDate);
-		$this->setUpdated(new \DateTime('now'));
-		$this->setCreated(new \DateTime('now'));
+		$this->setUpdated(new DateTime('now'));
+		$this->setCreated(new DateTime('now'));
 	    $this->setProjectManager($projectManager);
 	    $this->setEnabled(true);
 
@@ -131,4 +132,13 @@ class Project
 	    $this->users = new ArrayCollection();
 	}
 
+
+	public function setStartDate($startDate)
+	{
+		if (!$startDate instanceof DateTime) {
+			$this->startDate = new DateTime($startDate);
+		} else {
+			$this->startDate = $startDate;
+		}
+	}
 }

@@ -5,11 +5,13 @@ declare(strict_types=1);
 namespace App\AdminModule\Presenters;
 
 use Nette;
+use Nette\Application\UI\Multiplier;
 use App\Model;
 use App\Model\Facades\ProjectFacade;
 use App\Model\Facades\UserFacade;
 use App\Model\Facades\PhaseFacade;
 use App\Model\Facades\RiskFacade;
+use App\AdminModule\Forms\GridFormFactory;
 use App\AdminModule\Forms\ProjectFormFactory;
 use Tracy\Debugger;
 
@@ -27,6 +29,12 @@ class ProjectPresenter extends BasePresenter
 	
 	/** @var RiskFacade */
 	private $riskFacade;
+
+	/**
+	 * @var GridFormFactory
+	 * @inject
+	 */
+	public $gridFormFactory;
 	
 	public function __construct(ProjectFormFactory $projectFormFactory, UserFacade $userFacade, PhaseFacade $phaseFacade, RiskFacade $riskFacade)
 	{
@@ -329,5 +337,17 @@ class ProjectPresenter extends BasePresenter
         unset($this->project);
         $this->redirect('Homepage:default');
     }
-	
+
+
+	public function createComponentPhaseGrid($name)
+	{
+		$phaseFacade = $this->phaseFacade;
+		$presenter = $this;
+		return new Multiplier(function($phaseId) use ($phaseFacade, $presenter) {
+			$phase = $phaseFacade->getPhase($phaseId);
+
+			return $this->gridFormFactory->phaseGrid($phase, $presenter);
+		});
+
+	}
 }

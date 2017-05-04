@@ -10,6 +10,7 @@ declare(strict_types=1);
 namespace App\Model\Entities;
 
 use App\Model\Entities\Traits\TimeInfo;
+use DateTime;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Criteria;
 use Doctrine\ORM\Mapping as ORM;
@@ -115,11 +116,29 @@ class Phase
 		$this->setStartDate($startDate);
 		$this->setEndDate($endDate);
 		$this->setProject($project);
-		$this->setUpdated(new \DateTime('now'));
-		$this->setCreated(new \DateTime('now'));
+		$this->setUpdated(new DateTime('now'));
+		$this->setCreated(new DateTime('now'));
 		$this->setEnabled(true);
 
 		$this->risks = new ArrayCollection();
 		$this->users = new ArrayCollection();
+	}
+
+	public function setStartDate($startDate)
+	{
+		if (!$startDate instanceof DateTime) {
+			$this->startDate = new DateTime($startDate);
+		} else {
+			$this->startDate = $startDate;
+		}
+	}
+
+	public function setEndDate($endDate)
+	{
+		if (!$endDate instanceof DateTime) {
+			$this->startDate = new DateTime($endDate);
+		} else {
+			$this->startDate = $endDate;
+		}
 	}
 }
