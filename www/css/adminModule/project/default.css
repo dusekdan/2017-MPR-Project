@@ -48,6 +48,10 @@
 	background: #2f3e47;
 }
 
+.datagrid .dropdown-menu a {
+	color: white;
+}
+
 .datagrid table thead tr.row-group-actions th {
 	background: #2f3e47;
 }
