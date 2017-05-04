@@ -1,0 +1,35 @@
+.project-menu{
+    background-color: #253138;
+    color: #98a6ad;
+    border-radius: 5px 5px 0 0;
+    border: none;
+}
+
+.nav-tabs > li > a, .nav-tabs > li > a:hover{
+    background-color: transparent;
+    color: #98a6ad;
+    border: none;
+}
+
+.nav-tabs > li.active > a, .nav-tabs > li.active > a:hover, .nav-tabs > li.active > a:focus{
+    border: none;
+    color: white;
+    background-color: #00aced;
+    border-radius: 5px 5px 0 0;
+}
+
+#container {
+    margin: 0 auto;
+}
+
+.rotated{
+    transform:
+        /* Magic Numbers */
+            translate(0px, 75px)
+                /* 45 is really 360 - 45 */
+            rotate(270deg);
+}
+
+table{
+    text-align: center;
+}

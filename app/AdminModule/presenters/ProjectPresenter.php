@@ -12,6 +12,8 @@ use App\Model\Facades\UserFacade;
 use App\Model\Facades\PhaseFacade;
 use App\Model\Facades\RiskFacade;
 use App\AdminModule\Forms\GridFormFactory;
+use App\Model\Facades\UsersOnPhaseFacade;
+use App\Model\Facades\UsersOnProjectFacade;
 use App\AdminModule\Forms\ProjectFormFactory;
 use Tracy\Debugger;
 
@@ -36,21 +38,27 @@ class ProjectPresenter extends BasePresenter
 	 */
 	public $gridFormFactory;
 	
-	public function __construct(ProjectFormFactory $projectFormFactory, UserFacade $userFacade, PhaseFacade $phaseFacade, RiskFacade $riskFacade)
+	/** @var UsersOnPhaseFacade */
+	private $userOnPhaseFacade;
+	
+	/** @var UsersOnProjectFacade */
+	private $userOnProjectFacade;
+	
+	public function __construct(ProjectFormFactory $projectFormFactory, UserFacade $userFacade, PhaseFacade $phaseFacade, RiskFacade $riskFacade, UsersOnPhaseFacade $usersOnPhaseFacade, UsersOnProjectFacade $usersOnProjectFacade)
 	{
 		$this->projectFactory = $projectFormFactory;
 		$this->userFacade = $userFacade;
 		$this->phaseFacade = $phaseFacade;
 		$this->riskFacade = $riskFacade;
+		$this->userOnProjectFacade = $usersOnProjectFacade;
+		$this->userOnPhaseFacade = $usersOnPhaseFacade;
 	}
 	
 	public function renderDefault()
 	{
 		$this->template->users = $this->userFacade->getUsers();
 	}
-
-
-
+	
 	public function actionViewRisk($idRisk)
 	{
 		
@@ -72,7 +80,7 @@ class ProjectPresenter extends BasePresenter
 		$this->template->risk = $this->riskFacade->getRisk($idRisk);
 	}
 	
-
+	
 	public function actionAddRisk($phase)
 	{
 		
@@ -254,12 +262,14 @@ class ProjectPresenter extends BasePresenter
 		$users = [];
 		foreach ($this->userFacade->getUsers() as $oneUser) {
 			if (!$phase->getUsers()->contains($oneUser))
-				$users[$oneUser->getId()] = $oneUser->getUsername();
+				$users[$oneUser->getId()] = $oneUser->getFirstName()." ".$oneUser->getLastName()." (".$oneUser->getUsername().")";
 		}
 		
-		$form = $this->projectFactory->addUserProject($users,
-			function () {
-				$this->flashMessage("Uživatel přidán.", "success");
+		$form = $this->projectFactory->addUserProject($users, $phase,
+			function ($userId, $phase) {
+				$user = $this->userFacade->getUser($userId);
+				$this->userOnPhaseFacade->createUserOnPhase($user, $phase, true);
+				$this->flashMessage("Uživatel přidán do fáze.", "success");
 				$this->redirect('Project:default');
 			}, $caption);
 		
@@ -273,12 +283,14 @@ class ProjectPresenter extends BasePresenter
 		$users = [];
 		foreach ($this->userFacade->getUsers() as $oneUser) {
 			if (!$project->getUsers()->contains($oneUser))
-				$users[$oneUser->getId()] = $oneUser->getUsername();
+				$users[$oneUser->getId()] = $oneUser->getFirstName()." ".$oneUser->getLastName()." (".$oneUser->getUsername().")";
 		}
 		
-		$form = $this->projectFactory->addUserProject($users,
-			function () {
-				$this->flashMessage("Uživatel přidán.", "success");
+		$form = $this->projectFactory->addUserProject($users, $project,
+			function ($userId, $project) {
+				$user = $this->userFacade->getUser($userId);
+				$this->userOnProjectFacade->createUserOnProject($user, $project, true);
+				$this->flashMessage("Uživatel přidán do projektu.", "success");
 				$this->redirect('Project:default');
 			}, $caption);
 		
@@ -291,8 +303,6 @@ class ProjectPresenter extends BasePresenter
 		$this->userFacade->removeUser($userId, true);
 		$this->flashMessage("Uživatel přidán s id $userId byl smazán.", "success");
 	}
-
-
 
     // edit project
     public function actionEditProject($projectId)

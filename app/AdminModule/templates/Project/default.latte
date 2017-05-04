@@ -10,7 +10,7 @@
                 <div class="col-sm-12">
                     <div class="card-box">
                         <div class="dropdown pull-right">
-                            <a n:href="Project:editProject, 'projectId'=>$project->id" class="ajax"><button type="button" class="btn btn-primary active">Upravit projekt</button></a>
+                            <a n:href="Project:editProject, 'projectId'=>$project->id" class="ajax"><button type="button" class="btn btn-info active">Upravit projekt</button></a>
 
                             <a n:href="removeProject!, 'projectId' => $project->id" class="on-default remove-row" name="delete" data-confirm="modal" data-confirm-title="Smazání projektu" data-confirm-ok-class="btn-danger" data-confirm-ok-text="Smazat" data-confirm-cancel-class="btn-success" data-confirm-cancel-text="Zpět" data-confirm-text="Opravdu chcete smazat tenhle projekt : {$project->name}?" value="Smazat"><button type="button" class="btn btn-danger active">Smazat projekt</button></a>
                         </div>
@@ -34,7 +34,7 @@
                         </div>
                         <div class="row">
                             <div class="col-lg-12">
-                                <ul class="nav nav-tabs">
+                                <ul class="nav nav-tabs project-menu">
                                     <li role="presentation" class="active">
                                         <a href="#phases" class="project-item" role="tab" data-toggle="tab" aria-expanded="true">Fáze a rizika</a>
                                     </li>
@@ -45,26 +45,28 @@
                                 </ul>
                                 <div class="tab-content">
                                     <div role="tabpanel" class="tab-pane fade active in" id="phases">
-                                        <div class="row">
-                                            <div class="col-lg-12">
-                                                <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
-                                                    <div class="panel panel-default bx-shadow-none" n:foreach="$project->phases as $phase">
-                                                        <div class="panel-heading" role="tab" id="heading_{$iterator->counter}">
-                                                            <h4 class="panel-title">
-                                                                <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse_{$iterator->counter}" aria-expanded="false" aria-controls="collapse_{$iterator->counter}" class="collapsed">
-                                                                    {$phase->name}
-                                                                </a>
-                                                            </h4>
-                                                        </div>
-                                                        <div id="collapse_{$iterator->counter}" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading_{$iterator->counter}" aria-expanded="false" style="height: 0px;">
-                                                            <div class="panel-body">
-                                                                <div class="row">
+                                            <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+                                                <div class="panel panel-default bx-shadow-none" n:foreach="$project->phases as $phase">
+                                                    <div class="panel-heading" role="tab" id="heading_{$iterator->counter}">
+                                                        <h4 class="panel-title">
+                                                            <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse_{$iterator->counter}" aria-expanded="false" aria-controls="collapse_{$iterator->counter}" class="collapsed">
+                                                                {$phase->name}
+                                                            </a>
+                                                        </h4>
+                                                    </div>
+                                                    <div id="collapse_{$iterator->counter}" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading_{$iterator->counter}" aria-expanded="false" style="height: 0px;">
+                                                        <div class="panel-body">
+                                                            <div class="row">
+                                                                <div class="col-lg-12">
                                                                     <h3>Info</h3>
-                                                                    <ul>
-                                                                        <li>{$phase->description}</li>
-                                                                        <li>OD: {$phase->startDate|date:'%d.%m.%Y'}</li>
-                                                                        <li>DO: {$phase->endDate|date:'%d.%m.%Y'}</li>
-                                                                    </ul>
+                                                                    <p>{$phase->description}</p>
+
+                                                                    <table class="table table-striped m-0">
+                                                                        <tr>
+                                                                            <th>Začátek:</th><td>{$phase->startDate|date:'%d.%m.%Y'}</td>
+                                                                            <th>Konec:</th><td>{$phase->endDate|date:'%d.%m.%Y'}</td>
+                                                                        </tr>
+                                                                    </table>
                                                                     <h3>Rizika</h3>
                                                                     <div class="scroll-table">
 																		{control phaseGrid-$phase->id}
@@ -115,7 +117,6 @@
                                                             </div>
                                                         </div>
                                                     </div>
-                                                </div>
                                             </div>
                                             <hr>
                                             <div class="col-md-2 col-lg-offset-5 text-center">
@@ -127,7 +128,6 @@
                                         </div>
                                     </div>
                                     <div role="tabpanel" class="tab-pane fade" id="users">
-                                        <div class="row">
                                             <table class="table table-striped m-0">
                                                 <thead>
                                                     <tr>
@@ -157,8 +157,6 @@
                                                 </a>
                                             </div>
                                         </div>
-                                    </div>
-
                                 </div>
                             </div><!-- end col -->
                         </div>

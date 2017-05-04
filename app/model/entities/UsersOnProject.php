@@ -36,7 +36,7 @@ class UsersOnProject
      * Id projektu na ktorom user pracuje
      * @ORM\ManyToOne(targetEntity="Project")
      */
-    protected $idProject;
+    protected $project;
 
 
 
@@ -44,21 +44,21 @@ class UsersOnProject
      * ID Usera, ktoreho sa zaznam tyka
      * @ORM\Column(name="user_id", type="integer")
      * @var integer
-     * @Id @ManyToOne(targetEntity="User")
+     * @ORM\ManyToOne(targetEntity="User")
      */
-    protected $idUser;
+    protected $user;
 
 
     /**
      * Datum vytvorenia zaznamu
-     * @ORM\Column(name"created_", type="datetime")
+     * @ORM\Column(name="created", type="datetime")
      * @var \DateTime
      */
     protected $created;
 
     /**
      * Datum posledneho update zaznamu
-     * @ORM\Column(name"updatedt", type="datetime")
+     * @ORM\Column(name="updated", type="datetime")
      * @var \DateTime
      */
     protected $updated;
@@ -73,10 +73,11 @@ class UsersOnProject
 
 
 
-	public function __construct($idUser,$idProject)
+	public function __construct($user,$project)
 	{
-        $this->setIdUser($idUser);
-		$this->setIdProject($idProject);
+        $this->setIdUser($user);
+		$this->setIdProject($project);
+		$this->setEnabled(true);
 		$this->setUpdated(new \DateTime('now'));
 		$this->setCreated(new \DateTime('now'));
     }

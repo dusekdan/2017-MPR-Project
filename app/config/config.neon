@@ -42,6 +42,8 @@ services: #property name se uvádí u služeb který nahrazují stejně jmenovan
 	- App\Model\Facades\RiskFacade
 	- App\Model\Facades\RiskTypeFacade
 	- App\Model\Facades\ClientFacade
+	- App\Model\Facades\UsersOnPhaseFacade
+	- App\Model\Facades\UsersOnProjectFacade
 
 extensions:
 	# https://github.com/Kdyby/Doctrine

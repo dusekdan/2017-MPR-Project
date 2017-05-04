@@ -34,7 +34,7 @@ class UsersOnPhase
 
     /**
      * Id faze na ktorom user pracuje
-     * @ORM\ManyToOne(targetEntity="Project")
+     * @ORM\ManyToOne(targetEntity="Phase")
      */
     protected $phase;
 
@@ -49,14 +49,14 @@ class UsersOnPhase
 
     /**
      * Datum vytvorenia zaznamu
-     * @ORM\Column(name"created", type="datetime")
+     * @ORM\Column(name="created", type="datetime")
      * @var \DateTime
      */
     protected $created;
 
     /**
      * Datum posledneho update zaznamu
-     * @ORM\Column(name"updated", type="datetime")
+     * @ORM\Column(name="updated", type="datetime")
      * @var \DateTime
      */
     protected $updated;
@@ -75,6 +75,7 @@ class UsersOnPhase
 	{
         $this->setUser($user);
 		$this->setPhase($phase);
+		$this->setEnabled(true);
 		$this->setUpdated(new \DateTime('now'));
 		$this->setCreated(new \DateTime('now'));
     }

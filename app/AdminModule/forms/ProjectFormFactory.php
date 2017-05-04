@@ -258,11 +258,19 @@ class ProjectFormFactory extends BaseFactory
 		
 		$form->addText('probability', 'Pravděpodobnost')
 			->setType('number')
-			->setAttribute('step','0.1')
+			->setAttribute('step','0.01')
 			->addRule(Form::FLOAT, "Pravděpodobnost musí být desetinné číslo")
-			->addRule(Form::MAX, "Pravděpodobnost musí být menší než 100%", 100)
+			->addRule(Form::MAX, "Pravděpodobnost musí být menší než 1", 1)
 			->addRule(Form::MIN, "Pravděpodobnost musí být větší než 0",0)
 			->addRule(Form::FILLED, "Vyplňte prosím pravděpodobnost rizika");
+		
+		$form->addText('severity', 'Závažnost')
+			->setType('number')
+			->setAttribute('step','0.01')
+			->addRule(Form::FLOAT, "Závažnost musí být desetinné číslo")
+			->addRule(Form::MAX, "Závažnost musí být menší než 1", 1)
+			->addRule(Form::MIN, "Závažnost musí být větší než 0",0)
+			->addRule(Form::FILLED, "Vyplňte prosím závažnost rizika");
 		
 		$form->addText('time', 'Čas')
 			->setType('number')
@@ -283,10 +291,7 @@ class ProjectFormFactory extends BaseFactory
 		$form->addText('reaction', 'Reakce')
 			->addRule(Form::FILLED, "Vyplňte prosím reakci na riziko");
 		
-		$form->addText('severity', 'Závažnost')
-			->addRule(Form::FILLED, "Vyplňte prosím závažnost rizika");
-		
-		$form->addTextArea('primaryCause', 'Primární účel')
+		$form->addTextArea('primaryCause', 'Primární příčina')
 			->addRule(Form::FILLED, "Vyplňte prosím primární účel rizika");
 		
 		$form->addSelect('riskTypeId','Typ rizika', $types)
@@ -410,11 +415,20 @@ class ProjectFormFactory extends BaseFactory
 		$form->addText('probability', 'Pravděpodobnost')
 			->setDefaultValue($risk->getProbability())
 			->setType('number')
-			->setAttribute('step','0.1')
+			->setAttribute('step','0.01')
 			->addRule(Form::FLOAT, "Pravděpodobnost musí být desetinné číslo")
-			->addRule(Form::MAX, "Pravděpodobnost musí být menší než 100%", 100)
+			->addRule(Form::MAX, "Pravděpodobnost musí být menší než 1", 1)
 			->addRule(Form::MIN, "Pravděpodobnost musí být větší než 0",0)
 			->addRule(Form::FILLED, "Vyplňte prosím pravděpodobnost rizika");
+		
+		$form->addText('severity', 'Závažnost')
+			->setDefaultValue($risk->getSeverity())
+			->setType('number')
+			->setAttribute('step','0.01')
+			->addRule(Form::FLOAT, "Závažnost musí být desetinné číslo")
+			->addRule(Form::MAX, "Závažnost musí být menší než 1", 1)
+			->addRule(Form::MIN, "Závažnost musí být větší než 0",0)
+			->addRule(Form::FILLED, "Vyplňte prosím závažnost rizika");
 		
 		$form->addText('time', 'Čas')
 			->setDefaultValue($risk->getTime())
@@ -439,19 +453,17 @@ class ProjectFormFactory extends BaseFactory
 		$form->addText('reaction', 'Reakce')
 			->setDefaultValue($risk->getReaction())
 			->addRule(Form::FILLED, "Vyplňte prosím reakci na riziko");
-		
-		$form->addText('severity', 'Závažnost')
-			->setDefaultValue($risk->getSeverity())
-			->addRule(Form::FILLED, "Vyplňte prosím závažnost rizika");
-		
-		$form->addTextArea('primaryCause', 'Primární účel')
+			
+		$form->addTextArea('primaryCause', 'Primární příčina')
 			->setDefaultValue($risk->getPrimaryCause())
 			->addRule(Form::FILLED, "Vyplňte prosím primární účel rizika");
 		
 		$form->addSelect('riskTypeId','Typ rizika', $types)
+			->setDefaultValue($risk->getRiskType()->getId())
 			->addRule(Form::FILLED, "Vyplňte prosím typ rizika");
 		
 		$form->addSelect('responsibleUserId','Zodpovědný uživatel', $users)
+			->setDefaultValue($risk->getResponsibleUser()->getId())
 			->addRule(Form::FILLED, "Vyplňte prosím zodpovědného uživatele za riziko");
 		
 		
@@ -501,7 +513,7 @@ class ProjectFormFactory extends BaseFactory
 		return;
 	}
 	
-	public function addUserProject($users, callable $onSuccess, $caption)
+	public function addUserProject($users, $id, callable $onSuccess, $caption)
 	{
 		$form = $this->create();
 		$form->getElementPrototype()->class('ajax');
@@ -512,11 +524,13 @@ class ProjectFormFactory extends BaseFactory
 			->getControlPrototype()
 			->setName('button')
 			->setHtml('<span class="glyphicon glyphicon-user"></span>'.$caption);
-		$form->onSuccess[] = function (Form $form, $values) use ($onSuccess) {
-			$onSuccess($values->users);
+		
+		$form->onSuccess[] = function (Form $form, $values) use ($onSuccess, $id) {
+			$onSuccess($values['users'], $id);
 		};
 		
 		return $form;
 	}
+
 	
 }

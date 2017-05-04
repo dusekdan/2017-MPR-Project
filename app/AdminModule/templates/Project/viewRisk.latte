@@ -10,6 +10,7 @@
     {block modal}
         <table class="risk-table">
             <tr><th>Název</th><td colspan="3">{$risk->name}</td></tr>
+            <tr><th>Typ rizika</th><td>{$risk->riskType->name}</td></tr>
             <tr><th>Popis</th><td colspan="3">{$risk->description}</td></tr>
             <tr>
                 <th>Začátek</th><td>{$risk->startDate|date:'%d.%m.%Y'}</td>
@@ -19,7 +20,7 @@
                 <th>Zodpovědnost</th><td>{$risk->responsibleUser->firstName} {$risk->responsibleUser->lastName}</td>
                 <th>Aktivita</th><td>{($risk->enabled ? "aktivní" : "pasivní")}</td>
             </tr>
-            <tr><th>Primární účel</th><td>{$risk->primaryCause}</td></tr>
+            <tr><th>Primární příčina</th><td>{$risk->primaryCause}</td></tr>
             <tr><th>Výsledek</th><td colspan="3">{$risk->result}</td></tr>
             <tr><th>Reakce</th><td colspan="3">{$risk->reaction}</td></tr>
             <tr>
