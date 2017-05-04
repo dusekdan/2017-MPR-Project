@@ -35,7 +35,7 @@
                                         <table class="table table-bordered">
                                             <tr>
                                                 <th colspan="2" rowspan="2"></th>
-                                                <th style="text-align: center;" colspan="5">Pravděpodobnost výskytu</th>
+                                                <th style="text-align: center; color:white;" colspan="5">Pravděpodobnost výskytu</th>
                                             </tr>
                                             <tr>
                                                 <td><strong>nepatrná</strong></td>
@@ -191,7 +191,8 @@
                         console.log("event.target.id: ", event.target.id);
                         var risksClicked = findRisks("#"+event.target.id);
 
-                        var myTable= "<table class=\"table table-striped m-0\"><tr><th style='width: 100px;'>id</th>";
+                        var myTable= "<table class=\"table table-striped m-0\"><tr>" +
+                                "<th style='width: 100px;text-align: center;'>ID</th>";
                         myTable+= "<th style='width: 100px; text-align: left;'>Pravděpodobnost</th>";
                         myTable+= "<th style='width: 100px; text-align: left;'>Dopad</th>";
                         myTable+= "<th style='width: 100px; text-align: left;'>Příčina</th>";
