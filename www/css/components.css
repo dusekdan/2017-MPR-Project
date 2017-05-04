@@ -753,7 +753,7 @@ File: Components
   color: #575E6F !important;
 }
 .panel-group .panel .panel-heading a[data-toggle=collapse].collapsed:before {
-  content: '\f055';
+
 }
 .panel-group .panel .panel-heading .accordion-toggle.collapsed:before {
   content: '\f055';
@@ -762,13 +762,7 @@ File: Components
   display: block;
 }
 .panel-group .panel .panel-heading a[data-toggle=collapse]:before {
-  content: '\f056';
-  display: block;
-  float: right;
-  font-family: 'FontAwesome';
-  font-size: 14px;
-  text-align: right;
-  width: 25px;
+  
 }
 .panel-group .panel .panel-heading .accordion-toggle {
   display: block;
