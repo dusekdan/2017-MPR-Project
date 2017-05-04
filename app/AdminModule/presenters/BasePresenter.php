@@ -56,9 +56,10 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter
 	{
 		parent::beforeRender();
 
-		$this->template->projects = $this->projectFacade->getProjects();
 		if (isset($this->project)) {
 			$this->template->project = $this->projectFacade->getProject($this->project);
+		} else {
+			//$this->template->projects = $this->projectFacade->getProjects();
 		}
 	}
 

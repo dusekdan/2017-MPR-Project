@@ -7,7 +7,6 @@ namespace App\AdminModule\Presenters;
 use Nette;
 use Nette\Application\UI\Multiplier;
 use App\Model;
-use App\Model\Facades\ProjectFacade;
 use App\Model\Facades\UserFacade;
 use App\Model\Facades\PhaseFacade;
 use App\Model\Facades\RiskFacade;
@@ -83,7 +82,6 @@ class ProjectPresenter extends BasePresenter
 	
 	public function actionAddRisk($phase)
 	{
-		
 		if ($this->isAjax()) {
 			$this->payload->isModal = true;
 			//pokud je modal zobrazen překresluju už jen formulář
@@ -349,15 +347,21 @@ class ProjectPresenter extends BasePresenter
     }
 
 
-	public function createComponentPhaseGrid($name)
+	public function createComponentPhasesProjectGrid($name)
 	{
-		$phaseFacade = $this->phaseFacade;
 		$presenter = $this;
-		return new Multiplier(function($phaseId) use ($phaseFacade, $presenter) {
-			$phase = $phaseFacade->getPhase($phaseId);
+		return new Multiplier(function($phaseId, $parent) use ($presenter) {
+			$grid = $this->gridFormFactory->phasesProjectGrid($phaseId, $presenter, $parent);
 
-			return $this->gridFormFactory->phaseGrid($phase, $presenter);
+			return $grid;
 		});
 
+	}
+
+	public function createComponentRisksProjectsGrid($name)
+	{
+		$grid = $this->gridFormFactory->risksProjectsGrid($name, $this);
+
+		return $grid;
 	}
 }

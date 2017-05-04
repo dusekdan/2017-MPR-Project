@@ -1,0 +1,19 @@
+{* Latte template *}
+<div class="menu">
+	<div class="title">
+		Nastavení
+	</div>
+	<nav>
+		<ul>
+			<li>
+				<a class="ajax" n:href="Project:addProject"><span class="glyphicon glyphicon-tasks"></span>Přidání projektu</a>
+			</li>
+			<li n:if="$user->isAllowed('AdminModule', 'updateUsers')" >
+				<a n:href="User:users"><span class="glyphicon glyphicon-user"></span>Správa uživatelů</a>
+			</li>
+			<li>
+				<a n:href=":Admin:Client:default"><span class="glyphicon glyphicon-usd"></span>Správa klientů</a>
+			</li>
+		</ul>
+	</nav>
+</div>

@@ -1,5 +1,5 @@
 {block title}
-    {if isset($project)}Přehled projektu {$project->getName()} {else} Projekt nebyl zvolen {/if}
+    {if isset($project)}Přehled projektu {$project->getName()} {else} Rizika všech projektů {/if}
 {/block}
 
 {block content}
@@ -70,7 +70,7 @@
                                                                     </table>
                                                                     <h3>Rizika</h3>
                                                                     <div class="scroll-table">
-																		{control phaseGrid-$phase->id}
+																		{control phasesProjectGrid-$phase->id}
                                                                     </div>
                                                                     <hr>
                                                                     <div class="col-md-12 text-center">
@@ -166,7 +166,8 @@
             </div>
         </div>
     {else}
-        <div>Zvolte si prosím ve výběru vlevo.</div>
+        <div>Rizika ze všech projektů.</div>
+        {control risksProjectsGrid}
     {/if}
 
 
@@ -184,7 +185,7 @@
 {/block}
 
 {block head}
-
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 	<link rel="stylesheet" type="text/css" href="{$basePath}/libs/ublaboo/datagrid.css">
 	<link rel="stylesheet" type="text/css" href="{$basePath}/libs/ublaboo/datagrid-spinners.css">
 

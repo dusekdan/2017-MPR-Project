@@ -144,7 +144,7 @@ class User
 	 * @var array roleList
 	 */
 	static private $roleList = [
-		'user' => 'User',
+		'user' => 'Uživatel',
 		'administrator' => 'Administrátor',
 		'projectManager' => 'Projektový manažer',
         'owner' => 'Majitel spoločnosti'

@@ -43,3 +43,15 @@
 .datagrid th.text-right {
 	width: 90px;
 }
+
+.datagrid .dropdown-menu {
+	background: #2f3e47;
+}
+
+.datagrid table thead tr.row-group-actions th {
+	background: #2f3e47;
+}
+
+.datagrid table th.col-action {
+	color: white;
+}
