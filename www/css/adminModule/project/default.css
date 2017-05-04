@@ -55,3 +55,11 @@
 .datagrid table th.col-action {
 	color: white;
 }
+
+.datagrid i.glyphicon {
+	color: white;
+}
+
+.datagrid tr:hover td.col-action i.glyphicon {
+	color: black;
+}
