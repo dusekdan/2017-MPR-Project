@@ -30,7 +30,7 @@ class ProjectPresenter extends BasePresenter
 	
 	/** @var RiskFacade */
 	private $riskFacade;
-
+	
 	/**
 	 * @var GridFormFactory
 	 * @inject
@@ -256,11 +256,19 @@ class ProjectPresenter extends BasePresenter
 		$caption = 'Přidat uživatele do fáze';
 		
 		$phase = $this->phaseFacade->getPhase($this->getParameter('phaseId'));
+		$project = $this->projectFacade->getProject($this->project);
+		
+		$usersOnProject_ps = $this->userOnProjectFacade->getUsersOnProject($project);
+		
+		$usersOnProject = [];
+		foreach ($usersOnProject_ps as $userOnProject_p){
+			array_push($usersOnProject, $userOnProject_p->user);
+		}
 		
 		$users = [];
-		foreach ($this->userFacade->getUsers() as $oneUser) {
-			if (!$phase->getUsers()->contains($oneUser))
-				$users[$oneUser->getId()] = $oneUser->getFirstName()." ".$oneUser->getLastName()." (".$oneUser->getUsername().")";
+		foreach ($usersOnProject as $oneUser) {
+			if (!$phase->getUsers()->contains($oneUser) and $oneUser->getEnabled())
+					$users[$oneUser->getId()] = $oneUser->getFirstName() . " " . $oneUser->getLastName() . " (" . $oneUser->getUsername() . ")";
 		}
 		
 		$form = $this->projectFactory->addUserProject($users, $phase,
@@ -280,8 +288,8 @@ class ProjectPresenter extends BasePresenter
 		$project = $this->projectFacade->getProject($this->project);
 		$users = [];
 		foreach ($this->userFacade->getUsers() as $oneUser) {
-			if (!$project->getUsers()->contains($oneUser))
-				$users[$oneUser->getId()] = $oneUser->getFirstName()." ".$oneUser->getLastName()." (".$oneUser->getUsername().")";
+			if (!$project->getUsers()->contains($oneUser) and $oneUser->getEnabled())
+				$users[$oneUser->getId()] = $oneUser->getFirstName() . " " . $oneUser->getLastName() . " (" . $oneUser->getUsername() . ")";
 		}
 		
 		$form = $this->projectFactory->addUserProject($users, $project,
@@ -301,67 +309,93 @@ class ProjectPresenter extends BasePresenter
 		$this->userFacade->removeUser($userId, true);
 		$this->flashMessage("Uživatel přidán s id $userId byl smazán.", "success");
 	}
-
-    // edit project
-    public function actionEditProject($projectId)
-    {
-
-        if ($this->isAjax()) {
-            $this->payload->isModal = true;
-            //pokud je modal zobrazen překresluju už jen formulář
-            if ($this->showModal == false) {
-                $this->redrawControl("modal");
-                $this->showModal = true;
-            } else {
-                // snippetem překreslim jen to co je potřeba po odeslání formuláře
-                // formulář (pro zobrazeni chyb), vyslednou tabulku po zmene v DB
-            }
-        }
-    }
-
-    public function renderEditProject()
-    {
-    }
-
-    /**
-     * Edit project.
-     * @return Nette\Application\UI\Form
-     */
-    public function createComponentEditProjectForm()
-    {
-        $project = $this->projectFacade->getProject($this->getParameter('projectId'));
-
-        return $this->projectFormF->editProject(function() {
-            $this->flashMessage("Upravení projektu proběhlo úspěšne.", "info");
-            $this->showModal = false;
-            $this->redirect('Homepage:default');
-        }, $project);
-    }
-
-    public function handleRemoveProject($projectId)
-    {
-        $this->projectFacade->removeProject($projectId, true);
-        $this->flashMessage("Projekt byl smazán.", "success");
-        unset($this->project);
-        $this->redirect('Homepage:default');
-    }
-
-
+	
+	// edit project
+	public function actionEditProject($projectId)
+	{
+		
+		if ($this->isAjax()) {
+			$this->payload->isModal = true;
+			//pokud je modal zobrazen překresluju už jen formulář
+			if ($this->showModal == false) {
+				$this->redrawControl("modal");
+				$this->showModal = true;
+			} else {
+				// snippetem překreslim jen to co je potřeba po odeslání formuláře
+				// formulář (pro zobrazeni chyb), vyslednou tabulku po zmene v DB
+			}
+		}
+	}
+	
+	public function renderEditProject()
+	{
+	}
+	
+	/**
+	 * Edit project.
+	 * @return Nette\Application\UI\Form
+	 */
+	public function createComponentEditProjectForm()
+	{
+		$project = $this->projectFacade->getProject($this->getParameter('projectId'));
+		
+		return $this->projectFormF->editProject(function () {
+			$this->flashMessage("Upravení projektu proběhlo úspěšne.", "info");
+			$this->showModal = false;
+			$this->redirect('Homepage:default');
+		}, $project);
+	}
+	
+	public function handleRemoveProject($projectId)
+	{
+		$this->projectFacade->removeProject($projectId, true);
+		$this->flashMessage("Projekt byl smazán.", "success");
+		unset($this->project);
+		$this->redirect('Homepage:default');
+	}
+	
+	
 	public function createComponentPhasesProjectGrid($name)
 	{
 		$presenter = $this;
-		return new Multiplier(function($phaseId, $parent) use ($presenter) {
+		return new Multiplier(function ($phaseId, $parent) use ($presenter) {
 			$grid = $this->gridFormFactory->phasesProjectGrid($phaseId, $presenter, $parent);
-
+			
 			return $grid;
 		});
-
+		
 	}
-
+	
 	public function createComponentRisksProjectsGrid($name)
 	{
 		$grid = $this->gridFormFactory->risksProjectsGrid($name, $this);
-
+		
 		return $grid;
+	}
+	
+	
+	public function handleRemoveUserOnPhase($userId, $phaseId)
+	{
+		try {
+			$user = $this->userFacade->getUser($userId);
+			$phase = $this->phaseFacade->getPhase($phaseId);
+			$this->userOnPhaseFacade->removeUserOnPhase($user, $phase, true);
+			$this->flashMessage("Uživatel byl úspěšně odebrán z fáze.", "success");
+		} catch (\Exception $e) {
+			$this->flashMessage("Uživatele se nepodařilo odebrat z fáze.", "danger");
+		}
+	}
+	
+	public function handleRemoveUserOnProject($userId, $projectId)
+	{
+		try {
+			$user = $this->userFacade->getUser($userId);
+			$project = $this->projectFacade->getProject($projectId);
+			$userOnPhases = $this->userOnPhaseFacade->getUserOnPhases($user, $project->phases);
+			$this->userOnProjectFacade->removeUserOnProject($user, $project, $userOnPhases, true);
+			$this->flashMessage("Uživatel byl úspěšně odebrán z projektu.", "success");
+		} catch (\Exception $e) {
+			$this->flashMessage("Uživatele se nepodařilo odebrat z projektu.", "danger");
+		}
 	}
 }

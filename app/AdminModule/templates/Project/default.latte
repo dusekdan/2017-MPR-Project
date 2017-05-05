@@ -102,7 +102,7 @@
                                                                                     <td>{$user_p->email}</td>
                                                                                     <td>{$user_p->role}</td>
                                                                                     <td class="actions">
-                                                                                        <a n:href="removeUser!, 'userId' => $user_p->id" class="on-default remove-row" name="delete" data-confirm="modal" data-confirm-title="Smazání uživatele" data-confirm-ok-class="btn-danger" data-confirm-ok-text="Smazat" data-confirm-cancel-class="btn-success" data-confirm-cancel-text="Zpět" data-confirm-text="Opravdu chcete smazat uživatele {$user_p->firstName} {$user_p->lastName}?" value="Smazat"><i class="glyphicon glyphicon-trash"></i></a>
+                                                                                        <a n:href="removeUserOnPhase!, 'userId' => $user_p->id, 'phaseId' => $phase->id" class="on-default remove-row" name="delete" data-confirm="modal" data-confirm-title="Odebrání uživatele z fáze" data-confirm-ok-class="btn-danger" data-confirm-ok-text="Odebrat" data-confirm-cancel-class="btn-success" data-confirm-cancel-text="Zpět" data-confirm-text="Opravdu chcete odebrat uživatele {$user_p->firstName} {$user_p->lastName} z fáze {$phase->name}?" value="Smazat" data-toggle="tooltip" title="Odebrat"><i class="glyphicon glyphicon-hand-right"></i></a>
                                                                                     </td>
                                                                                 </tr>
                                                                             </tbody>
@@ -138,6 +138,7 @@
                                                         <th>Login</th>
                                                         <th>Email</th>
                                                         <th>Role</th>
+                                                        <th>Akce</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
@@ -148,6 +149,9 @@
                                                         <td>{$user_p->username}</td>
                                                         <td>{$user_p->email}</td>
                                                         <td>{$user_p->role}</td>
+                                                        <td class="actions">
+                                                            <a n:href="removeUserOnProject!, 'userId' => $user_p->id, 'projectId' => $project->id" class="on-default remove-row" name="delete" data-confirm="modal" data-confirm-title="Odebrání uživatele z projektu" data-confirm-ok-class="btn-danger" data-confirm-ok-text="Odebrat" data-confirm-cancel-class="btn-success" data-confirm-cancel-text="Zpět" data-confirm-text="Opravdu chcete odebrat uživatele {$user_p->firstName} {$user_p->lastName} z projektu {$project->name}?" value="Smazat" data-toggle="tooltip" title="Odebrat"><i class="glyphicon glyphicon-hand-right"></i></a>
+                                                        </td>
                                                     </tr>
                                                 </tbody>
                                             </table>
@@ -180,6 +184,11 @@
 
     <!-- Use this little extension for ajax spinners -->
     <script src="{$basePath}/libs/ublaboo/datagrid-spinners.js"></script>
+    <script>
+		$(document).ready(function(){
+			$('[data-toggle="tooltip"]').tooltip();
+		});
+    </script>
 
 {/block}
 

@@ -42,8 +42,6 @@ class UsersOnProject
 
     /**
      * ID Usera, ktoreho sa zaznam tyka
-     * @ORM\Column(name="user_id", type="integer")
-     * @var integer
      * @ORM\ManyToOne(targetEntity="User")
      */
     protected $user;
@@ -75,8 +73,8 @@ class UsersOnProject
 
 	public function __construct($user,$project)
 	{
-        $this->setIdUser($user);
-		$this->setIdProject($project);
+        $this->setUser($user);
+		$this->setProject($project);
 		$this->setEnabled(true);
 		$this->setUpdated(new \DateTime('now'));
 		$this->setCreated(new \DateTime('now'));

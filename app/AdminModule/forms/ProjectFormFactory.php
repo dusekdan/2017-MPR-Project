@@ -519,10 +519,7 @@ class ProjectFormFactory extends BaseFactory
 		$form->addSelect('users', '', $users)
 			->setPrompt('Vyberte uživatele pro přidání');
 		
-		$form->addSubmit('send')
-			->getControlPrototype()
-			->setName('button')
-			->setHtml('<span class="glyphicon glyphicon-user"></span>'.$caption);
+		$form->addSubmit('send', $caption);
 		
 		$form->onSuccess[] = function (Form $form, $values) use ($onSuccess, $id) {
 			$onSuccess($values['users'], $id);

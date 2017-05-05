@@ -106,11 +106,27 @@ class UserPresenter extends BasePresenter
 	public function handleDelete($userId)
 	{
 		try {
+			
+			if($this->project){
+				$user = $this->userFacade->getUser($userId);
+				if($user->getRole() === "projectManager"){
+					$project = $this->projectFacade->getProject($this->project);
+					if($project->getProjectManager() === $user) {
+						unset($this->project);
+						$this->flashMessage("Uživatel byl manažer zvoleného projektu, ten byl smazán a Vás jsme poslali na obecný přehled", "warning");
+					}
+						
+				}
+			}
 			$this->userFacade->removeUser($userId, true);
 			$this->fileStorage->deleteDirectory($this->fileStorage->getUserDir($userId));
 			$this->flashMessage("Uživatel s id:{$userId} byl úspěšně odstraněn.", "success");
+			
 		} catch (\Exception $e) {
 			$this->flashMessage($e->getMessage(), "danger");
+		}
+		if (!isset($this->project)) {
+			$this->redirect('this', ['project' => null]);
 		}
 	}
 }

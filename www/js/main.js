@@ -88,7 +88,7 @@ function flashMessageAnimation()
 		if($('.flash-message').eq(i).hasClass('alert-danger')){
 			$('.flash-message').eq(i).slideDown();
 		}else{
-			$('.flash-message').eq(i).delay(i*3000).slideDown().delay(2000).slideUp(function() {
+			$('.flash-message').eq(i).delay(i*4000).slideDown().delay(3000).slideUp(function() {
 				$(this).remove();
 			});
 		}
