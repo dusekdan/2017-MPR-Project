@@ -132,7 +132,9 @@ class ProjectPresenter extends BasePresenter
 	
 	public function renderEditRisk($idRisk)
 	{
-	
+		$risk = $this->riskFacade->getRisk($idRisk);
+		if ($this->user->isInRole('projectManager') || $risk->getCreator()->getId() == $this->user->getId())
+			$this->template->risk = $risk;
 	}
 	
 	/**
@@ -168,7 +170,9 @@ class ProjectPresenter extends BasePresenter
 	
 	public function renderRemoveRisk($idRisk)
 	{
-		$this->template->risk = $this->riskFacade->getRisk($this->getParameter('idRisk'));
+		$risk = $this->riskFacade->getRisk($idRisk);
+		if ($this->user->isInRole('projectManager') || $risk->getCreator()->getId() == $this->user->getId())
+			$this->template->risk = $risk;
 	}
 	
 	/**
@@ -357,9 +361,8 @@ class ProjectPresenter extends BasePresenter
 	
 	public function createComponentPhasesProjectGrid($name)
 	{
-		$presenter = $this;
-		return new Multiplier(function ($phaseId, $parent) use ($presenter) {
-			$grid = $this->gridFormFactory->phasesProjectGrid($phaseId, $presenter, $parent);
+		return new Multiplier(function ($phaseId, $parent) {
+			$grid = $this->gridFormFactory->phasesProjectGrid($phaseId, $this, $parent, $this->user->isInRole('projectManager'));
 			
 			return $grid;
 		});

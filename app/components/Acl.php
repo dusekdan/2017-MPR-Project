@@ -20,33 +20,44 @@ class Acl extends Control {
 
 		/* seznam uživatelských rolí */
 
-        $acl->addRole('guest');
-        $acl->addRole('administrator');
-        $acl->addRole('owner');
+        $acl->addRole('guest');                             // nutné pro nette - role pokud je odhlášen
+
+		$acl->addRole('administrator');
+        $acl->addRole('owner', 'administrator');
         $acl->addRole('projectManager', 'owner');
         $acl->addRole('user', 'projectManager');
 
 
 
 		/* seznam zdrojů */
-		$acl->addResource('AdminModule'); // přístup do Osobní údaje, Plán, Kalendář, Deník, Zprávy, Soubory
-		$acl->addResource('BaseModule'); // přístup do administrace sportmodulu
+		$acl->addResource('AdminModule');   // Administrace
+		$acl->addResource('BaseModule');    // Základní modul
 
-		/* seznam pravidel oprávnění (role, zdroj, operace)*/
+		/* seznam pravidel oprávnění (role, zdroj, operace) */
 		/* stránky */
-		$acl->allow('user','BaseModule', ['edit','view','remove','add']);
-		$acl->allow('administrator','AdminModule', ['edit','view','remove','add']); //povoleno pro admina -> nemusím povolovat pro superAdmina
-        $acl->allow('projectManager','AdminModule', ['edit','view','remove','add']); //povoleno pro admina -> nemusím povolovat pro superAdmina
-        $acl->allow('owner','AdminModule', ['edit','view','remove','add']); //povoleno pro admina -> nemusím povolovat pro superAdmina
+		$acl->allow('owner', 'AdminModule', ['view', 'viewUser','viewRisk','viewPhase','viewProject']);
+		$acl->allow('owner', 'AdminModule', ['addUser', 'addPhase', 'addProject']);
+		$acl->allow('owner','AdminModule', ['editUser', 'editPhase', 'editProject']);
+		$acl->allow('owner', 'AdminModule', ['deleteUser', 'deletePhase', 'deleteProject']);
+		$acl->allow('projectManager', 'AdminModule', ['view', 'viewUser','viewRisk','viewPhase','viewProject']);
+		$acl->allow('projectManager', 'AdminModule', ['addRisk', 'addPhase', 'addProject']);
+		$acl->allow('projectManager','AdminModule', ['editRisk', 'editPhase']);
+		$acl->allow('projectManager', 'AdminModule', ['deleteRisk', 'deletePhase']);
+		$acl->allow('user', 'AdminModule', ['view', 'viewRisk','viewPhase','viewProject']);
+		$acl->allow('user', 'AdminModule', 'addRisk');
 
-
-		$acl->deny('user','BaseModule', ['edit', 'remove']);
-		$acl->deny('user','AdminModule', ['edit','view','remove','add']);
-        $acl->allow('projectManager', 'AdminModule', 'updateUsers');
-        $acl->deny('owner', 'AdminModule', 'updateUsers');
+		$acl->deny('owner', 'AdminModule', 'addRisk');
+		$acl->deny('owner','AdminModule', 'editRisk');
+		$acl->deny('owner', 'AdminModule', 'deleteRisk');
+		$acl->deny('projectManager', 'AdminModule', 'addUser');
+		$acl->deny('projectManager','AdminModule', 'editUser');
+		$acl->deny('projectManager', 'AdminModule', 'deleteUser');
+		$acl->deny('user', 'AdminModule', 'viewUser');
+		$acl->deny('user', 'AdminModule', ['addUser', 'addPhase', 'addProject']);
+		$acl->deny('user', 'AdminModule', ['deleteRisk', 'deletePhase', 'deleteProject']);
 
 		/* superAdmin má práva na všechno */
-		$acl->allow('administrator', ['BaseModule', 'AdminModule'], ['edit', 'view', 'remove', 'add', 'updateUsers']);
+		$acl->allow('administrator', Permission::ALL, Permission::ALL);
 
 		return $acl;
 	}

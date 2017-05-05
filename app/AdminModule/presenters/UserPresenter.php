@@ -54,7 +54,7 @@ class UserPresenter extends BasePresenter
 
 	public function actionUpdate($userId)
 	{
-		if(!$this->user->isAllowed('AdminModule', 'updateUsers')){
+		if(!$this->user->isAllowed('AdminModule', 'editUser')){
 			$this->flashMessage('Nemáte dostatečné oprávnění pro úpravu uživatelů.','danger');
 			$this->redirect('User:users');
 		}

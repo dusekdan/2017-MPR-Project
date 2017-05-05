@@ -1,5 +1,5 @@
 {* Latte template *}
-<div class="menu">
+<div class="menu" n:if="!$user->isInRole('user')">
 	<div class="title">
 		Nastavení
 	</div>
@@ -8,7 +8,7 @@
 			<li>
 				<a class="ajax" n:href="Project:addProject"><span class="glyphicon glyphicon-tasks"></span>Přidání projektu</a>
 			</li>
-			<li n:if="$user->isAllowed('AdminModule', 'updateUsers')" >
+			<li n:if="$user->isAllowed('AdminModule', 'viewUser')" >
 				<a n:href="User:users"><span class="glyphicon glyphicon-user"></span>Správa uživatelů</a>
 			</li>
 			<li>

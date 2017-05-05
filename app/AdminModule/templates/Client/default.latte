@@ -9,7 +9,7 @@
             <th>Název</th>
             <th>Popis</th>
             <th>Aktivita</th>
-            <th>Akce</th>
+            <th n:if="$user->isAllowed('AdminModule','editUser')">Akce</th>
         </tr>
         </thead>
         <tbody>
@@ -20,15 +20,15 @@
                 <td>{$one->description}</td>
                 <td><a n:href="changeEnabled!, 'clientId' => $one->id"><button class='btn btn-enabled {$one->enabled ? "btn-success" : "btn-danger"}'>{$one->enabled ? "aktivní" : "neaktivní"}</button></a></td>
 
-                <td class="actions">
-                    <a class="ajax" n:href="Client:editClient, 'clientId' => $one->id" data-toggle="tooltip" title="Upravit"><span class="glyphicon glyphicon-pencil"></span></a>
-                    <a class="ajax" n:href="Client:removeClient, 'clientId' => $one->id" data-toggle="tooltip" title="Odstranit"><span class="glyphicon glyphicon-trash"></span></a>
+                <td class="actions" n:if="$user->isAllowed('AdminModule','editUser')">
+                    <a class="ajax" n:href="Client:editClient, 'clientId' => $one->id" n:if="$user->isAllowed('AdminModule','editUser')" data-toggle="tooltip" title="Upravit"><span class="glyphicon glyphicon-pencil"></span></a>
+                    <a class="ajax" n:href="Client:removeClient, 'clientId' => $one->id" n:if="$user->isInRole('administrator')" data-toggle="tooltip" title="Odstranit"><span class="glyphicon glyphicon-trash"></span></a>
                 </td>
             </tr>
         {/foreach}
         </tbody>
     </table>
-    <div class="col-md-2 col-lg-offset-5 text-center">
+    <div class="col-md-2 col-lg-offset-5 text-center" n:if="$user->isAllowed('AdminModule','editUser')">
         <a n:href="Client:addClient" class="ajax">
             <button class="btn btn-success waves-effect waves-light ">
                 <span class="glyphicon glyphicon-plus m-r-5"></span>

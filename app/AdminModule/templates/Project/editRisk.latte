@@ -8,20 +8,24 @@
     {/block}
 
     {block modal}
-        <link rel="stylesheet" href="{$basePath}/libs/datetimepicker/css/bootstrap-datetimepicker.css">
-        <script src="{$basePath}/libs/moment/moment-with-locales.min.js"></script>
-        <script src="{$basePath}/libs/datetimepicker/js/bootstrap-datetimepicker.min.js"></script>
-        <script type="text/javascript">
-		    $(function () {
-			    $('.datepicker').datetimepicker({
-				    locale: 'cs',
-				    viewMode: 'days',
-				    format: 'DD.MM.YYYY'
-			    });
-		    });
-        </script>
-        {import './../components/bootstrap-form.latte'} {* bootstrap formuláře *}
-        {include bootstrap-form, form => editRiskForm, labelSize => 4, inputSize => 8}
+		{if $risk}
+			<link rel="stylesheet" href="{$basePath}/libs/datetimepicker/css/bootstrap-datetimepicker.css">
+			<script src="{$basePath}/libs/moment/moment-with-locales.min.js"></script>
+			<script src="{$basePath}/libs/datetimepicker/js/bootstrap-datetimepicker.min.js"></script>
+			<script type="text/javascript">
+				$(function () {
+					$('.datepicker').datetimepicker({
+						locale: 'cs',
+						viewMode: 'days',
+						format: 'DD.MM.YYYY'
+					});
+				});
+			</script>
+			{import './../components/bootstrap-form.latte'} {* bootstrap formuláře *}
+			{include bootstrap-form, form => editRiskForm, labelSize => 4, inputSize => 8}
+		{else}
+			<div>Bohužel dostatečné nemáte oprávnění</div>
+		{/if}
     {/block}
 {/block}
 {block scripts}

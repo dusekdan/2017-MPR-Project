@@ -26,9 +26,15 @@ class StatisticPresenter extends BasePresenter
             $project = $this->projectFacade->getProject($this->project);
             $arrJSON = [];
 
-            foreach ($project->phases as $phase){
+            foreach ($project->phases as $phase) {
+	            if (!$phase->getEnabled()) {
+		            continue;
+	            }
                 $phaseJSON= [];
-                foreach($phase->risks as $risk){
+                foreach ($phase->risks as $risk) {
+	                if (!$risk->getEnabled()) {
+		                continue;
+	                }
                     $riskJSON = [];
                     array_push($riskJSON, $risk->id);
                     array_push($riskJSON, $risk->name);
@@ -48,10 +54,19 @@ class StatisticPresenter extends BasePresenter
 	        $projects = $this->projectFacade->getProjects();
             $arrJSON = [];
 
-            foreach ($projects as $project){
-                foreach ($project->phases as $phase){
+            foreach ($projects as $project) {
+	            if (!$project->getEnabled()) {
+		            continue;
+	            }
+                foreach ($project->phases as $phase) {
+	                if (!$phase->getEnabled()) {
+		                continue;
+	                }
                     $phaseJSON= [];
-                    foreach($phase->risks as $risk){
+                    foreach($phase->risks as $risk) {
+	                    if (!$risk->getEnabled()) {
+		                    continue;
+	                    }
                         $riskJSON = [];
                         array_push($riskJSON, $risk->id);
                         array_push($riskJSON, $risk->name);

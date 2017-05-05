@@ -8,9 +8,13 @@
     {/block}
 
     {block modal}
-        <p>Opravdu chcete odstranit riziko "{$risk->getName()}"?</p>
-        {import './../components/bootstrap-form.latte'} {* bootstrap formuláře *}
-        {include bootstrap-form, form => removeRiskForm, labelSize => 4, inputSize => 8}
+        {if $risk}
+            <p>Opravdu chcete odstranit riziko "{$risk->getName()}"?</p>
+            {import './../components/bootstrap-form.latte'} {* bootstrap formuláře *}
+            {include bootstrap-form, form => removeRiskForm, labelSize => 4, inputSize => 8}
+        {else}
+            <div>Bohužel dostatečné nemáte oprávnění</div>
+        {/if}
     {/block}
 {/block}
 {block scripts}

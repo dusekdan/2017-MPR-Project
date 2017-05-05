@@ -31,7 +31,7 @@ class GridFormFactory
 		$this->phaseFacade = $phaseFacade;
 	}
 
-	public function phasesProjectGrid($phaseId, $presenter, $parent)
+	public function phasesProjectGrid($phaseId, $presenter, $parent, $privilegia)
 	{
 		/**
 		 * @var DataGrid
@@ -50,7 +50,6 @@ class GridFormFactory
 		$grid->addColumnDateTime('endDate', 'Konec', 'endDate')
 			->setSortable();
 
-
 		$grid->addAction('View', '')->setRenderer(
 			function ($risk) use ($presenter) {
 				return Nette\Utils\Html::el('a')->addAttributes(['class'=>'ajax'])->href($presenter->link("viewRisk", $risk->id ))->setHtml('<i class="glyphicon glyphicon-eye-open"></i>') ;
@@ -65,7 +64,9 @@ class GridFormFactory
 
 		$grid->addAction('Remove', '')->setRenderer(
 			function ($risk) use ($presenter) {
-				return Nette\Utils\Html::el('a')->addAttributes(['class'=>'ajax'])->href($presenter->link("removeRisk", $risk->id ))->setHtml('<i class="glyphicon glyphicon-trash"></i>') ;
+				if ($presenter->user->isInRole('projectManager') || $presenter->user->id == $risk->getCreator()->getId()) {
+					return Nette\Utils\Html::el('a')->addAttributes(['class' => 'ajax'])->href($presenter->link("removeRisk", $risk->id))->setHtml('<i class="glyphicon glyphicon-trash"></i>');
+				}
 			}
 		);
 
@@ -109,7 +110,6 @@ class GridFormFactory
 			->setSortable();
 		$grid->addColumnDateTime('endDate', 'Konec', 'endDate')
 			->setSortable();
-
 
 		$grid->addAction('View', '')->setRenderer(
 			function ($risk) use ($presenter) {

@@ -73,7 +73,6 @@ function setFile(inputHiddenId) {
  */
 function sendForm(element)
 {
-	console.log(element.form);
 	element.form.submit();
 }
 

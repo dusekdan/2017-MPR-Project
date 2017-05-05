@@ -14,7 +14,7 @@
                 <th>Datum založení</th>
                 <th>Poslední přihlášení</th>
                 <th>Aktivita</th>
-                <th>Akce</th>
+                <th n:if="$user->isAllowed('AdminModule','editUser')" >Akce</th>
             </tr>
         </thead>
         <tbody>
@@ -28,16 +28,19 @@
                     <td>{$one->getRole()}</td>
                     <td>{$one->getCreated()|date:'G:i j.n.Y'}</td>
                     <td>{$one->getLastSign()|date:'G.i j.n.Y'}</td>
-                    <td><a n:href="changeEnabled!, 'userId' => $one->id"><button class='btn btn-enabled {$one->enabled ? "btn-success" : "btn-danger"}'>{$one->enabled ? "aktivní" : "neaktivní"}</button></a></td>
-                    <td class="actions">
-                        <a class="ajax" n:href="User:update, 'userId' => $one->id" data-toggle="tooltip" title="Upravit"><span class="glyphicon glyphicon-pencil"></span></a>
-                        <a n:href="delete!, 'userId' => $one->id" data-toggle="tooltip" title="Odstranit"><span class="glyphicon glyphicon-trash"></span></a>
+
+                    <td n:if="$user->isAllowed('AdminModule','editUser')"><a n:href="changeEnabled!, 'userId' => $one->id" ><button class='btn btn-enabled {$one->enabled ? "btn-success" : "btn-danger"}'>{$one->enabled ? "aktivní" : "neaktivní"}</button></a></td>
+                    <td n:if="!$user->isAllowed('AdminModule','editUser')"><button class='btn btn-enabled {$one->enabled ? "btn-success" : "btn-danger"}'>{$one->enabled ? "aktivní" : "neaktivní"}</button></td>
+
+                    <td class="actions" n:if="$user->isAllowed('AdminModule','editUser')">
+                        <a class="ajax" n:href="User:update, 'userId' => $one->id" n:if="$user->isAllowed('AdminModule','editUser')" data-toggle="tooltip" title="Upravit"><span class="glyphicon glyphicon-pencil"></span></a>
+                        <a n:href="delete!, 'userId' => $one->id" n:if="$user->isInRole('administrator')" data-toggle="tooltip" title="Odstranit"><span class="glyphicon glyphicon-trash"></span></a>
                     </td>
                 </tr>
             {/foreach}
         </tbody>
 	</table>
-    <div class="col-md-12 text-center">
+    <div class="col-md-12 text-center" n:if="$user->isAllowed('AdminModule','addUser')">
         <a class="ajax" n:href="User:addUser">
             <button class="btn btn-success waves-effect waves-light">
                 <span class="glyphicon glyphicon-plus m-r-5"></span>
