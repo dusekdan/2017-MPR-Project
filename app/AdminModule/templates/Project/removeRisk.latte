@@ -8,7 +8,7 @@
     {/block}
 
     {block modal}
-        {if $risk}
+        {if isset($risk)}
             <p>Opravdu chcete odstranit riziko "{$risk->getName()}"?</p>
             {import './../components/bootstrap-form.latte'} {* bootstrap formuláře *}
             {include bootstrap-form, form => removeRiskForm, labelSize => 4, inputSize => 8}
