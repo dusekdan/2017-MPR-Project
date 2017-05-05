@@ -1,10 +1,16 @@
+## Potřebné věci
+- mít server
+- nainstalovat `composer`
+- nainstalovat `GIT`
+
 ## Postup instalace
-- Naklonovat si tento projekt
+- Naklonovat si tento projekt pomocí `GITu`
 - Pomocí composeru si stáhněte potřebné balíčky 
     ```sh 
     $ composer update
     ``` 
-- Nastavit databázi v `app/config/config.local.neon` přepsáním nazev_databaze za vlastni
+- Následně mějme dva soubory `app/config/config.local.neon.default` a `phinx.yml.default`, které si zduplikujte (**nemažte**) a u duplikátů smažte koncovku `.default`
+- Nastavit databázi v `app/config/config.local.neon` přepsáním nazev_databaze za vlastni a nastavit správně parametr `user` a `password` u `database` a u `doctrine` 
 ```sh
 parameters:
 	dbname: nazev_databaze
@@ -21,7 +27,7 @@ doctrine:
 	password:
 	dbname: %dbname%
 	metadata:
-		App: %appDir%\Model\Entities
+		App: %appDir%/Model/Entities
 ```
 - Nastavit migrace přepsáním nazev_databaze za vlastni v `phinx.yml`
 ```sh
@@ -34,7 +40,7 @@ development:
     port: 3306
     charset: utf8
 ```
-- Spustit příkaz
+- Spustit v příkazové řadce ve složce s projektem příkaz
 	```sh
 	$ vendor/bin/phinx migrate
 	```
