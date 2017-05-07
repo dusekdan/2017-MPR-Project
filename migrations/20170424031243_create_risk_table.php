@@ -27,7 +27,7 @@ class CreateRiskTable extends AbstractMigration
             ->addColumn('time', 'integer',array('null' => true))
             ->addColumn('result', 'string',array('null' => true, 'limit' => 100))
             ->addColumn('primary_cause', 'string',array('null' => true, 'limit' => 100))
-            ->addColumn('trigger', 'string',array('null' => true, 'limit' => 100))
+            ->addColumn('trigger', 'string',array('null' => true, 'limit' => 300))
             ->addColumn('reaction', 'string',array('null' => true, 'limit' => 300))
             ->addColumn('severity', 'float',array('null' => true))
             ->addColumn('start_date', 'date')
