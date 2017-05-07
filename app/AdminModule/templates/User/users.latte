@@ -5,10 +5,10 @@
 	<table class="table table-striped m-0" n:snippet="snippetUsers"> {*TODO snippet neni dodelan*}
         <thead>
             <tr>
-                <th>ID</th>
-                <th>Login</th>
-                <th>Příjmení</th>
+                <th>#</th>
                 <th>Jméno</th>
+                <th>Příjmení</th>
+                <th>Login</th>
                 <th>Narozeniny</th>
                 <th>Role</th>
                 <th>Datum založení</th>
@@ -21,9 +21,9 @@
             {foreach $users as $one}
                 <tr>{*promene z doctrine jde vypisovat pomoci geteru ale v latte i zkracene  one->getId() / one->id*}
                     <td>{$one->id}</td>
-                    <td>{$one->getUsername()}</td>
-                    <td>{$one->getLastName()}</td>
                     <td>{$one->getFirstName()}</td>
+                    <td>{$one->getLastName()}</td>
+                    <td>{$one->getUsername()}</td>
                     <td>{$one->getBirthday()|date:'j.n.Y'}</td>
                     <td>{$one->getRole()}</td>
                     <td>{$one->getCreated()|date:'G:i j.n.Y'}</td>

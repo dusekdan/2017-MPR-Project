@@ -43,6 +43,7 @@ class StatisticPresenter extends BasePresenter
                     array_push($riskJSON, $risk->severity);
                     array_push($riskJSON, $risk->primaryCause);
                     array_push($riskJSON, $risk->result);
+	                array_push($riskJSON, $risk->reaction);
                     array_push($phaseJSON, $riskJSON);
                 }
                 array_push($arrJSON, $phaseJSON);

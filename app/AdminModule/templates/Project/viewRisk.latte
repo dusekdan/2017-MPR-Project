@@ -10,6 +10,8 @@
     {block modal}
         <table class="risk-table">
             <tr><th>Název</th><td colspan="3">{$risk->name}</td></tr>
+            <tr><th>Projekt:</th><td colspan="3">{$risk->phase->project->name}</td></tr>
+            <tr><th>Fáze projektu:</th><td colspan="3">{$risk->phase->name}</td></tr>
             <tr><th>Typ rizika</th><td>{$risk->riskType->name}</td></tr>
             <tr><th>Popis</th><td colspan="3">{$risk->description}</td></tr>
             <tr>

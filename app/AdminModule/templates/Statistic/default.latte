@@ -102,7 +102,6 @@
         <script src="{$basePath}/libs/highcharts/js/exporting.js"></script>
         <script>
             var array = JSON.parse({$JSONData});
-
             var phasesArr = [];
             var idArray = [];
             var moneyArray = [];
@@ -162,7 +161,6 @@
                 phases.forEach(function(risk) {
                     var severityType = getSeverityType(risk[4]);
                     var probabilityType = getProbabilityType(risk[2]);
-
                     idArray.push([risk[1], risk[3]]);
                     risksArr.push({
                         id: risk[0],
@@ -172,6 +170,7 @@
                         severity: risk[4],
                         cause: risk[5],
                         result: risk[6],
+                        reaction: risk[7],
                         category: "#"+severityType.toString()+"-"+probabilityType.toString()
                     });
                 });
@@ -190,18 +189,20 @@
                         var risksClicked = findRisks("#"+event.target.id);
 
                         var myTable= "<table class=\"table table-striped m-0\"><tr>" +
-                                "<th style='width: 100px;text-align: center;'>ID</th>";
-                        myTable+= "<th style='width: 100px; text-align: left;'>Pravděpodobnost</th>";
-                        myTable+= "<th style='width: 100px; text-align: left;'>Dopad</th>";
-                        myTable+= "<th style='width: 100px; text-align: left;'>Příčina</th>";
-                        myTable+="<th style='width: 100px; text-align: left;'>Následek</th></tr>";
+                                "<th style='width: 80px;text-align: center;'>ID</th>";
+                        myTable+= "<th style='width: 80px; text-align: left;' title='Pravděpodobnost'>P-st.</th>";
+                        myTable+= "<th style='width: 80px; text-align: left;'>Dopad</th>";
+                        myTable+= "<th style='width: 250px; text-align: left;'>Příčina</th>";
+                        myTable+="<th style='width: 250px; text-align: left;'>Následek</th>";
+	                    myTable+="<th style='width: 250px; text-align: left;'>Protiopatření</th></tr>";
 
                         risksClicked.forEach(function(riskClicked){
-                            myTable += "<tr><td style='width: 100px;'>" + riskClicked.id + "</td>";
-                            myTable += "<td style='width: 100px; text-align: left;'>" + parseFloat(riskClicked.probability)*100 + "%" + "</td>";
-                            myTable += "<td style='width: 100px; text-align: left;'>" + parseFloat(riskClicked.severity)*100 + "%" + "</td>";
-                            myTable += "<td style='width: 100px; text-align: left;'>" + riskClicked.cause + "</td>";
-                            myTable += "<td style='width: 100px; text-align: left;'>" + riskClicked.result + "</td></tr>";
+                            myTable += "<tr><td style='width: 80px;'>" + riskClicked.id + "</td>";
+                            myTable += "<td style='width: 80px; text-align: left;'>" + parseFloat(riskClicked.probability)*100 + "%" + "</td>";
+                            myTable += "<td style='width: 80px; text-align: left;'>" + parseFloat(riskClicked.severity)*100 + "%" + "</td>";
+                            myTable += "<td style='width: 250px; text-align: left;'>" + riskClicked.cause + "</td>";
+                            myTable += "<td style='width: 250px; text-align: left;'>" + riskClicked.result + "</td>";
+	                        myTable += "<td style='width: 250px; text-align: left;'>" + riskClicked.reaction + "</td></tr>";
                         });
                         myTable+="</table>";
 
@@ -289,7 +290,6 @@
 				width = $(".container").width();
 				chart.setSize(width, height, doAnimation = true);
 			}
-
         </script>
 {/block}
 {block scripts}
