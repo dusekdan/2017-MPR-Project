@@ -41,4 +41,11 @@ class UserFormFactory extends BaseFactory
 
 		return $form;
 	}
+	
+	public function add(callable $onSuccess)
+	{
+		$form = $this->baseUFF->signUp($onSuccess);
+		
+		return $form;
+	}
 }

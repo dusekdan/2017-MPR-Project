@@ -1,10 +1,10 @@
 {block title}
-    Upravit projekt
+    Přidat uživatele
 {/block}
 
 {block content}
     {block modalTitle}
-        Upravit projekt
+        Přidat uživatele
     {/block}
 
     {block modal}
@@ -12,16 +12,18 @@
         <script src="{$basePath}/libs/moment/moment-with-locales.min.js"></script>
         <script src="{$basePath}/libs/datetimepicker/js/bootstrap-datetimepicker.min.js"></script>
         <script type="text/javascript">
-            $(function () {
-                $('.datepicker').datetimepicker({
-                    locale: 'cs',
-                    viewMode: 'days',
-                    format: 'DD.MM.YYYY'
-                });
-            });
+			$(function () {
+				$('#datepicker').datetimepicker({
+					locale: 'cs',
+					viewMode: 'days',
+					format: 'DD.MM.YYYY'
+				});
+			});
         </script>
-        {import './../components/bootstrap-form.latte'} {* bootstrap formuláře *}
-        {include bootstrap-form, form => editProjectForm, labelSize => 4, inputSize => 8}
+        {snippet snippetUpdate}
+            {import './../components/bootstrap-form.latte'} {* bootstrap formuláře *}
+            {include bootstrap-form, form => addForm, labelSize => 4, inputSize => 7}
+        {/snippet}
     {/block}
 {/block}
 {block scripts}
@@ -29,4 +31,5 @@
 {/block}
 
 {block head}
+    <link rel="stylesheet" href="{$basePath}/css/adminModule/user/style.css">
 {/block}

@@ -92,6 +92,43 @@ class UserPresenter extends BasePresenter
 		return $form;
 	}
 	
+	
+	public function actionAdd()
+	{
+		if(!$this->user->isAllowed('AdminModule', 'addUser')){
+			$this->flashMessage('Nemáte dostatečné oprávnění pro úpravu uživatelů.','danger');
+			$this->redirect('User:users');
+		}
+		
+		if ($this->isAjax()) {
+			$this->payload->isModal = true;
+			//pokud je modal zobrazen překresluju už jen formulář
+			if ($this->showModal == false) {
+				$this->redrawControl("modal");
+				$this->showModal = true;
+			} else {
+			}
+		}
+	}
+	
+	public function renderAdd()
+	{
+	
+	}
+	
+	public function createComponentAddForm()
+	{
+		$form = $this->formFactory->add(function (){
+			$this->flashMessage("Uživatel byl přidán.", "success");
+			$this->showModal = false;
+			$this->redirect('User:users');
+		});
+		
+		$form->getElementPrototype()->class('ajax');
+		
+		return $form;
+	}
+	
 	public function handleChangeEnabled($userId)
 	{
 		try {

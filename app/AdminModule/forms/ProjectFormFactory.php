@@ -88,7 +88,8 @@ class ProjectFormFactory extends BaseFactory
     {
         $users = [];
         foreach ($this->userFacade->getUsers() as $u) {
-            $users[$u->getId()] = $u->getFirstName()." ".$u->getLastName()." (".$u->getUsername().")";
+        	if($u->getRole() === "projectManager")
+                $users[$u->getId()] = $u->getFirstName()." ".$u->getLastName()." (".$u->getUsername().")";
         }
 
         $clients = [];
@@ -155,7 +156,8 @@ class ProjectFormFactory extends BaseFactory
 
         $users = [];
         foreach ($this->userFacade->getUsers() as $u) {
-            $users[$u->getId()] = $u->getFirstName()." ".$u->getLastName()." (".$u->getUsername().")";
+	        if($u->getRole() === "projectManager")
+                $users[$u->getId()] = $u->getFirstName()." ".$u->getLastName()." (".$u->getUsername().")";
         }
 
         $clients = [];
