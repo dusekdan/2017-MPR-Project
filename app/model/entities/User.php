@@ -100,6 +100,13 @@ class User
 	protected $created;
 
 	/**
+	 * Datum vytvoření uživatele
+	 * @ORM\Column(type="datetime")
+	 * @var \DateTime
+	 */
+	protected $updated;
+
+	/**
 	 * Čas posledního přihlášení
 	 * @ORM\Column(name="last_sign", type="datetime", nullable=true)
 	 * @var \DateTime
@@ -123,14 +130,14 @@ class User
 	/**
 	 * Uživatelé k dané fazi
 	 * @ORM\ManyToMany(targetEntity="Phase", mappedBy="users")
-	 * @var Phase[]|Collection
+	 * @var Phase[]|ArrayCollection
 	 */
 	protected $phases;
 
 	/**
 	 * Uživatelé k daným projektům
 	 * @ORM\ManyToMany(targetEntity="Project", mappedBy="users")
-	 * @var Project[]|Collection
+	 * @var Project[]|ArrayCollection
 	 */
 	protected $projects;
 
@@ -163,9 +170,11 @@ class User
 		$role ? $this->setRole($role) : $this->setRole();
 		$this->setCreated(new \DateTime('now'));
         $this->setUpdated(new \DateTime('now'));
+        $this->setHasPhoto(false);
+        $this->setEnabled(true);
 
         $this->phases = new ArrayCollection();
-        $this->projects = new ArryCollection();
+        $this->projects = new ArrayCollection();
 	}
 
 	/**

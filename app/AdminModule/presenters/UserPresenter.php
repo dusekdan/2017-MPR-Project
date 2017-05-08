@@ -107,6 +107,8 @@ class UserPresenter extends BasePresenter
 				$this->redrawControl("modal");
 				$this->showModal = true;
 			} else {
+				$this->redrawControl("snippetAddUser");
+				$this->redrawControl("snippetUsers");
 			}
 		}
 	}
