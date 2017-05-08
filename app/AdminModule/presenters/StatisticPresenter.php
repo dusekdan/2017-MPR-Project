@@ -7,6 +7,7 @@ namespace  App\AdminModule\Presenters;
 use Nette;
 use App\Model;
 use App\Model\Facades\ProjectFacade;
+use Tracy\Debugger;
 
 class StatisticPresenter extends BasePresenter
 {
@@ -44,6 +45,7 @@ class StatisticPresenter extends BasePresenter
                     array_push($riskJSON, $risk->primaryCause);
                     array_push($riskJSON, $risk->result);
 	                array_push($riskJSON, $risk->reaction);
+
                     array_push($phaseJSON, $riskJSON);
                 }
                 array_push($arrJSON, $phaseJSON);
@@ -76,6 +78,7 @@ class StatisticPresenter extends BasePresenter
                         array_push($riskJSON, $risk->severity);
                         array_push($riskJSON, $risk->primaryCause);
                         array_push($riskJSON, $risk->result);
+	                    array_push($riskJSON, $risk->reaction);
                         array_push($phaseJSON, $riskJSON);
                     }
                     array_push($arrJSON, $phaseJSON);

@@ -162,7 +162,7 @@ class Risk
 
     /**
      * Reakcia/Opatrenie rizika
-     * @ORM\Column(name="reaction", type="string", length=100)
+     * @ORM\Column(name="reaction", type="string", length=300)
      * @var string
      */
     protected $reaction;
