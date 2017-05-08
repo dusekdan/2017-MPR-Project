@@ -137,7 +137,8 @@ class UserFormFactory extends BaseFactory
 				$user = new User($values->username, $values->password, $values->email, $values->firstName, $values->lastName, $values->birthday, $values->phone, NULL);
 				$this->em->persist($user);
 				$this->em->flush();
-				$this->user->login($values->username, $values->password);
+				if (!$this->user->isLoggedIn())
+					$this->user->login($values->username, $values->password);
 				$this->fileStorage->createDirectory($this->fileStorage->getUserPhotoDir($user->getId()));
 			} catch (\Exception $e) {
 				$form->addError("Nastala chyba při vytváření uživatele, informujte administrátora.".$e);
