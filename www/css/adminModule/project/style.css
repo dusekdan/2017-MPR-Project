@@ -1,0 +1,84 @@
+.header-title {
+    color: white;
+}
+
+.project-menu{
+    background-color: #253138;
+    color: #98a6ad;
+    border-radius: 5px 5px 0 0;
+    border: none;
+}
+
+
+
+.panel-collapse {
+    background-color: #2f3e47;
+}
+
+.tab-pane {
+    background-color: #2f3e47;
+}
+
+
+
+.scroll-table {
+    overflow: auto;
+}
+
+.tab-content{
+    padding-top: 5px;
+}
+
+.panel-default > .panel-heading {
+    background-color: #253138;
+    border-color: #EEEEEE;
+    color: #98a6ad;
+}
+
+.panel-title {
+    color: #98a6ad;
+    font-weight: normal;
+}
+
+.nav-tabs > li > a, .nav-tabs > li > a:hover{
+    background-color: transparent;
+    color: #98a6ad;
+    border: none;
+}
+
+.nav-tabs > li.active > a, .nav-tabs > li.active > a:hover, .nav-tabs > li.active > a:focus{
+    border: none;
+    color: white;
+    background-color: #00aced;
+    border-radius: 5px 5px 0 0;
+}
+
+.row h3{
+    color: #98a6ad;
+}
+
+.actions{
+    width: 90px;
+}
+.actions > a{
+    color: silver;
+    margin: 2px;
+}
+
+/**
+Formuláře
+ */
+
+form textarea {
+    resize: vertical;
+}
+
+.risk-table{
+    color: black;
+    collapse: collapse;
+    margin: 10px;
+}
+.risk-table th, .risk-table td{
+    padding: 5px;
+    color: black;
+}

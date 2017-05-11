@@ -1,0 +1,17 @@
+{* Latte template *}
+
+<div id='left-menu' class="left side-menu">
+	<div class="project-name"><a n:href=":Base:Homepage:">Octopus <span>Systém rizik</span></a></div>
+	{include './profile.latte'}
+	{import './bootstrap-form.latte'} {* bootstrap formuláře *}
+	{include bootstrap-form, form => chooseOneForm, labelSize => 12, inputSize => 12}
+	<script>
+		$("#left-menu form .send").hide(); {* pokud nebude fungovat js, musi se zobrazit, je to zde aby to bylo prehledne *}
+	</script>
+
+	{include './menu.latte'}
+	<hr>
+
+	{include './menuPrivate.latte'}
+</div>
+

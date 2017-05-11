@@ -1,0 +1,12 @@
+# přesměrování do www, kde najde index.php
+<IfModule mod_rewrite.c>
+        RewriteEngine On
+        RewriteRule ^$ www/ [L]
+        RewriteCond %{REQUEST_FILENAME} !-f
+        RewriteCond %{REQUEST_FILENAME} !-d
+        RewriteCond %{REQUEST_URI} !^www/
+        RewriteRule ^(.*)$ www/$1
+#pro https k přesměrování se použije 301
+#        RewriteCond %{HTTPS} off
+#        RewriteRule .* https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+</IfModule>

@@ -1,0 +1,96 @@
+{**
+ * @param string   $basePath web base path
+ * @param array    $flashes  flash messages
+ *}
+<!DOCTYPE html>
+{import './components/bootstrap-form.latte'} {* bootstrap formuláře *}
+<html>
+<head>
+	<meta charset="utf-8">
+
+	<title>{ifset title}{include title|stripHtml} | {/ifset}Moduly</title>
+
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="{$basePath}/libs/bootstrap/css/bootstrap.css" >
+	<link rel="stylesheet" href="{$basePath}/css/style.css">
+	<link rel="stylesheet" href="{$basePath}/css/adminModule/style.css">
+	<link rel="stylesheet" href="{$basePath}/css/components.css">
+	<link href="https://fonts.googleapis.com/css?family=Karla|Rancho" rel="stylesheet">
+
+	<script src="{$basePath}/js/include/jquery-3.1.1.js"></script>
+	<script src="{$basePath}/libs/bootstrap/js/bootstrap.js"></script>
+
+	<script src="{$basePath}/js/include/netteForms.js"></script>
+	<script src="{$basePath}/js/include/nette.ajax.js"></script>
+	<script src="{$basePath}/js/include/extension/nette.ajax.ex.js"></script>
+
+	<script src="{$basePath}/js/main.js"></script>
+	<script src="{$basePath}/js/adminModule/script.js"></script>
+
+	{block head}{/block}
+</head>
+
+<body>
+
+{include './components/leftSidePanel.latte'}
+
+<section id="main">
+	<div n:foreach="$flashes as $flash" class="flash-message alert alert-{$flash->type}">
+		<span class="type">{$flash->type == 'info' ? 'Info' :( $flash->type == 'success' ? 'Úspěch' :( $flash->type == 'warning' ? 'Varování' :( $flash->type == 'danger' ? 'Nebezpečí' : '' )))}!</span>
+		<span class="message">{$flash->message}</span>
+		<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+	</div>
+	<div id="header">
+		<h3>{ifset title}{include title|stripHtml}{/ifset}</h3>
+	</div>
+	<div class="inner-border">
+		<div id="content">
+			{include content}
+		</div>
+	</div>
+	<div id="footer">
+		2017 © Octopus - Systém rizik
+	</div>
+</section>
+
+
+
+
+<script>
+	$(function () {
+		$.nette.init();
+	});
+</script>
+{block scripts}
+{/block}
+
+{snippet modal}
+	{if $presenter->isAjax()}
+		{ifset #modal}
+			<div class="modal fade modal-ajax">
+				<div class="modal-dialog">
+					<div class="modal-content">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal">&times;</button>
+							{block modalHeader}
+								<h3 class="modal-title">
+									{block|striptags}{include #modalTitle}{/block}
+								</h3>
+							{/block}
+						</div>
+						<div class="modal-body">
+							{include #modal}
+						</div>
+						{ifset #modalFooter}
+							<div class="modal-footer">
+								{include #modalFooter}
+							</div>
+						{/ifset}
+					</div>
+				</div>
+			</div>
+		{/ifset}
+	{/if}
+{/snippet}
+</body>
+</html>

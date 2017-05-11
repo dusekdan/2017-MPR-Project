@@ -1,0 +1,67 @@
+{block title}
+	Správa uživatelů
+{/block}
+{block content}
+	<table class="table table-striped m-0" n:snippet="snippetUsers"> {*TODO snippet neni dodelan*}
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Jméno</th>
+                <th>Příjmení</th>
+                <th>Login</th>
+                <th>Narozeniny</th>
+                <th>Role</th>
+                <th>Datum založení</th>
+                <th>Poslední přihlášení</th>
+                <th>Aktivita</th>
+                <th n:if="$user->isAllowed('AdminModule','editUser')" >Akce</th>
+            </tr>
+        </thead>
+        <tbody>
+            {foreach $users as $one}
+                <tr>{*promene z doctrine jde vypisovat pomoci geteru ale v latte i zkracene  one->getId() / one->id*}
+                    <td>{$one->id}</td>
+                    <td>{$one->getFirstName()}</td>
+                    <td>{$one->getLastName()}</td>
+                    <td>{$one->getUsername()}</td>
+                    <td>{$one->getBirthday()|date:'j.n.Y'}</td>
+                    <td>{$one->getRole()}</td>
+                    <td>{$one->getCreated()|date:'G:i j.n.Y'}</td>
+                    <td>{$one->getLastSign()|date:'G.i j.n.Y'}</td>
+
+                    <td n:if="$user->isAllowed('AdminModule','editUser')"><a n:href="changeEnabled!, 'userId' => $one->id" ><button class='btn btn-enabled {$one->enabled ? "btn-success" : "btn-danger"}'>{$one->enabled ? "aktivní" : "neaktivní"}</button></a></td>
+                    <td n:if="!$user->isAllowed('AdminModule','editUser')"><button class='btn btn-enabled {$one->enabled ? "btn-success" : "btn-danger"}'>{$one->enabled ? "aktivní" : "neaktivní"}</button></td>
+
+                    <td class="actions" n:if="$user->isAllowed('AdminModule','editUser')">
+                        <a class="ajax" n:href="User:update, 'userId' => $one->id" n:if="$user->isAllowed('AdminModule','editUser')" data-toggle="tooltip" title="Upravit"><span class="glyphicon glyphicon-pencil"></span></a>
+                        <a n:href="delete!, 'userId' => $one->id" n:if="$user->isInRole('administrator')" data-toggle="tooltip" title="Odstranit"><span class="glyphicon glyphicon-trash"></span></a>
+                    </td>
+                </tr>
+            {/foreach}
+        </tbody>
+	</table>
+    <div class="col-md-12 text-center" n:if="$user->isAllowed('AdminModule','addUser')">
+        <a class="ajax" n:href="User:add">
+            <button class="btn btn-success waves-effect waves-light">
+                <span class="glyphicon glyphicon-plus m-r-5"></span>
+                Přidat uživatele
+            </button>
+        </a>
+    </div>
+{/block}
+
+{block scripts}
+{/block}
+
+{block head}
+
+	<link rel="stylesheet" href="{$basePath}/css/adminModule/User/style.css">
+	<link rel="stylesheet" href="{$basePath}/libs/datetimepicker/css/bootstrap-datetimepicker.css">
+	<script src="{$basePath}/libs/moment/moment-with-locales.min.js"></script>
+	<script src="{$basePath}/libs/datetimepicker/js/bootstrap-datetimepicker.min.js"></script>
+    <script>
+		$(document).ready(function(){
+			$('[data-toggle="tooltip"]').tooltip();
+		});
+    </script>
+{/block}

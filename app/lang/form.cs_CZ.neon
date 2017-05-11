@@ -1,0 +1,12 @@
+signIn:
+	username: Uživatelské jméno
+	password: Heslo
+	remember: Zapamatovat si?
+	submit: Přihlásit se
+	error:
+		username:
+		password:
+			empty:
+			bad:
+	success:
+		flash: Byl jste úspěšně přihlášen %name%.

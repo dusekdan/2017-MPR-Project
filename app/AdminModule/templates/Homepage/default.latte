@@ -1,0 +1,35 @@
+
+{block title}
+	Homepage
+{/block}
+{block content}
+	<div>
+		<table class="table ">
+			<tr>
+				<th>Uživatel</th>
+				<th></th>
+			</tr>
+			<tr>
+				<th>Id:</th>
+				<td>{$user->getId()}</td>
+			</tr>
+			<tr>
+				<th>Role:</th>
+				<td>{foreach $user->getRoles() as $role} {$role} {/foreach}</td>
+			</tr>
+			{foreach $user->getIdentity()->getData() as $key => $data}
+				<tr n:if="!is_array($data)">
+					<th>{$key}</th>
+					<td>{$data}</td>
+				</tr>
+			{/foreach}
+		</table>
+	</div>
+{/block}
+
+{block scripts}
+{/block}
+
+{block head}
+	<link rel="stylesheet" href="{$basePath}/css/adminModule/homepage/style.css">
+{/block}

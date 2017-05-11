@@ -1,0 +1,13 @@
+base:
+	header:
+		name: Název projektu
+	menu:
+		home: Domů
+		signIn: Přihlášení
+		signUp: Registrace
+		signOut: Odhlášení
+		administration: Administrace
+		updateProfile: Úprava údajů
+
+	Homepage:
+		title: Základní modul

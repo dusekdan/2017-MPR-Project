@@ -1,0 +1,34 @@
+{block title}
+    Přidat fázi
+{/block}
+
+{block content}
+    {block modalTitle}
+        Přidat fázi
+    {/block}
+
+    {block modal}
+        <link rel="stylesheet" href="{$basePath}/libs/datetimepicker/css/bootstrap-datetimepicker.css">
+        <script src="{$basePath}/libs/moment/moment-with-locales.min.js"></script>
+        <script src="{$basePath}/libs/datetimepicker/js/bootstrap-datetimepicker.min.js"></script>
+        <script type="text/javascript">
+			$(function () {
+				$('.datepicker').datetimepicker({
+					locale: 'cs',
+					viewMode: 'days',
+					format: 'DD.MM.YYYY'
+				});
+			});
+        </script>
+		{snippet snippetAddPhase}
+			{import './../components/bootstrap-form.latte'} {* bootstrap formuláře *}
+			{include bootstrap-form, form => addPhaseForm, labelSize => 4, inputSize => 8}
+		{/snippet}
+    {/block}
+{/block}
+{block scripts}
+
+{/block}
+
+{block head}
+{/block}

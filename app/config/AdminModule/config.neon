@@ -1,0 +1,13 @@
+#
+# WARNING: it is CRITICAL that this file & directory are NOT accessible directly via a web browser!
+# https://nette.org/security-warning
+#
+parameters:
+
+application:
+
+services:
+	- App\AdminModule\Forms\UserFormFactory
+	- App\AdminModule\Forms\ProjectFormFactory
+	- App\AdminModule\Forms\ClientFormFactory
+	- App\AdminModule\Forms\GridFormFactory

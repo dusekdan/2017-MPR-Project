@@ -1,0 +1,177 @@
+body {
+	font-family: sans-serif;
+}
+
+.flash-message {
+	position: absolute;
+	top: 0;
+	padding: 11px;
+	margin-bottom: 0px;
+	width: 100%;
+	z-index: 11;
+	border-radius: 0px;
+	display: none;
+}
+
+#header {
+	position: sticky;
+	top: 0;
+	z-index: 10;
+	overflow: auto;
+	width: 100%;
+	background-color: #253138;
+}
+
+#header h3 {
+	color: #eaebeb;
+	margin: 20px 0 20px 15px;
+}
+
+#main {
+	overflow: auto;
+	position: relative;
+	height: 100% ;
+	background-color: #253138;
+}
+
+.inner-border {
+	overflow: auto;
+	position: relative;
+	min-height: calc(100% - 125px);
+}
+
+
+#content {
+	overflow: auto;
+	box-sizing: border-box;
+	margin: 0 15px 0 15px;
+	padding: 10px;
+	border-radius: 3px;
+	background-color: #2f3e47;
+	height: 100%;
+	color: #98a6ad;
+}
+
+#footer {
+	border-top:solid 1px #3c4850;
+	overflow: auto;
+	height: 50px;
+	background-color: #253138;
+	color: #98a6ad;
+	padding: 13px 15px 12px;
+}
+
+.side-menu {
+	overflow: auto;
+	width: 255px;
+	height: 100%;
+}
+
+.left {
+	float: left;
+}
+
+#left-menu {
+
+}
+
+#left-menu .project-name {
+	text-align: center;
+	font-size: 32px;
+	font-family: 'Rancho', cursive;
+	color: #188ae2;
+	margin: 10px 0;
+}
+
+#left-menu a:hover {
+	text-decoration: none;
+}
+
+#left-menu .project-name span {
+	color: #10c469;
+}
+
+#profile div {
+	text-align: center;
+	color: #98a6ad;
+	font-size: 16px;
+}
+
+#profile .photo img {
+	height: 80px;
+	border: 1px solid #dadada;
+	border-radius: 80px;
+	padding: 5px;
+	margin-top: 30px;
+}
+
+#profile .glyphicon {
+	font-size: 13px;
+	color: #98a6ad;
+	margin: 3px;
+}
+
+#profile .role {
+	font-size: 12px;
+	margin: 6px;
+}
+
+#left-menu .control-label {
+	text-align: left;
+}
+
+#left-menu .menu {
+	margin-top: 20px;
+}
+
+#left-menu .menu .title {
+	margin-left: 15px;
+	color: #98a6ad;
+}
+
+#left-menu .menu nav ul {
+	margin: 0px;
+	padding: 0px;
+}
+
+#left-menu .menu nav li {
+	list-style: none;
+
+}
+
+#left-menu .menu .glyphicon {
+	margin: 0 20px 0 10px;
+}
+
+#left-menu .menu nav a {
+	display: block;
+	padding: 5px;
+}
+
+#left-menu .menu nav a:hover {
+	text-decoration: none;
+}
+
+.actions{
+	width: 90px;
+}
+.actions > a{
+	color: silver;
+	margin: 2px;
+}
+
+/**
+Formuláře
+ */
+form {
+	font-family: sans-serif;
+}
+
+form .form-btn {
+	overflow: auto;
+}
+
+form  .form-btn .form-group {
+	float: right;
+	margin-right: 15px;
+}

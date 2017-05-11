@@ -1,0 +1,23 @@
+<div id="profile">
+	<div class="photo">
+		{var $hasPhoto = $user->getIdentity()->getData()["hasPhoto"]}
+		<img n:if="!$hasPhoto" src="{$basePath}/images/default/userPhoto.png"/>
+		<img n:if="$hasPhoto" src="{$basePath}/images/user/{$user->id}_user/userPhoto/userPhoto-{$user->id}.png"/>
+	</div>
+	<div>
+		<div class="name">
+			{$user->getIdentity()->getData()['firstName']} {$user->getIdentity()->getData()['lastName']}
+		</div>
+		<div class="role">
+			{foreach $user->getRoles() as $role} {$user->getIdentity()->getData()['allRoles'][$role]} {/foreach}
+		</div>
+		<div>
+			<a n:href="User:update">
+				<span class="glyphicon glyphicon-cog"></span>
+			</a>
+			<a n:href=":Base:User:signOut">
+				<span class="glyphicon glyphicon-off"></span>
+			</a>
+		</div>
+	</div>
+</div>

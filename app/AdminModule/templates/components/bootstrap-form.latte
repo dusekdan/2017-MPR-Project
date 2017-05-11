@@ -1,0 +1,105 @@
+{block bootstrap-form} {* výchozí velikost 2 10  labelSize / inputSize*}
+	{*TODO proměnné přes default $promenna nadefinovat - melo by to nastavit pokud neni nastacena*}
+	<form n:name=$form class="form-horizontal {ifset $form->elementPrototype->attrs["class"]}{$form->elementPrototype->attrs["class"]}{/ifset}">
+		{*TODO co takhle hodit chyby do modalu?*}
+		<ul class=error n:if="$form->ownErrors">
+			<li n:foreach="$form->ownErrors as $error">{$error}</li>
+		</ul>
+		<div n:foreach="$form->controls as $name => $input"
+				n:if="!$input->getOption(rendered) && $input->getOption(type) !== hidden && $input->getOption(type) !== button"
+				n:class="form-group, $input->required ? required, $input->error ? has-error, $input->getHtmlName(), $input->getOption(type) == button ? form-btn">
+
+			<div class="col-sm-{isset($labelSize) ? $labelSize : 2} control-label">{label $input}</div>
+
+			<div class="col-sm-{isset($inputSize) ? $inputSize : 10}">
+				{if $input->getOption(type) in [text, select, textarea]}
+
+					{input $input class => [form-control, isset($input->getControl()->attrs['class']) ? $input->getControl()->attrs['class']]}
+				{elseif $input->getOption(type) === button}
+					{input $input class => "btn btn-default"}
+				{elseif $input->getOption(type) === checkbox}
+					<div class="checkbox">{input $input}</div>
+				{elseif $input->getOption(type) === radio}
+					<div class="radio">{input $input}</div>
+				{elseif $input->getOption(type) === file}
+					<input type="text" class="form-control fileInput" placeholder="Soubor nebyl vybrán" disabled>
+					<label class="fileLabel"  for="{$input->getControl()->attrs['id']}">Vybrat</label>
+					<div style="clear: both;"></div>
+				{input $input}
+					<script>
+						setFile("#"+{$input->getControl()->attrs['id']});
+					</script>
+				{else}
+					{input $input}
+				{/if}
+
+				<span class=error n:ifcontent>{$input->error}</span>
+			</div>
+		</div>
+		<div class="form-btn">
+			<div n:foreach="$form->controls as $name => $input"
+					n:if="$input->getOption(type) == button"
+					n:class="form-group, $input->required ? required, $input->error ? has-error, $input->getHtmlName()">
+				<div>
+						{input $input class => [form-control, isset($input->getControl()->attrs['class']) ? $input->getControl()->attrs['class']]}
+				</div>
+			</div>
+		</div>
+	</form>
+	<script>
+		/**
+		 * Zobrazovaní chyb u formulářů
+		 * @param errors
+		 * @param focus
+		 */
+		function showErrors(errors, focus) {
+			errors.forEach(function(error) {
+				if (error.message) {
+					$(error.element).closest('.form-group').addClass('has-error').find('.error').remove();
+					$('<span class=error>').text(error.message).insertAfter(error.element);
+				}
+
+				if (focus && error.element.focus) {
+					error.element.focus();
+					focus = false;
+				}
+			});
+		}
+		/**
+		 * Mazání chyb u formulářů
+		 * @param elem
+		 */
+		function removeErrors(elem)
+		{
+			if ($(elem).is('form')) {
+				$('.has-error', elem).removeClass('has-error');
+				$('.error', elem).remove();
+			} else {
+				$(elem).closest('.form-group').removeClass('has-error').find('.error').remove();
+			}
+		}
+
+		Nette.showFormErrors = function(form, errors) {
+			removeErrors(form);
+			showErrors(errors, true);
+		};
+
+		$(function() {
+			$(':input').keypress(function() {
+				removeErrors(this);
+			});
+
+			$(':input').blur(function() {
+				Nette.formErrors = [];
+				Nette.validateControl(this);
+				showErrors(Nette.formErrors);
+			});
+			$(':input').change(function() {
+				removeErrors(this);
+				Nette.formErrors = [];
+				Nette.validateControl(this);
+				showErrors(Nette.formErrors);
+			})
+		});
+	</script>
+{/block}

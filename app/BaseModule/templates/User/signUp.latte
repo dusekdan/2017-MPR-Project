@@ -1,0 +1,27 @@
+{block head}
+    <link rel="stylesheet" href="{$basePath}/libs/datetimepicker/css/bootstrap-datetimepicker.css">
+    <style>
+
+    </style>
+	<script src="{$basePath}/libs/moment/moment-with-locales.min.js"></script>
+	<script src="{$basePath}/libs/datetimepicker/js/bootstrap-datetimepicker.min.js"></script>
+	<script type="text/javascript">
+		$(function () {
+			$('#datepicker').datetimepicker({
+				locale: 'cs',
+				viewMode: 'days',
+				format: 'DD.MM.YYYY'
+			});
+		});
+	</script>
+{/block}
+
+{block content}
+<h1 n:block=title>Registrace</h1>
+    {include bootstrap-form, form => signUpForm}
+<p><a class="ajax" n:href="User:SignIn">Opravdu nemáte účet? Zde se můžete přihlásit.</a></p>
+
+
+{block scripts}
+
+{/block}
