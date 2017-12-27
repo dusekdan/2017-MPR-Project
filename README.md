@@ -1,3 +1,9 @@
+# FIT BUT, MPR
+*School projects for MPR (Project Management) class, Faculty of Information Technology, Brno University of Technology.*
+___
+# FIT VUT, MPR
+*Školní projekty do předmětu MPR (Management projektů), Fakulta Informačních Technologií, Vysoké Učení Technické Brno.*
+
 ## Potřebné věci
 - mít server
 - nainstalovat `composer`
