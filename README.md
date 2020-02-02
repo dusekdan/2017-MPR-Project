@@ -3,7 +3,7 @@
 ___
 # FIT VUT, MPR
 *Školní projekt do předmětu MPR (Management projektů), Fakulta Informačních Technologií, Vysoké Učení Technické Brno.*
-
+ 
 ## Potřebné věci
 - mít server
 - nainstalovat `composer`
